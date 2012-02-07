@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 07, 2012 at 10:00 PM
+-- Generation Time: Feb 07, 2012 at 10:04 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -32,14 +32,6 @@ CREATE TABLE IF NOT EXISTS `majors` (
   PRIMARY KEY (`major_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
---
--- Dumping data for table `majors`
---
-
-INSERT INTO `majors` (`major_id`, `major`) VALUES
-(1, 'Computer Science'),
-(2, 'Business Management');
-
 -- --------------------------------------------------------
 
 --
@@ -51,24 +43,6 @@ CREATE TABLE IF NOT EXISTS `skills` (
   `skill` varchar(255) NOT NULL,
   PRIMARY KEY (`skill_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Dumping data for table `skills`
---
-
-INSERT INTO `skills` (`skill_id`, `skill`) VALUES
-(1, 'HTML'),
-(2, 'CSS'),
-(3, 'Javascript'),
-(4, 'jQuery'),
-(5, 'PHP'),
-(6, 'Ruby on Rails'),
-(7, 'Python'),
-(9, 'C#'),
-(10, 'Objective-C'),
-(11, 'Android'),
-(12, 'Java'),
-(13, 'C++');
 
 -- --------------------------------------------------------
 
@@ -88,16 +62,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   `skills` text NOT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `password`, `year`, `major_id`, `bio`, `skills`) VALUES
-(1, 'Peter John', 'Casinelli', 'peter.casinelli.bc@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2014, 1, 'I am a computer science major.', 'HTML, CSS, Javascript, PHP, Java, Python, MySQL, C, Fortran'),
-(2, 'First', 'Last', 'address@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2013, 2, 'I am a business major.', 'Nothing'),
-(3, 'Alan', 'Lin', 'linpd@bc.edu', '5f4dcc3b5aa765d61d8327deb882cf99', 2013, 1, 'I love pointers.', 'Cooking, cleaning, pushing, and merging conflicts'),
-(4, 'Test', 'qsdasd', 'asdsa@f.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2014, 2, 'dasd', 'sds');
 
 -- --------------------------------------------------------
 
