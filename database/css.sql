@@ -3,11 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2012 at 05:50 PM
+-- Generation Time: Feb 07, 2012 at 10:00 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
-
-USE css;
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -89,15 +87,17 @@ CREATE TABLE IF NOT EXISTS `students` (
   `bio` text NOT NULL,
   `skills` text NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `password`, `year`, `major_id`, `bio`, `skills`) VALUES
-(1, 'Peter John', 'Casinelli', 'peter.casinelli.bc@gmail.com', 'password', 2014, 1, 'I am a computer science major.', 'HTML, CSS, Javascript, PHP, Java, Python, MySQL, C, Fortran'),
-(2, 'First', 'Last', 'address@email.com', 'password', 2013, 2, 'I am a business major.', 'Nothing');
+(1, 'Peter John', 'Casinelli', 'peter.casinelli.bc@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2014, 1, 'I am a computer science major.', 'HTML, CSS, Javascript, PHP, Java, Python, MySQL, C, Fortran'),
+(2, 'First', 'Last', 'address@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2013, 2, 'I am a business major.', 'Nothing'),
+(3, 'Alan', 'Lin', 'linpd@bc.edu', '5f4dcc3b5aa765d61d8327deb882cf99', 2013, 1, 'I love pointers.', 'Cooking, cleaning, pushing, and merging conflicts'),
+(4, 'Test', 'qsdasd', 'asdsa@f.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2014, 2, 'dasd', 'sds');
 
 -- --------------------------------------------------------
 
