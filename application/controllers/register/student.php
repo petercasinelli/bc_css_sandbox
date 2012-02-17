@@ -33,6 +33,12 @@ class Student extends CI_Controller {
 		$major 	  		  = $this->input->post('major',    		   TRUE);
 		$bio 	  		  = $this->input->post('bio', 	  		   TRUE);
 		$skills 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$programs 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$twitter 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$facebook 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$linkedin	  	  = $this->input->post('skills', 	  	   TRUE);
+		$dribbble 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$github 	  	  = $this->input->post('skills', 	  	   TRUE);
 
 		$this->load->library('form_validation');
 		
@@ -44,10 +50,19 @@ class Student extends CI_Controller {
 		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|required|htmlspecialchars|xss_clean|numeric|max_length[4]');
 		$this->form_validation->set_rules('major', 'major', 						'trim|required|htmlspecialchars|xss_clean|numeric');
 		$this->form_validation->set_rules('bio', 'bio', 							'trim|required|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('skills', 'skills',						'trim|required|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('programs', 'programs',					'trim|required|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('twitter', 'twitter',						'trim|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('facebook', 'facebook',					'trim|htmlspecialchars|xss_clean|valid_url');
+		$this->form_validation->set_rules('linkedin', 'linkedin',					'trim|htmlspecialchars|xss_clean|valid_url');
+		$this->form_validation->set_rules('dribbble', 'dribbble',					'trim|htmlspecialchars|xss_clean|valid_url');
+		$this->form_validation->set_rules('github', 'github',						'trim|htmlspecialchars|xss_clean|valid_url');
 
 		//If form does not validate according to rules above, load form view with error messages
-		if ($this->form_validation->run() == FALSE):		
-			$this->load->view('student/add_student_form');
+		if ($this->form_validation->run() == FALSE):
+			//Create list of majors
+			$data["majors"] = $this->student_model->get_majors();				
+			$this->load->view('student/register_student_form', $data);
 		
 		//Else, add student to database
 		else:
@@ -60,7 +75,13 @@ class Student extends CI_Controller {
 								 'year'		=> $year,
 								 'major_id'	=> $major,
 								 'bio' 		=> $bio,
-								 'skills'	=> $skills
+								 'skills'	=> $skills,
+								 'programs'	=> $programs,
+								 'twitter'	=> $twitter,
+								 'facebook'	=> $facebook,
+								 'linkedin'	=> $linkedin,
+								 'dribbble'	=> $dribbble,
+								 'github'	=> $github
 								 );
 			
 			$student_id = $this->student_model->add_student($student_data);

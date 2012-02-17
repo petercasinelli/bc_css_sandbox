@@ -21,8 +21,8 @@ class Student extends CI_Controller {
 		$student = $this->student_model->authenticate($email, $password);
 		
 		if (empty($student)):
-			echo 'You have entered incorrect login information. Please try again:';
-			$this->load->view('student/student_login_form');
+			$data['error'] = 'You have entered incorrect login information. Please try again:';
+			$this->load->view('student/student_login_form', $data);
 		else:
 			//We only want one result (and should only be passed one result)
 			$student = $student[0];
