@@ -16,7 +16,10 @@ class Student_model extends CI_Model {
 			$this->db->join('majors','majors.major_id = students.major_id', 'left');
 			$query = $this->db->get_where('students', array('student_id'=>$student_id));
 			$result = $query->result();
-
+			//Since we are only returning one student in get_student, point result to first element
+			//of array
+			$result = $result[0];
+			
 			return $result;	
 		}		
 		
@@ -45,14 +48,18 @@ class Student_model extends CI_Model {
 			return $this->db->affected_rows();
 		}
 		
-		public function search_students($skills)
+		public function search_students($queries)
 		{
-			foreach($skills AS $skill)
+			foreach($queries AS $query)
 			{
-				$skill = trim($skill);
-				$this->db->or_like('skills', $skill);
+				$this->db->or_like('skills', $query);
+				$this->db->or_like('first', $query);
+				$this->db->or_like('last', $query);
 			}
 			
+			
+			
+			$this->db->join('majors','majors.major_id = students.major_id', 'left');
 			$query = $this->db->get('students');
 			
 			$result = $query->result();
