@@ -11,12 +11,19 @@ class Student extends CI_Controller {
 			redirect('/');
 			exit(1);
 		endif;
+		
 	}	
 
 	public function index()
 	{
+		//Get the student's information (who is currently logged in)
+		$student_logged_in = $this->session->userdata('student_id');
+		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
+		
+		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students();
-		$this->load->view('student/view_students', $data);
+		
+		$this->load->view('student/home', $data);
 	}
 	
 	public function view($student_id)
@@ -36,10 +43,21 @@ class Student extends CI_Controller {
 	
 	public function search()
 	{
-		$skills = $this->input->post('skills', TRUE);
-		$skills = explode(',', $skills);
+		
+		
+		$query = $this->input->post('query', TRUE);
+		
+		if (strpos(",", $query) != FALSE)
+			$query_exploded = explode(',', $query);
+		else
+			$query_exploded = explode(' ', $query);
 
-		$data["students"] = $this->student_model->search_students($skills);
+		$data["students"] = $this->student_model->search_students($query_exploded);
+		
+		$student_logged_in = $this->session->userdata('student_id');
+		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
+		
+		$data["search_query"] = $query;
 		
 		$this->load->view('student/view_students', $data);
 	}
@@ -48,9 +66,10 @@ class Student extends CI_Controller {
 	
 	public function edit_form(){
 		
-		$student_id = $this->session->userdata('student_id');
+		$student_logged_in = $this->session->userdata('student_id');
+		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
 		
-		$data["student"] = $this->student_model->get_student($student_id);
+		$data["student"] = $this->student_model->get_student($student_logged_in);
 		
 		$this->load->view('student/edit_student_form', $data);
 	}
