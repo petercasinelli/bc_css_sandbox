@@ -15,10 +15,10 @@ class Student_model extends CI_Model {
 		{
 			$this->db->join('majors','majors.major_id = students.major_id', 'left');
 			$query = $this->db->get_where('students', array('student_id'=>$student_id));
-			$result = $query->result();
+			$result = $query->row();
 			//Since we are only returning one student in get_student, point result to first element
 			//of array
-			$result = $result[0];
+			//$result = $result[0]; 
 			
 			return $result;	
 		}		
@@ -44,8 +44,9 @@ class Student_model extends CI_Model {
 			$this->db->where('student_id', $student_id);
 			$this->db->update('students', $student_data);
 			
+			$affected_rows = $this->db->affected_rows();
 			//Return # of affected rows
-			return $this->db->affected_rows();
+			return $affected_rows;
 		}
 		
 		public function search_students($queries)
@@ -56,7 +57,6 @@ class Student_model extends CI_Model {
 				$this->db->or_like('first', $query);
 				$this->db->or_like('last', $query);
 			}
-			
 			
 			
 			$this->db->join('majors','majors.major_id = students.major_id', 'left');
@@ -86,10 +86,10 @@ class Student_model extends CI_Model {
 			$this->db->limit(1);
 			$query = $this->db->get_where('students', $login_information);
 			
-			$student = $query->result();
+			$result = $query->result();
 			
 			//Return student with student information
-			return $student;
+			return $result;
 			
 		}
 		
