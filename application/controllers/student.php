@@ -1,25 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Student extends CI_Controller {
-
+class Student extends STUDENT_Controller {
+	
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('student_model');
-		$this->load->helper('authentication_helper');
-		
-		if(!student_is_logged_in()):
-			redirect('/');
-			exit(1);
-		endif;
-		
 	}	
 
 	public function index()
 	{
-		//Get the student's information (who is currently logged in)
-		$student_logged_in = $this->session->userdata('student_id');
-		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
-		
+		$data["student_logged_in"] = $this->current_student_info;
 		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students();
 		
@@ -53,10 +42,7 @@ class Student extends CI_Controller {
 			$query_exploded = explode(' ', $query);
 
 		$data["students"] = $this->student_model->search_students($query_exploded);
-		
-		$student_logged_in = $this->session->userdata('student_id');
-		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
-		
+		$data["student_logged_in"] = $this->current_student_info;
 		$data["search_query"] = $query;
 		
 		$this->load->view('student/view_students', $data);
@@ -66,9 +52,7 @@ class Student extends CI_Controller {
 	
 	public function edit_form(){
 		
-		$student_logged_in = $this->session->userdata('student_id');
-		$data["student_logged_in"] = $this->student_model->get_student($student_logged_in);
-		
+		$data["student_logged_in"] = $this->current_student_info;
 		$data["student"] = $this->student_model->get_student($student_logged_in);
 		
 		$this->load->view('student/edit_student_form', $data);
@@ -76,7 +60,7 @@ class Student extends CI_Controller {
 	
 	public function edit(){
 		
-		$student_id = $this->session->userdata('student_id');		
+		$student_id = $this->current_student_id;		
 		
 		$first 	  		  = $this->input->post('first',    		   TRUE);
 		$last  	  		  = $this->input->post('last',     		   TRUE);
