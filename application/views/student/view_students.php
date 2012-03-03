@@ -42,6 +42,7 @@ $this->load->view('includes/header');
 				{
 					//echo anchor('student/view/' . $student->student_id, $student->first . ' ' . $student->last . '<br />');
 					$data["student"] = $student;
+					//we want to put this in assoc 
 					$this->load->view('student/student_block', $data);
 				}
 			?>	
