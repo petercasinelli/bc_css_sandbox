@@ -75,6 +75,7 @@ class Student_model extends CI_Model {
 
 		public function get_majors()
 		{
+			$this->db->order_by('major', 'asc');
 			$query = $this->db->get('majors');
 			$result = $query->result();
 			return $result;
@@ -82,6 +83,7 @@ class Student_model extends CI_Model {
 		
 		public function get_schools()
 		{
+			$this->db->order_by('school', 'asc');
 			$query = $this->db->get('schools');
 			$result = $query->result();
 			return $result;
