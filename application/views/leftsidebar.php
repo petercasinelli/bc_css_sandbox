@@ -1,9 +1,10 @@
 <div id="left-column">
 		<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo.png"></a>
 		
+		
 		<form action="" method="" id="search">
 			<!--no space between inputs for presentational reasons-->
-			<input type="text" name="query" placeholder="Search names, skills, majors..."><input type="submit" name="submit" value="Search">
+			<input type="text" name="query" placeholder="Search names, skills, majors..."><a href="<?php echo base_url(); ?>index.php/authentication/student"><input type="submit" name="submit" value="Search"></a>
 		</form>
 		
 		

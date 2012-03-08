@@ -1,9 +1,8 @@
 		<div class="item">
-			<a href="javascript:;" class="expand" id="expand1" onClick="toggleExpand('1');">Expand</a>
+			<a href="javascript:;" class="expand" id="expand1" onClick="toggleExpand('1');">Expand Profile</a>
 			<hgroup onClick="toggleExpand('1');">
-				<img src="https://si0.twimg.com/profile_images/1733086372/pic_reasonably_small.jpg">
 				<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
-				<h2><?php echo $student->major . ' ' . $student->year; ?></h2>
+				<h2><?php echo $student->school . ' ' . $student->year; ?> (Studying <?php echo $student->major ?>)</h2>
 			</hgroup>
 			<p>
 				<b>Skills:</b> <?php echo $student->skills; ?>
@@ -22,22 +21,22 @@
 					<?php endif;
 					if (!empty($student->facebook)):
 					?>
-					<a href="<?php echo $student->facebook; ?>" class="facebook" title="Facebook"></a>
+					<a href="<?php echo $student->facebook; ?>" class="facebook" title="Facebook" target="_blank"></a>
 					<?php
 					endif;
 					if (!empty($student->linkedin)):
 					?>
-					<a href="<?php echo $student->linkedin; ?>" class="linkedin" title="LinkedIn"></a>
+					<a href="<?php echo $student->linkedin; ?>" class="linkedin" title="LinkedIn" target="_blank"></a>
 					<?php
 					endif;
 					if (!empty($student->dribbble)):
 					?>
-					<a href="<?php echo $student->dribbble; ?>" class="dribbble" title="Dribbble"></a>
+					<a href="<?php echo $student->dribbble; ?>" class="dribbble" title="Dribbble" target="_blank"></a>
 					<?php
 					endif;
 					if (!empty($student->github)):
 					?>
-					<a href="<?php echo $student->github; ?>" class="github" title="Github"></a>
+					<a href="<?php echo $student->github; ?>" class="github" title="Github" target="_blank"></a>
 					<?php
 					endif;
 					?>

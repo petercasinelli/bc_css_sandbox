@@ -1,5 +1,6 @@
 <?php
 $this->load->helper('form');
+$this->load->library('message');
 $this->load->view('includes/header');
 ?>
 
@@ -8,13 +9,14 @@ $this->load->view('includes/header');
 	<div id="right-column">
 		<div class="item">
 			<hgroup>
-				<h1>Sign In As A Student:</h1>
-				<h2>You must be a Boston College student in order to create a profile.</h2>
+				<h1>Sign In To BC Skills</h1>
+				<h2>To search student profiles and manage your own, enter your login information below.</h2>
 			</hgroup>
-			<?php echo validation_errors(); ?>
-			<?php if (isset($error))
-					echo $error; ?>
-			<?php echo form_open('authentication/student/login'); ?>
+		</div>
+		
+			<?php $this->message->display(); ?>
+			
+			<?php echo form_open('authentication/student/login', array("id" => "edit-profile")); ?>
 			<?php 
 			
 			$email = array(
@@ -34,12 +36,12 @@ $this->load->view('includes/header');
 								  );
 			
 					?>
-			<div><?php echo form_label('E-Mail Address:', 'email-input'); echo form_input($email);?></div>
-			<div><?php echo form_label('Confirm Password:', 'password-input'); echo form_password($password); ?></div>
-			<div><?php echo form_submit($submit_button); ?></div>
+			<?php echo form_label('E-Mail Address:', 'email'); echo form_input($email);?>
+			<?php echo form_label('Confirm Password:', 'password'); echo form_password($password); ?>
+			<?php echo form_submit($submit_button); ?>
 		
 			<?php echo form_close(); ?>
-		</div>
+		
 		
 	</div>
 	

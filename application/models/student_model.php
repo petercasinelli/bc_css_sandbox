@@ -14,7 +14,10 @@ class Student_model extends CI_Model {
 		public function get_student($student_id)
 		{
 			$this->db->join('majors','majors.major_id = students.major_id', 'left');
+			$this->db->join('schools','schools.school_id = students.school_id', 'left');
+			
 			$query = $this->db->get_where('students', array('student_id'=>$student_id));
+	
 			$result = $query->row();
 			//Since we are only returning one student in get_student, point result to first element
 			//of array
@@ -49,21 +52,23 @@ class Student_model extends CI_Model {
 			return $affected_rows;
 		}
 		
-		public function search_students($queries)
+		/* This method needs a lot of improvement in terms of full text searching in postgreSQL */
+		public function search_students($query)
 		{
-			foreach($queries AS $query)
-			{
-				$this->db->or_like('skills', $query);
-				$this->db->or_like('first', $query);
-				$this->db->or_like('last', $query);
-			}
 			
+			//Escape query to protect against SQL injection, etc
+			$query = $this->db->escape($query);
 			
-			$this->db->join('majors','majors.major_id = students.major_id', 'left');
-			$query = $this->db->get('students');
+			//First attempt at Full Text search in postgreSQL
+			$sql = "SELECT * FROM students
+					LEFT JOIN majors ON majors.major_id = students.major_id
+					LEFT JOIN schools ON schools.school_id = students.school_id
+					WHERE to_tsvector(first || ' ' || last || ' ' || skills || ' ' || major || ' ' || school) @@ to_tsquery($query)
+					";
+			
+			$query = $this->db->query($sql);
 			
 			$result = $query->result();
-
 			return $result;
 			
 		}
@@ -71,22 +76,26 @@ class Student_model extends CI_Model {
 		public function get_majors()
 		{
 			$query = $this->db->get('majors');
-			
 			$result = $query->result();
-			
 			return $result;
-			
+		}
+		
+		public function get_schools()
+		{
+			$query = $this->db->get('schools');
+			$result = $query->result();
+			return $result;
 		}
 
 		public function authenticate($email, $password){
 			
 			$login_information = array('email' => $email,
-									   'password' => md5($password)
+									   'password' => sha1($password)
 										);
 			$this->db->limit(1);
 			$query = $this->db->get_where('students', $login_information);
 			
-			$result = $query->result();
+			$result = $query->row();
 			
 			//Return student with student information
 			return $result;

@@ -5,7 +5,10 @@ $this->load->view('includes/header');
 	<?php $this->load->view('student/leftsidebar.php'); ?>
 	
 	<div id="right-column">
-				<div class="item">
+		<?php echo anchor("/", "&laquo; Home", array("class" => "fancy-button")); ?>
+		<br /><br /><br />
+		
+		<div class="item">
 			<hgroup>
 				<h1>Search For A Student</h1>
 				<h2>with search term: <?php echo $search_query; ?></h2>
