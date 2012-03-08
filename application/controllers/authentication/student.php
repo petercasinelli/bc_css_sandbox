@@ -5,6 +5,7 @@ class Student extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('student_model');
+		$this->load->library('message');
 	}	
 	
 	
@@ -15,18 +16,20 @@ class Student extends CI_Controller {
 	
 	public function login(){
 		
+		
+		
 		$email = $this->input->post('email', TRUE);
 		$password = $this->input->post('password', TRUE);
 		
 		$student = $this->student_model->authenticate($email, $password);
 		
 		if (empty($student)):
-			$data['error'] = 'You have entered incorrect login information. Please try again:';
-			$this->load->view('student/student_login_form', $data);
+			$this->message->set("You have entered incorrect login information. Please try again:", "error");
+			$this->load->view('student/student_login_form');
 		else:
 			//We only want one result (and should only be passed one result)
-			$student = $student[0];
-			
+			//$student = $student[0];
+
 			$session_data = array('student_id' => $student->student_id
 								  );
 			

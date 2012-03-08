@@ -3,6 +3,7 @@
 class Student extends CI_Controller {
 	
 	public function __construct(){
+		
 		parent::__construct();
 		$this->load->model('student_model');
 		
@@ -14,9 +15,12 @@ class Student extends CI_Controller {
 	
 	
 	public function index(){
-		
 		//Create list of majors
 		$data["majors"] = $this->student_model->get_majors();
+		
+		//Create list of schools
+		$data["schools"] = $this->student_model->get_schools();
+		
 		//$data["majors"] = $majors[0];
 		//print_r($data["majors"]);
 		$this->load->view('student/register_student_form', $data);
@@ -30,28 +34,31 @@ class Student extends CI_Controller {
 		$password 		  = $this->input->post('password', 		   TRUE);
 		$confirm_password = $this->input->post('confirm_password', TRUE);
 		$year 	  		  = $this->input->post('year', 	  		   TRUE);
+		$school	  		  = $this->input->post('school',   		   TRUE);
 		$major 	  		  = $this->input->post('major',    		   TRUE);
 		$bio 	  		  = $this->input->post('bio', 	  		   TRUE);
 		$skills 	  	  = $this->input->post('skills', 	  	   TRUE);
-		$programs 	  	  = $this->input->post('skills', 	  	   TRUE);
-		$twitter 	  	  = $this->input->post('skills', 	  	   TRUE);
-		$facebook 	  	  = $this->input->post('skills', 	  	   TRUE);
-		$linkedin	  	  = $this->input->post('skills', 	  	   TRUE);
-		$dribbble 	  	  = $this->input->post('skills', 	  	   TRUE);
-		$github 	  	  = $this->input->post('skills', 	  	   TRUE);
+		$software 	  	  = $this->input->post('software', 	  	   TRUE);
+		$twitter 	  	  = $this->input->post('twitter', 	  	   TRUE);
+		$facebook 	  	  = $this->input->post('facebook', 	  	   TRUE);
+		$linkedin	  	  = $this->input->post('linkedin', 	  	   TRUE);
+		$dribbble 	  	  = $this->input->post('dribbble', 	  	   TRUE);
+		$github 	  	  = $this->input->post('github', 	  	   TRUE);
 
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('first', 'first name', 					'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('last', 'last promo', 					'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('email', 'BC e-mail address', 			'trim|required|htmlspecialchars|xss_clean|valid_email|is_unique[students.email]');
+		//Add custom validation for e-mail addresses so that only Boston College students can register
+		$this->form_validation->set_rules('email', 'BC e-mail address', 			'trim|required|htmlspecialchars|xss_clean|valid_email|bc_email|is_unique[students.email]');
 		$this->form_validation->set_rules('password', 'password', 					'trim|required|htmlspecialchars|xss_clean|matches[confirm_password]');
 		$this->form_validation->set_rules('confirm_password', 'confirmed password', 'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|required|htmlspecialchars|xss_clean|numeric|max_length[4]');
+		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|required|htmlspecialchars|xss_clean|numeric|max_length[4]|valid_graduation_year');
+		$this->form_validation->set_rules('school', 'school', 						'trim|required|htmlspecialchars|xss_clean|numeric');
 		$this->form_validation->set_rules('major', 'major', 						'trim|required|htmlspecialchars|xss_clean|numeric');
 		$this->form_validation->set_rules('bio', 'bio', 							'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('skills', 'skills',						'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('programs', 'programs',					'trim|required|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('software', 'software',					'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('twitter', 'twitter',						'trim|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('facebook', 'facebook',					'trim|htmlspecialchars|xss_clean|valid_url');
 		$this->form_validation->set_rules('linkedin', 'linkedin',					'trim|htmlspecialchars|xss_clean|valid_url');
@@ -61,7 +68,8 @@ class Student extends CI_Controller {
 		//If form does not validate according to rules above, load form view with error messages
 		if ($this->form_validation->run() == FALSE):
 			//Create list of majors
-			$data["majors"] = $this->student_model->get_majors();				
+			$data["majors"] = $this->student_model->get_majors();	
+			$data["schools"] = $this->student_model->get_schools();			
 			$this->load->view('student/register_student_form', $data);
 		
 		//Else, add student to database
@@ -71,12 +79,13 @@ class Student extends CI_Controller {
 								 'first' 	=> $first,
 								 'last'	 	=> $last,
 								 'email' 	=> $email,
-								 'password' => md5($password),
+								 'password' => sha1($password),
 								 'year'		=> $year,
+								 'school_id'=> $school,
 								 'major_id'	=> $major,
 								 'bio' 		=> $bio,
 								 'skills'	=> $skills,
-								 'programs'	=> $programs,
+								 'software'	=> $software,
 								 'twitter'	=> $twitter,
 								 'facebook'	=> $facebook,
 								 'linkedin'	=> $linkedin,
@@ -86,11 +95,14 @@ class Student extends CI_Controller {
 			
 			$student_id = $this->student_model->add_student($student_data);
 			
-			redirect('authentication/student/login');
+			$this->load->library('message');
+			$this->message->set("You have successfully registered. Please login below:", "success", TRUE);
+			redirect('authentication/student/');
 			
 		endif;
 		
 	}
+
 	
 }
 
