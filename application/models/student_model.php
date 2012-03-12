@@ -63,7 +63,7 @@ class Student_model extends CI_Model {
 			$sql = "SELECT * FROM students
 					LEFT JOIN majors ON majors.major_id = students.major_id
 					LEFT JOIN schools ON schools.school_id = students.school_id
-					WHERE to_tsvector(first || ' ' || last || ' ' || skills || ' ' || major || ' ' || school) @@ to_tsquery($query)
+					WHERE to_tsvector(first || ' ' || last || ' ' || skills || ' ' || software || ' ' || major || ' ' || school) @@ to_tsquery($query)
 					";
 			
 			$query = $this->db->query($sql);
