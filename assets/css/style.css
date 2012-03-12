@@ -43,9 +43,21 @@ a:hover {
 	float:right;
 }
 
+hgroup {
+	clear:both;
+}
+
 h1 {
 	font-size:1.5em;
 	color:#2f892e;
+}
+
+h3 {
+	font-weight:normal;
+}
+
+p {
+	padding:10px;
 }
 
 /*--------------*/
@@ -99,6 +111,7 @@ a#sign-up:hover {
 	border:1px solid #cccccc;
 	border-width:1px 0;
 	position:relative;
+	clear:both;
 }
 
 .item img {
@@ -114,6 +127,10 @@ a#sign-up:hover {
 	cursor:pointer;
 }
 
+.non-user-item hgroup {
+	cursor:default !important;
+}
+
 .item .expand {
 	position:absolute;
 	top:10px;
@@ -121,7 +138,6 @@ a#sign-up:hover {
 }
 
 .item p {
-	padding:10px;
 	overflow:hidden;
 }
 
@@ -182,7 +198,7 @@ a#sign-up:hover {
 }
 
 #right-column > .fancy-button {
-	margin:10px;
+	margin:10px 0 15px 10px;
 }
 
 nav {
@@ -270,7 +286,7 @@ nav ul li a:hover {
 	padding-right:15px;
 }
 
-#edit-profile input, #edit-profile select {
+#edit-profile input, #edit-profile select, #edit-profile textarea {
 	float:left;
 	clear:right;
 	margin-bottom:5px;
@@ -280,6 +296,10 @@ nav ul li a:hover {
 	border:1px solid #bdbdbd;
 	box-sizing:content-box;
 	-moz-box-sizing:content-box;
+}
+
+#edit-profile textarea {
+	height:6em;
 }
 
 #edit-profile input[type="submit"] {

@@ -1,5 +1,6 @@
 <?php
 $this->load->helper('form');
+$this->load->library('message');
 $this->load->view('includes/header');
 
 	//Create majors dropdown from data sent in from controller
@@ -17,7 +18,8 @@ endforeach;
 	//Settings for form
 	$first = array(
 					'name' 	=> 'first',
-					'value' => set_value('first')
+					'value' => set_value('first'),
+					
 				  );
 						
 	$last = array(
@@ -58,40 +60,48 @@ endforeach;
 				 
 	$bio = array(
 				'name' 	=> 'bio',
-				'value' => set_value('bio')
+				'value' => set_value('bio'),
+				'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? What are you passionate about?'
 				 );
 	$skills = array(
 					'name' => 'skills',
-					'value' => set_value('skills')
+					'value' => set_value('skills'),
+					'title' => 'Comma separated if multiple'
 					); 		
 	$software = array(
 					'name' => 'software',
-					'value' => set_value('software')
+					'value' => set_value('software'),
+					'title' => 'Comma separated if multiple'
 					);
 					
 	$twitter = array(
 					'name' => 'twitter',
-					'value' => set_value('twitter')
+					'value' => set_value('twitter'),
+					'title' => '@username'
 					);
 					
 	$facebook = array(
 					'name' => 'facebook',
-					'value' => set_value('facebook')
+					'value' => set_value('facebook'),
+					'title' => 'Full Facebook URL'
 					);
 					
 	$linkedin = array(
 					'name' => 'linkedin',
-					'value' => set_value('linkedin')
+					'value' => set_value('linkedin'),
+					'title' => 'Full LinkedIn Public Profile URL'
 					);
 					
 	$dribbble = array(
 					'name' => 'dribbble',
-					'value' => set_value('dribbble')
+					'value' => set_value('dribbble'),
+					'title' => 'Full Dribbble Profile URL'
 					);
 										
 	$github = array(
 					'name' => 'github',
-					'value' => set_value('github')
+					'value' => set_value('github'),
+					'title' => 'Full GitHub Profile URL'
 					);
 												
 
@@ -101,13 +111,13 @@ endforeach;
 							'type'  => 'submit'
 						  );
 ?>
-	<?php $this->load->view('leftsidebar.php'); ?>
+	<?php $this->load->view('includes/leftsidebar'); ?>
 	
 	<div id="right-column">
-		<?php echo anchor("/", "&laquo; Home", array("class" => "fancy-button")); ?>
-		<br /><br /><br />
+		<?php $this->load->view("includes/navigation"); ?>
 		<div>
 			
+		<?php echo $this->message->display(); ?>
 		
 		<div class="item">
 			<hgroup>		
@@ -133,11 +143,14 @@ endforeach;
 			<div class="form-spacing"></div>
 			<h2>BC Skills Profile</h2>
 			<?php echo form_label('Bio:', 'bio'); echo form_textarea($bio); ?>
-			<?php echo form_label('Skills (separate with commas):', 'skills'); echo form_input($skills); ?>
-			<?php echo form_label('software (separate with commas):', 'software'); echo form_input($software); ?>
-			<?php echo form_label('Twitter (@username):', 'twitter'); echo form_input($twitter); ?>
+			<?php echo form_label('Skills:', 'skills'); echo form_input($skills); ?>
+			<?php echo form_label('Software:', 'software'); echo form_input($software); ?>
+			
+			<div class="form-spacing"></div>
+			<h2>Social Meda</h2>
+			<?php echo form_label('Twitter:', 'twitter'); echo form_input($twitter); ?>
 			<?php echo form_label('Facebook:', 'facebook'); echo form_input($facebook); ?>
-			<?php echo form_label('LinkedIn (public profile):', 'linkedin'); echo form_input($linkedin); ?>
+			<?php echo form_label('LinkedIn:', 'linkedin'); echo form_input($linkedin); ?>
 			<?php echo form_label('Dribbble:', 'dribbble'); echo form_input($dribbble); ?>
 			<?php echo form_label('GitHub:', 'github'); echo form_input($github); ?>
 			<?php echo form_submit($submit_button); ?>

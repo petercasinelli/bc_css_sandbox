@@ -2,11 +2,10 @@
 $this->load->helper('form');
 $this->load->view('includes/header');
 ?>
-	<?php $this->load->view('student/leftsidebar.php'); ?>
+	<?php $this->load->view('student/includes/leftsidebar.php'); ?>
 	
 	<div id="right-column">
-		<?php echo anchor("/", "&laquo; Home", array("class" => "fancy-button")); ?>
-		<br /><br /><br />
+	<?php $this->load->view("student/includes/navigation"); ?>
 		
 		<div class="item">
 			<hgroup>
@@ -31,22 +30,24 @@ $this->load->view('includes/header');
 			<?php
 			
 				if (empty($students)):
-					echo 'No students exist with your search requirements.';
+					echo '<p>No students exist with your search requirements.</p>';
 				else:
 			?>
-			<hgroup>
-				<h1>Your search returned <?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></h1>
-			</hgroup>
+			<p>Your search returned <b><?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></b></p>
 			<br />
 			<?php
 				endif;
-			
+				
+				//Counter kept for expand/hide student profile
+				$i = 0;
 				foreach($students as $student)
 				{
 					//echo anchor('student/view/' . $student->student_id, $student->first . ' ' . $student->last . '<br />');
 					$data["student"] = $student;
+					$data["id"] = $i;
 					//we want to put this in assoc 
 					$this->load->view('student/student_block', $data);
+					$i++;
 				}
 			?>	
 		

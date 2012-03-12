@@ -1,6 +1,6 @@
 		<div class="item">
-			<a href="javascript:;" class="expand" id="expand1" onClick="toggleExpand('1');">Expand Profile</a>
-			<hgroup onClick="toggleExpand('1');">
+			<a href="javascript:;" class="expand" id="expand<?php echo $id; ?>" onClick="toggleExpand(<?php echo $id; ?>);">Expand Profile</a>
+			<hgroup onClick="toggleExpand('<?php echo $id; ?>');">
 				<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
 				<h2><?php echo $student->school . ' ' . $student->year; ?> (Studying <?php echo $student->major ?>)</h2>
 			</hgroup>
@@ -9,7 +9,7 @@
 				<br>
 				<b>Software:</b> <?php echo $student->software; ?>
 			</p>
-			<p id="item1" style="display:none;">
+			<p id="item<?php echo $id; ?>" style="display:none;">
 			<b>Bio: </b><?php echo $student->bio; ?>
 			<br /><br />
 			<a href="mailto:<?php echo $student->email; ?>" class="fancy-button">Contact</a>
