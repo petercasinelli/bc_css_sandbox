@@ -50,12 +50,12 @@ $active_record = TRUE;
 
 
 //Extract database environment variables from Heroku (for PHP)
-extract(parse_url($_ENV["DATABASE_URL"]));
+//extract(parse_url($_ENV["DATABASE_URL"]));
 
-$db['default']['hostname'] = $host; //Using Heroku db variables from extract()
-$db['default']['username'] = $user;
-$db['default']['password'] = $pass;
-$db['default']['database'] = substr($path, 1);
+$db['default']['hostname'] = 'localhost'; //Using Heroku db variables from extract()
+$db['default']['username'] = 'postgres';
+$db['default']['password'] = 'password';
+$db['default']['database'] = 'bcccss';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
