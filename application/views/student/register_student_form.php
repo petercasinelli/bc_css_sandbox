@@ -121,7 +121,7 @@ endforeach;
 		
 		<div class="item">
 			<hgroup>		
-				<h1>Create A Profile on BC Skillz</h1>
+				<h1>Create A Profile on BC Skills</h1>
 				<h2>You must be a student at Boston College in order to register.</h2>
 			</hgroup>
 		</div>
