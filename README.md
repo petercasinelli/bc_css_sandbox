@@ -37,7 +37,7 @@ $db['default']['password'] = 'yourpasswordhere';	//Whatever password you chose t
 $db['default']['database'] = 'yourdatabasenamehere';	//Name of the database. We used css for "computer science society"!
 </pre>
 
-Important: you must comment out this line (number 53)
+Important: you must comment out this line (line #53)
 
 <pre>
 //extract(parse_url($_ENV["DATABASE_URL"]));
