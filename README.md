@@ -16,11 +16,36 @@ git clone git@github.com:pcas00/bc_css_sandbox.git
 
 If you need help getting started with GitHub, <a href="http://learn.github.com/p/intro.html" target="_blank">click here to learn more</a>.
 
-###Installing/Importing Test Database Data
+###Importing Test Database Data
 This applicaton uses a PostgreSQL backend. To import dummy data, after forking this repository, import the database.sql file located
 in the root directory of this application.
 
 For one-click PostgreSQL installation, <a href="http://www.enterprisedb.com/products-services-training/pgdownload" target="_blank">click here to visit a PostgreSQL download web site</a>.
+
+###Installing Database With CodeIgniter
+Once you have forked the PHP application and installed your PostgreSQL database with dummy data, you will need to connect it to the application!
+This can be done by navigating to the Application folder, then opening the Config folder, and then opening the Database.php file.
+
+You will only be concerned with editing the following lines of code:
+
+<pre>
+$db['default']['hostname'] = "hostnamehere";	//Usually localhost
+$db['default']['username'] = "usernamehere";	//May be postgres
+$db['default']['password'] = "yourpasswordhere";	//Whatever password you chose to setup the database
+$db['default']['database'] = 'yourdatabasenamehere';	//Name of the database. We used css for "computer science society"!
+</pre>
+
+Save this file, and open it on your local server
+
+###Installing a Local Server
+If you are running a Mac, you can easiy setup a PHP Apache environment by <a href="http://www.coolestguyplanet.net/how-to-install-php-mysql-apache-on-os-x-10-6/" target="_blank">clicking here and checking out this tutorial</a>.
+
+If you are running Windows, an easy way to install a local server is by using WAMP. <a href="http://www.wampserver.com/en/" target="_blank">Click here to view installation instructions and get started quickly.</a>
+
+## Making Pull Requests
+Please make an effort to enhance the functionality of this application! We encourage everyone, of any skill level, to try and extend features, fix bugs, or enhance documentation. If you know how to do something better, share it!
+
+Make sure you do not commit our project settings, local files that do not belong in the repository, or configuration settings. These pull requests will have to be rejected.
 
 ##Getting Help
 If you need help getting started, do not hesitate to contact Peter Casinelli at <a href="mailto:peter.casinelli@bc.edu" target="_blank">peter.casinelli@bc.edu</a> .
