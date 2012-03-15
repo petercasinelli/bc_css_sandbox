@@ -45,7 +45,7 @@ If you are running Windows, an easy way to install a local server is by using WA
 ## Making Pull Requests
 Please make an effort to enhance the functionality of this application! We encourage everyone, of any skill level, to try and extend features, fix bugs, or enhance documentation. If you know how to do something better, share it!
 
-Make sure you do not commit our project settings, local files that do not belong in the repository, or configuration settings. These pull requests will have to be rejected.
+Make sure you do not commit your project settings, local files that do not belong in the repository, or configuration settings. These pull requests will have to be rejected.
 
 ##Getting Help
 If you need help getting started, do not hesitate to contact Peter Casinelli at <a href="mailto:peter.casinelli@bc.edu" target="_blank">peter.casinelli@bc.edu</a> .
