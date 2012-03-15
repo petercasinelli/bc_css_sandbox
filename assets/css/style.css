@@ -29,7 +29,7 @@ a:hover {
 #container > div {
 	background-image:url('../images/column_background.png');
 	box-shadow:0 0 4px 2px #BABABA;
-	height:100%;
+	min-height:100%;
 }
 
 #left-column {
@@ -203,7 +203,7 @@ a#sign-up:hover {
 
 nav {
 	text-align:center;
-	margin-top:20px;
+	margin:20px 0;
 }
 
 nav ul li {
@@ -241,12 +241,12 @@ nav ul li a:hover {
 }
 
 #search {
-	width:100%;
+	padding:10px;
 	margin-bottom:20px;
 }
 
 #search input[type="text"] {
-	width:70%;
+	width:80%;
 	height:2.5em;
 	border:1px solid #bdbdbd;
 	padding:0 5px;
@@ -254,7 +254,7 @@ nav ul li a:hover {
 }
 
 #search input[type="submit"] {
-	width:20%;
+	width:15%;
 	float:right;
 	height:2.5em;
 	padding:0;
