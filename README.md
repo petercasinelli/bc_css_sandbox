@@ -29,9 +29,9 @@ This can be done by navigating to the Application folder, then opening the Confi
 You will only be concerned with editing the following lines of code:
 
 <pre>
-$db['default']['hostname'] = "hostnamehere";	//Usually localhost
-$db['default']['username'] = "usernamehere";	//May be postgres
-$db['default']['password'] = "yourpasswordhere";	//Whatever password you chose to setup the database
+$db['default']['hostname'] = 'hostnamehere';	//Usually localhost
+$db['default']['username'] = 'usernamehere';	//May be postgres
+$db['default']['password'] = 'yourpasswordhere';	//Whatever password you chose to setup the database
 $db['default']['database'] = 'yourdatabasenamehere';	//Name of the database. We used css for "computer science society"!
 </pre>
 
