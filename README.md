@@ -18,6 +18,8 @@ If you want a quick tutorial on how to fork, <a href="http://help.github.com/for
 
 If you need help getting started with GitHub, <a href="http://learn.github.com/p/intro.html" target="_blank">click here to learn more</a>.
 
+Setting up on mac? <a href="http://help.github.com/mac-set-up-git/" target="_blank">check out this guide</a>
+
 ###Importing Test Database Data
 This applicaton uses a PostgreSQL backend. To import dummy data, after forking this repository, import the database.sql file located
 in the root directory of this application.
