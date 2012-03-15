@@ -14,6 +14,8 @@ Fork this repository by using the following Git command:
 git clone git@github.com:pcas00/bc_css_sandbox.git
 </pre>
 
+If you want a quick tutorial on how to fork, <a href="http://help.github.com/fork-a-repo/" target="_blank">click here</a>.
+
 If you need help getting started with GitHub, <a href="http://learn.github.com/p/intro.html" target="_blank">click here to learn more</a>.
 
 ###Importing Test Database Data
