@@ -22,6 +22,10 @@ in the root directory of this application.
 
 For one-click PostgreSQL installation, <a href="http://www.enterprisedb.com/products-services-training/pgdownload" target="_blank">click here to visit a PostgreSQL download web site</a>.
 
+##Getting Help
+If you need help getting started, do not hesitate to contact Peter Casinelli at <a href="mailto:peter.casinelli@bc.edu" target="_blank">peter.casinelli@bc.edu</a> .
+If you have questions regarding how Codeigniter or PostgreSQL works, or particular functionality, please refer to the documentation help below!
+
 ##Documentation
 
 This PHP application is being built using an open source PHP framework called <a href="http://www.codeigniter.com" target="blank">Codeigniter</a>.
