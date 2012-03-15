@@ -7,7 +7,7 @@
 		<div class="item non-user-item">
 			<hgroup>
 				<h2>BC CS Society Releases BC Skills</h2>
-				<h3>3/6/2012</h3>
+				<h3>March 6th, 2012</h3>
 			</hgroup>
 			<p>The Boston College Computer Science Society has released the <b>BC Skills</b> open source platform. 
 				Not only are we allowing anyone to contribute and extend our platform using <a href="https://github.com/pcas00/bc_css_sandbox" target="_blank">GitHub</a>,

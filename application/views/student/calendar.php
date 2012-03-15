@@ -7,16 +7,16 @@
 		
 		<div class="item non-user-item">
 			<hgroup>
-				<h1>CSS Special Event</h1>
-				<h2>When: March 15th, 2012 @ 4pm-5pm</h2>
+				<h2>CSS Special Event</h1>
+				<h3>March 15th, 2012 @ 4pm-5pm</h2>
 			</hgroup>
 			<p>You are invited to a CSS special event. We will be unveiling a secret project and discussing our plans for the rest of the semester. We hope to see you there! Pizza and drinks will be served.</p>
 		</div>
 		
 		<div class="item non-user-item">
 			<hgroup>
-				<h1>That Great Idea Isn't Yours Unless You Own It: Intellectual Property Protection for the Uninitiated</h1>
-				<h2>When: March 22nd, 2012 @ 5pm-6pm</h2>
+				<h2>That Great Idea Isn't Yours Unless You Own It: Intellectual Property Protection for the Uninitiated</h1>
+				<h3>March 22nd, 2012 @ 5pm-6pm</h2>
 			</hgroup>
 			<p>Guest lecture by Matt Lowrie.</p>
 			
@@ -32,8 +32,8 @@
 		
 		<div class="item non-user-item">
 			<hgroup>
-				<h1>Ruby on Rails: Development process from vision to release</h1>
-				<h2>March 29th, 2012 @ 4pm-5pm</h2>
+				<h2>Ruby on Rails: Development process from vision to release</h1>
+				<h3>March 29th, 2012 @ 4pm-5pm</h2>
 			</hgroup>
 			<p>Chris Paul is the VPE at BlueLeaf, a Boston-area startup company.  He is a software development veteran
 				 with 30+ years of experience.</p>

@@ -1,1 +1,1 @@
-<?php echo anchor("/", "&laquo; Home", array("class" => "fancy-button")); ?>
+<?php echo anchor("/", "Home", array("class" => "fancy-button")); ?>
