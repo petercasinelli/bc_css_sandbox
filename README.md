@@ -45,6 +45,11 @@ Important: you must comment out this line (number 53)
 //extract(parse_url($_ENV["DATABASE_URL"]));
 </pre>
 
+Note: If you encounter a database error at any point (error description: "Unable to connect to your database server using the provided settings."), try making the following change to database.php:
+
+<pre>
+$db['default']['db_debug'] = FALSE;
+</pre>
 
 
 Save this file, and open it on your local server
