@@ -9,8 +9,8 @@ $this->load->view('includes/header');
 		
 		<div class="item">
 			<hgroup>
-				<h1>Search For A Student</h1>
-				<h2>with search term: <?php echo $search_query; ?></h2>
+				<h1>Search for Skills at BC</h1>
+				<h2>What type of student are you looking for?</h2>
 			</hgroup>
 			<?php echo form_open('student/search/', 'id=search'); ?>
 			<?php 
@@ -25,6 +25,7 @@ $this->load->view('includes/header');
 					?>
 			<?php echo form_input($query); ?>
 			<input type="submit" name="submit" value="Search">
+			<?php echo form_close(); ?>
 		</div>
 		
 			<?php

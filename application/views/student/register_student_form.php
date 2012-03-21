@@ -77,7 +77,7 @@ endforeach;
 	$twitter = array(
 					'name' => 'twitter',
 					'value' => set_value('twitter'),
-					'title' => '@username'
+					'title' => 'Just your username'
 					);
 					
 	$facebook = array(
@@ -119,13 +119,13 @@ endforeach;
 			
 		<?php echo $this->message->display(); ?>
 		
-		<div class="item">
+		<div class="item non-user-item">
 			<hgroup>		
-				<h1>Create A Profile on BC Skillz</h1>
+				<h1>Create A Profile on BC Skills</h1>
 				<h2>You must be a student at Boston College in order to register.</h2>
 			</hgroup>
 		</div>
-			<?php echo validation_errors('<div class="redAlert">', '</div>'); ?>
+			<?php echo validation_errors('<p>', '</p>'); ?>
 			<?php echo form_open('register/student/register', array("id" => "edit-profile")); ?>
 			<h2>Personal Information</h2>
 			<?php echo form_label('First Name:', 'first'); echo form_input($first);?>
@@ -147,7 +147,7 @@ endforeach;
 			<?php echo form_label('Software:', 'software'); echo form_input($software); ?>
 			
 			<div class="form-spacing"></div>
-			<h2>Social Meda</h2>
+			<h2>Social Media</h2>
 			<?php echo form_label('Twitter:', 'twitter'); echo form_input($twitter); ?>
 			<?php echo form_label('Facebook:', 'facebook'); echo form_input($facebook); ?>
 			<?php echo form_label('LinkedIn:', 'linkedin'); echo form_input($linkedin); ?>

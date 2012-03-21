@@ -15,24 +15,27 @@ $this->load->view('includes/header');
 				<h1>Search for Skills at BC</h1>
 				<h2>What type of student are you looking for?</h2>
 			</hgroup>
-		</div>
 			
-		<?php echo $this->message->display(); ?>
+			<?php echo $this->message->display(); ?>
 		
-		<?php echo validation_errors('<div class="redAlert">', '</div>'); ?>
-		<?php echo form_open('student/search/', 'id="search"'); ?>
-		<?php 
+			<?php echo validation_errors('<p>', '</p>'); ?>
+			<?php echo form_open('student/search/', 'id="search"'); ?>
+			<?php 
 		
-		$query = array(
+			$query = array(
 						'name' 	=> 'query',
 						'value' => set_value('query'),
 						'placeholder' => 'Search names, skills, majors...'
-					  );
+					 );
 		
-				?>
+		?>
+		</div>
+		
 		<?php echo form_input($query); ?>
 		<input type="submit" name="submit" value="Search">
+		<?php echo form_close(); ?>
 		<br />
+		
 		<?php $this->load->view('student/message_board'); ?>
 		<br /><br />
 		<?php $this->load->view('student/calendar'); ?>
