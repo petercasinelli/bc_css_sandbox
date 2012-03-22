@@ -61,23 +61,23 @@ endforeach;
 	$bio = array(
 				'name' 	=> 'bio',
 				'value' => set_value('bio'),
-				'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? What are you passionate about?'
+				'title' => 'Tell us a little bit about yourself. Are your recruiting a technical or business co-founder? Are you looking to get involved in a startup? What are you passionate about?'
 				 );
 	$skills = array(
 					'name' => 'skills',
 					'value' => set_value('skills'),
-					'title' => 'Comma separated if multiple'
+					'title' => 'What programming languages do you know? What business skills do you have? Any skills are welcome! Comma separated if multiple'
 					); 		
 	$software = array(
 					'name' => 'software',
 					'value' => set_value('software'),
-					'title' => 'Comma separated if multiple'
+					'title' => 'What software do you use? Ie- Eclipse, XCode, Balsamiq, Excel, etc. Comma separated if multiple'
 					);
 					
 	$twitter = array(
 					'name' => 'twitter',
 					'value' => set_value('twitter'),
-					'title' => 'Just your username'
+					'title' => 'Just your username @username'
 					);
 					
 	$facebook = array(
