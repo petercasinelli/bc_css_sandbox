@@ -50,10 +50,10 @@ Important: you must comment out this line (number 53)
 Save this file, and open it on your local server
 
 ###Installing a Local Server
-#Mac Users
+####Mac Users
 If you are running a Mac, you can easiy setup a PHP Apache environment by <a href="http://www.coolestguyplanet.net/how-to-install-php-mysql-apache-on-os-x-10-6/" target="_blank">clicking here and checking out this tutorial</a>.
  
-#Windows Users
+####Windows Users
 If you are running Windows, an easy way to install a local server is by using WAMP. <a href="http://www.wampserver.com/en/" target="_blank">Click here to view installation instructions and get started quickly.</a>
 
 Once you have WAMP installed, place the source code into the www folder of WAMP (usually C:\wamp\www). Next start the server and click on the icon that appears in the Quick Launch area of the taskbar. Click on PHP -> PHP Settings and make sure php_pdo_pgsql
