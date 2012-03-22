@@ -45,19 +45,19 @@ Important: you must comment out this line (number 53)
 //extract(parse_url($_ENV["DATABASE_URL"]));
 </pre>
 
-Note: If you encounter a database error at any point (error description: "Unable to connect to your database server using the provided settings."), try making the following change to database.php:
-
-<pre>
-$db['default']['db_debug'] = FALSE;
-</pre>
 
 
 Save this file, and open it on your local server
 
 ###Installing a Local Server
+#Mac Users
 If you are running a Mac, you can easiy setup a PHP Apache environment by <a href="http://www.coolestguyplanet.net/how-to-install-php-mysql-apache-on-os-x-10-6/" target="_blank">clicking here and checking out this tutorial</a>.
-
+ 
+#Windows Users
 If you are running Windows, an easy way to install a local server is by using WAMP. <a href="http://www.wampserver.com/en/" target="_blank">Click here to view installation instructions and get started quickly.</a>
+
+Once you have WAMP installed, place the source code into the www folder of WAMP (usually C:\wamp\www). Next start the server and click on the icon that appears in the Quick Launch area of the taskbar. Click on PHP -> PHP Settings and make sure php_pdo_pgsql
+and php_pgsql are checked.  If they are not, then click them to install the extension.
 
 ## Making Pull Requests
 Please make an effort to enhance the functionality of this application! We encourage everyone, of any skill level, to try and extend features, fix bugs, or enhance documentation. If you know how to do something better, share it!
