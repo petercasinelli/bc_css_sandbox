@@ -59,6 +59,9 @@ If you are running Windows, an easy way to install a local server is by using WA
 Once you have WAMP installed, place the source code into the www folder of WAMP (usually C:\wamp\www). Next start the server and click on the icon that appears in the Quick Launch area of the taskbar. Click on PHP -> PHP Settings and make sure php_pdo_pgsql
 and php_pgsql are checked.  If they are not, then click them to install the extension.
 
+Note: If apache is unable to load after the extensions have been enabled, copy the file libpq.dll from your C:\wamp\php folder into C:\wamp\apache\bin and restart the server.
+See issue <a href="http://forum.wampserver.com/read.php?2,40270,40311" target="_blank">here</a> 
+ 
 ## Making Pull Requests
 Please make an effort to enhance the functionality of this application! We encourage everyone, of any skill level, to try and extend features, fix bugs, or enhance documentation. If you know how to do something better, share it!
 
