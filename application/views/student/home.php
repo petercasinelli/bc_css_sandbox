@@ -28,16 +28,16 @@ $this->load->view('includes/header');
 						'placeholder' => 'Search names, skills, majors...'
 					 );
 		
-		?>
+			?>
+			
+			<?php echo form_input($query); ?>
+			<input type="submit" name="submit" value="Search">
+			<?php echo form_close(); ?>
 		</div>
-		
-		<?php echo form_input($query); ?>
-		<input type="submit" name="submit" value="Search">
-		<?php echo form_close(); ?>
-		<br />
+		<br><br>
 		
 		<?php $this->load->view('student/message_board'); ?>
-		<br /><br />
+		<br><br>
 		<?php $this->load->view('student/calendar'); ?>
 	</div>
 	
