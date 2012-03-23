@@ -113,7 +113,7 @@ endforeach;
 					
 	$submit_button = array(
 							'name'	=> 'submit',
-							'value' => 'Edit Profile',
+							'value' => 'Save Profile',
 							'type'  => 'submit'
 						  );
 
