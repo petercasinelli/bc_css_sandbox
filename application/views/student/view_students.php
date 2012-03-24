@@ -31,10 +31,10 @@ $this->load->view('includes/header');
 			<?php
 			
 				if (empty($students)):
-					echo '<p>No students exist with your search requirements.</p>';
+					echo '<p class="red-alert">No students exist with your search requirements.</p>';
 				else:
 			?>
-			<p>Your search returned <b><?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></b></p>
+			<p class="green-alert">Your search returned <b><?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></b></p>
 			<br />
 			<?php
 				endif;

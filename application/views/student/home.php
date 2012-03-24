@@ -18,7 +18,7 @@ $this->load->view('includes/header');
 			
 			<?php echo $this->message->display(); ?>
 		
-			<?php echo validation_errors('<p>', '</p>'); ?>
+			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
 			<?php echo form_open('student/search/', 'id="search"'); ?>
 			<?php 
 		
@@ -34,10 +34,9 @@ $this->load->view('includes/header');
 			<input type="submit" name="submit" value="Search">
 			<?php echo form_close(); ?>
 		</div>
-		<br><br>
 		
 		<?php $this->load->view('student/message_board'); ?>
-		<br><br>
+
 		<?php $this->load->view('student/calendar'); ?>
 	</div>
 	

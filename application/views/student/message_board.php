@@ -4,7 +4,7 @@
 				<h2>Stay up to date with the latest on the start-up and computer science community at Boston College</h2>
 			</hgroup>
 		</div>
-		<div class="item non-user-item">
+		<div class="item non-user-item text-item">
 			<hgroup>
 				<h2>BC CS Society Releases BC Skills</h2>
 				<h3>March 6th, 2012</h3>

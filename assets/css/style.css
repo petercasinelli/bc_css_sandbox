@@ -60,6 +60,27 @@ p {
 	padding:10px;
 }
 
+#red-alert {
+	background:#FFCECE;
+	border:1px solid #ED9595;
+	border-width:1px 0;
+	color:#750000;
+}
+
+#green-alert {
+	background:#E3FCDB;
+	border:1px solid #85D36B;
+	border-width:1px 0;
+	color:#027F00;
+}
+
+#yellow-alert {
+	background:#FFF0B7;
+	border:1px solid #FFD17C;
+	border-width:1px 0;
+	color:#D68B00;
+}
+
 /*--------------*/
 /*----CONTENT---*/
 /*--------------*/
@@ -129,6 +150,22 @@ a#sign-up:hover {
 
 .non-user-item hgroup {
 	cursor:default !important;
+}
+
+.non-user-item img {
+	width:auto;
+	height:auto;
+	float:none;
+	margin:0;
+}
+
+.text-item {
+	background:none;
+	border-width:0;
+}
+
+.text-item hgroup {
+	background:-moz-linear-gradient(top, #dedede 0%, rgba(235,235,235,0) 100%);
 }
 
 .item .expand {

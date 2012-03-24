@@ -19,7 +19,6 @@ endforeach;
 	$first = array(
 					'name' 	=> 'first',
 					'value' => set_value('first'),
-					
 				  );
 						
 	$last = array(
@@ -104,7 +103,6 @@ endforeach;
 					'title' => 'Full GitHub Profile URL'
 					);
 												
-
 	$submit_button = array(
 							'name'	=> 'submit',
 							'value' => 'Register',
@@ -125,7 +123,7 @@ endforeach;
 				<h2>You must be a student at Boston College in order to register.</h2>
 			</hgroup>
 		</div>
-			<?php echo validation_errors('<p>', '</p>'); ?>
+			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
 			<?php echo form_open('register/student/register', array("id" => "edit-profile")); ?>
 			<h2>Personal Information</h2>
 			<?php echo form_label('First Name:', 'first'); echo form_input($first);?>

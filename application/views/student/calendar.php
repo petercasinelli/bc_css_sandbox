@@ -5,7 +5,7 @@
 			</hgroup>
 		</div>
 		
-		<div class="item non-user-item">
+		<div class="item non-user-item text-item">
 			<hgroup>
 				<h2>CSS Special Event</h1>
 				<h3>March 15th, 2012 @ 4pm-5pm</h2>
@@ -13,7 +13,7 @@
 			<p>You are invited to a CSS special event. We will be unveiling a secret project and discussing our plans for the rest of the semester. We hope to see you there! Pizza and drinks will be served.</p>
 		</div>
 		
-		<div class="item non-user-item">
+		<div class="item non-user-item text-item">
 			<hgroup>
 				<h2>That Great Idea Isn't Yours Unless You Own It: Intellectual Property Protection for the Uninitiated</h1>
 				<h3>March 22nd, 2012 @ 5pm-6pm</h2>
@@ -30,7 +30,7 @@
 				    electrical engineering and received an M.S. in electrical engineering, and a B.S. in computer engineering.</p>
 		</div>
 		
-		<div class="item non-user-item">
+		<div class="item non-user-item text-item">
 			<hgroup>
 				<h2>Ruby on Rails: Development process from vision to release</h1>
 				<h3>March 29th, 2012 @ 4pm-5pm</h2>

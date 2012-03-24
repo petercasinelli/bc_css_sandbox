@@ -113,7 +113,7 @@ endforeach;
 					
 	$submit_button = array(
 							'name'	=> 'submit',
-							'value' => 'Edit Profile',
+							'value' => 'Save Profile',
 							'type'  => 'submit'
 						  );
 
@@ -132,7 +132,7 @@ endforeach;
 			<?php $this->message->display(); ?>
 	
 			<?php echo form_open('student/edit/' . $student_logged_in->student_id, array("id" => "edit-profile")); ?>
-			<?php echo validation_errors('<div class="redAlert">', '</div>'); ?>
+			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
 			<br />
 			<h2>Personal Information</h2>
 			<?php echo form_label('First Name:', 'first'); echo form_input($first);?>
