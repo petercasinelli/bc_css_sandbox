@@ -62,11 +62,15 @@ class CI_Message {
             $output = $this->get(FALSE, $group);
             echo ($wrapper !== FALSE ? $wrapper[0] : $this->wrapper[0])."\r\n";
             foreach($output as $type => $messages){
-                echo '<div class="message-'.$type.'">'."\r\n";
+                //echo '<div class="'.$type.'">'."\r\n";
+                if ($type == "error")
+					$color = 'red';
+				else
+					$color = 'green';
                 foreach($messages as $msg){
-                    echo '<p>'.$msg.'</p>'."\r\n";
+                    echo '<p class="'.$color.'-alert">'.$msg.'</p>'."\r\n";
                 }
-                echo '</div>'."\r\n";
+                //echo '</div>'."\r\n";
             }
             echo ($wrapper !== FALSE ? $wrapper[1] : $this->wrapper[1])."\r\n";
         }        
