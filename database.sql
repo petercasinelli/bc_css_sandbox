@@ -1,301 +1,201 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.10.1
+-- http://www.phpmyadmin.net
 --
--- PostgreSQL database dump
---
+-- Host: localhost
+-- Generation Time: May 04, 2012 at 09:58 PM
+-- Server version: 5.5.21
+-- PHP Version: 5.3.8
 
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Name: majors; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Database: `css`
 --
 
-CREATE TABLE majors (
-    major_id integer NOT NULL,
-    major character varying(100) NOT NULL
-);
-
-
-ALTER TABLE public.majors OWNER TO postgres;
+-- --------------------------------------------------------
 
 --
--- Name: majors_major_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Table structure for table `majors`
 --
 
-CREATE SEQUENCE majors_major_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.majors_major_id_seq OWNER TO postgres;
+CREATE TABLE IF NOT EXISTS `majors` (
+  `major_id` int(11) NOT NULL AUTO_INCREMENT,
+  `major` varchar(100) NOT NULL,
+  PRIMARY KEY (`major_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
--- Name: majors_major_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Dumping data for table `majors`
 --
 
-ALTER SEQUENCE majors_major_id_seq OWNED BY majors.major_id;
+INSERT INTO `majors` (`major_id`, `major`) VALUES
+(1, 'Computer Science'),
+(3, 'Biology'),
+(4, 'Chemistry'),
+(5, 'Classical Studies'),
+(6, 'Communication'),
+(7, 'Earth and Environmental Sciences'),
+(8, 'Economics'),
+(9, 'Education'),
+(10, 'English'),
+(11, 'Finance'),
+(12, 'Accounting'),
+(13, 'Fine Arts'),
+(14, 'General Management'),
+(15, 'German Studies'),
+(16, 'History'),
+(17, 'Information Systems'),
+(18, 'Islamic Civilizations and Societies'),
+(19, 'International Studies'),
+(20, 'Marketing'),
+(21, 'Mathematics'),
+(22, 'Management and Organization'),
+(23, 'Music'),
+(24, 'Nursing'),
+(25, 'Operations Management'),
+(26, 'Philosophy'),
+(27, 'Physics'),
+(28, 'Political Science'),
+(29, 'Psychology'),
+(30, 'Romance Language and Literatures'),
+(31, 'Slavic and Eastern Languages and Literatures'),
+(32, 'Sociology'),
+(33, 'Theatre'),
+(34, 'Theology'),
+(35, 'African and African Diaspora Studies'),
+(36, 'Business Law'),
+(37, 'Biochemistry');
 
-
---
--- Name: majors_major_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('majors_major_id_seq', 37, true);
-
-
---
--- Name: schools; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE schools (
-    school_id integer NOT NULL,
-    school character varying(50) NOT NULL
-);
-
-
-ALTER TABLE public.schools OWNER TO postgres;
-
---
--- Name: TABLE schools; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON TABLE schools IS 'Table of schools at Boston College';
-
-
---
--- Name: schools_school_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE schools_school_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.schools_school_id_seq OWNER TO postgres;
+-- --------------------------------------------------------
 
 --
--- Name: schools_school_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Table structure for table `schools`
 --
 
-ALTER SEQUENCE schools_school_id_seq OWNED BY schools.school_id;
-
-
---
--- Name: schools_school_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('schools_school_id_seq', 8, true);
-
+CREATE TABLE IF NOT EXISTS `schools` (
+  `school_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `school` varchar(255) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`school_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Dumping data for table `schools`
 --
 
-CREATE TABLE students (
-    student_id integer NOT NULL,
-    first character varying(100),
-    last character varying(100),
-    email character varying(200),
-    password character varying(255),
-    school_id integer,
-    year integer,
-    major_id integer,
-    bio text,
-    skills text,
-    software text,
-    twitter text,
-    facebook text,
-    linkedin text,
-    dribbble text,
-    github text
-);
+INSERT INTO `schools` (`school_id`, `school`) VALUES
+(1, 'Arts and Sciences'),
+(2, 'CSOM'),
+(3, 'CSON'),
+(4, 'GSSW'),
+(5, 'Law'),
+(6, 'Lynch School'),
+(7, 'School of Theology'),
+(8, 'Woods College');
 
-
-ALTER TABLE public.students OWNER TO postgres;
+-- --------------------------------------------------------
 
 --
--- Name: TABLE students; Type: COMMENT; Schema: public; Owner: postgres
+-- Table structure for table `skills`
 --
 
-COMMENT ON TABLE students IS 'Table of students who are members of BC Skills';
-
-
---
--- Name: students_student_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE students_student_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.students_student_id_seq OWNER TO postgres;
+CREATE TABLE IF NOT EXISTS `skills` (
+  `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `skill` varchar(255) NOT NULL,
+  PRIMARY KEY (`skill_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Name: students_student_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Dumping data for table `skills`
 --
 
-ALTER SEQUENCE students_student_id_seq OWNED BY students.student_id;
+INSERT INTO `skills` (`skill_id`, `skill`) VALUES
+(1, 'HTML'),
+(2, 'CSS'),
+(3, 'Javascript'),
+(4, 'jQuery'),
+(5, 'PHP'),
+(6, 'Ruby on Rails'),
+(7, 'Python'),
+(9, 'C#'),
+(10, 'Objective-C'),
+(11, 'Android'),
+(12, 'Java'),
+(13, 'C++');
 
-
---
--- Name: students_student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('students_student_id_seq', 5, true);
-
-
---
--- Name: major_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY majors ALTER COLUMN major_id SET DEFAULT nextval('majors_major_id_seq'::regclass);
-
-
---
--- Name: school_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY schools ALTER COLUMN school_id SET DEFAULT nextval('schools_school_id_seq'::regclass);
-
+-- --------------------------------------------------------
 
 --
--- Name: student_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Table structure for table `students`
 --
 
-ALTER TABLE ONLY students ALTER COLUMN student_id SET DEFAULT nextval('students_student_id_seq'::regclass);
+CREATE TABLE IF NOT EXISTS `students` (
+  `student_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `first` varchar(255) NOT NULL,
+  `last` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `oauth_uid` binary(20) DEFAULT NULL,
+  `password` char(40) NOT NULL,
+  `school_id` int(11) unsigned DEFAULT NULL,
+  `year` int(4) unsigned DEFAULT NULL,
+  `major_id` int(11) unsigned DEFAULT NULL,
+  `bio` text,
+  `status` varchar(144) DEFAULT NULL,
+  `skills` text,
+  `software` text,
+  `twitter` text,
+  `facebook` text,
+  `linkedin` text,
+  `dribbble` text CHARACTER SET utf8 COLLATE utf8_bin,
+  `github` text NOT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
-
---
--- Data for Name: majors; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO majors VALUES (1, 'Computer Science');
-INSERT INTO majors VALUES (3, 'Biology');
-INSERT INTO majors VALUES (4, 'Chemistry');
-INSERT INTO majors VALUES (5, 'Classical Studies');
-INSERT INTO majors VALUES (6, 'Communication');
-INSERT INTO majors VALUES (7, 'Earth and Environmental Sciences');
-INSERT INTO majors VALUES (8, 'Economics');
-INSERT INTO majors VALUES (9, 'Education');
-INSERT INTO majors VALUES (10, 'English');
-INSERT INTO majors VALUES (11, 'Finance');
-INSERT INTO majors VALUES (12, 'Accounting');
-INSERT INTO majors VALUES (13, 'Fine Arts');
-INSERT INTO majors VALUES (14, 'General Management');
-INSERT INTO majors VALUES (15, 'German Studies');
-INSERT INTO majors VALUES (16, 'History');
-INSERT INTO majors VALUES (17, 'Information Systems');
-INSERT INTO majors VALUES (18, 'Islamic Civilizations and Societies');
-INSERT INTO majors VALUES (19, 'International Studies');
-INSERT INTO majors VALUES (20, 'Marketing');
-INSERT INTO majors VALUES (21, 'Mathematics');
-INSERT INTO majors VALUES (22, 'Management and Organization');
-INSERT INTO majors VALUES (23, 'Music');
-INSERT INTO majors VALUES (24, 'Nursing');
-INSERT INTO majors VALUES (25, 'Operations Management');
-INSERT INTO majors VALUES (26, 'Philosophy');
-INSERT INTO majors VALUES (27, 'Physics');
-INSERT INTO majors VALUES (28, 'Political Science');
-INSERT INTO majors VALUES (29, 'Psychology');
-INSERT INTO majors VALUES (30, 'Romance Language and Literatures');
-INSERT INTO majors VALUES (32, 'Sociology');
-INSERT INTO majors VALUES (33, 'Theatre');
-INSERT INTO majors VALUES (34, 'Theology');
-INSERT INTO majors VALUES (31, 'Slavic and Eastern Languages and Literatures');
-INSERT INTO majors VALUES (35, 'African and African Diaspora Studies');
-INSERT INTO majors VALUES (36, 'Business Law');
-INSERT INTO majors VALUES (37, 'Biochemistry');
-
+-- --------------------------------------------------------
 
 --
--- Data for Name: schools; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Table structure for table `student_skills`
 --
 
-INSERT INTO schools VALUES (2, 'CSOM');
-INSERT INTO schools VALUES (3, 'CSON');
-INSERT INTO schools VALUES (4, 'GSSW');
-INSERT INTO schools VALUES (5, 'Law');
-INSERT INTO schools VALUES (6, 'Lynch School');
-INSERT INTO schools VALUES (7, 'School of Theology');
-INSERT INTO schools VALUES (8, 'Woods College');
-INSERT INTO schools VALUES (1, 'Arts and Sciences');
+CREATE TABLE IF NOT EXISTS `student_skills` (
+  `student_id` int(11) unsigned NOT NULL,
+  `skill_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
 --
--- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Table structure for table `teams`
 --
 
-INSERT INTO students VALUES (4, 'First', 'Last', 'email@bc.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 1, 2014, 1, 'This is a bio', 'html, java, c', 'eclipse, xcode', '@twitterusername', '', '', '', '');
-INSERT INTO students VALUES (5, 'First 2', 'Last 2', 'email2@bc.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 3, 2013, 3, 'Bio for second student', 'HTML5, Java, C, C#', 'xcode, dreamweaver, eclipse, aptana', '', '', '', '', '');
+CREATE TABLE IF NOT EXISTS `teams` (
+  `team_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `team_description` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-
---
--- Name: majors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY majors
-    ADD CONSTRAINT majors_pkey PRIMARY KEY (major_id);
-
+-- --------------------------------------------------------
 
 --
--- Name: schools_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Table structure for table `team_members`
 --
 
-ALTER TABLE ONLY schools
-    ADD CONSTRAINT schools_pkey PRIMARY KEY (school_id);
+CREATE TABLE IF NOT EXISTS `team_members` (
+  `team_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `privilege_id` int(5) NOT NULL,
+  PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
---
--- Name: students_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY students
-    ADD CONSTRAINT students_pkey PRIMARY KEY (student_id);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
--- PostgreSQL database dump complete
---
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
