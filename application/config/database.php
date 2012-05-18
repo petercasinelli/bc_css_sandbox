@@ -46,7 +46,8 @@
 */
 
 $active_group = 'default';
-$active_record = TRUE; 
+$active_record = TRUE;
+ 
 
 $db['default']['hostname'] = get_cfg_var('aws.param1');
 $db['default']['username'] = get_cfg_var('aws.param3');
