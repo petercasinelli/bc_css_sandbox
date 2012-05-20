@@ -48,11 +48,20 @@
 $active_group = 'default';
 $active_record = TRUE;
  
+$hostname = get_cfg_var('aws.param1');
+$database = get_cfg_var('aws.param2');
+$username = get_cfg_var('aws.param3');
+$password = get_cfg_var('aws.param4');
+ 
 
-$db['default']['hostname'] = get_cfg_var('aws.param1');
-$db['default']['username'] = get_cfg_var('aws.param3');
-$db['default']['password'] = get_cfg_var('aws.param4');
-$db['default']['database'] = get_cfg_var('aws.param2');
+$db['default']['hostname'] = $hostname;
+$db['default']['username'] = $username;
+$db['default']['password'] = $password;
+$db['default']['database'] = $database;
+
+echo 'Hostname: ' . $hostname;
+
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
