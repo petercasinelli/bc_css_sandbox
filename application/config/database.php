@@ -58,6 +58,8 @@ $db['default']['username'] = $username;
 $db['default']['password'] = $password;
 $db['default']['database'] = $database;
 
+echo 'Hostname: ' . $hostname . '\n Username: ' . $username . '\n Password: ' . $password . ' \n DB: ' . $database;
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['port'] = 3306;
 $db['default']['dbprefix'] = '';
