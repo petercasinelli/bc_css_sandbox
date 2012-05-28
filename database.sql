@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 28, 2012 at 04:35 PM
+-- Generation Time: May 28, 2012 at 04:37 PM
 -- Server version: 5.5.21
 -- PHP Version: 5.3.8
 
@@ -211,6 +211,7 @@ CREATE TABLE IF NOT EXISTS `team_members` (
 CREATE TABLE IF NOT EXISTS `team_privileges` (
   `student_id` int(11) unsigned NOT NULL,
   `privilege_id` int(11) unsigned NOT NULL,
+  `team_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
