@@ -49,6 +49,12 @@ function create_menu(basepath)
 		
 		'</td><td class="td_sep" valign="top">' +
 
+		'<h3>Models</h3>' +
+		'<ul>' +
+			'<li><a href="'+base+'models/student_model.html">Student Model</a></li>' +
+			'<li><a href="'+base+'models/team_model.html">Team Model</a></li>' +
+		'</ul>' +
+		
 		'<h3>General Topics</h3>' +
 		'<ul>' +
 			'<li><a href="'+base+'general/urls.html">CodeIgniter URLs</a></li>' +

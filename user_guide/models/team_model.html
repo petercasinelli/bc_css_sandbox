@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Team Model: BC Skills Project Documentation</title>
+
+<style type='text/css' media='all'>@import url('./userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
+
+<script type="text/javascript" src="../nav/nav.js"></script>
+<script type="text/javascript" src="../nav/prototype.lite.js"></script>
+<script type="text/javascript" src="../nav/moo.fx.js"></script>
+<script type="text/javascript" src="../nav/user_guide_menu.js"></script>
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>BC Skills User Guide Version 1</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="../">BC Skills Home</a> &nbsp;&#8250;&nbsp;
+<a href="#">Models</a> &nbsp;&#8250;&nbsp;
+Team Model
+</td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="example.com/user_guide/" />Search Project User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+</tr>
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Team Model</h1>
+
+<p>The team model provides controllers access to team information from the database.</p>
+
+<p>Features:</p>
+
+<ul>
+	<li>Access team information</li>
+	<li>Access team permission information</li>
+
+</ul>
+
+<h2>$this->team_model->add_team($team_data)</h2>
+
+<p>Add a team by passing the $team_data array variable with the appropriate data. See the sample code and variable information below:</p>
+
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+	<th>Column Name</th>
+	<th>Description</th>
+	<th>Value</th>
+</tr>
+<tr>
+	<td class="td"><strong>team_id</strong></td>
+	<td class="td">Unique team id</td>
+	<td class="td">Unsigned int(11). Auto increment. Primary key.</td>
+</tr>
+<tr>
+	<td class="td"><strong>team_name</strong></td>
+	<td class="td">Team name</td>
+	<td class="td">varchar(255)</td>
+</tr>
+<tr>
+	<td class="td"><strong>team_description</strong></td>
+	<td class="td">Team description</td>
+	<td class="td">varchar(255)</td>
+</tr>
+</table>
+
+
+<code>
+	$team_name = 'Test team name';<br/>
+	$team_description = 'This is the team description';<br/><br/>
+	
+	$team_data = array(<br/>
+		'team_name' 	   => $team_name,<br/>
+		'team_description' => $team_description<br/>
+	);<br/><br/>
+	$this->team_model->add_team($team_data);<br />
+</code>
+
+
+<h2>$this->team_model->update_team($team_id, $team_data)</h2>
+
+<p>Update a team $team_id by passing the $team_data array variable with the appropriate data. See the variable information in the table above.</p>
+
+<h2>$this->team_model->add_team_member($student_id, $team_id)</h2>
+
+<p>Add a student with the given $student_id as a member of a team. This, by default, adds a student with no special priveledges or permissions.</p>
+
+<p class="important"><strong>Important:</strong>&nbsp; By default, if you are simply adding a team member, you do not need to set any permissions. Only add permissions if you want them to have special privileges such as administrator.</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+	<th>Column Name</th>
+	<th>Description</th>
+	<th>Value</th>
+</tr>
+<tr>
+	<td class="td"><strong>team_id</strong></td>
+	<td class="td">Team id</td>
+	<td class="td">Unsigned int(11). Primary key. Relation to teams table.</td>
+</tr>
+<tr>
+	<td class="td"><strong>user_id</strong></td>
+	<td class="td">User id</td>
+	<td class="td">varchar(255). Relation to students table.</td>
+</tr>
+</table>
+
+
+<h2>$this->team_model->remove_team_member($student_id, $team_id)</h2>
+
+<p>Remove a student with the given $student_id from a given team id $team_id.</p>
+
+<h2>$this->team_model->add_member_permission($student_id, $permission_id, $team_id)</h2>
+
+<p>Give student $student_id a permission $permission_id to the indicated team $team_id. See permission ID's below:</p>
+
+<p class="important"><strong>Important:</strong>&nbsp; This section is still pretty new. Only one permission will exist in the beginning: an administrator. In the future, we may have calendar management, or someone who only manages the team members but not team description, etc. Also, only we can delete teams in the beginning.</p>
+
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+	<th>Permission ID</th>
+	<th>Permission Description</th>
+</tr>
+<tr>
+	<td class="td"><strong>1</strong></td>
+	<td class="td">Administrator who has all functionality: can add team members and remove team members.</td>
+</tr>
+</table>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="#">Previous Class</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="#">Next Class</a>
+</p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+</div>
+
+</body>
+</html>
