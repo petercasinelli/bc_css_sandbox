@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 04, 2012 at 09:58 PM
+-- Generation Time: May 28, 2012 at 04:35 PM
 -- Server version: 5.5.21
 -- PHP Version: 5.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `css`
+-- Database: `bc-css-skills`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `majors` (
   `major_id` int(11) NOT NULL AUTO_INCREMENT,
-  `major` varchar(100) NOT NULL,
+  `major` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`major_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `first` varchar(255) NOT NULL,
   `last` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `oauth_uid` binary(20) DEFAULT NULL,
+  `oauth_uid` char(40) DEFAULT NULL,
   `password` char(40) NOT NULL,
   `school_id` int(11) unsigned DEFAULT NULL,
   `year` int(4) unsigned DEFAULT NULL,
@@ -156,7 +156,14 @@ CREATE TABLE IF NOT EXISTS `students` (
   `dribbble` text CHARACTER SET utf8 COLLATE utf8_bin,
   `github` text NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `oauth_uid`, `password`, `school_id`, `year`, `major_id`, `bio`, `status`, `skills`, `software`, `twitter`, `facebook`, `linkedin`, `dribbble`, `github`) VALUES
+(10, 'Peter', '', 'peter.casinelli@bc.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -191,9 +198,20 @@ CREATE TABLE IF NOT EXISTS `teams` (
 
 CREATE TABLE IF NOT EXISTS `team_members` (
   `team_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
-  `privilege_id` int(5) NOT NULL,
+  `student_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team_privileges`
+--
+
+CREATE TABLE IF NOT EXISTS `team_privileges` (
+  `student_id` int(11) unsigned NOT NULL,
+  `privilege_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
