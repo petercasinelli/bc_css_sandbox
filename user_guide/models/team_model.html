@@ -66,9 +66,9 @@ Team Model
 
 </ul>
 
-<h2>$this->team_model->add_team($team_data)</h2>
+<h2>$this->team_model->add_team($team_data, $student_id)</h2>
 
-<p>Add a team by passing the $team_data array variable with the appropriate data. See the sample code and variable information below:</p>
+<p>Add a team by passing the $team_data array variable with the appropriate data. You must pass it a $student_id which is the student that is currently logged in. This $student_id will be added to the team and set as the initial administrator. See the sample code and variable information below:</p>
 
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
@@ -97,19 +97,20 @@ Team Model
 
 <code>
 	$team_name = 'Test team name';<br/>
-	$team_description = 'This is the team description';<br/><br/>
+	$team_description = 'This is the team description';<br/>
+	$student_id = $this->current_student_id;<br/><br/>
 	
 	$team_data = array(<br/>
 		'team_name' 	   => $team_name,<br/>
 		'team_description' => $team_description<br/>
 	);<br/><br/>
-	$this->team_model->add_team($team_data);<br />
+	$this->team_model->add_team($team_data, $student_id);<br />
 </code>
 
 
-<h2>$this->team_model->update_team($team_id, $team_data)</h2>
+<h2>$this->team_model->update_team($team_id, $team_data, $student_id)</h2>
 
-<p>Update a team $team_id by passing the $team_data array variable with the appropriate data. See the variable information in the table above.</p>
+<p>Update a team $team_id by passing the $team_data array variable with the appropriate data. The $student_id must have appropriate permissions to update the team. See the variable information in the table above.</p>
 
 <h2>$this->team_model->add_team_member($student_id, $team_id)</h2>
 
@@ -134,6 +135,10 @@ Team Model
 	<td class="td">varchar(255). Relation to students table.</td>
 </tr>
 </table>
+
+<h2>$this->team_model->get_team($team_id)</h2>
+
+<p>Return all team information from a given team id $team_id.</p>
 
 
 <h2>$this->team_model->remove_team_member($student_id, $team_id)</h2>
