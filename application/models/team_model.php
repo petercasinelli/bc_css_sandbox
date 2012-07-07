@@ -23,8 +23,6 @@ class Team_Model extends CI_Model {
 				$add_team_member_permission = $this->add_member_permission($student_id, 1, $team_id);
 				
 				$affected_rows = $this->db->affected_rows();
-				return $affected_rows;
-				
 			endif;
 			
 		endif;
