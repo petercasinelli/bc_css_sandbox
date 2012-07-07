@@ -1,29 +1,4 @@
-<?php
-$this->load->view('includes/header');
-$this->load->library('message');
-	//Create majors dropdown from data sent in from controller
-/*$major_dropdown = array();
-foreach($majors AS $major):
-	$major_dropdown[$major->major_id] = $major->major;
-endforeach;
-
-//Create schools dropdown
-$schools_dropdown = array();
-foreach($schools AS $school):
-	$schools_dropdown[$school->school_id] = $school->school;
-endforeach;*/
-	
-	//Settings for form
-	/*$first = array(
-					'name' 	=> 'first',
-					'value' => set_value('first'),
-				  );
-						
-	$last = array(
-					'name' 	=> 'last',
-					'value' => set_value('last')
-				);
-*/
+<?php 
 	$name = array(
 				'name' 	=> 'name',
 				'value' => set_value('name')
@@ -33,100 +8,17 @@ endforeach;*/
 				'name' 	=> 'email',
 				'value' => set_value('email')
 				 );												
-						
+
 	$password = array(
 				'name' 	=> 'password'
 				 );
-				 
-	/*$confirm_password = array(
-				'name' 	=> 'confirm_password'
-				 );			
-				 				 
-	$year = array(
-				'name' 	=> 'year',
-				'value' => set_value('year'),
-				'maxlength' => 4
-				 );
-				 
-	$school = array(
-				'name' 	=> 'school',
-				'value' => set_value('school'),
-				'options' => $schools_dropdown
-				 );
-				 
-	$major = array(
-				'name' 	=> 'major',
-				'value' => set_value('major'),
-				'options' => $major_dropdown
-				 );
-				 
-	$bio = array(
-				'name' 	=> 'bio',
-				'value' => set_value('bio'),
-				'title' => 'Tell us a little bit about yourself. Are your recruiting a technical or business co-founder? Are you looking to get involved in a startup? What are you passionate about?'
-				 );
-	$skills = array(
-					'name' => 'skills',
-					'value' => set_value('skills'),
-					'title' => 'What programming languages do you know? What business skills do you have? Any skills are welcome! Comma separated if multiple'
-					); 		
-	$software = array(
-					'name' => 'software',
-					'value' => set_value('software'),
-					'title' => 'What software do you use? Ie- Eclipse, XCode, Balsamiq, Excel, etc. Comma separated if multiple'
-					);
 					
-	$twitter = array(
-					'name' => 'twitter',
-					'value' => set_value('twitter'),
-					'title' => 'Just your username @username'
-					);
-					
-	$facebook = array(
-					'name' => 'facebook',
-					'value' => set_value('facebook'),
-					'title' => 'Full Facebook URL'
-					);
-					
-	$linkedin = array(
-					'name' => 'linkedin',
-					'value' => set_value('linkedin'),
-					'title' => 'Full LinkedIn Public Profile URL'
-					);
-					
-	$dribbble = array(
-					'name' => 'dribbble',
-					'value' => set_value('dribbble'),
-					'title' => 'Full Dribbble Profile URL'
-					);
-										
-	$github = array(
-					'name' => 'github',
-					'value' => set_value('github'),
-					'title' => 'Full GitHub Profile URL'
-					);
-						*/						
 	$submit_button = array(
 							'name'	=> 'submit',
 							'value' => 'Register',
 							'type'  => 'submit'
 						  );
 ?>
-	<?php $this->load->view('includes/leftsidebar'); ?>
-	
-	<div id="right-column">
-		<?php $this->load->view("includes/navigation"); ?>
-		<div>
-			
-		<?php echo $this->message->display(); ?>
-		
-		<div class="item non-user-item">
-			<hgroup>		
-				<h1>Create A Profile on BC Skills</h1>
-				<h2>You must be a student at Boston College in order to register.</h2>
-			</hgroup>
-		</div>
-			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
 			<?php echo form_open('register/student/register', array("id" => "edit-profile")); ?>
 			
 			<?php echo form_label('Full Name:', 'name'); echo form_input($name); ?>
@@ -159,8 +51,4 @@ endforeach;*/
 			<?php echo form_submit($submit_button); ?>
 
 			<?php echo form_close(); ?>
-			</div>
-		
-	</div>
 	
-<?php $this->load->view('includes/footer'); ?>
