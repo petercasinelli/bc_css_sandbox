@@ -41,6 +41,31 @@ class Student extends CI_Controller {
 		
 	}
 	
+	public function fb_login(){	
+		$this->load->library('fb_connect');
+		$user_id = $this->fb_connect->get_user_id();
+		
+		if(!$user_id):
+			$login = $this->fb_connect->get_login_url();
+			redirect($login);
+		endif;
+		
+		$user_profile = $this->fb_connect->get_user_info($user_id);
+		if($user_profile):
+			$uid = $user_profile['id'];
+			$first_name = $user_profile['first_name'];
+			$last_name = $user_profile['last_name'];
+			$email = $user_profile['email'];
+			
+			//check if the ID exists in DB
+				//if so, get the user and set session
+			//else, check if the email exists in DB
+				//if so, redirect user to login page.
+				//else, create a new account with email and oauth_id
+					//if creation successful, set the session
+		endif;
+	}
+	
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('/');
