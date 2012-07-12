@@ -23,7 +23,7 @@ class Student extends CI_Controller {
 		
 		//$data["majors"] = $majors[0];
 		//print_r($data["majors"]);
-		$this->load->view('student/register_student_form', $data);
+		$this->load->view('student/registration/sign_up', $data);
 	}
 	
 	public function register(){
@@ -74,7 +74,7 @@ class Student extends CI_Controller {
 			/*//Create list of majors
 			$data["majors"] = $this->student_model->get_majors();	
 			$data["schools"] = $this->student_model->get_schools();	*/		
-			$this->load->view('student/register_student_form');
+			$this->load->view('student/registration/sign_up');
 		
 		//Else, add student to database
 		else:
