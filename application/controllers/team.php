@@ -34,12 +34,11 @@ class Team extends MY_Controller {
         //TO DO ** Need to ping model to get team information and pass it to view_team view through $data array
         $data['team'] = $this->team_model->get_team($team_id);
         $data['team_members'] = $this->team_model->get_team_members($team_id);
-
+        
 		$this->load->view('team/view_team', $data);
 	
 	}
 
-	
 	public function add_form()
 	{
 		$data["student_logged_in"] = $this->current_student_info;
@@ -144,7 +143,6 @@ class Team extends MY_Controller {
 		endif;
 		
 	}
-
 
 }
 

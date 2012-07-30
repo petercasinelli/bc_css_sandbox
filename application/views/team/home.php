@@ -36,8 +36,14 @@ $this->load->view('includes/header');
 		</div>
 		
 		Team Home
+
 		
-		We should list teams here
+		<?php foreach($teams as $team):?>
+		<?php $data['team'] = $team; ?>
+		<?php $data['team_members'] = $team_members[$team->team_id];?>
+		<?php $this->load->view('team/team_block', $data); ?>
+		<?php endforeach; ?>
+
 	</div>
 	
 <?php $this->load->view('includes/footer'); ?>
