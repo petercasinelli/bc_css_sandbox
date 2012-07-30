@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Student Model: BC Skills Project Documentation</title>
+
+<style type='text/css' media='all'>@import url('./userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
+
+<script type="text/javascript" src="../nav/nav.js"></script>
+<script type="text/javascript" src="../nav/prototype.lite.js"></script>
+<script type="text/javascript" src="../nav/moo.fx.js"></script>
+<script type="text/javascript" src="../nav/user_guide_menu.js"></script>
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>BC Skills</h1></td>
+<td id="breadcrumb_right"><a href="#">Right Breadcrumb</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+
+<!-- START BREADCRUMB -->
+<div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>BC Skills User Guide Version 1</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Student Model</h1>
+
+<p>The student model provides controllers access to student information from the database.</p>
+
+<p>Features:</p>
+
+<ul>
+	<li>Access student information</li>
+	<li>Search students</li>
+	<li>Add/Register students</li>
+	<li>Authenticate students</li>
+	<li>Access school information (list of schools)</li>
+	<li>Access major information (list of majors)</li>
+</ul>
+
+<h2>$this->student_model->get_all_students()</h2>
+
+<p>Retrieve all columns of database for students. Does not include join of majors or schools.</p>
+
+<code>
+	$this->student_model->get_all_students();<br />
+</code>
+
+<h2>$this->student_model->get_student($student_id)</h2>
+
+<p>Retrieve all columns of database for a specific student, given by $student_id. Includes join of major and school.</p>
+
+
+<h2>$this->student_model->get_student_skills($student_id)</h2>
+
+<p>Retrieve student skills from skills table using the $student_id.</p>
+
+<h2>$this->student_model->add_student($student_data)</h2>
+
+<p>Add a student to the student database using $student_data variable. You must pass appropriate variables to $student_data:</p>
+
+<p class="important"><strong>Important:</strong>&nbsp; For a simplified registration, we usually do not send <kbd>ALL</kbd> of these variables to the model. See the code example after the following variable table:</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+	<th>Column Name</th>
+	<th>Description</th>
+	<th>Value</th>
+</tr>
+<tr>
+	<td class="td"><strong>student_id</strong></td>
+	<td class="td">Unique student id</td>
+	<td class="td">Unsigned int(11). Auto increment. Primary key.</td>
+</tr>
+<tr>
+	<td class="td"><strong>first</strong></td>
+	<td class="td">Student first name</td>
+	<td class="td">varchar(255)</td>
+</tr>
+<tr>
+	<td class="td"><strong>last</strong></td>
+	<td class="td">Student last name</td>
+	<td class="td">varchar(255)</td>
+</tr>
+<tr>
+	<td class="td"><strong>email</strong></td>
+	<td class="td">Student email address (used as username as well)</td>
+	<td class="td">varchar(255)</td>
+</tr>
+<tr>
+	<td class="td"><strong>oauth_id</strong></td>
+	<td class="td">Student oauth id used for Facebook login</td>
+	<td class="td">char(20)</td>
+</tr>
+<tr>
+	<td class="td"><strong>password</strong></td>
+	<td class="td">Student login password</td>
+	<td class="td">char(40)</td>
+</tr>
+<tr>
+	<td class="td"><strong>school_id</strong></td>
+	<td class="td">Student's school id (joined with schools table)</td>
+	<td class="td">int(11)</td>
+</tr>
+<tr>
+	<td class="td"><strong>year</strong></td>
+	<td class="td">Student graduation year</td>
+	<td class="td">int(4)</td>
+</tr>
+<tr>
+	<td class="td"><strong>major_id</strong></td>
+	<td class="td">Student's major id (joined with majors table)</td>
+	<td class="td">int(11)</td>
+</tr>
+<tr>
+	<td class="td"><strong>bio</strong></td>
+	<td class="td">Student bio</td>
+	<td class="td">text</td>
+</tr>
+<tr>
+	<td class="td"><strong>status</strong></td>
+	<td class="td">Student status (ie- "Looking for a PHP developer")</td>
+	<td class="td">varchar(144)</td>
+</tr>
+
+<tr>
+	<td class="td"><strong>twitter</strong></td>
+	<td class="td">Student's twitter profile link</td>
+	<td class="td">text</td>
+</tr>
+<tr>
+	<td class="td"><strong>facebook</strong></td>
+	<td class="td">Student's facebook profile link</td>
+	<td class="td">text</td>
+</tr>
+<tr>
+	<td class="td"><strong>linkedin</strong></td>
+	<td class="td">Student's linkedin profile link</td>
+	<td class="td">text</td>
+</tr>
+<tr>
+	<td class="td"><strong>dribbble</strong></td>
+	<td class="td">Student's dribbble profile link</td>
+	<td class="td">text</td>
+</tr>
+<tr>
+	<td class="td"><strong>github</strong></td>
+	<td class="td">Student's github profile link</td>
+	<td class="td">text</td>
+</tr>
+</table>
+
+<h3>In this code example, we simply send the first and last name, email address, and encrypted password. Our registration forms only ask for a full name, and we must parse the name into a first and last variable.</h3>
+<code>
+$student_data = array(<br/>
+'first' => $first,<br/>
+'last'	=> $last,<br/>
+'email' => $email,<br/>
+'password' => sha1($password)<br/>
+);
+
+<br /><br />
+$student_id = $this->student_model->add_student($student_data);
+	
+</code>
+
+<h2>$this->student_model->edit_student($student_id, $student_data)</h2>
+
+<p>Update a sepcific student's information given by $student_id in the student table. Pass a $student_data array with same possible variables as the table above in add_student() method.</p>
+
+<h2>$this->student_model->search_students($query)</h2>
+
+<p>Search for a student using the search query $query. Can search student names, schools, and majors.</p>
+
+<h2>$this->student_model->get_majors()</h2>
+
+<p>Retrieve all majors from the majors table</p>
+
+<h2>$this->student_model->get_schools()</h2>
+
+<p>Retrieve all schools from the schools table (ie- CSOM, Arts & Sciences)</p>
+
+<h2>$this->student_model->authenticate($email, $password)</h2>
+
+<p>Attempt to authenticate a given username and password by comparing login information to user table in database.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="#">Previous Class</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="#">Next Class</a>
+</p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+</div>
+
+</body>
+</html>
