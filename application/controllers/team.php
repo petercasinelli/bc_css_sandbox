@@ -12,7 +12,13 @@ class Team extends MY_Controller {
 	public function index()
 	{
 		$data["student_logged_in"] = $this->current_student_info;
-		
+
+		$data['teams'] = $this->team_model->get_teams();
+		foreach($data['teams'] as $team){
+			$team_members[$team->team_id] = $this->team_model->get_team_members($team->team_id);
+		}
+		$data['team_members'] = $team_members;
+
 		$this->load->view('team/home', $data);
 	}
 
@@ -26,14 +32,13 @@ class Team extends MY_Controller {
 		$data["student_logged_in"] = $this->current_student_info;
 
         //TO DO ** Need to ping model to get team information and pass it to view_team view through $data array
+        $data['team'] = $this->team_model->get_team($team_id);
+        $data['team_members'] = $this->team_model->get_team_members($team_id);
 
 		$this->load->view('team/view_team', $data);
 	
 	}
-	
-	/*public function index($team_id){
-		echo "Team: $team_id";
-	}*/
+
 	
 	public function add_form()
 	{
@@ -139,14 +144,7 @@ class Team extends MY_Controller {
 		endif;
 		
 	}
-	
-	
-		
-	/*Future feature to view individual profile page
-	public function view($student_id)
-	{
-		
-	}*/
+
 
 }
 
