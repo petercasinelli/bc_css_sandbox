@@ -104,4 +104,37 @@ class Student_model extends CI_Model {
 			
 		}
 		
+		public function oauth_authenticate($oauth_id, $email="None", $first_name, $last_name){
+			//check if the uid exists in database, if so, return TRUE
+			$query = $this->db->get_where('students', array('oauth_uid'=>$oauth_id));
+			$rows = $query->num_rows();
+			$result = $query->row();
+		
+			if($rows > 0): 
+				return $result;
+			else:
+				//echo "mufuka he ain't exist";exit(4);
+			
+				$data = array(
+		   			'oauth_uid' => $oauth_id,
+		   			'first' => $first_name ,
+		   			'last' => $last_name,
+		   			'email' => $email,
+				);
+				
+				$this->db->insert('students', $data); 
+				$user_id = $this->db->insert_id();
+				$rows_affected = $this->db->affected_rows();
+				
+				//fetch the user
+				if($rows_affected > 0):
+					$query = $this->db->get_where('students', array('student_id'=>$user_id));
+					$rows = $query->num_rows();
+					$result = $query->row();
+					return $result;
+				endif;
+			
+			endif;
+		}
+		
 }
