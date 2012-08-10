@@ -6,9 +6,13 @@ class Fb_connect{
 	
 	public function __construct(){
 		$this->CI = &get_instance();
+		
+		$app_id = get_cfg_var('aws.param5');
+		$secret = get_cfg_var('aws.param6');
+		
 		$this->config = array(
-  			'appId'  => '158785734227653',
-  			'secret' => 'd8dcb9f6d5e8ac274d75d24526156be6',
+  			'appId'  => $app_id,
+  			'secret' => $secret,
 		);
 		$this->CI->load->library('facebook-php-sdk/src/facebook', $this->config, 'facebook');
 	}
@@ -18,7 +22,7 @@ class Fb_connect{
 	}
 	
 	public function get_login_url(){
-	  	return $this->CI->facebook->getLoginUrl();
+	  	return $this->CI->facebook->getLoginUrl(array("scope" => "email"));
 	}
 	
 	public function get_user_info($user_id){

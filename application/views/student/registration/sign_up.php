@@ -16,8 +16,8 @@
 			</hgroup>
 		</div>
 		<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
-		<?php $this->load->view('student/registration/includes/regular_registration_form'); ?>
-		<?php $this->load->view('student/registration/includes/fb_registration_form'); ?>
+		<?php $this->load->view('student/registration/forms/regular_registration_form'); ?>
+		<?php $this->load->view('student/registration/forms/fb_registration_form'); ?>
 		</div>
 		
 	</div>
