@@ -48,15 +48,22 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+/*
+//Get Amazon configuration variables 
+$hostname = get_cfg_var('aws.param1');
+$database = get_cfg_var('aws.param2');
+$username = get_cfg_var('aws.param3');
+$password = get_cfg_var('aws.param4');
+*/
 
-//Extract database environment variables from Heroku (for PHP)
-extract(parse_url($_ENV["DATABASE_URL"]));
+$db['default']['hostname'] = "localhost";
+$db['default']['username'] = "root";
+$db['default']['password'] = "root";
+$db['default']['database'] = "BC Skills Local";
 
-$db['default']['hostname'] = $host; //Using Heroku db variables from extract()
-$db['default']['username'] = $user;
-$db['default']['password'] = $pass;
-$db['default']['database'] = substr($path, 1);
-$db['default']['dbdriver'] = 'postgre';
+
+$db['default']['dbdriver'] = 'mysql';
+$db['default']['port'] = 8809;
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
