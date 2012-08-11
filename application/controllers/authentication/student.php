@@ -41,6 +41,37 @@ class Student extends CI_Controller {
 		
 	}
 	
+	public function fb_login(){	
+		$this->load->library('fb_connect');
+		$user_id = $this->fb_connect->get_user_id();
+		
+		if(!$user_id):
+			$login = $this->fb_connect->get_login_url();
+			redirect($login);
+		endif;
+		
+		$user_profile = $this->fb_connect->get_user_info($user_id);
+		
+		if($user_profile):
+			$uid = $user_profile['id'];
+			$first_name = $user_profile['first_name'];
+			$last_name = $user_profile['last_name'];
+			$email = $user_profile['email'];
+			
+			//we may want to verify email beforehand
+			
+			$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
+			if($student):
+				$session_data = array('student_id' => $student->student_id);
+				$this->session->set_userdata($session_data);
+				redirect('student/');
+			endif;
+		endif;
+		
+		//set error message.
+		//echo "failed oauth authen.";
+	}
+	
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('/');
