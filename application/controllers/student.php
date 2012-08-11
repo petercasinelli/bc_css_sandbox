@@ -88,6 +88,7 @@ class Student extends MY_Controller {
 		$year 	  		  = $this->input->post('year', 	  		   TRUE);
 		$school 	  	  = $this->input->post('school',   		   TRUE);
 		$major 	  		  = $this->input->post('major',    		   TRUE);
+		$status			  = $this->input->post('status', 		   TRUE);
 		$bio 	  		  = $this->input->post('bio', 	  		   TRUE);
 		$skills 	  	  = $this->input->post('skills', 	  	   TRUE);
 		$software 	  	  = $this->input->post('software', 	  	   TRUE);
@@ -113,6 +114,7 @@ class Student extends MY_Controller {
 		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|required|htmlspecialchars|xss_clean|numeric|max_length[4]|valid_graduation_date');
 		$this->form_validation->set_rules('school', 'school', 						'trim|required|htmlspecialchars|xss_clean|numeric');
 		$this->form_validation->set_rules('major', 'major', 						'trim|required|htmlspecialchars|xss_clean|numeric');
+		$this->form_validation->set_rules('status', 'status', 						'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('bio', 'bio', 							'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('skills', 'skills',						'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('software', 'software',					'trim|required|htmlspecialchars|xss_clean');
@@ -144,6 +146,7 @@ class Student extends MY_Controller {
 								 'year'		=> $year,
 								 'major_id' => $major,
 								 'school_id'=> $school,
+								 'status'   => $status,
 								 'bio' 		=> $bio,
 								 'skills'	=> $skills,
 								 'software'	=> $software,
