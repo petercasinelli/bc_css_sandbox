@@ -65,6 +65,10 @@ endforeach;
 				'options' => $major_dropdown
 				 );
 				 
+	$status = array(
+				'name' 	=> 'status',
+				'value' => set_value('status', $student_logged_in->status),
+				 );			 
 	$bio = array(
 				'name' 	=> 'bio',
 				'value' => set_value('bio', $student_logged_in->bio),
@@ -149,6 +153,7 @@ endforeach;
 			
 			<div class="form-spacing"></div>
 			<h2>BC Skills Profile</h2>
+			<?php echo form_label('Status:', 'status'); echo form_input($status); ?>
 			<?php echo form_label('Bio:', 'bio'); echo form_textarea($bio); ?>
 			<?php echo form_label('Skills:', 'skills'); echo form_input($skills); ?>
 			<?php echo form_label('Software:', 'software'); echo form_input($software); ?>
