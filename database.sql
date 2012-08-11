@@ -2,10 +2,11 @@
 -- version 3.3.9.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
+
 -- Generation Time: Jul 08, 2012 at 12:07 PM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
+
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -99,7 +100,7 @@ INSERT INTO `schools` VALUES(8, 'Woods College');
 
 CREATE TABLE `skills` (
   `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `skill` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `skill` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`skill_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
 
@@ -128,31 +129,34 @@ INSERT INTO `skills` VALUES(13, 'C++');
 
 CREATE TABLE `students` (
   `student_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `last` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `email` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `oauth_uid` char(40) CHARACTER SET latin1 DEFAULT NULL,
-  `password` char(40) CHARACTER SET latin1 NOT NULL,
+  `first` varchar(255) NOT NULL,
+  `last` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `oauth_uid` char(40) DEFAULT NULL,
+  `password` char(40) NOT NULL,
   `school_id` int(11) unsigned DEFAULT NULL,
   `year` int(4) unsigned DEFAULT NULL,
   `major_id` int(11) unsigned DEFAULT NULL,
-  `bio` text CHARACTER SET latin1,
-  `status` varchar(144) CHARACTER SET latin1 DEFAULT NULL,
-  `skills` text CHARACTER SET latin1,
-  `software` text CHARACTER SET latin1,
-  `twitter` text CHARACTER SET latin1,
-  `facebook` text CHARACTER SET latin1,
-  `linkedin` text CHARACTER SET latin1,
+  `bio` text CHARACTER SET utf8,
+  `status` varchar(144) CHARACTER SET utf8 DEFAULT NULL,
+  `skills` text CHARACTER SET utf8,
+  `software` text CHARACTER SET utf8,
+  `twitter` text CHARACTER SET utf8,
+  `facebook` text CHARACTER SET utf8,
+  `linkedin` text CHARACTER SET utf8,
   `dribbble` text COLLATE utf8_bin,
-  `github` text CHARACTER SET latin1 NOT NULL,
+  `github` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`student_id`)
+
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` VALUES(10, 'Peter', '', 'peter.casinelli@bc.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+
+INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `oauth_uid`, `password`, `school_id`, `year`, `major_id`, `bio`, `status`, `skills`, `software`, `twitter`, `facebook`, `linkedin`, `dribbble`, `github`) VALUES
+(10, 'Peter', '', 'peter.casinelli@bc.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -167,12 +171,6 @@ CREATE TABLE `student_skills` (
   PRIMARY KEY (`student_skills_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `student_skills`
---
-
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `teams`
@@ -185,12 +183,6 @@ CREATE TABLE `teams` (
   PRIMARY KEY (`team_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `teams`
---
-
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `team_members`
@@ -200,13 +192,8 @@ CREATE TABLE `team_members` (
   `team_members_id` int(11) NOT NULL AUTO_INCREMENT,
   `team_id` int(11) unsigned NOT NULL,
   `student_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`team_members_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `team_members`
---
-
+  PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -220,9 +207,4 @@ CREATE TABLE `team_permissions` (
   `permission_id` int(11) unsigned NOT NULL,
   `team_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`team_permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `team_permissions`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

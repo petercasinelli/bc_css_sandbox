@@ -34,9 +34,15 @@ $this->load->view('includes/header');
 			<input type="submit" name="submit" value="Search">
 			<?php echo form_close(); ?>
 		</div>
-		
-		View team page
+
 		Team info here
+
+		<?php $this->load->view("team/team_block", array("team"=>$team)); ?>
+		team Members
+		<?php foreach($team_members as $student):?>
+		<?php $this->load->view("student/student_block", array("student"=>$student, "id" => $student->student_id))?>
+		<?php endforeach;?>
+
 	</div>
 	
 <?php $this->load->view('includes/footer'); ?>

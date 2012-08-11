@@ -2,7 +2,7 @@
 			<a href="javascript:;" class="expand" id="expand<?php echo $id; ?>" onClick="toggleExpand(<?php echo $id; ?>);">Expand Profile</a>
 			<hgroup onClick="toggleExpand('<?php echo $id; ?>');">
 				<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
-				<h2><?php echo $student->school . ' ' . $student->year; ?> - <?php echo $student->major ?></h2>
+				<h2><?php echo $student->school_id . ' ' . $student->year; ?> - <?php echo $student->major_id ?></h2>
 			</hgroup>
 			<p>
 				<b>Skills:</b> <?php echo $student->skills; ?>
@@ -48,7 +48,7 @@
 <a href="javascript:;" class="expand" id="expand1">Expand</a>
 <hgroup id="expand">
 	<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
-	<h2><?php echo 'Graduating: ' . $student->year . ' Major: ' . $student->major; ?></h2>
+	<h2><?php echo 'Graduating: ' . $student->year . ' Major: ' . $student->major_id; ?></h2>
 </hgroup>
 <p><br /><br />
 	<strong>Skills</strong>: <?php echo $student->skills; ?>
