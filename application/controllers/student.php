@@ -104,20 +104,20 @@ class Student extends MY_Controller {
 		$this->form_validation->set_rules('last', 'last name', 						'trim|required|htmlspecialchars|xss_clean');
 		//Add custom validation for e-mail addresses so that only Boston College students can register
 		
-		//$this->form_validation->set_rules('email', 'BC e-mail address', 			'trim|required|htmlspecialchars|xss_clean|valid_email|bc_email|is_unique[students.email]');
+		$this->form_validation->set_rules('email', 'e-mail address', 			'trim|required|htmlspecialchars|xss_clean|valid_email|is_unique[students.email]');
 		
 		if (!empty($password)):
 			$this->form_validation->set_rules('password', 'password', 					'trim|required|htmlspecialchars|xss_clean|matches[confirm_password]');
 			$this->form_validation->set_rules('confirm_password', 'confirmed password', 'trim|required|htmlspecialchars|xss_clean');
 		endif;
 		
-		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|required|htmlspecialchars|xss_clean|numeric|max_length[4]|valid_graduation_date');
-		$this->form_validation->set_rules('school', 'school', 						'trim|required|htmlspecialchars|xss_clean|numeric');
-		$this->form_validation->set_rules('major', 'major', 						'trim|required|htmlspecialchars|xss_clean|numeric');
-		$this->form_validation->set_rules('status', 'status', 						'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('bio', 'bio', 							'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('skills', 'skills',						'trim|required|htmlspecialchars|xss_clean');
-		$this->form_validation->set_rules('software', 'software',					'trim|required|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('year', 'year of graduation', 			'trim|htmlspecialchars|xss_clean|numeric|max_length[4]|valid_graduation_date');
+		$this->form_validation->set_rules('school', 'school', 						'trim|htmlspecialchars|xss_clean|numeric');
+		$this->form_validation->set_rules('major', 'major', 						'trim|htmlspecialchars|xss_clean|numeric');
+		$this->form_validation->set_rules('status', 'status', 						'trim|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('bio', 'bio', 							'trim|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('skills', 'skills',						'trim|htmlspecialchars|xss_clean');
+		$this->form_validation->set_rules('software', 'software',					'trim|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('twitter', 'twitter',						'trim|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('facebook', 'facebook',					'trim|htmlspecialchars|xss_clean|valid_url');
 		$this->form_validation->set_rules('linkedin', 'linkedin',					'trim|htmlspecialchars|xss_clean|valid_url');
@@ -142,7 +142,7 @@ class Student extends MY_Controller {
 			$student_data = array(
 								 'first' 	=> $first,
 								 'last'	 	=> $last,
-								//'email' 	=> $email,
+								 'email' 	=> $email,
 								 'year'		=> $year,
 								 'major_id' => $major,
 								 'school_id'=> $school,
@@ -182,12 +182,14 @@ class Student extends MY_Controller {
 	}
 	
 	
-		
-	/*Future feature to view individual profile page
-	public function view($student_id)
+	//View all students
+	public function view_all()
 	{
+		//Retrieve all students information to send to view
+		$data["students"] = $this->student_model->get_all_students();
 		
-	}*/
+		$this->load->view('student/view_all_students', $data);
+	}
 
 }
 

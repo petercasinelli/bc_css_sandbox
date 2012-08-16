@@ -21,8 +21,7 @@ class Student extends CI_Controller {
 		//Create list of schools
 		$data["schools"] = $this->student_model->get_schools();
 		
-		//$data["majors"] = $majors[0];
-		//print_r($data["majors"]);
+		$data['current_page'] = 'register';
 		$this->load->view('student/registration/sign_up', $data);
 	}
 	

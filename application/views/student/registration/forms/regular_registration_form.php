@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$name = array(
 				'name' 	=> 'name',
 				'value' => set_value('name')

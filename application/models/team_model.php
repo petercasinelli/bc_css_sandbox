@@ -101,4 +101,11 @@ class Team_Model extends CI_Model {
     	return $result;
     }
 
+	public function get_student_permission($team_id, $student_id)
+	{
+		$this->db->select('permission_id');
+		$query = $this->db->get_where('team_permissions',array('student_id' => $student_id, 'team_id' => $team_id));
+		$result = $query->row();
+		return $result;
+	}
 }

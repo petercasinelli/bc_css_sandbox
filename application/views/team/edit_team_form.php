@@ -1,7 +1,7 @@
 <?php
 $this->load->helper('form');
 $this->load->library('message');
-$this->load->view('includes/header');
+$this->load->view('student/includes/header');
 
 	$team_name = array(
 				'name' 	=> 'team_name',
@@ -19,20 +19,15 @@ $this->load->view('includes/header');
 							'type'  => 'submit'
 						  );
 ?>
-	<?php $this->load->view('includes/leftsidebar'); ?>
-	
-	<div id="right-column">
-		<?php $this->load->view("includes/navigation"); ?>
-		<div>
-			
+
+<section>
 		<?php echo $this->message->display(); ?>
 		
-		<div class="item non-user-item">
 			<hgroup>		
-				<h1><?php echo $team_name; ?></h1>
+				<h1><?php echo $team_data->team_name; ?></h1>
 				<h2>Edit your team information.</h2>
 			</hgroup>
-		</div>
+
 			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
 			<?php echo form_open('team/edit/'.$team_data->team_id, array("id" => "edit-team")); ?>
 			
@@ -41,9 +36,8 @@ $this->load->view('includes/header');
 
 			<?php echo form_submit($submit_button); ?>
 
-			<?php echo form_close(); ?>
-			</div>
-		
-	</div>
+			<?php echo form_close(); ?>	
+</section>			
+
 	
 <?php $this->load->view('includes/footer'); ?>

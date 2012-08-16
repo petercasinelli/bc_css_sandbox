@@ -11,7 +11,9 @@ class Student extends CI_Controller {
 	
 	public function index(){
 		
-		$this->load->view('student/student_login_form');
+		$data['current_page'] = 'login';
+		$this->load->view('student/student_login_form', $data);
+		
 	}
 	
 	public function login(){

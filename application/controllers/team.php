@@ -6,7 +6,6 @@ class Team extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
         $this->load->model("team_model");
-		
 	}	
 
 	public function index()
@@ -14,11 +13,12 @@ class Team extends MY_Controller {
 		$data["student_logged_in"] = $this->current_student_info;
 
 		$data['teams'] = $this->team_model->get_teams();
-		foreach($data['teams'] as $team){
-			$team_members[$team->team_id] = $this->team_model->get_team_members($team->team_id);
-		}
-		$data['team_members'] = $team_members;
-
+		//print_r($data['teams']);
+		foreach($data['teams'] as $key => $team):
+			$team->team_members = $this->team_model->get_team_members($team->team_id); 
+			//$data['teams'][$key]->teams = $this->team_model->get_team_members($team->team_id);
+		endforeach;
+		
 		$this->load->view('team/home', $data);
 	}
 
@@ -29,11 +29,13 @@ class Team extends MY_Controller {
 			redirect('team/');
 		endif;
 		
+		
 		$data["student_logged_in"] = $this->current_student_info;
 
+		$data["permission"] = $this->team_model->get_student_permission($team_id, $this->current_student_id);
         //TO DO ** Need to ping model to get team information and pass it to view_team view through $data array
         $data['team'] = $this->team_model->get_team($team_id);
-        $data['team_members'] = $this->team_model->get_team_members($team_id);
+        $data['team']->team_members = $this->team_model->get_team_members($team_id);
         
 		$this->load->view('team/view_team', $data);
 	

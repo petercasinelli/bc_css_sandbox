@@ -1,1 +1,1 @@
-<?php echo anchor("authentication/student/fb_login", "Login with Facebook", array("id"=>"facebook_login"));  ?>
+<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>

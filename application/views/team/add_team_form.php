@@ -1,7 +1,7 @@
 <?php
 $this->load->helper('form');
 $this->load->library('message');
-$this->load->view('includes/header');
+$this->load->view('student/includes/header');
 
 	$team_name = array(
 				'name' 	=> 'team_name',
@@ -19,21 +19,15 @@ $this->load->view('includes/header');
 							'type'  => 'submit'
 						  );
 ?>
-	<?php $this->load->view('includes/leftsidebar'); ?>
+<section>
 	
-	<div id="right-column">
-		<?php $this->load->view("includes/navigation"); ?>
-		<div>
-			
 		<?php echo $this->message->display(); ?>
 		
-		<div class="item non-user-item">
 			<hgroup>		
 				<h1>Create A Team on BC Skills</h1>
 				<h2>Add your team and start recruiting co-founders or co-workers.</h2>
 			</hgroup>
-		</div>
-			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
+			<?php echo validation_errors('<p class="error-message">', '</p>'); ?>
 			<?php echo form_open('team/add', array("id" => "add-team")); ?>
 			
 			<?php echo form_label('Team Name:', 'team_name'); echo form_input($team_name); ?>
@@ -42,8 +36,7 @@ $this->load->view('includes/header');
 			<?php echo form_submit($submit_button); ?>
 
 			<?php echo form_close(); ?>
-			</div>
-		
-	</div>
+
+</section>		
 	
 <?php $this->load->view('includes/footer'); ?>

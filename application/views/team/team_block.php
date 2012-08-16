@@ -1,20 +1,24 @@
-<div class="item">
-	<a href="javascript:;" class="expand" id="expand<?php echo $team->team_id; ?>" onClick="toggleExpand(<?php echo $team->team_id; ?>);">Expand Profile</a>
-	<hgroup onClick="toggleExpand('<?php echo $team->team_id; ?>');">
-		<h1><a href="<?php echo 'team/view/'.$team->team_id; ?>"><?php echo $team->team_name; ?></a></h1>
-	</hgroup>
-	<p>
-	
+<section class="listing">
+			<header>
+				<h2><?php echo anchor('team/view/'.$team->team_id,$team->team_name); //$team->team_name; ?></h2>
+			</header>
+			<div class="float-right" style="padding:10px;">
+			<?php
+			
+			foreach ($team->team_members as $team_member):
+				if ($team_member->oauth_uid == NULL):
+					$img_src = base_url() . 'assets/images/blank_person.png';
+				else:
+					$img_src = $team_member->oauth_id;
+				endif;
+				
+				echo '<img src="'.$img_src.'" style="width:25px; height:25px; border:1px solid #ccc; float:left; padding:1px;">';
+			endforeach;
+			?>
+			</div>
+			<br />
+			<p>
+			<b>Description</b>:<?php echo $team->team_description; ?>
+			</p>
+</section>
 		
-		<br>
-		<b>Description</b>
-		<?php echo $team->team_description; ?>
-	</p>
-
-	<p id="item<?php echo $team->team_id; ?>" style="display:none;">
-	<!-- 	<b>Members: </b><br>
-		<?php foreach($team_members as $team_member): ?>
-		<i><?php echo $team_member->first.' '.$team_member->last.' '.$team_member->email;?></i><br>
-		<?php endforeach;?> -->
-	</p>			
-</div>

@@ -6,7 +6,3 @@ function toggleExpand(id) {
 		$('#expand'+id).html('Collapse');
 	}
 }
-
-$(function() {
-	$('#edit-profile [title]').tipsy({trigger:'focus', gravity:'w'});
-});
