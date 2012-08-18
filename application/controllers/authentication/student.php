@@ -26,8 +26,9 @@ class Student extends CI_Controller {
 		$student = $this->student_model->authenticate($email, $password);
 		
 		if (empty($student)):
+			$data['current_page'] = "index";
 			$this->message->set("You have entered incorrect login information. Please try again:", "error");
-			$this->load->view('student/student_login_form');
+			$this->load->view('student/student_login_form', $data);
 		else:
 			//We only want one result (and should only be passed one result)
 			//$student = $student[0];
@@ -59,9 +60,17 @@ class Student extends CI_Controller {
 			$first_name = $user_profile['first_name'];
 			$last_name = $user_profile['last_name'];
 			$email = $user_profile['email'];
+			$education = $user_profile['education'];
 			
-			//we may want to verify email beforehand
-			
+			//Check valid bc student
+			$is_bc_student = strstr(json_encode($education), "Boston College");
+			if(!$is_bc_student):
+				$this->message->set("Sorry, You're not a BC student", "error");
+				$data['current_page'] = "index";
+				$this->load->view('student/student_login_form', $data);
+				return;
+			endif;
+		
 			$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
 			if($student):
 				$session_data = array('student_id' => $student->student_id);
@@ -70,8 +79,8 @@ class Student extends CI_Controller {
 			endif;
 		endif;
 		
-		//set error message.
-		//echo "failed oauth authen.";
+		$this->message->set("We were unable to authenticate you through Facebook", "error");
+		$this->load->view('student/student_login_form');
 	}
 	
 	public function logout(){
