@@ -1,5 +1,5 @@
 <?php
-class test_users_controller extends CodeIgniterUnitTestCase
+class test_my_form_validator extends CodeIgniterUnitTestCase
 {
 	protected $regex = '';
 	
