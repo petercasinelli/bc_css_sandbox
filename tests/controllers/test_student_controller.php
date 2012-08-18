@@ -1,85 +1,55 @@
 <?php
 class test_users_controller extends CodeIgniterUnitTestCase
 {
-	protected $rand = '';
-
+	protected $regex = '';
+	
 	public function __construct()
 	{
-		$this->rand = "hi";
-		$hello = new Student();
+		$this->regex = "/[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@bc\.edu/";
 	}
 
-	public function setUp()
+	public function test_should_be_invalid_if_missing_and()
 	{
-		
-    }
-
-    public function tearDown()
-	{
-
-    }
-
-	/*public function test_included()
-	{
-		$this->assertTrue(class_exists('users_model'));
-	}*/
-
-	public function test_add_user()
-	{
-		$a = 1;
-		$this->assertEqual($a, 1);
+		$email = "linpdhaha.bc.edu";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 0);
 	}
-
-	/*public function test_get_user_by_id()
+	
+	public function test_should_be_invalid_if_missing_bc_dot_edu()
 	{
-		$user = $this->users_model->get_user(1);
-		$this->assertEqual($user['user_id'], 1);
+		$email = "linpd@google.com";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 0);
 	}
-
-	public function test_get_user_by_username()
+	
+	public function test_should_be_invalid_if_contains_space()
 	{
-		$user = $this->users_model->get_user('test_'.$this->rand);
-		$this->assertEqual($user['user_id'], 1);
+		$email = "linpd haha @bc.edu";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 0);
 	}
-
-	public function test_edit_user()
+	
+	public function test_should_be_valid_if_contains_dot()
 	{
-		$insert_data = array(
-			    'user_email' => 'edit_demo'.$this->rand.'@demo.com',
-			);
-		$user = $this->users_model->edit_user(1, $insert_data);
-		$this->assertTrue($user);
+		$email = "linp.dhaha@bc.edu";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 1);
 	}
-
-	public function test_delete_user()
+	
+	public function test_should_be_invalid_if_invalid_email()
 	{
-		$user = $this->users_model->delete_user(1);
-		$this->assertTrue($user);
+		$email = "notanemail";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 0);
 	}
-
-	public function test_username_exists()
+	
+	public function test_should_be_valid_if_valid_email()
 	{
-		$user = $this->users_model->username_check('test_'.$this->rand);
-		$this->assertFalse($user);
+		$email = "goodbcemail@bc.edu";
+		$matched = preg_match($this->regex, $email);
+		$this->assertEqual($matched, 1);
 	}
-
-	public function test_username_does_not_exists()
-	{
-		$user = $this->users_model->username_check('my_super_test_'.$this->rand);
-		$this->assertTrue($user);
-	}
-
-	public function test_email_exists()
-	{
-		$user = $this->users_model->email_check('demo'.$this->rand.'@demo.com');
-		$this->assertFalse($user);
-	}
-
-	public function test_email_does_not_exists()
-	{
-		$user = $this->users_model->email_check('my_super_test_'.$this->rand.'@demo.com');
-		$this->assertTrue($user);
-	}*/
+	
 }
 
 /* End of file test_users_model.php */
