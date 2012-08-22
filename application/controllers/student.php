@@ -5,7 +5,7 @@ class Student extends MY_Controller {
 	
 	public function __construct(){
 		parent::__construct();
-		
+		$this->load->helper("image_helper");
 	}	
 
 	public function index()
@@ -134,7 +134,7 @@ class Student extends MY_Controller {
 			$data["majors"] = $this->student_model->get_majors();
 			//Create list of schools view
 			$data["schools"] = $this->student_model->get_schools();
-			
+			$data["upload_errors"] = '';
 			$this->load->view('student/edit_student_form', $data);
 		
 		//Else, add student to database
