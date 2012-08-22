@@ -131,8 +131,8 @@ endforeach;
 
 			<?php $this->message->display(); ?>
 			<!--Get the students profile picture source.. Will add helper for this -->
-			<img src="http://25.media.tumblr.com/tumblr_l92s4gOQni1qdhmifo1_500.png" width="100px" height="100px"/>
-			
+			<?php $pic_src = student_picture_src($student_logged_in->student_id, $student_logged_in->oauth_uid, $student_logged_in->picture); ?>
+			<img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
 			<!--begin upload form-->
 			<?php echo $upload_errors;?>
 			<?php echo form_open_multipart('student/upload_profile_pic');?>
