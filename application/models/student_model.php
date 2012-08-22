@@ -113,8 +113,6 @@ class Student_model extends CI_Model {
 			if($rows > 0): 
 				return $result;
 			else:
-				//echo "mufuka he ain't exist";exit(4);
-			
 				$data = array(
 		   			'oauth_uid' => $oauth_id,
 		   			'first' => $first_name ,
@@ -132,9 +130,25 @@ class Student_model extends CI_Model {
 					$rows = $query->num_rows();
 					$result = $query->row();
 					return $result;
-				endif;
-			
+				endif;	
 			endif;
+		}
+		
+		public function update_profile_picture($student_id, $file_name){
+			//update student set picture = blah where id = blah
+			$data = array(
+               'picture' => $file_name,
+            );
+			$this->db->where('student_id', $student_id);
+			$this->db->update('students', $data); 
+			
+			$rows_affected = $this->db->affected_rows();
+			
+			if($rows_affected > 0)
+				return TRUE;
+			else 
+				return FALSE;
+			
 		}
 		
 }
