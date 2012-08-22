@@ -1,7 +1,10 @@
 <section class="listing">
 			<header>
+				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
+				<img src="<?php echo $pic_src; ?>" width="25px" height="25px"/>
 				<h2><?php echo $student->first . ' ' . $student->last; ?></h2>
 				<h3><?php echo $student->school_id . ' ' . $student->year; ?> - <?php echo $student->major_id ?>
+				<h3><?php if($student->status) echo $student->status; ?></h3>
 					<br />Arts & Sciences 2014 - Computer Science</h3>
 			</header>
 			<div class="float-right">

@@ -5,7 +5,7 @@ class Student extends MY_Controller {
 	
 	public function __construct(){
 		parent::__construct();
-		
+		$this->load->helper("image_helper");
 	}	
 
 	public function index()
@@ -70,6 +70,7 @@ class Student extends MY_Controller {
 		
 		//Create list of schools view
 		$data["schools"] = $this->student_model->get_schools();
+		$data["upload_errors"] = '';
 		
 		$this->load->view('student/edit_student_form', $data);
 	}
@@ -133,7 +134,7 @@ class Student extends MY_Controller {
 			$data["majors"] = $this->student_model->get_majors();
 			//Create list of schools view
 			$data["schools"] = $this->student_model->get_schools();
-		
+			$data["upload_errors"] = '';
 			$this->load->view('student/edit_student_form', $data);
 		
 		//Else, add student to database
@@ -180,14 +181,65 @@ class Student extends MY_Controller {
 		endif;
 		
 	}
-	
+
+	public function upload_profile_pic(){
+		
+		//set the path to root
+		$config['upload_path'] = './uploads/students/pictures';
+		$config['allowed_types'] = 'gif|jpg|png';
+		//append unix time stamp for unique update
+		$config['file_name'] = "studentpic_" . $this->current_student_id . "_" . time();
+		
+		//2000kb and max image width and height
+		$config['max_size']	= '2000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		
+		//prevent users from uploading multiple images.
+		$config['overwrite']  = TRUE;
+		
+		//load the upload lib with settings
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload()):
+			$data["student_logged_in"] = $this->current_student_info;
+			$data["majors"] = $this->student_model->get_majors();
+			$data["schools"] = $this->student_model->get_schools();
+			$data["upload_errors"] =  $this->upload->display_errors();
+			
+			$this->load->view('student/edit_student_form', $data);
+		else:
+			$uploaded_data = $this->upload->data();
+			$status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
+			
+			$this->load->library('message');
+			if ($status):
+				$this->message->set("Picture updated successfully", "success", TRUE);
+				redirect("student/edit_form");
+			else:
+				$this->message->set("Picture update failed", "error", TRUE);
+				redirect("student/edit_form");
+			endif;
+		endif;
+		
+	}
+
+	public function remove_profile_pic(){
+			$status = $this->student_model->delete_profile_picture($this->current_student_id);
+			$this->load->library('message');
+			if ($status):
+				$this->message->set("Picture deleted successfully", "success", TRUE);
+				redirect("student/edit_form");
+			else:
+				$this->message->set("Picture delete failed", "error", TRUE);
+				redirect("student/edit_form");
+			endif;
+	}
 	
 	//View all students
 	public function view_all()
 	{
 		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students();
-		
 		$this->load->view('student/view_all_students', $data);
 	}
 
