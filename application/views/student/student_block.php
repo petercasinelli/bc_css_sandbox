@@ -1,5 +1,7 @@
 <section class="listing">
 			<header>
+				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
+				<img src="<?php echo $pic_src; ?>" width="25px" height="25px"/>
 				<h2><?php echo $student->first . ' ' . $student->last; ?></h2>
 				<h3><?php echo $student->school_id . ' ' . $student->year; ?> - <?php echo $student->major_id ?>
 					<br />Arts & Sciences 2014 - Computer Science</h3>
