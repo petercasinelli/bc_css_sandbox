@@ -151,4 +151,20 @@ class Student_model extends CI_Model {
 			
 		}
 		
+		public function delete_profile_picture($student_id){
+			$data = array(
+               'picture' => NULL,
+            );
+			
+			$this->db->where('student_id', $student_id);
+			$this->db->update('students', $data, FALSE); 
+			
+			$rows_affected = $this->db->affected_rows();
+			
+			if($rows_affected > 0)
+				return TRUE;
+			else 
+				return FALSE;
+		}
+		
 }
