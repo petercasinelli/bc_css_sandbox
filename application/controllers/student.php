@@ -182,10 +182,6 @@ class Student extends MY_Controller {
 		
 	}
 
-	public function image_upload_view(){
-		$this->load->view('student/upload_form', array('error' => ' ' ));
-	}
-	
 	public function upload_profile_pic(){
 		
 		//set the path to root
@@ -215,9 +211,12 @@ class Student extends MY_Controller {
 			$uploaded_data = $this->upload->data();
 			$status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
 			
+			$this->load->library('message');
 			if ($status):
-				$this->load->library('message');
 				$this->message->set("Picture updated successfully", "success", TRUE);
+				redirect("student/edit_form");
+			else:
+				$this->message->set("Picture update failed", "error", TRUE);
 				redirect("student/edit_form");
 			endif;
 		endif;
