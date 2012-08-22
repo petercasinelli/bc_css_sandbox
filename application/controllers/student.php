@@ -222,6 +222,18 @@ class Student extends MY_Controller {
 		endif;
 		
 	}
+
+	public function remove_profile_pic(){
+			$status = $this->student_model->delete_profile_picture($this->current_student_id);
+			$this->load->library('message');
+			if ($status):
+				$this->message->set("Picture deleted successfully", "success", TRUE);
+				redirect("student/edit_form");
+			else:
+				$this->message->set("Picture delete failed", "error", TRUE);
+				redirect("student/edit_form");
+			endif;
+	}
 	
 	//View all students
 	public function view_all()
