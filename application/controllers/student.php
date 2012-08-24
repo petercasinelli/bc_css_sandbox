@@ -10,10 +10,11 @@ class Student extends MY_Controller {
 
 	public function index()
 	{
+		$this->load->helper('studentprofile_helper');
 		$data["student_logged_in"] = $this->current_student_info;
 		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students($record_offset = 0);
-		
+		$data['profile_completion'] = profile_completed($this->current_student_info);
 		$this->load->view('student/home', $data);
 	}
 

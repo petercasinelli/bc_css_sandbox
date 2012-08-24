@@ -10,6 +10,7 @@ $this->load->view('student/includes/header');
             <section>
             <header>
                 <h1>Complete Your Profile</h1>
+                <?php echo "Your profile is $profile_completion complete"; ?>
             </header>
             </section>
         </div>
