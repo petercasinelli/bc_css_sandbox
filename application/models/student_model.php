@@ -1,14 +1,19 @@
 <?php
 class Student_model extends CI_Model {
 		
-		public function get_all_students()
+		public function get_all_students($record_offset)
 		{
-			
-			$query = $this->db->get('students');
+			$this->load->helper('pagination_helper');
+			$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
 			$result = $query->result();
 			
 			return $result;
-			
+		}
+		
+		public function get_total_student_count()
+		{
+			$rows = $this->db->count_all('students');
+			return $rows;
 		}
 		
 		public function get_student($student_id)

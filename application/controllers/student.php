@@ -12,7 +12,7 @@ class Student extends MY_Controller {
 	{
 		$data["student_logged_in"] = $this->current_student_info;
 		//Retrieve all students information to send to view
-		$data["students"] = $this->student_model->get_all_students();
+		$data["students"] = $this->student_model->get_all_students($record_offset = 0);
 		
 		$this->load->view('student/home', $data);
 	}
@@ -181,13 +181,12 @@ class Student extends MY_Controller {
 		
 	}
 	
-	
 	//View all students
-	public function view_all()
-	{
-		//Retrieve all students information to send to view
-		$data["students"] = $this->student_model->get_all_students();
-		
+	public function view_all($record_offset = 0){
+		$this->load->library('pagination');
+		$this->load->helper('pagination_helper');
+		$data["students"] = $this->student_model->get_all_students($record_offset);
+		$this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "index.php/student/view_all")); 
 		$this->load->view('student/view_all_students', $data);
 	}
 
