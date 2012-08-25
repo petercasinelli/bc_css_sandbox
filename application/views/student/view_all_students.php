@@ -18,6 +18,7 @@ $this->load->view('student/includes/header');
 		$data["student"] = $student;
 		$this->load->view('student/student_block', $data);
 	endforeach;
+	echo $this->pagination->create_links();
 	?>
 
 </section>

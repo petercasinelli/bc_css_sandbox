@@ -35,7 +35,8 @@ endforeach;
 
 	$email = array(
 				'name' 	=> 'email',
-				'value' => $student_logged_in->email
+				'value' => $student_logged_in->email,
+				'disabled'=> true
 				 );												
 						
 	$password = array(
@@ -155,7 +156,7 @@ endforeach;
 
 			<h2>Login Information</h2>
 			<?php echo form_label('BC E-mail Address:', 'email'); echo form_input($email); ?>
-			<?php echo form_label('Password:', 'password'); echo form_password($password); ?>
+			<?php echo form_label('New Password:', 'password'); echo form_password($password); ?>
 			<?php echo form_label('Confirm Password:', 'confirm-password'); echo form_password($confirm_password); ?>
 			
 
