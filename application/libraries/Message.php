@@ -68,7 +68,9 @@ class CI_Message {
 				else
 					$color = 'success';
                 foreach($messages as $msg){
+                    echo '<section>';
                     echo '<p class="'.$color.'-message">'.$msg.'</p>'."\r\n";
+                    echo '</section>';
                 }
                 //echo '</div>'."\r\n";
             }
