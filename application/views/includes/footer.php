@@ -4,7 +4,7 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.autoSuggest.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#skills").autoSuggest("<?php echo base_url();?>index.php/student/autosuggest_skills", {selectedItemProp: "name", searchObjProps: "name",minChars: 2, matchCase: false});
+		$("#skills").autoSuggest("<?php echo base_url();?>index.php/student/autosuggest_skills", {startText: "Enter skills here",selectedItemProp: "name", searchObjProps: "name",minChars: 2, matchCase: false});
 	});
 </script>
 <!-- Google Analysitcs -->
