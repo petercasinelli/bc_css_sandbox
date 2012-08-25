@@ -22,7 +22,7 @@ foreach($schools AS $school):
 endforeach;
 	
 //Settings for form elements
-
+	
 	$first = array(
 					'name' 	=> 'first',
 					'value' => set_value('first', $student_logged_in->first)
@@ -130,10 +130,22 @@ endforeach;
 		</hgroup>
 
 			<?php $this->message->display(); ?>
-	
+			<!--Get the students profile picture source.. Will add helper for this -->
+			<?php $pic_src = student_picture_src($student_logged_in->student_id, $student_logged_in->oauth_uid, $student_logged_in->picture); ?>
+			<img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
+			<?php echo anchor("student/remove_profile_pic", "Remove Picture"); ?>
+			<!--begin upload form-->
+			<?php echo $upload_errors;?>
+			<?php echo form_open_multipart('student/upload_profile_pic');?>
+			<input type="file" name="userfile" size="20" />
+			<input type="submit" value="upload" />
+			</form>
+			<!--end upload form-->
+			
 			<?php echo form_open('student/edit/' . $student_logged_in->student_id, array("id" => "edit-profile")); ?>
+	
 			<?php echo validation_errors('<p class="error-message">', '</p>'); ?>
-
+			
 			<h2>Personal Information</h2>
 			<?php echo form_label('First Name:', 'first'); echo form_input($first);?>
 			<?php echo form_label('Last Name:', 'last'); echo form_input($last); ?>

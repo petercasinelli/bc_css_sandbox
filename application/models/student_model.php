@@ -110,8 +110,6 @@ class Student_model extends CI_Model {
         if($rows > 0):
             return $result;
         else:
-            //echo "mufuka he ain't exist";exit(4);
-
             $data = array(
                 'oauth_uid' => $oauth_id,
                 'first' => $first_name ,
@@ -130,6 +128,66 @@ class Student_model extends CI_Model {
                 $result = $query->row();
                 return $result;
             endif;
+        endif;
+    }
+
+    public function update_profile_picture($student_id, $file_name){
+        //update student set picture = blah where id = blah
+        $data = array(
+            'picture' => $file_name,
+        );
+        $this->db->where('student_id', $student_id);
+        $this->db->update('students', $data);
+
+        $rows_affected = $this->db->affected_rows();
+
+        if($rows_affected > 0)
+            return TRUE;
+        else
+            return FALSE;
+
+    }
+
+    public function delete_profile_picture($student_id){
+        $data = array(
+            'picture' => NULL,
+        );
+
+        $this->db->where('student_id', $student_id);
+        $this->db->update('students', $data, FALSE);
+
+        $rows_affected = $this->db->affected_rows();
+
+        if($rows_affected > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    public function get_notifications($student_id){
+
+        //Check to see if this student is an administrator for any team
+        $this->db->select("team_id");
+        $query = $this->db->get_where("team_members", array("student_id" => $student_id, "account_type" => 1));
+        $results = $query->result();
+
+        if (empty($results)):
+            return $results;
+        else:
+            $notifications = array();
+
+            foreach($results as $result):
+
+                $join_request_query = $this->db->select("first, last, team_id, students.student_id, join_team_requests.timestamp")->from("students")->join("join_team_requests", "students.student_id = join_team_requests.student_id")->where("team_id", $result->team_id)->get();
+                $team_request = $join_request_query->row();
+                if (!empty($team_request)):
+                    $team_request->type = 'join_team';
+                    array_push($notifications, $team_request);
+                endif;
+
+            endforeach;
+
+            return $notifications;
 
         endif;
     }
@@ -162,33 +220,4 @@ class Student_model extends CI_Model {
 
         return $result;
     }
-
-    public function get_notifications($student_id){
-
-        //Check to see if this student is an administrator for any team
-        $this->db->select("team_id");
-        $query = $this->db->get_where("team_members", array("student_id" => $student_id, "account_type" => 1));
-        $results = $query->result();
-
-        if (empty($results)):
-            return $results;
-        else:
-            $notifications = array();
-
-            foreach($results as $result):
-
-                $join_request_query = $this->db->select("first, last, team_id, students.student_id, join_team_requests.timestamp")->from("students")->join("join_team_requests", "students.student_id = join_team_requests.student_id")->where("team_id", $result->team_id)->get();
-                $team_request = $join_request_query->row();
-                if (!empty($team_request)):
-                    $team_request->type = 'join_team';
-                    array_push($notifications, $team_request);
-                endif;
-
-            endforeach;
-
-            return $notifications;
-
-        endif;
-    }
-
 }
