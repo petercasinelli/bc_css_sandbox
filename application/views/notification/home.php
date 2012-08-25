@@ -1,8 +1,44 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: petercasinelli
- * Date: 8/23/12
- * Time: 9:54 AM
- * To change this template use File | Settings | File Templates.
- */
+$this->load->helper('form');
+$this->load->library('message');
+$this->load->view('student/includes/header');
+?>
+
+<?php if (strlen($this->message->display()) > 0): ?>
+<section xmlns="http://www.w3.org/1999/html">
+    <?php echo $this->message->display(); ?>
+</section>
+<?php endif;?>
+
+
+<section>
+            <section>
+                <header>
+                    <h1>Notifications</h1>
+                </header>
+                <?php
+                if (empty($notifications)):
+                    ?>
+                    <h3>You have no new notifications.</h3>
+                    <?php else:
+                    ?>
+                    <br/>
+                    <p>
+                        <?php
+                        foreach($notifications as $notification):
+                            switch ($notification->type):
+                                case 'join_team':
+                                    $this->load->view("notification/team_request", $notification);
+                                break;
+                                default: echo 'Unknown request type. Please contact admin';
+                                break;
+                            endswitch;
+                        endforeach; ?>
+                    </p>
+                    <?php
+                endif; ?>
+            </section>
+</section>
+
+
+<?php $this->load->view('includes/footer'); ?>
