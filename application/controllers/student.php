@@ -10,16 +10,21 @@ class Student extends MY_Controller {
 
 	public function index()
 	{
+        $data["current_page"] = 'index';
 		$data["student_logged_in"] = $this->current_student_info;
 		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students();
-		
+
+        //Get a count of all notifications for this user and pass count to student/includes/navigation view
+        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+
 		$this->load->view('student/home', $data);
 	}
 
 	public function search()
 	{
-				
+        $data["current_page"] = 'student';
+
 		$query = $this->input->post('query', TRUE);
 
 		$this->load->library('form_validation');
@@ -62,7 +67,8 @@ class Student extends MY_Controller {
 
 	
 	public function edit_form(){
-		
+
+        $data["current_page"] = 'edit_profile';
 		$data["student_logged_in"] = $this->current_student_info;
 
 		//Create list of majors for view
@@ -70,12 +76,17 @@ class Student extends MY_Controller {
 		
 		//Create list of schools view
 		$data["schools"] = $this->student_model->get_schools();
-		
+
+        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+
 		$this->load->view('student/edit_student_form', $data);
 	}
 	
 	public function edit(){
-		
+
+        $data["current_page"] = 'edit_profile';
+        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+
 		$student_id = $this->current_student_id;		
 		
 		//Currently, email address cannot be changed
@@ -185,8 +196,11 @@ class Student extends MY_Controller {
 	//View all students
 	public function view_all()
 	{
+        $data["current_page"] = 'student';
 		//Retrieve all students information to send to view
 		$data["students"] = $this->student_model->get_all_students();
+
+        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 		
 		$this->load->view('student/view_all_students', $data);
 	}

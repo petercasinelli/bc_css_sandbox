@@ -5,11 +5,11 @@ $this->load->view('includes/header');
 ?>
 <section>
 	<h1>Sign In To BC Skills</h1>
-	<?php
-		if (strcmp($this->message->display(), "") != FALSE):
-	echo $this->message->display();
-	endif;
-	?>
+    <?php if (strlen($this->message->display()) > 0): ?>
+    <section>
+        <?php echo $this->message->display(); ?>
+    </section>
+    <?php endif;?>
 	<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
 	<hr style="width:400px;">
 	<div style="width:200px; margin:auto;">

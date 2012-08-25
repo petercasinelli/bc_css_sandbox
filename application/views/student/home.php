@@ -4,6 +4,12 @@ $this->load->library('message');
 $this->load->view('student/includes/header');
 ?>
 
+<?php if (strlen($this->message->display()) > 0): ?>
+<section>
+    <?php echo $this->message->display(); ?>
+</section>
+<?php endif;?>
+
 <section>
     <div class="grid">
         <div class="quarter">

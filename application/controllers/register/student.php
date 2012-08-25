@@ -70,9 +70,7 @@ class Student extends CI_Controller {
 */
 		//If form does not validate according to rules above, load form view with error messages
 		if ($this->form_validation->run() == FALSE):
-			/*//Create list of majors
-			$data["majors"] = $this->student_model->get_majors();	
-			$data["schools"] = $this->student_model->get_schools();	*/		
+
 			$this->load->view('student/registration/sign_up');
 		
 		//Else, add student to database
@@ -120,8 +118,15 @@ class Student extends CI_Controller {
 			$student_id = $this->student_model->add_student($student_data);
 			
 			$this->load->library('message');
-			$this->message->set("You have successfully registered. Please login below:", "success", TRUE);
-			redirect('authentication/student/');
+			$this->message->set("Welcome to BC Skills! To network the best, we recommend you complete your profile below.", "success", TRUE);
+
+            //Log student in automatically and redirect to student logged in page
+            $session_data = array('student_id' => $student_id
+            );
+
+            $this->session->set_userdata($session_data);
+
+            redirect('student/');
 			
 		endif;
 		
