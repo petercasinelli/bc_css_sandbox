@@ -192,6 +192,20 @@ class Student extends MY_Controller {
 		
 	}
 	
+	public function autosuggest_skills(){
+		//to be implemented
+		//$param = $this->input->post('q');
+		//$skills = $this->student_model->get_all_skills($param);
+		$data = array();
+		
+		array_push($data,array('value'=>"21", 'name'=>"Mick Jagger"));
+		array_push($data,array('value'=>"22", 'name'=>"Alan Lin"));
+		array_push($data,array('value'=>"23", 'name'=>"Alicia Keys"));
+		array_push($data,array('value'=>"23", 'name'=>"Young Jeezy"));
+
+		header("Content-type: application/json");
+		echo json_encode($data);
+	}
 	
 	//View all students
 	public function view_all()

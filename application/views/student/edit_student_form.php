@@ -75,6 +75,7 @@ endforeach;
 				'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? What are you passionate about?'
 				 );
 	$skills = array(
+					'id'=>'skills',
 					'name' => 'skills',
 					'title' => 'Comma separated if multiple',
 					'value' => set_value('skills', $student_logged_in->skills)
