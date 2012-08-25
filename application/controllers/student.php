@@ -10,10 +10,11 @@ class Student extends MY_Controller {
 
 	public function index()
 	{
+		$this->load->helper('studentprofile_helper');
 		$data["student_logged_in"] = $this->current_student_info;
 		//Retrieve all students information to send to view
-		$data["students"] = $this->student_model->get_all_students();
-		
+		$data["students"] = $this->student_model->get_all_students($record_offset = 0);
+		$data['profile_completion'] = profile_completed($this->current_student_info);
 		$this->load->view('student/home', $data);
 	}
 
@@ -82,7 +83,6 @@ class Student extends MY_Controller {
 		
 		$first 	  		  = $this->input->post('first',    		   TRUE);
 		$last  	  		  = $this->input->post('last',     		   TRUE);
-		//$email 	  		  = $this->input->post('email',    		   TRUE);
 		$password 		  = $this->input->post('password', 		   TRUE);
 		$confirm_password = $this->input->post('confirm_password', TRUE);
 		$year 	  		  = $this->input->post('year', 	  		   TRUE);
@@ -102,10 +102,6 @@ class Student extends MY_Controller {
 		
 		$this->form_validation->set_rules('first', 'first name', 					'trim|required|htmlspecialchars|xss_clean');
 		$this->form_validation->set_rules('last', 'last name', 						'trim|required|htmlspecialchars|xss_clean');
-		//Add custom validation for e-mail addresses so that only Boston College students can register
-		
-		$this->form_validation->set_rules('email', 'e-mail address', 			'trim|required|htmlspecialchars|xss_clean|valid_email|is_unique[students.email]');
-		
 		if (!empty($password)):
 			$this->form_validation->set_rules('password', 'password', 					'trim|required|htmlspecialchars|xss_clean|matches[confirm_password]');
 			$this->form_validation->set_rules('confirm_password', 'confirmed password', 'trim|required|htmlspecialchars|xss_clean');
@@ -142,7 +138,6 @@ class Student extends MY_Controller {
 			$student_data = array(
 								 'first' 	=> $first,
 								 'last'	 	=> $last,
-								 'email' 	=> $email,
 								 'year'		=> $year,
 								 'major_id' => $major,
 								 'school_id'=> $school,
@@ -169,11 +164,10 @@ class Student extends MY_Controller {
 			if ($rows_affected):
 				$this->message->set("You have successfully edited your account profile", "success", TRUE);
 				redirect("student/edit_form");
-				
 			else:
+				//this also gets called when user doesn't make any changes.
 				$this->message->set("Your profile could not be edited. Please try again.", "error", TRUE);
-				redirect("student/edit_form");
-				
+				redirect("student/edit_form");	
 				//echo 'Your profile could not be edited. Please try again.';
 			endif;
 			
@@ -181,13 +175,12 @@ class Student extends MY_Controller {
 		
 	}
 	
-	
 	//View all students
-	public function view_all()
-	{
-		//Retrieve all students information to send to view
-		$data["students"] = $this->student_model->get_all_students();
-		
+	public function view_all($record_offset = 0){
+		$this->load->library('pagination');
+		$this->load->helper('pagination_helper');
+		$data["students"] = $this->student_model->get_all_students($record_offset);
+		$this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "index.php/student/view_all")); 
 		$this->load->view('student/view_all_students', $data);
 	}
 
