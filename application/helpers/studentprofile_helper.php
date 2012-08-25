@@ -5,7 +5,6 @@ function profile_completed($student_info){
 	$score = 0;
 	//set up point system with relevant fields
 	$point_map = array(
-		'email'=>1,
 		'first'=>1,
 		'last' =>1,
 		'school_id'=>1,
