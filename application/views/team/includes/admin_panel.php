@@ -1,7 +1,7 @@
 <section class="no-background no-borders">
 	<div class="float-right">
-	<a href="<?php echo base_url(); ?>/index.php/team/edit_form/<?php echo $team->team_id; ?>"><button>Edit Team Information</button></a>
-	<button>Add Team Update</button>
-	<button>Add Team Member</button>
+	<?php echo anchor('team/edit_form/'.$team_data->team_id,'<button>Edit Team Information</button>'); ?>
+	<?php echo anchor('team/add_update_form/'.$team_data->team_id, '<button>Add Team Update</button>'); ?>
+    <?php //echo anchor('team/add_team_member/'.$team_data->team_id, '<button>Add Team Member</button>'); ?>
 	</div>
 </section>

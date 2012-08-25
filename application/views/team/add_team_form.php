@@ -19,6 +19,13 @@ $this->load->view('student/includes/header');
 							'type'  => 'submit'
 						  );
 ?>
+
+<section class="no-background no-borders">
+    <div class="float-right">
+        <?php echo anchor('team/','<button><< Back To Teams</button>'); ?>
+    </div>
+</section>
+
 <section>
 	
 		<?php echo $this->message->display(); ?>

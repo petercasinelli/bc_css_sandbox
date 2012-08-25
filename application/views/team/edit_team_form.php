@@ -2,7 +2,7 @@
 $this->load->helper('form');
 $this->load->library('message');
 $this->load->view('student/includes/header');
-
+$this->load->view('team/includes/back_to_team');
 	$team_name = array(
 				'name' 	=> 'team_name',
 				'value' => set_value('team_name', $team_data->team_name)
