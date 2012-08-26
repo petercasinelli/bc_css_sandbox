@@ -26,7 +26,7 @@ $config['student_pic_upload_path'] = 'uploads/students/pictures/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
