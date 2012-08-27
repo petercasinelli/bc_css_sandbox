@@ -1,18 +1,32 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9.2
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
-
--- Generation Time: Jul 08, 2012 at 12:07 PM
--- Server version: 5.5.9
--- PHP Version: 5.3.6
-
+-- Host: localhost
+-- Generation Time: Aug 27, 2012 at 10:34 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 --
 -- Database: `bc-css-skills`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `join_team_requests`
+--
+
+CREATE TABLE `join_team_requests` (
+  `join_team_request_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) unsigned NOT NULL,
+  `student_id` int(11) unsigned NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`join_team_request_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -30,42 +44,43 @@ CREATE TABLE `majors` (
 -- Dumping data for table `majors`
 --
 
-INSERT INTO `majors` VALUES(1, 'Computer Science');
-INSERT INTO `majors` VALUES(3, 'Biology');
-INSERT INTO `majors` VALUES(4, 'Chemistry');
-INSERT INTO `majors` VALUES(5, 'Classical Studies');
-INSERT INTO `majors` VALUES(6, 'Communication');
-INSERT INTO `majors` VALUES(7, 'Earth and Environmental Sciences');
-INSERT INTO `majors` VALUES(8, 'Economics');
-INSERT INTO `majors` VALUES(9, 'Education');
-INSERT INTO `majors` VALUES(10, 'English');
-INSERT INTO `majors` VALUES(11, 'Finance');
-INSERT INTO `majors` VALUES(12, 'Accounting');
-INSERT INTO `majors` VALUES(13, 'Fine Arts');
-INSERT INTO `majors` VALUES(14, 'General Management');
-INSERT INTO `majors` VALUES(15, 'German Studies');
-INSERT INTO `majors` VALUES(16, 'History');
-INSERT INTO `majors` VALUES(17, 'Information Systems');
-INSERT INTO `majors` VALUES(18, 'Islamic Civilizations and Societies');
-INSERT INTO `majors` VALUES(19, 'International Studies');
-INSERT INTO `majors` VALUES(20, 'Marketing');
-INSERT INTO `majors` VALUES(21, 'Mathematics');
-INSERT INTO `majors` VALUES(22, 'Management and Organization');
-INSERT INTO `majors` VALUES(23, 'Music');
-INSERT INTO `majors` VALUES(24, 'Nursing');
-INSERT INTO `majors` VALUES(25, 'Operations Management');
-INSERT INTO `majors` VALUES(26, 'Philosophy');
-INSERT INTO `majors` VALUES(27, 'Physics');
-INSERT INTO `majors` VALUES(28, 'Political Science');
-INSERT INTO `majors` VALUES(29, 'Psychology');
-INSERT INTO `majors` VALUES(30, 'Romance Language and Literatures');
-INSERT INTO `majors` VALUES(31, 'Slavic and Eastern Languages and Literatures');
-INSERT INTO `majors` VALUES(32, 'Sociology');
-INSERT INTO `majors` VALUES(33, 'Theatre');
-INSERT INTO `majors` VALUES(34, 'Theology');
-INSERT INTO `majors` VALUES(35, 'African and African Diaspora Studies');
-INSERT INTO `majors` VALUES(36, 'Business Law');
-INSERT INTO `majors` VALUES(37, 'Biochemistry');
+INSERT INTO `majors` (`major_id`, `major`) VALUES
+(1, 'Computer Science'),
+(3, 'Biology'),
+(4, 'Chemistry'),
+(5, 'Classical Studies'),
+(6, 'Communication'),
+(7, 'Earth and Environmental Sciences'),
+(8, 'Economics'),
+(9, 'Education'),
+(10, 'English'),
+(11, 'Finance'),
+(12, 'Accounting'),
+(13, 'Fine Arts'),
+(14, 'General Management'),
+(15, 'German Studies'),
+(16, 'History'),
+(17, 'Information Systems'),
+(18, 'Islamic Civilizations and Societies'),
+(19, 'International Studies'),
+(20, 'Marketing'),
+(21, 'Mathematics'),
+(22, 'Management and Organization'),
+(23, 'Music'),
+(24, 'Nursing'),
+(25, 'Operations Management'),
+(26, 'Philosophy'),
+(27, 'Physics'),
+(28, 'Political Science'),
+(29, 'Psychology'),
+(30, 'Romance Language and Literatures'),
+(31, 'Slavic and Eastern Languages and Literatures'),
+(32, 'Sociology'),
+(33, 'Theatre'),
+(34, 'Theology'),
+(35, 'African and African Diaspora Studies'),
+(36, 'Business Law'),
+(37, 'Biochemistry');
 
 -- --------------------------------------------------------
 
@@ -83,14 +98,15 @@ CREATE TABLE `schools` (
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` VALUES(1, 'Arts and Sciences');
-INSERT INTO `schools` VALUES(2, 'CSOM');
-INSERT INTO `schools` VALUES(3, 'CSON');
-INSERT INTO `schools` VALUES(4, 'GSSW');
-INSERT INTO `schools` VALUES(5, 'Law');
-INSERT INTO `schools` VALUES(6, 'Lynch School');
-INSERT INTO `schools` VALUES(7, 'School of Theology');
-INSERT INTO `schools` VALUES(8, 'Woods College');
+INSERT INTO `schools` (`school_id`, `school`) VALUES
+(1, 'Arts and Sciences'),
+(2, 'CSOM'),
+(3, 'CSON'),
+(4, 'GSSW'),
+(5, 'Law'),
+(6, 'Lynch School'),
+(7, 'School of Theology'),
+(8, 'Woods College');
 
 -- --------------------------------------------------------
 
@@ -100,26 +116,62 @@ INSERT INTO `schools` VALUES(8, 'Woods College');
 
 CREATE TABLE `skills` (
   `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `skill` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `skill` varchar(255) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`skill_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=48 ;
 
 --
 -- Dumping data for table `skills`
 --
 
-INSERT INTO `skills` VALUES(1, 'HTML');
-INSERT INTO `skills` VALUES(2, 'CSS');
-INSERT INTO `skills` VALUES(3, 'Javascript');
-INSERT INTO `skills` VALUES(4, 'jQuery');
-INSERT INTO `skills` VALUES(5, 'PHP');
-INSERT INTO `skills` VALUES(6, 'Ruby on Rails');
-INSERT INTO `skills` VALUES(7, 'Python');
-INSERT INTO `skills` VALUES(9, 'C#');
-INSERT INTO `skills` VALUES(10, 'Objective-C');
-INSERT INTO `skills` VALUES(11, 'Android');
-INSERT INTO `skills` VALUES(12, 'Java');
-INSERT INTO `skills` VALUES(13, 'C++');
+INSERT INTO `skills` (`skill_id`, `skill`) VALUES
+(1, 'PHP'),
+(2, 'MySQL'),
+(3, 'PostgreSQL'),
+(4, 'Java'),
+(5, 'Javascript'),
+(6, 'HTML5'),
+(7, 'CSS'),
+(8, 'n/a'),
+(9, 'Objective C'),
+(10, 'Marketing'),
+(11, 'Sales'),
+(12, 'Design'),
+(13, 'Finance.'),
+(14, 'iOS'),
+(15, 'objective-c'),
+(16, 'Image Editing'),
+(17, 'Great business background and big thinker.'),
+(18, 'C#'),
+(19, 'OpenGL'),
+(20, 'jQuery'),
+(21, 'Python'),
+(22, 'Video Production'),
+(23, 'Graphic Design'),
+(24, 'UX'),
+(25, 'MATLAB'),
+(26, 'basic understanding of HTML and CSS'),
+(27, 'html & css'),
+(28, 'ruby'),
+(29, 'ruby on rails'),
+(30, 'etc.'),
+(31, 'Realbasic'),
+(32, 'ninjitsu'),
+(33, 'Networking'),
+(34, 'Programming Languages: C family'),
+(35, 'LISP (Common and Scheme)'),
+(36, 'various'),
+(37, 'HTML/CSS'),
+(38, 'Data Mining'),
+(39, 'Business Plan creation'),
+(40, 'I come up with ideas'),
+(41, 'Presentation'),
+(42, 'C++'),
+(43, 'Computer Vision'),
+(44, 'Image Processing'),
+(45, 'modeling (software)'),
+(46, 'new skill'),
+(47, 'test');
 
 -- --------------------------------------------------------
 
@@ -129,34 +181,80 @@ INSERT INTO `skills` VALUES(13, 'C++');
 
 CREATE TABLE `students` (
   `student_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first` varchar(255) NOT NULL,
-  `last` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `oauth_uid` char(40) DEFAULT NULL,
-  `password` char(40) NOT NULL,
-  `school_id` int(11) unsigned DEFAULT NULL,
+  `first` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `last` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `picture` varchar(255) COLLATE utf8_bin NOT NULL,
+  `oauth_uid` char(40) CHARACTER SET latin1 DEFAULT NULL,
+  `password` char(40) CHARACTER SET latin1 NOT NULL,
+  `school_id` int(11) unsigned DEFAULT '0',
   `year` int(4) unsigned DEFAULT NULL,
-  `major_id` int(11) unsigned DEFAULT NULL,
-  `bio` text CHARACTER SET utf8,
-  `status` varchar(144) CHARACTER SET utf8 DEFAULT NULL,
-  `skills` text CHARACTER SET utf8,
-  `software` text CHARACTER SET utf8,
-  `twitter` text CHARACTER SET utf8,
-  `facebook` text CHARACTER SET utf8,
-  `linkedin` text CHARACTER SET utf8,
+  `major_id` int(11) unsigned DEFAULT '0',
+  `bio` text CHARACTER SET latin1,
+  `status` varchar(144) CHARACTER SET latin1 DEFAULT NULL,
+  `twitter` text CHARACTER SET latin1,
+  `facebook` text CHARACTER SET latin1,
+  `linkedin` text CHARACTER SET latin1,
   `dribbble` text COLLATE utf8_bin,
-  `github` text CHARACTER SET utf8 NOT NULL,
+  `github` text CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`student_id`)
-
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `students`
 --
 
+INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `picture`, `oauth_uid`, `password`, `school_id`, `year`, `major_id`, `bio`, `status`, `twitter`, `facebook`, `linkedin`, `dribbble`, `github`) VALUES
+(14, 'Peter', 'Casinelli', 'peter.casinelli@bc.edu', 'studentpic_14_1345922075.png', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, 0, 0, '', '', '', '', '', '', ''),
+(18, 'Peter', 'Casinelli', 'casinepe@bc.edu', '', NULL, '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(19, 'test_first_0', 'test_last_0', 'test_0@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(20, 'test_first_1', 'test_last_1', 'test_1@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(21, 'test_first_2', 'test_last_2', 'test_2@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(22, 'test_first_3', 'test_last_3', 'test_3@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(23, 'test_first_4', 'test_last_4', 'test_4@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(24, 'test_first_5', 'test_last_5', 'test_5@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(25, 'test_first_6', 'test_last_6', 'test_6@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(26, 'test_first_7', 'test_last_7', 'test_7@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(27, 'test_first_8', 'test_last_8', 'test_8@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(28, 'test_first_9', 'test_last_9', 'test_9@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(29, 'test_first_10', 'test_last_10', 'test_10@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(30, 'test_first_11', 'test_last_11', 'test_11@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(31, 'test_first_12', 'test_last_12', 'test_12@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(32, 'test_first_13', 'test_last_13', 'test_13@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(33, 'test_first_14', 'test_last_14', 'test_14@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(34, 'test_first_15', 'test_last_15', 'test_15@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(35, 'test_first_16', 'test_last_16', 'test_16@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(36, 'test_first_17', 'test_last_17', 'test_17@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(37, 'test_first_18', 'test_last_18', 'test_18@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(38, 'test_first_19', 'test_last_19', 'test_19@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
-INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `oauth_uid`, `password`, `school_id`, `year`, `major_id`, `bio`, `status`, `skills`, `software`, `twitter`, `facebook`, `linkedin`, `dribbble`, `github`) VALUES
-(10, 'Peter', '', 'peter.casinelli@bc.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_migration`
+--
+
+CREATE TABLE `students_migration` (
+  `student_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `first` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `last` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `oauth_uid` char(40) CHARACTER SET latin1 DEFAULT NULL,
+  `password` char(40) CHARACTER SET latin1 NOT NULL,
+  `school_id` int(11) unsigned DEFAULT '0',
+  `year` int(4) unsigned DEFAULT NULL,
+  `major_id` int(11) unsigned DEFAULT '0',
+  `bio` text CHARACTER SET latin1,
+  `status` varchar(144) CHARACTER SET latin1 DEFAULT NULL,
+  `skills` text CHARACTER SET latin1,
+  `software` text CHARACTER SET latin1,
+  `twitter` text CHARACTER SET latin1,
+  `facebook` text CHARACTER SET latin1,
+  `linkedin` text CHARACTER SET latin1,
+  `dribbble` text COLLATE utf8_bin,
+  `github` text CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -169,8 +267,18 @@ CREATE TABLE `student_skills` (
   `student_id` int(11) unsigned NOT NULL,
   `skill_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`student_skills_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
 
+--
+-- Dumping data for table `student_skills`
+--
+
+INSERT INTO `student_skills` (`student_skills_id`, `student_id`, `skill_id`) VALUES
+(15, 14, 6),
+(16, 14, 1),
+(17, 14, 47);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `teams`
@@ -181,19 +289,39 @@ CREATE TABLE `teams` (
   `team_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `team_description` tinytext COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`team_id`, `team_name`, `team_description`) VALUES
+(2, 'BC Skills', 0x5765206372656174656420424320536b696c6c732e2e2e20496620796f752077616e7420746f2067657420696e766f6c76656420696e2074686520646576656c6f706d656e742070726f636573732c206c6574207573206b6e6f7720616e64206a6f696e20746865207465616d21),
+(5, 'Team 2', 0x6d79207365636f6e64207465616d7373);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `team_members`
 --
 
 CREATE TABLE `team_members` (
-  `team_members_id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_members_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `team_id` int(11) unsigned NOT NULL,
   `student_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `account_type` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`team_members_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `team_members`
+--
+
+INSERT INTO `team_members` (`team_members_id`, `team_id`, `student_id`, `account_type`) VALUES
+(3, 2, 14, 1),
+(10, 5, 14, 1),
+(11, 2, 18, 0),
+(12, 5, 18, 0);
 
 -- --------------------------------------------------------
 
@@ -207,4 +335,27 @@ CREATE TABLE `team_permissions` (
   `permission_id` int(11) unsigned NOT NULL,
   `team_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`team_permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `team_permissions`
+--
+
+INSERT INTO `team_permissions` (`team_permission_id`, `student_id`, `permission_id`, `team_id`) VALUES
+(1, 142, 1, 2),
+(2, 18, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team_updates`
+--
+
+CREATE TABLE `team_updates` (
+  `team_update_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) unsigned NOT NULL,
+  `team_update` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `student_id` int(11) unsigned NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`team_update_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
