@@ -42,8 +42,6 @@
 			<p>
 				<b>Bio</b>: <?php echo $student->bio; ?>
 				<b>Skills</b>: <?php echo $student->skills; ?>
-				<br>
-				<b>Software</b>: <?php echo $student->software; ?>
 			</p>
 </section>
 		

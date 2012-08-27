@@ -22,16 +22,35 @@ class Student_model extends CI_Model {
         $this->db->join('majors','majors.major_id = students.major_id', 'left');
         $this->db->join('schools','schools.school_id = students.school_id', 'left');
 
-        $query = $this->db->get_where('students', array('student_id'=>$student_id));
+        $query = $this->db->get_where('students', array('students.student_id'=>$student_id));
 
         $result = $query->row();
 
         return $result;
     }
 
+    public function add_student_skill($student_id, $skill_id){
+
+        $students_skills_query = $this->db->select('student_skills.skill_id')->from('student_skills')->where(array('student_id'=>$student_id, 'skill_id' => $skill_id))->get();
+        $student_skills = $students_skills_query->result();
+
+        if (empty($student_skills)):
+
+            $query = $this->db->insert('student_skills', array('student_id' => $student_id, 'skill_id' => $skill_id));
+            $affected_rows = $this->db->affected_rows();
+            return $affected_rows;
+
+        else:
+
+            return 0;
+        endif;
+
+    }
+
     public function get_student_skills($student_id)
     {
-        $query = $this->db->get_where('student_skills', array('student_id'=>$student_id));
+        $this->db->select('skills.skill_id, skill');
+        $query = $this->db->join("skills", "skills.skill_id = student_skills.skill_id")->get_where('student_skills', array('student_id'=>$student_id));
         $result = $query->result();
 
         return $result;
@@ -200,20 +219,12 @@ class Student_model extends CI_Model {
 
     public function add_skill($skill){
 
-        $previous_skill = $this->find_skill($skill);
+        $skill_data = array('skill' => $skill);
+        $add_skill = $this->db->insert('skills', $skill_data);
+        $skill_id = $this->db->insert_id();
 
-        if (sizeof($previous_skill) > 0):
-            echo 'There was a result already';
-            return 0;
-        else:
-            echo 'No result so add it';
-            $skill_data = array('skill' => $skill);
-            $add_skill = $this->db->insert('skills', $skill_data);
-            $rows_affected = $this->db->affected_rows();
-            echo 'Affected: ' . $rows_affected;
-            return $rows_affected;
+        return $skill_id;
 
-        endif;
 
 
     }
@@ -222,8 +233,16 @@ class Student_model extends CI_Model {
 
         $this->db->from("skills")->like("skill", $skill);
         $query = $this->db->get();
-        $result = $query->row();
+        $result = $query->result();
 
         return $result;
+    }
+
+    public function get_all_skills(){
+
+        $query = $this->db->get('skills');
+        $results = $query->result();
+
+        return $results;
     }
 }
