@@ -48,13 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-
 //Get Amazon configuration variables 
 $hostname = get_cfg_var('aws.param1');
 $database = get_cfg_var('aws.param2');
 $username = get_cfg_var('aws.param3');
 $password = get_cfg_var('aws.param4');
-
 
 $db['default']['hostname'] = $hostname;
 $db['default']['username'] = $username;
@@ -63,7 +61,7 @@ $db['default']['database'] = $database;
 
 
 $db['default']['dbdriver'] = 'mysql';
-$db['default']['port'] = 8809;
+$db['default']['port'] = 3306;
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

@@ -12,10 +12,8 @@ class MY_Form_validation extends CI_Form_validation {
 	public function bc_email($email){
 		
 		//Separate email domain from username in email address
-		$email = explode("@", $email);
-		$email_domain = $email[1];
-		
-		if (strcasecmp($email_domain, "bc.edu") == 0):
+		$matched = preg_match("/[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@bc\.edu/", $email);	
+		if ($matched):
 			return TRUE;
 		else:
 			$this->set_message('bc_email', 'You must have a Boston College e-mail address');

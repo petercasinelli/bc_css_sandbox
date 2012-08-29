@@ -1,43 +1,91 @@
 <?php
 $this->load->helper('form');
 $this->load->library('message');
-$this->load->view('includes/header');
+$this->load->view('student/includes/header');
 ?>
 
-	<?php $this->load->view('student/includes/leftsidebar'); ?>
-	
-	<div id="right-column">
-		
-		<?php $this->load->view("student/includes/navigation"); ?>
-		
-		<div class="item non-user-item">
-			<hgroup>
-				<h1>Search for Skills at BC</h1>
-				<h2>What type of student are you looking for?</h2>
-			</hgroup>
-			
-			<?php echo $this->message->display(); ?>
-		
-			<?php echo validation_errors('<p class="red-alert">', '</p>'); ?>
-			<?php echo form_open('student/search/', 'id="search"'); ?>
-			<?php 
-		
-			$query = array(
-						'name' 	=> 'query',
-						'value' => set_value('query'),
-						'placeholder' => 'Search names, skills, majors...'
-					 );
-		
-			?>
-			
-			<?php echo form_input($query); ?>
-			<input type="submit" name="submit" value="Search">
-			<?php echo form_close(); ?>
-		</div>
-		
-		<?php $this->load->view('student/message_board'); ?>
+<?php if (strlen($this->message->display()) > 0): ?>
+<section>
+    <?php echo $this->message->display(); ?>
+</section>
+<?php endif;?>
 
-		<?php $this->load->view('student/calendar'); ?>
-	</div>
-	
+<section>
+    <div class="grid">
+        <div class="quarter">
+            <section>
+            <header>
+                <h1>Complete Your Profile</h1>
+                <?php echo "Your profile is $profile_completion complete"; ?>
+            </header>
+            </section>
+        </div>
+        <div class="three-quarters">
+            <section>
+                Form goes here
+            </section>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="grid">
+        <div class="half">
+            <section>
+                <header>
+                    <h1>What's New</h1>
+                </header>
+                <p>
+                   New updates here
+                </p>
+            </section>
+        </div>
+        <div class="half">
+            <section>
+                <header>
+                    <h1>New Students</h1>
+                </header>
+                <section class="listing">
+                <p>
+                    Student 1
+                    <br />
+                    <b>Bio goes here</b>
+                </p>
+            </section>
+                <section class="listing">
+                    <p>
+                        Student 2
+                        <br />
+                        <b>Bio goes here</b>
+                    </p>
+                </section>
+                <?php echo anchor('student/view_all', 'View All Students'); ?>
+
+            </section>
+            <br />
+            <section>
+                <header>
+                    <h1>New Teams</h1>
+                </header>
+                <section class="listing">
+                    <p>
+                        Team 1
+                        <br />
+                        <b>Description goes here</b>
+                    </p>
+                </section>
+                <section class="listing">
+                    <p>
+                        Team 2
+                        <br />
+                        <b>Description goes here</b>
+                    </p>
+                </section>
+                <?php echo anchor('/team', 'View All Teams'); ?>
+            </section>
+        </div>
+    </div>
+</section>
+
+
 <?php $this->load->view('includes/footer'); ?>

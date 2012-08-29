@@ -13,7 +13,20 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home');
+		$data['current_page'] = 'index';
+		$this->load->view('home', $data);
+	}
+	
+	public function about()
+	{
+		$data['current_page'] = 'about';
+		$this->load->view('home', $data);
+	}
+	
+	public function contact()
+	{
+		$data['current_page'] = 'contact';
+		$this->load->view('home', $data);
 	}
 
 

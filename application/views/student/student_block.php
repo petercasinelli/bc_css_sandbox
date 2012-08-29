@@ -1,18 +1,13 @@
-		<div class="item">
-			<a href="javascript:;" class="expand" id="expand<?php echo $id; ?>" onClick="toggleExpand(<?php echo $id; ?>);">Expand Profile</a>
-			<hgroup onClick="toggleExpand('<?php echo $id; ?>');">
-				<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
-				<h2><?php echo $student->school . ' ' . $student->year; ?> - <?php echo $student->major ?></h2>
-			</hgroup>
-			<p>
-				<b>Skills:</b> <?php echo $student->skills; ?>
-				<br>
-				<b>Software:</b> <?php echo $student->software; ?>
-			</p>
-			<p id="item<?php echo $id; ?>" style="display:none;">
-			<b>Bio: </b><?php echo $student->bio; ?>
-			<br /><br />
-			<a href="mailto:<?php echo $student->email; ?>" class="fancy-button">Contact</a>
+<section class="listing">
+			<header>
+				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
+				<img src="<?php echo $pic_src; ?>" width="25px" height="25px"/>
+				<h2><?php echo $student->first . ' ' . $student->last; ?></h2>
+				<h3><?php echo $student->school_id . ' ' . $student->year; ?> - <?php echo $student->major_id ?>
+				<h3><?php if($student->status) echo $student->status; ?></h3>
+					<br />Arts & Sciences 2014 - Computer Science</h3>
+			</header>
+			<div class="float-right">
 				<span class="social-links">
 					<?php
 					if (!empty($student->twitter)):
@@ -40,18 +35,13 @@
 					<?php
 					endif;
 					?>
-
 				</span>
-			</p>			
-		</div>
-<!--
-<a href="javascript:;" class="expand" id="expand1">Expand</a>
-<hgroup id="expand">
-	<h1><?php echo $student->first . ' ' . $student->last; ?></h1>
-	<h2><?php echo 'Graduating: ' . $student->year . ' Major: ' . $student->major; ?></h2>
-</hgroup>
-<p><br /><br />
-	<strong>Skills</strong>: <?php echo $student->skills; ?>
-<br /><br />
-</p>
--->
+				<a href="mailto:<?php echo $student->email; ?>">Contact</a>
+			</div>
+			<hr>
+			<p>
+				<b>Bio</b>: <?php echo $student->bio; ?>
+				<b>Skills</b>: <?php echo $student->skills; ?>
+			</p>
+</section>
+		

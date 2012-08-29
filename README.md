@@ -21,28 +21,22 @@ If you need help getting started with GitHub, <a href="http://learn.github.com/p
 Setting up on mac? <a href="http://help.github.com/mac-set-up-git/" target="_blank">check out this guide</a>
 
 ###Importing Test Database Data
-This applicaton uses a PostgreSQL backend. To import dummy data, after forking this repository, import the database.sql file located
+This applicaton uses a MySQL backend. To import dummy data, after forking this repository, import the database.sql file located
 in the root directory of this application.
 
-For one-click PostgreSQL installation, <a href="http://www.enterprisedb.com/products-services-training/pgdownload" target="_blank">click here to visit a PostgreSQL download web site</a>.
+To learn about installing MySQL on any computer, <a href="http://dev.mysql.com/doc/refman/5.5/en/installing.html" target="_blank">click here to visit a MySQL download web site</a>. (View coming soon!)
 
 ###Installing Database With CodeIgniter
-Once you have forked the PHP application and installed your PostgreSQL database with dummy data, you will need to connect it to the application!
+Once you have forked the PHP application and installed your MySQL database with dummy data, you will need to connect it to the application!
 This can be done by navigating to the Application folder, then opening the Config folder, and then opening the Database.php file.
 
 You will only be concerned with editing the following lines of code:
 
 <pre>
 $db['default']['hostname'] = 'hostnamehere';	//Usually localhost
-$db['default']['username'] = 'usernamehere';	//May be postgres
+$db['default']['username'] = 'usernamehere';	//May be root
 $db['default']['password'] = 'yourpasswordhere';	//Whatever password you chose to setup the database
 $db['default']['database'] = 'yourdatabasenamehere';	//Name of the database. We used css for "computer science society"!
-</pre>
-
-Important: you must comment out this line (number 53)
-
-<pre>
-//extract(parse_url($_ENV["DATABASE_URL"]));
 </pre>
 
 
@@ -69,11 +63,11 @@ Make sure you do not commit your project settings, local files that do not belon
 
 ##Getting Help
 If you need help getting started, do not hesitate to contact Peter Casinelli at <a href="mailto:peter.casinelli@bc.edu" target="_blank">peter.casinelli@bc.edu</a> .
-If you have questions regarding how Codeigniter or PostgreSQL works, or particular functionality, please refer to the documentation help below!
+If you have questions regarding how Codeigniter or MySQL works, or particular functionality, please refer to the documentation help below!
 
 ##Documentation
 
 This PHP application is being built using an open source PHP framework called <a href="http://www.codeigniter.com" target="blank">Codeigniter</a>.
 If you have general questions about code being used, you can always refer to <a href="http://codeigniter.com/user_guide/" target="_blank">Codeigniter's documentation here</a>.
 
-For documentation regarding PostgreSQL databases, <a href="http://www.postgresql.org/docs/" target="_blank">click here visit the documentation web page</a>.
+For documentation regarding MySQL databases, <a href="http://dev.mysql.com/doc/" target="_blank">click here visit the documentation web page</a>.

@@ -3,40 +3,31 @@ $this->load->helper('form');
 $this->load->library('message');
 $this->load->view('includes/header');
 ?>
-
-	<?php $this->load->view('includes/leftsidebar'); ?>
-	
-	<div id="right-column">
-		
-		<?php $this->load->view("includes/navigation"); ?>
-		
-		<div class="item non-user-item">
-			<hgroup>
-				<h1>Sign In To BC Skills</h1>
-				<h2>To search student profiles and manage your own, enter your login information below.</h2>
-			</hgroup>
-		</div>
-		
-			<?php
-				if (strcmp($this->message->display(), "") != FALSE):
-			?>
-			
-			<?php echo $this->message->display(); ?>	
-			
-			<?php
-				endif;
-			?>
-			
+<section>
+	<h1>Sign In To BC Skills</h1>
+    <?php if (strlen($this->message->display()) > 0): ?>
+    <section>
+        <?php echo $this->message->display(); ?>
+    </section>
+    <?php endif;?>
+	<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+	<hr style="width:400px;">
+	<div style="width:200px; margin:auto;">
+	<a href="javascript:;" onclick="toggleExpand(0)" id="sign-in-without-fb">Sign in without Facebook</a>
+	</div>
+	<div id="item0" style="display:none; width:200px; margin:auto">
 			<?php echo form_open('authentication/student/login', array("id" => "edit-profile")); ?>
 			<?php 
 			
 			$email = array(
 							'name' 	=> 'email',
-							'value' => set_value('email')
+							'value' => set_value('email'),
+							'id' => 'field'
 						  );
 								
 			$password = array(
-							'name' 	=> 'password'
+							'name' 	=> 'password',
+							'id' => 'field'
 							);
 			
 		
@@ -52,8 +43,8 @@ $this->load->view('includes/header');
 			<?php echo form_submit($submit_button); ?>
 		
 			<?php echo form_close(); ?>
-		
-		
-	</div>
-	
+		</div>
+<br />
+</section>
+
 <?php $this->load->view('includes/footer'); ?>

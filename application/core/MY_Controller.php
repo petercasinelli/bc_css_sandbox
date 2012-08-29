@@ -17,8 +17,6 @@ class MY_Controller extends CI_Controller {
 		
 		$this->current_student_id = $this->session->userdata('student_id');
 		$this->current_student_info = $this->student_model->get_student($this->current_student_id);
-		
-
     }
 	
 }

@@ -1,0 +1,1 @@
+<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>

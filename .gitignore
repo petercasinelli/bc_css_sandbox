@@ -1,5 +1,16 @@
 # Configuration files #
-application/config/*
-.DS_Store
+######################
+application/config/database.php
+
+# OS/Project generated files #
+######################
 .project
-.settings/
+.settings
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db

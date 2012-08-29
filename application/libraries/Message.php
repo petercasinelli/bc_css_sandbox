@@ -64,11 +64,13 @@ class CI_Message {
             foreach($output as $type => $messages){
                 //echo '<div class="'.$type.'">'."\r\n";
                 if ($type == "error")
-					$color = 'red';
+					$color = 'error';
 				else
-					$color = 'green';
+					$color = 'success';
                 foreach($messages as $msg){
-                    echo '<p class="'.$color.'-alert">'.$msg.'</p>'."\r\n";
+                    echo '<section>';
+                    echo '<p class="'.$color.'-message">'.$msg.'</p>'."\r\n";
+                    echo '</section>';
                 }
                 //echo '</div>'."\r\n";
             }

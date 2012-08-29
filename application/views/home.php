@@ -1,33 +1,38 @@
 <?php $this->load->view('includes/header'); ?>
-<body>
 
-	<?php $this->load->view('includes/leftsidebar'); ?>
-	
-	<div id="right-column">
-	
-		<?php $this->load->view("includes/navigation"); ?>
-		
-		<div class="item non-user-item">
-			<hgroup>		
-				<h1>Welcome to BC Skills</h1>
-				<h2>What skills are you looking for?</h2>
-			</hgroup>
-		</div>
-		
-		<div class="item non-user-item text-item">
-			<hgroup>
-				<h2>The Boston College Computer Science Society is excited to announce our new open source project, BC Skills!</h2>
-			</hgroup>
-			<p>BC Skills is an open source platform built by Boston College students for Boston College students. This project has two
-				main goals: to help <b>connect</b> technical and entrepreneurial students to build new start ups, and <b>teach</b> students
-				how to collaborate through open source applications.</p>
-			<p>Are you interested in getting involved? The first step is to <?php echo anchor('register/student', 'register'); ?>. Then, start collaborating on <?php echo anchor("https://github.com/pcas00/bc_css_sandbox", "GitHub", 'target="_blank"'); ?>.</p>
-			<p>If you need help getting started, refer to our help documentation, or contact <a href="mailto:peter.casinelli@bc.edu">peter.casinelli@bc.edu</a>.</p>
-		</div>
-		
-	<?php $this->load->view('student/calendar'); ?>
+<section>
+    <div class="grid">
+        <div class="half">
+            <header>
+                <h1 style="font-size:28px; line-height:30px;">Find Students Working On Start-ups At Boston College</h1>
+                <hr>
+                <h2 style="font-size:20px; line-height:25px;">Create an account in seconds and find a co-founder, team member, or a team!</h2>
+            </header>
+            <br />
+            <p>
+                Starting or joining a start-up can be difficult when you don't know where to look for co-founders and team members. BC Skills abstracts this process and allows you to directly contact other students who you can work with. It doesn't matter if you are in the business school or a developer, BC Skills is for you!
+            </p>
+        </div>
+        <div class="half">
+            <section>
+            <header>
 
-		
-	</div>
-	
+            </header>
+                <?php echo validation_errors('<p class="error-message">', '</p>'); ?>
+                <?php echo $this->load->view('student/registration/forms/fb_registration_form'); ?>
+            </section>
+            <hr style="width:400px;">
+            <section class="listing">
+            <div>
+                <a href="javascript:;" onclick="toggleExpand(0)" id="sign-up-without-fb">Sign up without Facebook</a>
+            </div>
+            <div id="item0" style="display:none; margin:auto;">
+                <?php $this->load->view('student/registration/forms/regular_registration_form'); ?>
+            </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
 <?php $this->load->view('includes/footer'); ?>
