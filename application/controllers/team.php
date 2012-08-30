@@ -9,11 +9,14 @@ class Team extends MY_Controller {
         $this->load->library('message');
     }
 
-    public function index()
+    public function index($record_offset = 0)
     {
+    	$this->load->library('pagination');
+        $this->load->helper('pagination_helper');
+		
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
-        $data['teams'] = $this->team_model->get_teams();
+        $data['teams'] = $this->team_model->get_teams($record_offset);
 
         foreach($data['teams'] as $key => $team):
             $team->team_members = $this->team_model->get_team_members($team->team_id);
@@ -21,7 +24,8 @@ class Team extends MY_Controller {
         endforeach;
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-
+		
+		$this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "/team/index"));
         $this->load->view('team/home', $data);
     }
 
