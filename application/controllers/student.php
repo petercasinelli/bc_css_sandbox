@@ -42,7 +42,7 @@ class Student extends MY_Controller {
 
         //Else, display students according to search term
         else:
-
+/*
             if (strpos(",", $query) != FALSE)
                 $query_exploded = explode(',', $query);
             else
@@ -55,13 +55,25 @@ class Student extends MY_Controller {
                 if ($i != sizeof($query_exploded) - 1)
                     $search_string = $search_string . ' | ';
                 $i++;
+            endforeach;*/
+
+            $data["students"] = $this->student_model->search_students($query);
+            foreach($data["students"] as $student):
+
+                $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+                $student->skills = '';
+
+                foreach($student_skills as $skill):
+                    $student->skills = $student->skills . $skill->skill . ', ';
+                endforeach;
+
             endforeach;
 
-            $data["students"] = $this->student_model->search_students($search_string);
             $data["student_logged_in"] = $this->current_student_info;
             $data["search_query"] = $query;
+            $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
-            $this->load->view('student/view_students', $data);
+            $this->load->view('student/search_students', $data);
 
         endif;
 
@@ -224,6 +236,7 @@ class Student extends MY_Controller {
 
     }
 
+
     public function upload_profile_pic(){
 
         //set the path to root
@@ -320,6 +333,38 @@ class Student extends MY_Controller {
 
         header("Content-type: application/json");
         echo json_encode($data);
+    }
+
+
+    public function complete_profile(){
+
+        $random_column = $this->get_incomplete_profile_field($this->current_student_info);
+
+
+        $profile_data = $this->input->post('user_input', TRUE);
+
+        //$update_profile = $this->student_model->complete_profile($profile_data, $this->current_student_id);
+        //if ($update_profile > 0)
+        echo 'true';
+        //else
+        //  echo 'Profile data: ' . $profile_data;
+    }
+
+    private function  get_incomplete_profile_field($student_data){
+
+        $not_null = function($var){
+            return $var == NULL;
+        };
+
+        $values = get_object_vars($student_data);
+        print_r(array_filter($values, $not_null));
+        /*foreach($values as $key => $value):
+            if ($value == NULL)
+                echo $key . ' is NULL <br />';
+            else
+                echo $key . ' is NOT NULL <br />';
+        endforeach;*/
+
     }
 
 }

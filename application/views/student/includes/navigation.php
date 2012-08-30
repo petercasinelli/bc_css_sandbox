@@ -1,3 +1,11 @@
+<?php
+$this->load->helper('form');
+
+$search = array(
+    'name' => 'query',
+    'id' => 'search',
+    'placeholder' => 'Search for students');
+?>
 <header>
     <div>
         <div id="logo">
@@ -23,9 +31,13 @@
             ?>
         </nav>
         <div class="float-right">
-            <form class="float-right">
-                <input type="text" placeholder="Search for students" id="search">
-            </form>
+
+            <?php
+            echo form_open('/student/search', array("class" => 'float-right'));
+            echo form_input($search);
+            echo form_close();
+            ?>
+
             <?php echo anchor('authentication/student/logout', 'Logout', array('class' => 'float-right')); ?>
         </div>
     </div>

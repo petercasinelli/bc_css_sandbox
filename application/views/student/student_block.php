@@ -40,8 +40,10 @@
 			</div>
 			<hr>
 			<p>
+                <b>Skills</b>: <?php echo $student->skills; ?>
+                <br />
 				<b>Bio</b>: <?php echo $student->bio; ?>
-				<b>Skills</b>: <?php echo $student->skills; ?>
+
 			</p>
 </section>
 		

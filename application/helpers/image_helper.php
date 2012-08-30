@@ -12,7 +12,7 @@ function student_picture_src($student_id, $oauth_uid, $picture){
 		if($oauth_uid):
 			return "https://graph.facebook.com/". $oauth_uid . "/picture?type=large"; //high resolution
 		else:
-			return "http://i0.kym-cdn.com/photos/images/original/000/074/586/tumblr_l7l1nqA5va1qdsweso1_1280.jpg?1318992465"; //dummy image
+			return base_url() . 'assets/images/blank_person.png'; //dummy image
 		endif;
 	endif;
 	

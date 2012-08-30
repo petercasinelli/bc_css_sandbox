@@ -11,6 +11,8 @@ class Team extends MY_Controller {
 
     public function index()
     {
+        $this->load->helper("image_helper");
+
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
         $data['teams'] = $this->team_model->get_teams();
@@ -27,6 +29,8 @@ class Team extends MY_Controller {
 
     //View an individual team $team_id
     public function view($team_id){
+
+        $this->load->helper("image_helper");
 
         if (empty($team_id)):
             redirect('team/');
@@ -55,6 +59,17 @@ class Team extends MY_Controller {
 
         $data['team_data'] = $this->team_model->get_team($team_id);
         $data['team_data']->team_members = $this->team_model->get_team_members($team_id);
+
+        foreach($data['team_data']->team_members as $student):
+
+            $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+            $student->skills = '';
+
+            foreach($student_skills as $skill):
+                $student->skills = $student->skills . $skill->skill . ', ';
+            endforeach;
+
+        endforeach;
 
         $data['team_updates'] = $this->team_model->get_updates($team_id);
 

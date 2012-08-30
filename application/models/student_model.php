@@ -5,6 +5,7 @@ class Student_model extends CI_Model {
     public function get_all_students($record_offset)
     {
         $this->load->helper('pagination_helper');
+        $this->db->order_by('first', 'asc');
         $query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
         $result = $query->result();
 
@@ -74,23 +75,24 @@ class Student_model extends CI_Model {
         return $affected_rows;
     }
 
-    /* This method needs a lot of improvement in terms of full text searching in postgreSQL */
     public function search_students($query)
     {
 
-        //Escape query to protect against SQL injection, etc
-        $query = $this->db->escape($query);
+        $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
+        $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
+        $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
 
-        //First attempt at Full Text search in postgreSQL
-        $sql = "SELECT * FROM students
-					LEFT JOIN majors ON majors.major_id = students.major_id
-					LEFT JOIN schools ON schools.school_id = students.school_id
-					WHERE to_tsvector(first || ' ' || last || ' ' || skills || ' ' || software || ' ' || major || ' ' || school) @@ to_tsquery($query)
-					";
+        $this->db->like('first', $query);
+        $this->db->or_like('last', $query);
+        $this->db->or_like('school', $query);
+        $this->db->or_like('skill', $query);
 
-        $query = $this->db->query($sql);
+        $this->db->distinct('students.student_id');
 
+        $this->db->select('first, last, email, oauth_uid, students.student_id, picture, students.school_id, year, students.major_id, bio, status, twitter, facebook, linkedin, dribbble, github');
+        $query = $this->db->get('students');
         $result = $query->result();
+
         return $result;
 
     }
@@ -245,4 +247,33 @@ class Student_model extends CI_Model {
 
         return $results;
     }
+
+    public function complete_profile($profile_data, $student_id){
+
+        $this->db->where('student_id', $student_id);
+        $complete_profile = $this->db->update('students', $profile_data);
+        $affected_rows = $this->db->affected_rows();
+
+        return $affected_rows;
+
+    }
+
+    /*
+    public function get_incomplete_profile_field($student_data){
+
+//        $this->db->select('picture, school_id, year, major_id, bio');
+//        $query = $this->db->get_where('students', array('student_id' => $student_id));
+//        $result = $query->row();
+
+        $values = get_object_vars($result);
+
+        foreach($values as $key => $value):
+            if ($value == NULL)
+                echo $key . ' is NULL <br />';
+            else
+                echo $key . ' is NOT NULL <br />';
+        endforeach;
+
+    }*/
+
 }

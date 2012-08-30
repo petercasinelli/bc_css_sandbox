@@ -121,54 +121,96 @@ $submit_button = array(
 ?>
 
 <section>
-    <hgroup>
-        <h1>Manage Your Profile on BC Skills</h1>
-        <h2>Edit your profile information, skills, experience, and online presence.</h2>
-    </hgroup>
-
     <?php $this->message->display(); ?>
-    <!--Get the students profile picture source.. Will add helper for this -->
-    <?php $pic_src = student_picture_src($student_logged_in->student_id, $student_logged_in->oauth_uid, $student_logged_in->picture); ?>
-    <img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
-    <?php echo anchor("student/remove_profile_pic", "Remove Picture"); ?>
-    <!--begin upload form-->
     <?php echo $upload_errors;?>
-    <?php echo form_open_multipart('student/upload_profile_pic');?>
-    <input type="file" name="userfile" size="20" />
-    <input type="submit" value="upload" />
-    </form>
-    <!--end upload form-->
-
-    <?php echo form_open('student/edit/' . $student_logged_in->student_id, array("id" => "edit-profile")); ?>
-
     <?php echo validation_errors('<p class="error-message">', '</p>'); ?>
-
-    <h2>Personal Information</h2>
-    <?php echo form_label('First Name:', 'first'); echo form_input($first);?>
-    <?php echo form_label('Last Name:', 'last'); echo form_input($last); ?>
-    <?php echo form_label('School:', 'school'); echo form_dropdown('school', $schools_dropdown, $student_logged_in->school_id); ?>
-    <?php echo form_label('Graduation Year:', 'year'); echo form_input($year); ?>
-    <?php echo form_label('Major:', 'major'); echo form_dropdown('major', $major_dropdown, $student_logged_in->major_id); ?>
-
-    <h2>Login Information</h2>
-    <?php echo form_label('BC E-mail Address:', 'email'); echo form_input($email); ?>
-    <?php echo form_label('New Password:', 'password'); echo form_password($password); ?>
-    <?php echo form_label('Confirm Password:', 'confirm-password'); echo form_password($confirm_password); ?>
-
-
-    <h2>BC Skills Profile</h2>
-    <?php echo form_label('Status:', 'status'); echo form_input($status); ?>
-    <?php echo form_label('Bio:', 'bio'); echo form_textarea($bio); ?>
-    <?php echo form_label('Skills:', 'skills'); echo form_input($skills); ?>
-
-    <h2>Social Media</h2>
-    <?php echo form_label('Twitter:', 'twitter'); echo form_input($twitter); ?>
-    <?php echo form_label('Facebook:', 'facebook'); echo form_input($facebook); ?>
-    <?php echo form_label('LinkedIn:', 'linkedin'); echo form_input($linkedin); ?>
-    <?php echo form_label('Dribbble:', 'dribbble'); echo form_input($dribbble); ?>
-    <?php echo form_label('GitHub:', 'github'); echo form_input($github); ?>
-    <?php echo form_submit($submit_button); ?>
 </section>
+
+<section>
+    <div class="grid">
+        <div class="half">
+            <header>
+                <h1>Profile Picture</h1>
+                <h2>Upload a new photo or remove your current photo</h2>
+            </header>
+            <!--Get the students profile picture source.. Will add helper for this -->
+            <?php $pic_src = student_picture_src($student_logged_in->student_id, $student_logged_in->oauth_uid, $student_logged_in->picture); ?>
+            <img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
+            <br />
+            <?php echo anchor("student/remove_profile_pic", "Remove Picture"); ?>
+            <!--begin upload form-->
+
+            <?php echo form_open_multipart('student/upload_profile_pic');?>
+            <input type="file" name="userfile" size="20" />
+            <input type="submit" value="Change My Picture" />
+            </form>
+            <!--end upload form-->
+        </div>
+        <?php echo form_open('student/edit/' . $student_logged_in->student_id, array("id" => "edit-profile")); ?>
+        <div class="half">
+            <header>
+                <h1>BC Skills Profile</h1>
+            </header>
+            <?php echo form_label('Status:', 'status'); echo form_input($status); ?>
+            <?php echo form_label('Skills:', 'skills'); echo form_input($skills); ?>
+            <br />
+            <?php echo form_submit($submit_button); ?>
+        </div>
+    </div>
+
+</section>
+
+<section>
+    <div class="grid">
+        <div class="half">
+            <header>
+                <h1>Personal Information</h1>
+            </header>
+            <?php echo form_label('First Name:', 'first'); echo form_input($first);?>
+            <?php echo form_label('Last Name:', 'last'); echo form_input($last); ?>
+            <?php echo form_label('School:', 'school'); echo form_dropdown('school', $schools_dropdown, $student_logged_in->school_id); ?>
+            <?php echo form_label('Major:', 'major'); echo form_dropdown('major', $major_dropdown, $student_logged_in->major_id); ?>
+            <br /><br />
+            <?php echo form_submit($submit_button); ?>
+        </div>
+        <div class="half">
+            <?php echo form_label('Graduation Year:', 'year'); echo form_input($year); ?>
+            <?php echo form_label('Bio:', 'bio'); echo form_textarea($bio); ?>
+
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="grid">
+        <div class="half">
+            <header>
+                <h1>Social Media</h1>
+            </header>
+            <?php echo form_label('Twitter:', 'twitter'); echo form_input($twitter); ?>
+            <?php echo form_label('Facebook:', 'facebook'); echo form_input($facebook); ?>
+            <?php echo form_label('LinkedIn:', 'linkedin'); echo form_input($linkedin); ?>
+            <?php echo form_label('Dribbble:', 'dribbble'); echo form_input($dribbble); ?>
+            <?php echo form_label('GitHub:', 'github'); echo form_input($github); ?>
+            <br />
+            <?php echo form_submit($submit_button); ?>
+        </div>
+        <div class="half">
+
+            <header>
+                <h1>Login Information</h1>
+            </header>
+            <?php echo form_label('BC E-mail Address:', 'email'); echo form_input($email); ?>
+            <?php echo form_label('New Password:', 'password'); echo form_password($password); ?>
+            <?php echo form_label('Confirm Password:', 'confirm-password'); echo form_password($confirm_password); ?>
+            <br />
+            <?php echo form_submit($submit_button); ?>
+        </div>
+    </div>
+</section>
+<?php echo form_close(); ?>
+
+
 
 <?php
 $student_skills_length = strlen($this_students_skills);
