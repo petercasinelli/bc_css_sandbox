@@ -26,7 +26,7 @@ class Team_Model extends CI_Model {
 
 
     }
-
+	
     public function update_team($team_id, $team_data){
 
         $this->db->where('team_id', $team_id);
@@ -83,10 +83,17 @@ class Team_Model extends CI_Model {
 
     }
 
-    public function get_teams(){
-        $query = $this->db->from('teams')->get();
+    public function get_teams($record_offset){
+    	$this->load->helper('pagination_helper');
+		$query = $this->db->get('teams', PaginationSettings::per_page(), $record_offset);
+        // $query = $this->db->from('teams')->get();
         $result = $query->result();
         return $result;
+    }
+	
+		public function get_total_team_count() {
+        $rows = $this->db->count_all('teams');
+        return $rows;
     }
 
     public function get_team_members($team_id){
