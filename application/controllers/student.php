@@ -314,7 +314,7 @@ class Student extends MY_Controller {
         endforeach;
 
 
-        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "index.php/student/view_all"));
+        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "/student/view_all"));
 
         $this->load->view('student/view_all_students', $data);
     }
