@@ -7,6 +7,7 @@ class Team extends MY_Controller {
         parent::__construct();
         $this->load->model("team_model");
         $this->load->library('message');
+		$this->load->helper("image_helper");
     }
 
     public function index()
@@ -55,7 +56,7 @@ class Team extends MY_Controller {
 
         $data['team_data'] = $this->team_model->get_team($team_id);
         $data['team_data']->team_members = $this->team_model->get_team_members($team_id);
-
+		
         $data['team_updates'] = $this->team_model->get_updates($team_id);
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
