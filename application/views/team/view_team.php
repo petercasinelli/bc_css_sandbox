@@ -57,7 +57,7 @@ endif;
             endif;
 
             foreach($team_data->team_members as $student):?>
-                <?php $this->load->view("student/student_block", array("student"=>$student, "id" => $student->student_id))?>
+                <?php $this->load->view("team/member_block", array("student"=>$student, "id" => $student->student_id))?>
                 <?php endforeach;?>
         </div>
     </div>
