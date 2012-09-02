@@ -229,8 +229,7 @@ class Student extends MY_Controller {
         //set the path to root
         $config['upload_path'] = './uploads/students/pictures';
         $config['allowed_types'] = 'gif|jpg|png';
-        //append unix time stamp for unique update
-        $config['file_name'] = "studentpic_" . $this->current_student_id . "_" . time();
+        $config['file_name'] = "studentpic_" . sha1($this->current_student_id);
 
         //2000kb and max image width and height
         $config['max_size']	= '2000';

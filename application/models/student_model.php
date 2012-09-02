@@ -161,16 +161,15 @@ class Student_model extends CI_Model {
         $data = array(
             'picture' => $file_name,
         );
-        $this->db->where('student_id', $student_id);
-        $this->db->update('students', $data);
-
-        $rows_affected = $this->db->affected_rows();
-
-        if($rows_affected > 0)
-            return TRUE;
-        else
-            return FALSE;
-
+		
+		try{
+        	$this->db->where('student_id', $student_id);
+        	$this->db->update('students', $data);
+			return TRUE;
+		} catch (Exception $e) {
+    		//echo 'Update failed: ',  $e->getMessage(), "\n";
+			return FALSE;
+		}
     }
 
     public function delete_profile_picture($student_id){
