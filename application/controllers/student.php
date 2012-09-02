@@ -275,7 +275,25 @@ class Student extends MY_Controller {
             redirect("student/edit_form");
         endif;
     }
-
+	//view single student
+	public function view_student($id=null){
+    	$data['student'] = $this->student_model->get_student($id);
+    	if($data['student'] && !is_null($id)):
+			$data["current_page"] = 'student';
+	        $data["notifications"] = $this->student_model->get_notifications($id);
+			$student_skills = $this->student_model->get_student_skills($id);
+	        $data['student']->skills = '';
+	        foreach($student_skills as $skill):
+	        	$data['student']->skills = $data['student']->skills . $skill->skill . ', ';
+	        endforeach;
+	        $this->load->view('student/view_student', $data);
+		else:
+			$data["current_page"] = 'student';
+			$data["student"] = null;
+			$data['notifications'] = null;
+            $this->load->view('student/view_student', $data);
+		endif;
+	}
     //View all students
     public function view_all($record_offset = 0){
         $this->load->library('pagination');
