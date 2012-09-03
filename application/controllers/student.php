@@ -185,32 +185,14 @@ class Student extends MY_Controller {
                 $student_data["password"] = sha1($password);
             endif;
 
-            $skills_array = explode(',', $skills);
-
-            foreach($skills_array as $skill):
-                $skill = trim($skill);
-                if (!empty($skill)):
-                    $existing_skill = $this->student_model->find_skill($skill);
-
-                    if (empty($existing_skill)):
-                        echo 'This skill does not exist: '.$skill;
-                        $skill_id = $this->student_model->add_skill($skill);
-                        echo ' and now has id: '.$skill_id;
-                    else:
-
-                        $skill_id = $existing_skill[0]->skill_id;
-                        echo 'Need to add skill '. $skill_id;
-                    endif;
-                    $this->student_model->add_student_skill($this->current_student_id, $skill_id);
-                endif;
-            endforeach;
-
+			$skills_affected = $this->student_model->update_student_skills($student_id, $skills);
+			
             //Load message library for setting success/error messages
             $this->load->library('message');
 
             $rows_affected = $this->student_model->edit_student($student_id, $student_data);
 
-            if ($rows_affected):
+            if ($rows_affected || $skills_affected):
                 $this->message->set("You have successfully edited your account profile", "success", TRUE);
                 redirect("student/edit_form");
             else:
