@@ -1,4 +1,4 @@
-/*--Reset--*/	
+/*--Reset--*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -7,8 +7,8 @@ del, dfn, em, img, ins, kbd, q, s, samp,
 tt, var, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -35,7 +35,7 @@ body > header {
 	background:    -moz-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* FF3.6+ */
 	background: -webkit-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* Chrome10+,Safari5.1+ */
 	background:     -ms-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* IE10+ */
-	background:         linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* W3C */	
+	background:         linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* W3C */
 	border-width:0 0 1px 0;
 	border-color:#cdcdcd;
 	border-style:solid;
@@ -176,7 +176,7 @@ hr {
 	background:    -moz-linear-gradient(left, #ECECEC 0%, #858585 50%, #ECECEC 100%); /* FF3.6+ */
 	background: -webkit-linear-gradient(left, #ECECEC 0%, #858585 50%, #ECECEC 100%); /* Chrome10+,Safari5.1+ */
 	background:     -ms-linear-gradient(left, #ECECEC 0%, #858585 50%, #ECECEC 100%); /* IE10+ */
-	background:         linear-gradient(left, #ECECEC 0%, #858585 50%, #ECECEC 100%); /* W3C */	
+	background:         linear-gradient(left, #ECECEC 0%, #858585 50%, #ECECEC 100%); /* W3C */
 	clear:both;
 }
 
@@ -258,6 +258,28 @@ hr {
 	background:url('../images/github.png');
 }
 
+.pagination {
+    text-align:center;
+    margin:10px;
+}
+
+.pagination ul li {
+    display:inline;
+}
+
+.pagination ul li a {
+    padding:3px;
+    border:1px solid #CDCDCD;
+    border-radius:2px;
+    color:#858585;
+    text-decoration:none;
+    background:#ECECEC;
+}
+
+.pagination ul li a:hover {
+    background:#EFEFEF;
+}
+
 form {
 	margin:20px;
 }
@@ -292,7 +314,7 @@ input[type=submit], input[type=button], button {
 	background:    -moz-linear-gradient(top, #f4f4f4 0%, #cdcdcd 100%); /* FF3.6+ */
 	background: -webkit-linear-gradient(top, #f4f4f4 0%, #cdcdcd 100%); /* Chrome10+,Safari5.1+ */
 	background:     -ms-linear-gradient(top, #f4f4f4 0%, #cdcdcd 100%); /* IE10+ */
-	background:         linear-gradient(top, #f4f4f4 0%, #cdcdcd 100%); /* W3C */	
+	background:         linear-gradient(top, #f4f4f4 0%, #cdcdcd 100%); /* W3C */
 }
 
 input[placeholder], [placeholder], *[placeholder] {
