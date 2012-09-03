@@ -336,37 +336,6 @@ class Student extends MY_Controller {
     }
 
 
-    public function complete_profile(){
-
-        $random_column = $this->get_incomplete_profile_field($this->current_student_info);
-
-
-        $profile_data = $this->input->post('user_input', TRUE);
-
-        //$update_profile = $this->student_model->complete_profile($profile_data, $this->current_student_id);
-        //if ($update_profile > 0)
-        echo 'true';
-        //else
-        //  echo 'Profile data: ' . $profile_data;
-    }
-
-    private function  get_incomplete_profile_field($student_data){
-
-        $not_null = function($var){
-            return $var == NULL;
-        };
-
-        $values = get_object_vars($student_data);
-        print_r(array_filter($values, $not_null));
-        /*foreach($values as $key => $value):
-            if ($value == NULL)
-                echo $key . ' is NULL <br />';
-            else
-                echo $key . ' is NOT NULL <br />';
-        endforeach;*/
-
-    }
-
 }
 
 /* End of file student.php */

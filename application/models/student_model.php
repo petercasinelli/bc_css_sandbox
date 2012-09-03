@@ -248,32 +248,4 @@ class Student_model extends CI_Model {
         return $results;
     }
 
-    public function complete_profile($profile_data, $student_id){
-
-        $this->db->where('student_id', $student_id);
-        $complete_profile = $this->db->update('students', $profile_data);
-        $affected_rows = $this->db->affected_rows();
-
-        return $affected_rows;
-
-    }
-
-    /*
-    public function get_incomplete_profile_field($student_data){
-
-//        $this->db->select('picture, school_id, year, major_id, bio');
-//        $query = $this->db->get_where('students', array('student_id' => $student_id));
-//        $result = $query->row();
-
-        $values = get_object_vars($result);
-
-        foreach($values as $key => $value):
-            if ($value == NULL)
-                echo $key . ' is NULL <br />';
-            else
-                echo $key . ' is NOT NULL <br />';
-        endforeach;
-
-    }*/
-
 }

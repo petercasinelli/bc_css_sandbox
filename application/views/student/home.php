@@ -14,15 +14,15 @@ $this->load->view('student/includes/header');
     <div class="grid">
         <div class="quarter">
             <section>
-            <header>
-                <h1>Complete Your Profile</h1>
-                <?php echo "Your profile is $profile_completion complete"; ?>
-            </header>
+                <header>
+                    <h1>Complete Your Profile</h1>
+                    <?php echo "Your profile is $profile_completion complete"; ?>
+                </header>
             </section>
         </div>
         <div class="three-quarters">
             <section>
-                Form goes here
+                Complete profile
             </section>
         </div>
     </div>
@@ -36,7 +36,7 @@ $this->load->view('student/includes/header');
                     <h1>What's New</h1>
                 </header>
                 <p>
-                   New updates here
+                    New updates here
                 </p>
             </section>
         </div>
@@ -46,12 +46,12 @@ $this->load->view('student/includes/header');
                     <h1>New Students</h1>
                 </header>
                 <section class="listing">
-                <p>
-                    Student 1
-                    <br />
-                    <b>Bio goes here</b>
-                </p>
-            </section>
+                    <p>
+                        Student 1
+                        <br />
+                        <b>Bio goes here</b>
+                    </p>
+                </section>
                 <section class="listing">
                     <p>
                         Student 2
@@ -88,4 +88,4 @@ $this->load->view('student/includes/header');
 </section>
 
 
-<?php $this->load->view('includes/footer'); ?>
+<?php $this->load->view('includes/footer', $data); ?>
