@@ -197,32 +197,14 @@ class Student extends MY_Controller {
                 $student_data["password"] = sha1($password);
             endif;
 
-            $skills_array = explode(',', $skills);
-
-            foreach($skills_array as $skill):
-                $skill = trim($skill);
-                if (!empty($skill)):
-                    $existing_skill = $this->student_model->find_skill($skill);
-
-                    if (empty($existing_skill)):
-                        echo 'This skill does not exist: '.$skill;
-                        $skill_id = $this->student_model->add_skill($skill);
-                        echo ' and now has id: '.$skill_id;
-                    else:
-
-                        $skill_id = $existing_skill[0]->skill_id;
-                        echo 'Need to add skill '. $skill_id;
-                    endif;
-                    $this->student_model->add_student_skill($this->current_student_id, $skill_id);
-                endif;
-            endforeach;
-
+			$skills_affected = $this->student_model->update_student_skills($student_id, $skills);
+			
             //Load message library for setting success/error messages
             $this->load->library('message');
 
             $rows_affected = $this->student_model->edit_student($student_id, $student_data);
 
-            if ($rows_affected):
+            if ($rows_affected || $skills_affected):
                 $this->message->set("You have successfully edited your account profile", "success", TRUE);
                 redirect("student/edit_form");
             else:
@@ -242,8 +224,7 @@ class Student extends MY_Controller {
         //set the path to root
         $config['upload_path'] = './uploads/students/pictures';
         $config['allowed_types'] = 'gif|jpg|png';
-        //append unix time stamp for unique update
-        $config['file_name'] = "studentpic_" . $this->current_student_id . "_" . time();
+        $config['file_name'] = "studentpic_" . sha1($this->current_student_id);
 
         //2000kb and max image width and height
         $config['max_size']	= '2000';
@@ -289,7 +270,25 @@ class Student extends MY_Controller {
             redirect("student/edit_form");
         endif;
     }
-
+	//view single student
+	public function view_student($id=null){
+    	$data['student'] = $this->student_model->get_student($id);
+    	if($data['student'] && !is_null($id)):
+			$data["current_page"] = 'student';
+	        $data["notifications"] = $this->student_model->get_notifications($id);
+			$student_skills = $this->student_model->get_student_skills($id);
+	        $data['student']->skills = '';
+	        foreach($student_skills as $skill):
+	        	$data['student']->skills = $data['student']->skills . $skill->skill . ', ';
+	        endforeach;
+	        $this->load->view('student/view_student', $data);
+		else:
+			$data["current_page"] = 'student';
+			$data["student"] = null;
+			$data['notifications'] = null;
+            $this->load->view('student/view_student', $data);
+		endif;
+	}
     //View all students
     public function view_all($record_offset = 0){
         $this->load->library('pagination');

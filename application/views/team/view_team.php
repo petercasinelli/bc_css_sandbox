@@ -56,9 +56,9 @@ endif;
                 echo '<h3>There are currently no team members.</h3>';
             endif;
 
-            foreach($team_data->team_members as $student):
-                $this->load->view("student/student_block", array('student' => $student));
-            endforeach;?>
+            foreach($team_data->team_members as $student):?>
+                <?php $this->load->view("team/member_block", array("student"=>$student, "id" => $student->student_id))?>
+                <?php endforeach;?>
         </div>
     </div>
 
