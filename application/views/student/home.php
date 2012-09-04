@@ -20,9 +20,9 @@ $this->load->view('student/includes/header');
                 </header>
             </section>
         </div>
-        <div class="three-quarters">
+    <div class="three-quarters">
             <section>
-                Complete profile
+                <?php echo anchor('/student/edit_form', 'Complete My Profile Now', array('class' => 'blueButton', 'style' => 'width:182px;')); ?>
             </section>
         </div>
     </div>
@@ -88,4 +88,4 @@ $this->load->view('student/includes/header');
 </section>
 
 
-<?php $this->load->view('includes/footer', $data); ?>
+<?php $this->load->view('includes/footer'); ?>
