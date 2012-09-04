@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2012 at 10:34 PM
+-- Generation Time: Aug 30, 2012 at 03:40 PM
 -- Server version: 5.5.25
 -- PHP Version: 5.4.4
 
@@ -118,7 +118,7 @@ CREATE TABLE `skills` (
   `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `skill` varchar(255) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`skill_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `skills`
@@ -169,9 +169,7 @@ INSERT INTO `skills` (`skill_id`, `skill`) VALUES
 (42, 'C++'),
 (43, 'Computer Vision'),
 (44, 'Image Processing'),
-(45, 'modeling (software)'),
-(46, 'new skill'),
-(47, 'test');
+(45, 'modeling (software)');
 
 -- --------------------------------------------------------
 
@@ -184,19 +182,19 @@ CREATE TABLE `students` (
   `first` varchar(255) CHARACTER SET latin1 NOT NULL,
   `last` varchar(255) CHARACTER SET latin1 NOT NULL,
   `email` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `picture` varchar(255) COLLATE utf8_bin NOT NULL,
+  `picture` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `oauth_uid` char(40) CHARACTER SET latin1 DEFAULT NULL,
   `password` char(40) CHARACTER SET latin1 NOT NULL,
-  `school_id` int(11) unsigned DEFAULT '0',
+  `school_id` int(11) unsigned DEFAULT NULL,
   `year` int(4) unsigned DEFAULT NULL,
-  `major_id` int(11) unsigned DEFAULT '0',
+  `major_id` int(11) unsigned DEFAULT NULL,
   `bio` text CHARACTER SET latin1,
   `status` varchar(144) CHARACTER SET latin1 DEFAULT NULL,
   `twitter` text CHARACTER SET latin1,
   `facebook` text CHARACTER SET latin1,
   `linkedin` text CHARACTER SET latin1,
   `dribbble` text COLLATE utf8_bin,
-  `github` text CHARACTER SET latin1 NOT NULL,
+  `github` text COLLATE utf8_bin,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=39 ;
 
@@ -205,8 +203,8 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `first`, `last`, `email`, `picture`, `oauth_uid`, `password`, `school_id`, `year`, `major_id`, `bio`, `status`, `twitter`, `facebook`, `linkedin`, `dribbble`, `github`) VALUES
-(14, 'Peter', 'Casinelli', 'peter.casinelli@bc.edu', 'studentpic_14_1345922075.png', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, 0, 0, '', '', '', '', '', '', ''),
-(18, 'Peter', 'Casinelli', 'casinepe@bc.edu', '', NULL, '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(14, 'Peter', 'Casinelli', 'peter.casinelli@bc.edu', 'studentpic_14_1345922075.png', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, 2014, 0, '', '', '', '', '', '', ''),
+(18, 'Peter', 'Casinelli', 'casinepe@bc.edu', '', NULL, '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (19, 'test_first_0', 'test_last_0', 'test_0@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (20, 'test_first_1', 'test_last_1', 'test_1@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (21, 'test_first_2', 'test_last_2', 'test_2@email.com', '', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, ''),
@@ -267,7 +265,7 @@ CREATE TABLE `student_skills` (
   `student_id` int(11) unsigned NOT NULL,
   `skill_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`student_skills_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `student_skills`
@@ -275,8 +273,7 @@ CREATE TABLE `student_skills` (
 
 INSERT INTO `student_skills` (`student_skills_id`, `student_id`, `skill_id`) VALUES
 (15, 14, 6),
-(16, 14, 1),
-(17, 14, 47);
+(16, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -311,7 +308,7 @@ CREATE TABLE `team_members` (
   `student_id` int(11) unsigned NOT NULL,
   `account_type` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`team_members_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `team_members`
@@ -319,9 +316,7 @@ CREATE TABLE `team_members` (
 
 INSERT INTO `team_members` (`team_members_id`, `team_id`, `student_id`, `account_type`) VALUES
 (3, 2, 14, 1),
-(10, 5, 14, 1),
-(11, 2, 18, 0),
-(12, 5, 18, 0);
+(11, 2, 18, 0);
 
 -- --------------------------------------------------------
 

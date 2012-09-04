@@ -5,7 +5,7 @@ $this->load->view('student/includes/header');
 ?>
 
 <?php if (strlen($this->message->display()) > 0): ?>
-<section xmlns="http://www.w3.org/1999/html">
+<section>
     <?php echo $this->message->display(); ?>
 </section>
 <?php endif;?>

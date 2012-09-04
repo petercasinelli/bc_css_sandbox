@@ -10,11 +10,17 @@ class Team extends MY_Controller {
 		$this->load->helper("image_helper");
     }
 
-    public function index()
+    public function index($record_offset = 0)
     {
+
+        $this->load->helper("image_helper");
+
+    	$this->load->library('pagination');
+        $this->load->helper('pagination_helper');
+
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
-        $data['teams'] = $this->team_model->get_teams();
+        $data['teams'] = $this->team_model->get_teams($record_offset);
 
         foreach($data['teams'] as $key => $team):
             $team->team_members = $this->team_model->get_team_members($team->team_id);
@@ -22,12 +28,15 @@ class Team extends MY_Controller {
         endforeach;
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-
+		
+		$this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "/team/index"));
         $this->load->view('team/home', $data);
     }
 
     //View an individual team $team_id
     public function view($team_id){
+
+        $this->load->helper("image_helper");
 
         if (empty($team_id)):
             redirect('team/');
@@ -56,7 +65,19 @@ class Team extends MY_Controller {
 
         $data['team_data'] = $this->team_model->get_team($team_id);
         $data['team_data']->team_members = $this->team_model->get_team_members($team_id);
-		
+
+
+        foreach($data['team_data']->team_members as $student):
+
+            $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+            $student->skills = '';
+
+            foreach($student_skills as $skill):
+                $student->skills = $student->skills . $skill->skill . ', ';
+            endforeach;
+
+        endforeach;
+
         $data['team_updates'] = $this->team_model->get_updates($team_id);
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);

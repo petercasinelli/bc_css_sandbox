@@ -42,7 +42,7 @@ class Student extends MY_Controller {
 
         //Else, display students according to search term
         else:
-
+/*
             if (strpos(",", $query) != FALSE)
                 $query_exploded = explode(',', $query);
             else
@@ -55,13 +55,25 @@ class Student extends MY_Controller {
                 if ($i != sizeof($query_exploded) - 1)
                     $search_string = $search_string . ' | ';
                 $i++;
+            endforeach;*/
+
+            $data["students"] = $this->student_model->search_students($query);
+            foreach($data["students"] as $student):
+
+                $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+                $student->skills = '';
+
+                foreach($student_skills as $skill):
+                    $student->skills = $student->skills . $skill->skill . ', ';
+                endforeach;
+
             endforeach;
 
-            $data["students"] = $this->student_model->search_students($search_string);
             $data["student_logged_in"] = $this->current_student_info;
             $data["search_query"] = $query;
+            $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
-            $this->load->view('student/view_students', $data);
+            $this->load->view('student/search_students', $data);
 
         endif;
 
@@ -185,32 +197,14 @@ class Student extends MY_Controller {
                 $student_data["password"] = sha1($password);
             endif;
 
-            $skills_array = explode(',', $skills);
-
-            foreach($skills_array as $skill):
-                $skill = trim($skill);
-                if (!empty($skill)):
-                    $existing_skill = $this->student_model->find_skill($skill);
-
-                    if (empty($existing_skill)):
-                        echo 'This skill does not exist: '.$skill;
-                        $skill_id = $this->student_model->add_skill($skill);
-                        echo ' and now has id: '.$skill_id;
-                    else:
-
-                        $skill_id = $existing_skill[0]->skill_id;
-                        echo 'Need to add skill '. $skill_id;
-                    endif;
-                    $this->student_model->add_student_skill($this->current_student_id, $skill_id);
-                endif;
-            endforeach;
-
+			$skills_affected = $this->student_model->update_student_skills($student_id, $skills);
+			
             //Load message library for setting success/error messages
             $this->load->library('message');
 
             $rows_affected = $this->student_model->edit_student($student_id, $student_data);
 
-            if ($rows_affected):
+            if ($rows_affected || $skills_affected):
                 $this->message->set("You have successfully edited your account profile", "success", TRUE);
                 redirect("student/edit_form");
             else:
@@ -223,6 +217,7 @@ class Student extends MY_Controller {
         endif;
 
     }
+
 
     public function upload_profile_pic(){
 
@@ -318,7 +313,7 @@ class Student extends MY_Controller {
         endforeach;
 
 
-        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "index.php/student/view_all"));
+        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "/student/view_all"));
 
         $this->load->view('student/view_all_students', $data);
     }
@@ -338,6 +333,7 @@ class Student extends MY_Controller {
         header("Content-type: application/json");
         echo json_encode($data);
     }
+
 
 }
 
