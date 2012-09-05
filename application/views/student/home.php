@@ -20,7 +20,7 @@ $this->load->view('student/includes/header');
                 </header>
             </section>
         </div>
-    <div class="three-quarters">
+        <div class="three-quarters">
             <section>
                 <?php echo anchor('/student/edit_form', 'Complete My Profile Now', array('class' => 'blueButton', 'style' => 'width:182px;')); ?>
             </section>
@@ -36,7 +36,7 @@ $this->load->view('student/includes/header');
                     <h1>What's New</h1>
                 </header>
                 <p>
-                    New updates here
+                    BC Skills has a new look and new features. Now anyone can easily find co-founders, team members, and teams to join!
                 </p>
             </section>
         </div>
@@ -45,20 +45,12 @@ $this->load->view('student/includes/header');
                 <header>
                     <h1>New Students</h1>
                 </header>
-                <section class="listing">
-                    <p>
-                        Student 1
-                        <br />
-                        <b>Bio goes here</b>
-                    </p>
-                </section>
-                <section class="listing">
-                    <p>
-                        Student 2
-                        <br />
-                        <b>Bio goes here</b>
-                    </p>
-                </section>
+                <?php
+                foreach($new_students as $new_student):
+                    $data["student"] = $new_student;
+                    $this->load->view('team/member_block.php', $data);
+                endforeach;
+                ?>
                 <?php echo anchor('student/view_all', 'View All Students'); ?>
 
             </section>
@@ -67,20 +59,12 @@ $this->load->view('student/includes/header');
                 <header>
                     <h1>New Teams</h1>
                 </header>
-                <section class="listing">
-                    <p>
-                        Team 1
-                        <br />
-                        <b>Description goes here</b>
-                    </p>
-                </section>
-                <section class="listing">
-                    <p>
-                        Team 2
-                        <br />
-                        <b>Description goes here</b>
-                    </p>
-                </section>
+                <?php
+                foreach($new_teams as $new_team):
+                    $data["team"] = $new_team;
+                    $this->load->view('team/team_block.php', $data);
+                endforeach;
+                ?>
                 <?php echo anchor('/team', 'View All Teams'); ?>
             </section>
         </div>

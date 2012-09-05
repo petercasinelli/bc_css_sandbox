@@ -6,6 +6,9 @@ class Student_model extends CI_Model {
     {
         $this->load->helper('pagination_helper');
         $this->db->order_by('first', 'asc');
+        $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
+        $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
+
         $query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
         $result = $query->result();
 
@@ -119,18 +122,19 @@ class Student_model extends CI_Model {
     public function search_students($query)
     {
 
-        $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
-        $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
+        //$this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
+        //$this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
+        $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
 
         $this->db->like('first', $query);
         $this->db->or_like('last', $query);
         $this->db->or_like('school', $query);
-        $this->db->or_like('skill', $query);
+        $this->db->or_like('major', $query);
 
         $this->db->distinct('students.student_id');
 
-        $this->db->select('first, last, email, oauth_uid, students.student_id, picture, students.school_id, year, students.major_id, bio, status, twitter, facebook, linkedin, dribbble, github');
+        $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
         $query = $this->db->get('students');
         $result = $query->result();
 
@@ -358,5 +362,18 @@ class Student_model extends CI_Model {
 			
 		endforeach;
 	}
+
+    public function get_new_students($limit){
+
+        $this->db->limit($limit);
+        $this->db->join('majors','majors.major_id = students.major_id', 'left');
+        $this->db->join('schools','schools.school_id = students.school_id', 'left');
+        $this->db->order_by('student_id', 'DESC');
+        $query = $this->db->get('students');
+        $results = $query->result();
+
+        return $results;
+
+    }
 
 }

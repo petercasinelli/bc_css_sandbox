@@ -201,4 +201,13 @@ class Team_Model extends CI_Model {
         endif;
     }
 
+    public function get_new_teams($limit){
+
+        $this->db->limit($limit);
+        $query = $this->db->get('teams');
+        $results = $query->result();
+
+        return $results;
+    }
+
 }
