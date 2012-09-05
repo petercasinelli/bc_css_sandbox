@@ -97,7 +97,7 @@ class Team_Model extends CI_Model {
     }
 
     public function get_team_members($team_id){
-        $query = $this->db->from('students')->join('team_members', 'students.student_id = team_members.student_id')->where('team_id', $team_id)->get();
+        $query = $this->db->from('students')->join('team_members', 'students.student_id = team_members.student_id')->join('schools', 'schools.school_id = students.school_id', 'left')->join('majors', 'majors.major_id = students.major_id','left')->where('team_id', $team_id)->get();
         $result = $query->result();
         return $result;
     }
