@@ -7,7 +7,7 @@ class Team extends MY_Controller {
         parent::__construct();
         $this->load->model("team_model");
         $this->load->library('message');
-		$this->load->helper("image_helper");
+        $this->load->helper("image_helper");
     }
 
     public function index($record_offset = 0)
@@ -15,7 +15,7 @@ class Team extends MY_Controller {
 
         $this->load->helper("image_helper");
 
-    	$this->load->library('pagination');
+        $this->load->library('pagination');
         $this->load->helper('pagination_helper');
 
         $data["current_page"] = 'team';
@@ -28,8 +28,8 @@ class Team extends MY_Controller {
         endforeach;
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-		
-		$this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "/team/index"));
+
+        $this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "/team/index"));
         $this->load->view('team/home', $data);
     }
 
@@ -145,6 +145,10 @@ class Team extends MY_Controller {
 
     //Form displayed to edit a team
     public function edit_form($team_id){
+        $this->load->helper('team_helper');
+
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
@@ -159,6 +163,11 @@ class Team extends MY_Controller {
 
     //Action of edit form to edit a team
     public function edit($team_id){
+
+        $this->load->helper('team_helper');
+
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
@@ -201,6 +210,9 @@ class Team extends MY_Controller {
     }
 
     public function add_update_form($team_id){
+        $this->load->helper('team_helper');
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
@@ -213,6 +225,9 @@ class Team extends MY_Controller {
 
     //Need to validate that this student has appropriate permissions!
     public function add_update($team_id){
+        $this->load->helper('team_helper');
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
@@ -250,9 +265,10 @@ class Team extends MY_Controller {
         endif;
     }
 
-    //Check permissions
     public function delete_update($team_id, $team_update_id){
-
+        $this->load->helper('team_helper');
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $delete_update = $this->team_model->delete_update($team_update_id);
         if ($delete_update > 0):
@@ -278,8 +294,10 @@ class Team extends MY_Controller {
         endif;
     }
 
-    //Check permissions to make sure this student is admin
     public function accept_request($team_id, $student_id){
+        $this->load->helper('team_helper');
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $accept_request = $this->team_model->accept_request($team_id, $student_id);
 
@@ -294,8 +312,10 @@ class Team extends MY_Controller {
 
     }
 
-    //Check permissions to make sure this student is admin
     public function deny_request($team_id, $student_id){
+        $this->load->helper('team_helper');
+        //Check to see if this student is administrator and can access this page
+        $permission = student_is_team_admin($team_id, $this->current_student_id);
 
         $deny_request = $this->team_model->deny_request($team_id, $student_id);
 
