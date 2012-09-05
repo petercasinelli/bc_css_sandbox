@@ -14,7 +14,7 @@
 			</div>
 			<br />
 			<p>
-			<b>Description</b>:<?php echo $team->team_description; ?>
+			<b>Description</b>: <?php echo $team->team_description; ?>
 			</p>
 </section>
 		
