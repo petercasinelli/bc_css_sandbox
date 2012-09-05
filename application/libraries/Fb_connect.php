@@ -22,7 +22,7 @@ class Fb_connect{
 	}
 	
 	public function get_login_url(){
-	  	return $this->CI->facebook->getLoginUrl(array("scope" => "email"));
+	  	return $this->CI->facebook->getLoginUrl(array("scope" => array("email", "education")));
 	}
 	
 	public function get_user_info($user_id){
