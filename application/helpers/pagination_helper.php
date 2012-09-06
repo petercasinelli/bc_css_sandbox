@@ -3,6 +3,7 @@ class PaginationSettings {
 		public static function set($total_rows, $url_segments){
 			$config["total_rows"] = $total_rows;
 			$config["base_url"] = base_url() . $url_segments;
+			$config["uri_segment"] = sizeof(explode('/', $url_segments)) + 1;
 			return $config;
 		}
 		
