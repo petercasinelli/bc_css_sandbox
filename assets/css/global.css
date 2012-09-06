@@ -1,0 +1,118 @@
+/* Slide style */
+
+#container {
+	width:900px;
+	margin:0 auto;
+	position:relative;
+	z-index:0;
+    border-radius:3px;
+    border:1px solid #cdcdcd;
+    background:#f4f4f4;
+    margin:0 auto 20px;
+
+}
+
+
+#example {
+	width:900px;
+	height:190px;
+	position:relative;
+}
+
+#slide_section {
+    width:900px;
+    border-radius:3px;
+    border:1px solid #cdcdcd;
+    background:#f4f4f4;
+}
+
+/*
+	Slideshow
+*/
+
+#slides {
+	position:absolute;
+	top:5px;
+	left:4px;
+	z-index:100;
+}
+
+/*
+	Slides container
+	Important:
+	Set the width of your slides container
+	Set to display none, prevents content flash
+*/
+
+.slides_container {
+	width:900px;
+	position:relative;
+	display:none;
+}
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+
+.slides_container div.slide {
+	width:900px;
+	height:140px;
+	display:block;
+}
+
+
+/*
+	Next/prev buttons
+*/
+
+#slides .next,#slides .prev {
+	position:absolute;
+	top:50px;
+	left:-39px;
+	width:24px;
+	height:43px;
+	display:block;
+	z-index:101;
+}
+
+#slides .next {
+	left:900px;
+}
+
+#slides .prev {
+    left:-32px;
+}
+
+/*
+	Pagination
+*/
+
+.pagination {
+	margin:26px auto 0;
+	width:100px;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background-image:url(../images/slides/pagination.png);
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
