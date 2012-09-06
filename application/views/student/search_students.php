@@ -12,11 +12,11 @@ $this->load->view('student/includes/header');
     </header>
 
     <?php
-    if (empty($students)):
+    if (empty($search_results)):
         echo '<p class="red-alert">No students exist with your search requirements.</p>';
     else:
         ?>
-        <p class="green-alert">Your search returned <b><?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></b></p>
+        <p class="green-alert">Your search returned <b><?php echo $search_results; ?> student<?php if ($search_results > 1) echo 's'; ?></b></p>
         <?php
         $this->load->view('student/search_form');
 
@@ -32,6 +32,7 @@ $this->load->view('student/includes/header');
         $this->load->view('student/student_block', $data);
         $i++;
     }
+	echo $this->pagination->create_links();
     ?>
 
 </section>
