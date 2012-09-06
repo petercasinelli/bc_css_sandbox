@@ -68,7 +68,7 @@ class Student extends MY_Controller {
             $data["students"] = $this->student_model->search_students($query);
             foreach($data["students"] as $student):
 
-                $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+                $student_skills = $this->student_model->get_student_skills($student->student_id);
                 $student->skills = '';
 
                 foreach($student_skills as $skill):
@@ -284,8 +284,8 @@ class Student extends MY_Controller {
         if($data['student'] && !is_null($id)):
             $data["current_page"] = 'student';
             $data["notifications"] = $this->student_model->get_notifications($id);
-            $student_skills = $this->student_model->get_student_skills($id);
             $data['student']->skills = '';
+            $student_skills = $this->student_model->get_student_skills($id);
             foreach($student_skills as $skill):
                 $data['student']->skills = $data['student']->skills . $skill->skill . ', ';
             endforeach;
@@ -311,7 +311,7 @@ class Student extends MY_Controller {
 
         foreach($data["students"] as $student):
 
-            $student_skills = $this->student_model->get_student_skills($this->current_student_id);
+            $student_skills = $this->student_model->get_student_skills($student->student_id);
             $student->skills = '';
 
             foreach($student_skills as $skill):

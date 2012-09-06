@@ -53,6 +53,7 @@ class Student_model extends CI_Model {
 
     public function get_student_skills($student_id)
     {
+
         $this->db->select('skills.skill_id, skill');
         $query = $this->db->join("skills", "skills.skill_id = student_skills.skill_id")->get_where('student_skills', array('student_id'=>$student_id));
         $result = $query->result();
@@ -122,8 +123,8 @@ class Student_model extends CI_Model {
     public function search_students($query)
     {
 
-        //$this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
-        //$this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
+        $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
+        $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
         $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
 
@@ -131,6 +132,7 @@ class Student_model extends CI_Model {
         $this->db->or_like('last', $query);
         $this->db->or_like('school', $query);
         $this->db->or_like('major', $query);
+        $this->db->or_like('skill', $query);
 
         $this->db->distinct('students.student_id');
 

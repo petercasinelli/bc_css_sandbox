@@ -223,6 +223,8 @@ else
 
 $data["jquery"] = '$(function(){
 		$("#skills").autoSuggest("'.base_url().'index.php/student/autosuggest_skills", {'.$preFill.', searchObjProps: "name", selectedItemProp: "name", selectedValuesProp: "name", minChars: 1, matchCase: false});
+
+		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
 	});';
 
 $this->load->view('includes/footer', $data); ?>

@@ -7,7 +7,7 @@ $this->load->view('student/includes/header');
 <section>
     <header>
 
-        <h1>Search for Skills at BC</h1>
+        <h1>Search for Students at BC</h1>
 
     </header>
 
@@ -17,8 +17,9 @@ $this->load->view('student/includes/header');
     else:
         ?>
         <p class="green-alert">Your search returned <b><?php echo count($students); ?> student<?php if (count($students) > 1) echo 's'; ?></b></p>
-        <br />
         <?php
+        $this->load->view('student/search_form');
+
     endif;
     //Counter kept for expand/hide student profile
     $i = 0;

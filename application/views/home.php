@@ -23,7 +23,7 @@
             </section>
             <hr style="width:400px;">
             <section class="listing">
-            <div>
+            <div style="width:90%; text-align: center;">
                 <a href="javascript:;" onclick="toggleExpand(0)" id="sign-up-without-fb">Sign up without Facebook</a>
             </div>
             <div id="item0" style="display:none; margin:auto;">
