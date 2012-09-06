@@ -31,13 +31,12 @@ class Student extends MY_Controller {
 
         $this->load->view('student/home', $data);
     }
-
-    public function search()
-    {
+	
+	public function search($query, $record_offset=0){
+		//echo $record_offset;
+		$this->load->library('pagination');
+        $this->load->helper('pagination_helper');
         $data["current_page"] = 'student';
-
-        $query = $this->input->post('query', TRUE);
-
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('query', 'search terms', 'trim|required|htmlspecialchars|xss_clean');
@@ -64,8 +63,8 @@ class Student extends MY_Controller {
                     $search_string = $search_string . ' | ';
                 $i++;
             endforeach;*/
-
-            $data["students"] = $this->student_model->search_students($query);
+			$decoded_query = urldecode($query);
+            $data["students"] = $this->student_model->search_students($decoded_query, $record_offset);
             foreach($data["students"] as $student):
 
                 $student_skills = $this->student_model->get_student_skills($student->student_id);
@@ -78,13 +77,18 @@ class Student extends MY_Controller {
             endforeach;
 
             $data["student_logged_in"] = $this->current_student_info;
-            $data["search_query"] = $query;
+            $data["search_query"] = $decoded_query;
             $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-
+			$data["search_results"] = $this->student_model->get_search_student_count($decoded_query);
+			$this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
             $this->load->view('student/search_students', $data);
+	}
 
-        //endif;
-
+    public function submit_query($record_offset = 0)
+    {
+    	//encode the url before redirecting to search
+        $query = urlencode($this->input->post('query', TRUE));
+		redirect("student/search/$query");
     }
 
 
@@ -321,7 +325,7 @@ class Student extends MY_Controller {
         endforeach;
 
 
-        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "/student/view_all"));
+        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "student/view_all"));
 
         $this->load->view('student/view_all_students', $data);
     }
