@@ -1,5 +1,15 @@
 <?php $this->load->view('includes/header'); ?>
 
+<?php
+if (strlen($this->message->display()) > 0):
+    ?>
+<section><?php echo $this->message->display(); ?></section>
+
+<?php
+endif;
+
+?>
+
 <section>
     <div class="grid">
         <div class="half">
@@ -15,20 +25,20 @@
         </div>
         <div class="half">
             <section>
-            <header>
+                <header>
 
-            </header>
+                </header>
                 <?php echo validation_errors('<p class="error-message">', '</p>'); ?>
                 <?php echo $this->load->view('student/registration/forms/fb_registration_form'); ?>
             </section>
             <hr style="width:400px;">
             <section class="listing">
-            <div style="width:90%; text-align: center;">
-                <a href="javascript:;" onclick="toggleExpand(0)" id="sign-up-without-fb">Sign up without Facebook</a>
-            </div>
-            <div id="item0" style="display:none; margin:auto;">
-                <?php $this->load->view('student/registration/forms/regular_registration_form'); ?>
-            </div>
+                <div style="width:90%; text-align: center;">
+                    <a href="javascript:;" onclick="toggleExpand(0)" id="sign-up-without-fb">Sign up without Facebook</a>
+                </div>
+                <div id="item0" style="display:none; margin:auto;">
+                    <?php $this->load->view('student/registration/forms/regular_registration_form'); ?>
+                </div>
             </section>
         </div>
     </div>
