@@ -3,7 +3,7 @@
         <?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
         <img src="<?php echo $pic_src; ?>" width="25px" height="25px" class="float-left"/>
         <hgroup class="float-left">
-            <h2><?php echo $student->first . ' ' . $student->last; ?></h2>
+            <h2><?php echo anchor('student/view_student/'.$student->student_id, $student->first .' '.$student->last); ?></h2>
 
         </hgroup>
     </header>
