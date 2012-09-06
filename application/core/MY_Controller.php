@@ -18,11 +18,11 @@ class MY_Controller extends CI_Controller {
 		$this->current_student_id = $this->session->userdata('student_id');
 		//we need to use template pattern for this..
 		$this->current_student_info = $this->student_model->get_student($this->current_student_id);
-		$student_skills = $this->student_model->get_student_skills($this->current_student_id);
+		/*$student_skills = $this->student_model->get_student_skills($this->current_student_id);
         $this->current_student_info->skills = '';
         foreach($student_skills as $skill):
         	$this->current_student_info->skills = $this->current_student_info->skills . $skill->skill . ', ';
-        endforeach;
+        endforeach;*/
     }
 	
 }
