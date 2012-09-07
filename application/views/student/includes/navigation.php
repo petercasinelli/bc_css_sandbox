@@ -33,7 +33,7 @@ $search = array(
         <div class="float-right">
 
             <?php
-            echo form_open('/student/search', array("class" => 'float-right'));
+            echo form_open('/student/submit_query', array("class" => 'float-right'));
             echo form_input($search);
             echo form_close();
             ?>
