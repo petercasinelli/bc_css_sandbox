@@ -119,8 +119,31 @@ class Student_model extends CI_Model {
         //Return # of affected rows
         return $affected_rows;
     }
+	
+	public function get_search_student_count($query)
+	{
+		
+		$this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
+        $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
+        $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
+        $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
 
-    public function search_students($query)
+        $this->db->like('first', $query);
+        $this->db->or_like('last', $query);
+        $this->db->or_like('school', $query);
+        $this->db->or_like('major', $query);
+        $this->db->or_like('skill', $query);
+
+        $this->db->distinct('students.student_id');
+
+        $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
+        $query = $this->db->get('students');
+        $rowcount = $query->num_rows();
+
+        return $rowcount;
+	}
+
+    public function search_students($query, $record_offset)
     {
 
         $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
@@ -137,7 +160,7 @@ class Student_model extends CI_Model {
         $this->db->distinct('students.student_id');
 
         $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
-        $query = $this->db->get('students');
+        $query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
         $result = $query->result();
 
         return $result;
