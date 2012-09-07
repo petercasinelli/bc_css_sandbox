@@ -13,7 +13,7 @@ $submit_button = array(
     'type'  => 'submit'
 );
 
-echo form_open('/student/search');
+echo form_open('/student/submit_query');
 echo form_input($search);
 echo form_submit($submit_button);
 echo form_close();
