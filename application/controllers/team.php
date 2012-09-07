@@ -48,6 +48,7 @@ class Team extends MY_Controller {
         $permission = $this->team_model->get_student_permission($team_id, $this->current_student_id);
 
         if (empty($permission)):
+
             //Student logged in is not a member
             //Check to see if this student has requested to join this team
             $student_has_requested_to_join = $this->team_model->get_join_request($team_id, $this->current_student_id);
