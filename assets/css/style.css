@@ -364,3 +364,14 @@ a#facebookButton:hover {
     background:-webkit-gradient(linear,left top,left bottom,from(#869cc6),to(#657eaf));
     background:-moz-linear-gradient(top,#869cc6,#657eaf);
 }
+
+.circle_number {
+    width:35px;
+    height:35px;
+    border-radius:50px;
+    font-size:20px;
+    color:#fff;
+    line-height:35px;
+    text-align:center;
+    background:#2d517a;
+}
