@@ -47,7 +47,8 @@ $route['authentication/student'] = "authentication/student/index";
 $route['register/student'] = "register/student/index";
 $route['about'] = 'home/about';
 $route['contact'] = 'home/contact';
-
+$route['forgot_password'] = 'home/forgot_password';
+$route['reset_password'] = 'home/reset_password';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
