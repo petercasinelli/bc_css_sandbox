@@ -36,7 +36,6 @@ $last = array(
 $email = array(
     'name' 	=> 'email',
     'value' => $student_logged_in->email,
-    'disabled'=> true
 );
 
 $password = array(

@@ -129,6 +129,7 @@ class Student extends MY_Controller {
 
         $first 	  		  = $this->input->post('first',    		   TRUE);
         $last  	  		  = $this->input->post('last',     		   TRUE);
+        $email            = $this->input->post('email',     	   TRUE);
         $password 		  = $this->input->post('password', 		   TRUE);
         $confirm_password = $this->input->post('confirm_password', TRUE);
         $year 	  		  = $this->input->post('year', 	  		   TRUE);
@@ -148,6 +149,7 @@ class Student extends MY_Controller {
 
         $this->form_validation->set_rules('first', 'first name', 					'trim|required|htmlspecialchars|xss_clean');
         $this->form_validation->set_rules('last', 'last name', 						'trim|required|htmlspecialchars|xss_clean');
+        $this->form_validation->set_rules('email', 'e-mail address', 			    'trim|required|htmlspecialchars|xss_clean');
         if (!empty($password)):
             $this->form_validation->set_rules('password', 'password', 					'trim|required|htmlspecialchars|xss_clean|matches[confirm_password]');
             $this->form_validation->set_rules('confirm_password', 'confirmed password', 'trim|required|htmlspecialchars|xss_clean');
@@ -193,6 +195,7 @@ class Student extends MY_Controller {
             $student_data = array(
                 'first' 	=> $first,
                 'last'	 	=> $last,
+                'email'     => $email,
                 'year'		=> $year,
                 'major_id' => $major,
                 'school_id'=> $school,

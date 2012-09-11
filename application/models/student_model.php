@@ -413,23 +413,31 @@ class Student_model extends CI_Model {
 
     public function check_for_existing_student($first, $last, $email, $type){
 
-
         $this->db->where('first =', $first);
         $this->db->where('last =', $last);
         $this->db->or_where('email =', $email);
 
         //If type is Facebook, search for non Facebook students
         if ($type == 'facebook')
-            $this->db->where('oauth_uid !=', 'NULL');
+            $this->db->where('oauth_uid', 'NULL');
 
-        echo $this->db->last_query();
         $query = $this->db->get('students');
 
-        $result = $query->result();
+        $result = $query->row();
 
         return $result;
+    }
 
+    //Right now strictly being used for checking previous student data needed for account merging
+    public function get_previous_student($student_id){
 
+        $this->db->select('first, last, email');
+        $this->db->where('student_id', $student_id);
+        $query = $this->db->get('students');
+
+        $result = $query->row();
+
+        return $result;
     }
 
 }
