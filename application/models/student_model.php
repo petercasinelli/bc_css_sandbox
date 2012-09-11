@@ -413,16 +413,15 @@ class Student_model extends CI_Model {
 
     public function check_for_existing_student($first, $last, $email, $type){
 
-        $this->db->where('first =', $first);
-        $this->db->where('last =', $last);
-        $this->db->or_where('email =', $email);
-
+        //$this->db->where('first =', $first);
+        //$this->db->where('last =', $last);
+        //$this->db->or_where('email =', $email);
+		$where = "(first = '$first' and last = '$last' OR email = '$email') AND (oauth_uid = 'null')";
+		//if($type == 'facebook')
+			//$this->db->where('oauth_uid', 'NULL');
+		$this->db->where($where);
         //If type is Facebook, search for non Facebook students
-        if ($type == 'facebook')
-            $this->db->where('oauth_uid', 'NULL');
-
-        $query = $this->db->get('students');
-
+       $query = $this->db->get('students', null, false);
         $result = $query->row();
 
         return $result;
