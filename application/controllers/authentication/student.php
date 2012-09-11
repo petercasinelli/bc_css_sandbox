@@ -70,29 +70,32 @@ class Student extends CI_Controller {
                 $this->load->view('student/student_login_form', $data);
                 return;
             endif;
-
-            $existing_student = $this->student_model->check_for_existing_student($first_name, $last_name, $email, 'facebook');
-
-            //If there is an existing student, ask if they would like to connect the accounts
-            if (!empty($existing_student)):
-                $this->session->set_userdata(array('temp_student_id' => $existing_student->student_id));
-                redirect('connect_fb_with_previous_account/'.$uid);
-            else:
-
-                $student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
+   
+			$fb_login_confirmation = $this->session->userdata('fb_login_confirmed');
+			if(!empty($fb_login_confirmation)):
+				$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
                 if($student):
                     $session_data = array('student_id' => $student->student_id);
                     $this->session->set_userdata($session_data);
                     redirect('student/');
                 endif;
-            endif;
-
-            $this->message->set("We were unable to authenticate you through Facebook", "error");
-            $this->load->view('student/student_login_form', $data);
-
-        endif;
+			else:
+            	//If there is an existing student NORMAL Account AND the student FB login is UNCONFIRMED, ask if they would like to connect the accounts
+            	$existing_student = $this->student_model->check_for_existing_student($first_name, $last_name, $email, 'facebook');
+           		if (!empty($existing_student)):
+                	$this->session->set_userdata(array('temp_student_id' => $existing_student->student_id));
+                	redirect('connect_fb_with_previous_account/'.$uid);
+            	else:
+					$this->session->set_userdata(array('fb_login_confirmed' => TRUE));
+            		redirect('authentication/student/fb_login');
+            	endif;
+			endif;
+		endif;
+		
+		$this->message->set("We were unable to authenticate you through Facebook", "error");
+        $this->load->view('student/student_login_form', $data);
     }
-
+	
     public function logout(){
         $this->session->sess_destroy();
         redirect('/');
