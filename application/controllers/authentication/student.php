@@ -93,10 +93,6 @@ class Student extends CI_Controller {
         endif;
     }
 
-    public function confirm_login_with_fb($oauth_uid){
-
-    }
-
     public function logout(){
         $this->session->sess_destroy();
         redirect('/');
