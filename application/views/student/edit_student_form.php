@@ -119,11 +119,16 @@ $submit_button = array(
 
 ?>
 
+<?php
+if (strlen($this->message->display()) > 0 || strlen($upload_errors) > 0 || strlen(validation_errors()) > 0):
+    ?>
 <section>
     <?php $this->message->display(); ?>
-    <?php echo $upload_errors;?>
-    <?php echo validation_errors('<p class="error-message">', '</p>'); ?>
+<?php echo $upload_errors;?>
+<?php echo validation_errors('<p class="error-message">', '</p>'); ?>
 </section>
+<?php
+endif; ?>
 
 <section>
     <div class="grid">

@@ -439,4 +439,14 @@ class Student_model extends CI_Model {
         return $result;
     }
 
+    public function merge_with_fb_account($student_id, $oauth_uid){
+
+        $this->db->where('student_id', $student_id);
+        $this->db->limit(1);
+        $query = $this->db->update('students', array('oauth_uid' => $oauth_uid));
+        $affected_rows = $this->db->affected_rows();
+
+        return $affected_rows;
+    }
+
 }

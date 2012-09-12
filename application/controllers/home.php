@@ -75,11 +75,12 @@ class Home extends CI_Controller {
 
                     $this->email->subject('BC Skills Password Reset');
                     $this->email->message('Hello,
-                    Your password has been reset to: ' . $new_password);
+
+                    You recently requested to reset your password. Here is your new password: ' . $new_password);
 
                     $this->email->send();
 
-                    $this->message->set('We just sent '. $email .'a new password', 'success', TRUE);
+                    $this->message->set('We just sent '. $email .' a new password', 'success', TRUE);
                     redirect('home');
                     break;
                 //Some error
@@ -95,7 +96,7 @@ class Home extends CI_Controller {
 
     }
 
-    public function connect_fb_with_previous_account($oauth_uid){
+    public function connect_fb_with_previous_account(){
         $data["current_page"] = 'student';
         $student_id = $this->session->userdata('temp_student_id');
 

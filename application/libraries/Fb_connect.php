@@ -7,8 +7,8 @@ class Fb_connect{
 	public function __construct(){
 		$this->CI = &get_instance();
 		
-		$app_id = '173070729494386';
-		$secret = '1f057a69afe8e961929cc268e03dece8';
+		$app_id = '488337221194075';
+		$secret = '816aab53d3398025bde44a13c57bf149';
 		
 		$this->config = array(
   			'appId'  => $app_id,

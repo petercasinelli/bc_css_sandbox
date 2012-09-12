@@ -3,7 +3,8 @@ $this->load->helper('form');
 
 
 $password = array(
-    'name' 	=> 'password'
+    'name' 	=> 'password',
+    'type' => 'password'
 );
 
 $submit_button = array(
@@ -16,9 +17,10 @@ $submit_button = array(
 $this->load->view('includes/header');
 ?>
 
-<?php if (strlen($this->message->display()) > 0): ?>
+<?php if (strlen($this->message->display()) > 0 || strlen(validation_errors()) > 0): ?>
 <section>
-    <?php echo $this->message->display(); ?>
+    <?php echo $this->message->display();
+    echo validation_errors('<p class="error-message">', '</p>');    ?>
 </section>
 <?php endif; ?>
 
@@ -28,10 +30,12 @@ $this->load->view('includes/header');
         <h1>Create A Profile on BC Skills</h1>
         <h2>We think you may have already registered with BC Skills in the past:</h2>
     </hgroup>
-
+    <div style="position:relative; left:410px; top:100px; color:#253f7a; font-size: 30px; font-weight: bold; width:10px;">
+        OR
+    </div>
     <div class="grid">
         <div class="half">
-            <?php echo form_open('student/'); ?>
+            <?php echo form_open('authentication/student/fb_login_confirmed'); ?>
             Simply sign in below if this information matches yours and you created an account on BC Skills in the past: <br /><br/>
             Name: <h2 style="display: inline;"><?php echo $student->first . ' ' . $student->last; ?></h2> <br />
             E-mail: <h2 style="display: inline;"><?php echo $student->email; ?></h2> <br />
@@ -46,9 +50,7 @@ $this->load->view('includes/header');
             ?>
 
         </div>
-        <div style="position:absolute; left:575px; top:230px; color:#253f7a; font-size: 30px; font-weight: bold;">
-            OR
-        </div>
+
         <div class="half" style="text-align: center;">
             <br />If the the name and e-mail address don't look like yours, create a new account with Facebook
             <br />

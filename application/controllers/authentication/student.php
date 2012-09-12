@@ -74,6 +74,7 @@ class Student extends CI_Controller {
 			$fb_login_confirmation = $this->session->userdata('fb_login_confirmed');
 			if(!empty($fb_login_confirmation)):
 				$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
+
                 if($student):
                     $session_data = array('student_id' => $student->student_id);
                     $this->session->set_userdata($session_data);
@@ -99,6 +100,70 @@ class Student extends CI_Controller {
     public function logout(){
         $this->session->sess_destroy();
         redirect('/');
+    }
+
+
+    //A user has recognized they had a previous account and are attempting to login to merge with their Facebook account
+    public function fb_login_confirmed(){
+
+        //Oauth_uid and student_id were set as flash session variables to hide from user for security reasons
+        $oauth_uid = $this->session->userdata('oauth_uid');
+        $student_id = $this->session->userdata('temp_student_id');
+        $student = $this->student_model->get_previous_student($student_id);
+
+        //If there is no student, redirect out
+        if (empty($student)):
+            $this->message->set('There was an error trying to process your request. Please contact BC Skills with this error.', 'error', TRUE);
+            redirect('/');
+            exit(1);
+        //Else, check this student's login information
+        else:
+            $email = $student->email;
+            $password = $this->input->post('password', TRUE);
+
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('password', 'password', 'trim|required|htmlspecialchars|xss_clean');
+
+            //If form does not validate according to rules above, load form view with error messages
+            if ($this->form_validation->run() == FALSE):
+                $data['current_page'] = "login";
+                $student_id = $this->session->userdata('temp_student_id');
+
+                $data["student"] = $this->student_model->get_previous_student($student_id);
+
+                $this->load->view('student/registration/connect_fb_with_previous_account', $data);
+            else:
+
+                $logged_in_student = $this->student_model->authenticate($email, $password);
+
+                if (empty($logged_in_student)):
+
+                    $this->message->set("You have entered incorrect login information. Please try again:", "error", TRUE);
+                    redirect('home/connect_fb_with_previous_account');
+                else:
+
+                    //Add FB oauth_uid to this account
+                    $merge_account = $this->student_model->merge_with_fb_account($logged_in_student->student_id, $oauth_uid);
+
+                    $session_data = array('student_id' => $logged_in_student->student_id
+                    );
+
+                    $this->session->set_userdata($session_data);
+                    $this->message->set('You have successfully merged your Facebook account. Now you can log in with Facebook in the future!', 'success', TRUE);
+                    redirect('student/');
+
+                endif;
+
+
+            endif;
+
+
+
+        endif;
+
+
+
     }
 
 }

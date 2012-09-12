@@ -49,7 +49,6 @@ $route['about'] = 'home/about';
 $route['contact'] = 'home/contact';
 $route['forgot_password'] = 'home/forgot_password';
 $route['reset_password'] = 'home/reset_password';
-$route['connect_fb_with_previous_account/(:num)'] = 'home/connect_fb_with_previous_account/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
