@@ -7,7 +7,7 @@ class Fb_connect{
 	public function __construct(){
 		$this->CI = &get_instance();
 		
-		$app_id = '488337221194075';
+		$app_id = '173070729494386';
 		$secret = get_cfg_var('aws.param5');
 		
 		$this->config = array(
