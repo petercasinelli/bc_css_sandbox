@@ -10,7 +10,7 @@ class Fb_connect{
         $vars = get_cfg_var('aws.param5');
         $explode = explode(',', $vars);
 
-		$app_id = '488337221194075';
+		$app_id = '173070729494386';
 		$secret = $explode[0];
 
 		$this->config = array(
