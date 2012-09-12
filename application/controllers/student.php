@@ -40,6 +40,7 @@ class Student extends MY_Controller {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('query', 'search terms', 'trim|required|htmlspecialchars|xss_clean');
+        $this->form_validation->set_rules('query', 'search terms', 'trim|required|htmlspecialchars|xss_clean');
 
         //If form does not validate according to rules above, load form view with error messages
        /* if ($this->form_validation->run() == FALSE):

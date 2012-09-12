@@ -68,20 +68,34 @@ class Home extends CI_Controller {
                 //1 means pass was changed
                 case 1:
                     //Send an e-mail
-                    $this->load->library('email');
 
+
+                    $this->load->library('email');
+                    $this->email->set_newline("\r\n").
                     $this->email->from('bccss.development@gmail.com', 'BC Skills');
                     $this->email->to($email);
 
                     $this->email->subject('BC Skills Password Reset');
                     $this->email->message('Hello,
 
-                    You recently requested to reset your password. Here is your new password: ' . $new_password);
+                    You recently requested to reset your password on BCSkills.com.
 
-                    $this->email->send();
+                    Here is your new password: ' . $new_password . '
 
-                    $this->message->set('We just sent '. $email .' a new password', 'success', TRUE);
-                    redirect('home');
+                    Please let us know if you have any issues,
+
+                    BC CSS Team');
+
+                    if ($this->email->send()):
+                        $this->message->set('We just sent '. $email .' a new password', 'success', TRUE);
+                        redirect('home');
+                    else:
+                        echo $this->email->print_debugger();
+                        exit;
+                        $this->message->set('Your password could not be reset. Please try again. If this problem persists, please contact BC Skills.', 'error', TRUE);
+                        redirect('/forgot_password');
+                    endif;
+
                     break;
                 //Some error
                 default:
