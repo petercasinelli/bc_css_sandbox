@@ -84,8 +84,8 @@ class Student extends CI_Controller {
             	//If there is an existing student NORMAL Account AND the student FB login is UNCONFIRMED, ask if they would like to connect the accounts
             	$existing_student = $this->student_model->check_for_existing_student($first_name, $last_name, $email, 'facebook');
            		if (!empty($existing_student)):
-                	$this->session->set_userdata(array('temp_student_id' => $existing_student->student_id));
-                	redirect('connect_fb_with_previous_account/'.$uid);
+                	$this->session->set_userdata(array('temp_student_id' => $existing_student->student_id, 'oauth_uid' => $uid));
+                	redirect('authentication/student/connect_fb_with_previous_account/');
             	else:
 					$this->session->set_userdata(array('fb_login_confirmed' => TRUE));
             		redirect('authentication/student/fb_login');
@@ -102,9 +102,26 @@ class Student extends CI_Controller {
         redirect('/');
     }
 
+    public function connect_fb_with_previous_account(){
+        $data["current_page"] = 'student';
+        $student_id = $this->session->userdata('temp_student_id');
+
+        $data["student"] = $this->student_model->get_previous_student($student_id);
+
+        if (empty($data["student"]))
+            redirect('home');
+
+        $this->load->view('student/registration/connect_fb_with_previous_account', $data);
+    }
+
+    //Student has not tried to merge previous account with Facebook and wants to create a new Facebook account
+    public function fb_login_confirmed(){
+        $this->session->set_userdata(array('fb_login_confirmed' => TRUE));
+        redirect('authentication/student/fb_login');
+    }
 
     //A user has recognized they had a previous account and are attempting to login to merge with their Facebook account
-    public function fb_login_confirmed(){
+    public function login_to_merge_with_facebook(){
 
         //Oauth_uid and student_id were set as flash session variables to hide from user for security reasons
         $oauth_uid = $this->session->userdata('oauth_uid');
@@ -140,7 +157,7 @@ class Student extends CI_Controller {
                 if (empty($logged_in_student)):
 
                     $this->message->set("You have entered incorrect login information. Please try again:", "error", TRUE);
-                    redirect('home/connect_fb_with_previous_account');
+                    redirect('authentication/student/connect_fb_with_previous_account');
                 else:
 
                     //Add FB oauth_uid to this account

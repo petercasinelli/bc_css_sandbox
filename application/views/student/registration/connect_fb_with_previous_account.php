@@ -35,7 +35,7 @@ $this->load->view('includes/header');
     </div>
     <div class="grid">
         <div class="half">
-            <?php echo form_open('authentication/student/fb_login_confirmed'); ?>
+            <?php echo form_open('authentication/student/login_to_merge_with_facebook'); ?>
             Simply sign in below if this information matches yours and you created an account on BC Skills in the past: <br /><br/>
             Name: <h2 style="display: inline;"><?php echo $student->first . ' ' . $student->last; ?></h2> <br />
             E-mail: <h2 style="display: inline;"><?php echo $student->email; ?></h2> <br />
@@ -54,7 +54,7 @@ $this->load->view('includes/header');
         <div class="half" style="text-align: center;">
             <br />If the the name and e-mail address don't look like yours, create a new account with Facebook
             <br />
-            <a href="<?php echo base_url(); ?>" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_confirmed" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
         </div>
     </div>
 

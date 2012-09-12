@@ -96,18 +96,6 @@ class Home extends CI_Controller {
 
     }
 
-    public function connect_fb_with_previous_account(){
-        $data["current_page"] = 'student';
-        $student_id = $this->session->userdata('temp_student_id');
-
-        $data["student"] = $this->student_model->get_previous_student($student_id);
-
-        if (empty($data["student"]))
-            redirect('home');
-
-        $this->load->view('student/registration/connect_fb_with_previous_account', $data);
-    }
-
 
 }
 
