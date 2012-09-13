@@ -1,6 +1,10 @@
 <?php $this->load->view('student/includes/header'); ?>
 
 <section>
+    <div style="padding:10px;">
+    <a href="#create">Jump to "How To Create A Team"</a><br/>
+    <a href="#join">Jump to "How To Join A Team"</a><br /><br />
+    </div>
     <a name="create"></a>
     <h1 style="font-size:24px">How To Create A Team</h1>
 
