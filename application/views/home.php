@@ -16,7 +16,7 @@ endif;
             <header>
                 <h1 style="font-size:28px; line-height:30px;">Find Students Working On Start-ups At Boston College</h1>
                 <hr>
-                <h2 style="font-size:20px; line-height:25px;">Create an account in seconds and find a co-founder, team member, or a team!</h2>
+                <h2 style="font-size:20px; line-height:25px;">Create an account and find a co-founder, team member, or a team in seconds!</h2>
             </header>
             <br />
             <p>
