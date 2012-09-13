@@ -145,25 +145,41 @@ class Student_model extends CI_Model {
 
     public function search_students($query, $record_offset)
     {
-
+		//we'll explode the query to split it into keywords
+		$search_terms = array_filter(explode(" ", $query));
+		//for each FIELD, we'll do multiple ORs 
         $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
         $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
         $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
-
-        $this->db->like('first', $query);
-        $this->db->or_like('last', $query);
-        $this->db->or_like('school', $query);
-        $this->db->or_like('major', $query);
-        $this->db->or_like('skill', $query);
+		
+		foreach($search_terms as $key=>$value){
+			//for the first value, we'll take it through all. Afterwords, do ORS.
+			if($key == 0){
+				$this->db->like('first', $value);
+        		$this->db->or_like('last', $value);
+        		$this->db->or_like('school', $value);
+        		$this->db->or_like('major', $value);
+        		$this->db->or_like('skill', $value);
+			}else{
+				$this->db->or_like('first', $value);
+				$this->db->or_like('last', $value);
+        		$this->db->or_like('school', $value);
+        		$this->db->or_like('major', $value);
+        		$this->db->or_like('skill', $value);
+			}
+		}
 
         $this->db->distinct('students.student_id');
-
         $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
-        $query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
+        //$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
+		$query = $this->db->get('students');
         $result = $query->result();
-
-        return $result;
+		
+		//splice the array rather than relying on separate query for count
+		$results = array_splice($result, $record_offset, PaginationSettings::per_page());	
+		$result_map = array("result_count"=>sizeof($result), "result"=>$results);
+        return $result_map;
 
     }
 
