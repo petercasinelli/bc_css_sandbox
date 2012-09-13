@@ -32,40 +32,30 @@ class Student extends MY_Controller {
         $this->load->view('student/home', $data);
     }
 	
-	public function search($query, $record_offset=0){
+	public function search($query=null, $record_offset=0){
 		//echo $record_offset;
+		//$query = urlencode($query);
+		//echo $query;exit(1);
 		$this->load->library('pagination');
         $this->load->helper('pagination_helper');
+        $this->load->library('message');
+		
+		if(empty($query)){
+			$this->message->set("Please enter a search term", "error", TRUE);
+			$data["current_page"] = 'student';
+			$data["search_query"] = "";
+            $data["notifications"] = "";
+			$data["students"] = array();
+			//$data["search_results"] = $search_results["result_count"];
+            $this->load->view('student/search_students', $data);
+			return;
+		}
+		
         $data["current_page"] = 'student';
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('query', 'search terms', 'trim|required|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('query', 'search terms', 'trim|required|htmlspecialchars|xss_clean');
-
-        //If form does not validate according to rules above, load form view with error messages
-       /* if ($this->form_validation->run() == FALSE):
-
-            $data["student_logged_in"] = $this->current_student_info;
-            $this->load->view('student/home', $data);
-
-        //Else, display students according to search term
-        else:*/
-            /*
-            if (strpos(",", $query) != FALSE)
-                $query_exploded = explode(',', $query);
-            else
-                $query_exploded = explode(' ', $query);
-
-            $search_string = '';
-            $i = 0;
-            foreach ($query_exploded AS $term):
-                $search_string = $search_string . $term;
-                if ($i != sizeof($query_exploded) - 1)
-                    $search_string = $search_string . ' | ';
-                $i++;
-            endforeach;*/
 			$decoded_query = urldecode($query);
-            $data["students"] = $this->student_model->search_students($decoded_query, $record_offset);
+			$search_results = $this->student_model->search_students($decoded_query, $record_offset);
+            $data["students"] = $search_results["result"];
+			
             foreach($data["students"] as $student):
 
                 $student_skills = $this->student_model->get_student_skills($student->student_id);
@@ -80,7 +70,7 @@ class Student extends MY_Controller {
             $data["student_logged_in"] = $this->current_student_info;
             $data["search_query"] = $decoded_query;
             $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-			$data["search_results"] = $this->student_model->get_search_student_count($decoded_query);
+			$data["search_results"] = $search_results["result_count"];
 			$this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
             $this->load->view('student/search_students', $data);
 	}
@@ -88,7 +78,7 @@ class Student extends MY_Controller {
     public function submit_query($record_offset = 0)
     {
     	//encode the url before redirecting to search
-        $query = urlencode($this->input->post('query', TRUE));
+        $query = $this->input->post('query', TRUE);
 		redirect("student/search/$query");
     }
 
