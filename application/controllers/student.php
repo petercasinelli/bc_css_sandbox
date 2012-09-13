@@ -352,7 +352,7 @@ class Student extends MY_Controller {
 
     public function tutorial(){
 
-        $data["current_page"] = 'student';
+        $data["current_page"] = 'tutorial';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
         $this->load->view('student/tutorial', $data);

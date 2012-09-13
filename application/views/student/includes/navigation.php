@@ -15,6 +15,7 @@ $search = array(
         <nav>
             <?php
             echo anchor("/", "Home", ($current_page == 'index') ? array('class' => 'active') : '');
+            echo anchor("/student/tutorial", "Tutorial", ($current_page == 'tutorial') ? array('class' => 'active') : '');
             echo anchor("/student/edit_form", "My Profile", ($current_page == 'edit_profile') ? array('class' => 'active') : '');
             echo anchor("/student/view_all", "Students", ($current_page == 'student') ? array('class' => 'active') : '');
             echo anchor("/team/", "Teams", ($current_page == 'team') ? array('class' => 'active') : '');
@@ -30,7 +31,7 @@ $search = array(
             echo anchor("/notification/", "Notifications $notifications_count", array('class' => $notifications_class));
             ?>
         </nav>
-        <div class="float-right">
+        <div>
 
             <?php
             echo form_open('/student/submit_query', array("class" => 'float-right'));
