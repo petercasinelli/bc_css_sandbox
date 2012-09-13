@@ -12,6 +12,10 @@ $this->load->view('student/includes/header');
     </header>
 
     <?php
+  
+if (strlen($this->message->display()) > 0):
+	echo $this->message->display();
+else:
     if (empty($search_results)):
         echo '<p class="red-alert">No students exist with your search requirements.</p>';
     else:
@@ -19,8 +23,8 @@ $this->load->view('student/includes/header');
         <p class="green-alert">Your search returned <b><?php echo $search_results; ?> student<?php if ($search_results > 1) echo 's'; ?></b></p>
         <?php
         $this->load->view('student/search_form');
-
     endif;
+endif;
     //Counter kept for expand/hide student profile
     $i = 0;
     foreach($students as $student)
