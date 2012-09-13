@@ -55,6 +55,10 @@ $data["jquery"] = "
                 </header>
                 <p>
                     BC Skills has a new look and new features. Now anyone can easily find co-founders, team members, and teams to join!
+                    <br /><br/>
+                    If you need help getting started, check out our <?php echo anchor('student/tutorial', 'tutorial'); ?> page for help on how to create your own team or join a team.
+                    <br /><br/>
+                    Also, since this is a new project, if you come across any errors or bugs, be sure to send them to <a href="mailto:bccss.development@gmail.com">bccss.development@gmail.com</a>.
                 </p>
             </section>
         </div>
