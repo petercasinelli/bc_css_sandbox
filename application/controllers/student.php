@@ -38,13 +38,13 @@ class Student extends MY_Controller {
 		//echo $query;exit(1);
 		$this->load->library('pagination');
         $this->load->helper('pagination_helper');
-        $this->load->library('message');
 		
 		if(empty($query)){
-			$this->message->set("Please enter a search term", "error", TRUE);
+			$data["empty_search"] = "Please enter a search term";
 			$data["current_page"] = 'student';
 			$data["search_query"] = "";
-            $data["notifications"] = array();
+            $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+
 			$data["students"] = array();
 			//$data["search_results"] = $search_results["result_count"];
             $this->load->view('student/search_students', $data);
@@ -71,6 +71,7 @@ class Student extends MY_Controller {
             $data["search_query"] = $decoded_query;
             $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 			$data["search_results"] = $search_results["result_count"];
+			//echo $search_results["result_count"];exit(1);
 			$this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
             $this->load->view('student/search_students', $data);
 	}
