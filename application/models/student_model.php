@@ -175,10 +175,10 @@ class Student_model extends CI_Model {
         //$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
 		$query = $this->db->get('students');
         $result = $query->result();
-		
+		$result_count = sizeof($result);
 		//splice the array rather than relying on separate query for count
 		$results = array_splice($result, $record_offset, PaginationSettings::per_page());	
-		$result_map = array("result_count"=>sizeof($result), "result"=>$results);
+		$result_map = array("result_count"=>$result_count, "result"=>$results);
         return $result_map;
 
     }
