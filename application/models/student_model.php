@@ -416,7 +416,7 @@ class Student_model extends CI_Model {
         //$this->db->where('first =', $first);
         //$this->db->where('last =', $last);
         //$this->db->or_where('email =', $email);
-        $where = "(first = '$first' and last = '$last' OR email = '$email') AND (oauth_uid = 'null')";
+        $where = "(first = '$first' and last = '$last' OR email = '$email') AND (oauth_uid IS NULL)";
         //if($type == 'facebook')
           //  $this->db->where('oauth_uid', 'NULL');
         $this->db->where($where);
