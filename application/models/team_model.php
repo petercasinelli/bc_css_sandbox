@@ -204,7 +204,9 @@ class Team_Model extends CI_Model {
     public function get_new_teams($limit){
 
         $this->db->limit($limit);
+        $this->db->order_by('team_id', 'DESC');
         $query = $this->db->get('teams');
+
         $results = $query->result();
 
         return $results;
