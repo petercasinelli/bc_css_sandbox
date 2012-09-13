@@ -2,8 +2,6 @@
 
 $vars = get_cfg_var('aws.param5');
 $explode = explode(',', $vars);
-
-$app_id = '488337221194075';
 $pass = $explode[1];
 
 $config['protocol']='smtp';
