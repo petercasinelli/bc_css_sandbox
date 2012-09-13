@@ -54,7 +54,7 @@ $this->load->view('includes/header');
         <div class="half" style="text-align: center;">
             <br />If the the name and e-mail address don't look like yours, create a new account with Facebook
             <br />
-            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_confirmed" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_confirmed" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button_4.png"></a>
         </div>
     </div>
 
