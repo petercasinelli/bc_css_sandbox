@@ -44,7 +44,7 @@ class Student extends MY_Controller {
 			$this->message->set("Please enter a search term", "error", TRUE);
 			$data["current_page"] = 'student';
 			$data["search_query"] = "";
-            $data["notifications"] = "";
+            $data["notifications"] = array();
 			$data["students"] = array();
 			//$data["search_results"] = $search_results["result_count"];
             $this->load->view('student/search_students', $data);
