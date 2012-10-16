@@ -30,6 +30,8 @@ class Student extends CI_Controller {
         else:
             //We only want one result (and should only be passed one result)
             //$student = $student[0];
+            //Set last login to now
+            $this->student_model->set_last_login($student->student_id);
 
             $session_data = array('student_id' => $student->student_id
             );
@@ -76,6 +78,9 @@ class Student extends CI_Controller {
 				$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
 
                 if($student):
+                    //Set last login to now
+                    $this->student_model->set_last_login($student->student_id);
+
                     $session_data = array('student_id' => $student->student_id);
                     $this->session->set_userdata($session_data);
                     redirect('student/');

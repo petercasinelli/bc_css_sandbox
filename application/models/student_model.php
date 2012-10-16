@@ -214,6 +214,15 @@ class Student_model extends CI_Model {
 
     }
 
+    public function set_last_login($student_id){
+
+        $this->db->set('last_login', 'NOW()', false);
+        $this->db->limit(1);
+        $this->db->where('student_id', $student_id);
+        $query = $this->db->update('students');
+
+    }
+
     public function oauth_authenticate($oauth_id, $email="None", $first_name, $last_name){
         //check if the uid exists in database, if so, return TRUE
         $query = $this->db->get_where('students', array('oauth_uid'=>$oauth_id));
