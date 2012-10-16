@@ -29,11 +29,16 @@ $submit_button = array(
         <?php
     endif;
     ?>
+    <div class="grid">
 	<?php 
 	foreach($students as $student):
 		$data["student"] = $student;
 		$this->load->view('student/student_block', $data);
 	endforeach;
+    ?>
+
+    </div>
+        <?php
 	echo $this->pagination->create_links();
 	?>
 
