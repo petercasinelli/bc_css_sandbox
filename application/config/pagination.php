@@ -2,7 +2,7 @@
 //default pagination settings
 $config['base_url'] = base_url();
 $config['use_page_numbers'] = FALSE;
-$config['per_page'] = 5; 
+$config['per_page'] = 10;
 $config['display_pages'] = TRUE;
 $config['num_tag_open'] = '<li>';
 $config['num_tag_close'] = '</li>  ';
