@@ -5,7 +5,7 @@ class Student_model extends CI_Model {
     public function get_all_students($record_offset)
     {
         $this->load->helper('pagination_helper');
-        $this->db->order_by('first', 'asc');
+        $this->db->order_by('last_login', 'desc');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
         $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
 
