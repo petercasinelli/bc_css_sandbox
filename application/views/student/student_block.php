@@ -1,4 +1,4 @@
-<div class="listing half" style="width:400px; height:220px;">
+<div class="listing">
 			<header>
 				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
 				<img src="<?php echo $pic_src; ?>" width="50px" height="50px" class="float-left"/>
@@ -18,9 +18,7 @@
                 <b>Skills</b>: <?php echo $student->skills; ?>
                 <br />
 				<b>Bio</b>: <?php
-                if (strlen($student->bio) > 150)
-                    echo substr($student->bio,0,150) . '...' . anchor('/view/'.$student->student_id, 'Read More');
-                else
+
                     echo $student->bio;
                     ?>
 
