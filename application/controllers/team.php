@@ -105,6 +105,7 @@ class Team extends MY_Controller {
 
         $team_name = $this->input->post('team_name', TRUE);
         $team_description = $this->input->post('team_description', TRUE);
+        $team_needs = $this->input->post('team_needs', TRUE);
 
         $this->load->library('form_validation');
 
@@ -123,7 +124,8 @@ class Team extends MY_Controller {
             $this->load->model('team_model');
 
             $team_data = array('team_name' => $team_name,
-                'team_description' => $team_description
+                'team_description' => $team_description,
+                'team_needs' => $team_needs
             );
 
             //This automatically adds team with the current student being the administrator
@@ -175,6 +177,7 @@ class Team extends MY_Controller {
 
         $team_name = $this->input->post('team_name', 			   TRUE);
         $team_description = $this->input->post('team_description', TRUE);
+        $team_needs = $this->input->post('team_needs', TRUE);
 
         $this->load->library('form_validation');
 
@@ -190,7 +193,8 @@ class Team extends MY_Controller {
         else:
 
             $team_data = array('team_name' => $team_name,
-                'team_description' => $team_description
+                'team_description' => $team_description,
+                'team_needs' => $team_needs
             );
 
             $update_team = $this->team_model->update_team($team_id, $team_data, $this->current_student_id);

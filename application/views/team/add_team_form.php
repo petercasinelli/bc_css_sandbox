@@ -11,7 +11,12 @@ $this->load->view('student/includes/header');
 	$team_description = array(
 				'name' 	=> 'team_description',
 				'value' => set_value('team_description')
-				 );												
+				 );
+
+    $team_needs = array(
+        'name' => 'team_needs',
+        'value' => set_value('team_needs')
+    );
 						
 	$submit_button = array(
 							'name'	=> 'submit',
@@ -39,7 +44,7 @@ $this->load->view('student/includes/header');
 			
 			<?php echo form_label('Team Name:', 'team_name'); echo form_input($team_name); ?>
 			<?php echo form_label('Team Description:', 'team_description'); echo form_textarea($team_description); ?>
-
+            <?php echo form_label('What does your team need? What are you looking for?:', 'team_needs'); echo form_textarea($team_needs); ?>
 			<?php echo form_submit($submit_button); ?>
 
 			<?php echo form_close(); ?>

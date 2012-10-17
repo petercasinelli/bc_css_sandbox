@@ -28,7 +28,15 @@ endif;
 ?>
 
 <section>
+    <h1>About Us</h1>
     <?php $this->load->view("team/team_block", array("team"=>$team_data)); ?>
+</section>
+
+<section>
+    <h1>What we need:</h1>
+    <section class="listing">
+        <?php echo $team_data->team_needs; ?>
+    </section>
 </section>
 
 <section>
