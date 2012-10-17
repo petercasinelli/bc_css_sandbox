@@ -32,13 +32,14 @@ endif;
     <?php $this->load->view("team/team_block", array("team"=>$team_data)); ?>
 </section>
 
+<?php if (strlen($team_data->team_needs) > 0): ?>
 <section>
     <h1>What we need:</h1>
     <section class="listing">
         <?php echo $team_data->team_needs; ?>
     </section>
 </section>
-
+<?php endif; ?>
 <section>
 
     <div class="grid">
