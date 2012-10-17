@@ -33,7 +33,7 @@ $submit_button = array(
 	<?php 
 	foreach($students as $student):
 		$data["student"] = $student;
-		$this->load->view('student/student_block', $data);
+		$this->load->view('student/small_student_block', $data);
 	endforeach;
     ?>
 
