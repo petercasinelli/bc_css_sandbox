@@ -11,7 +11,7 @@
     <br />
     <div class="grid">
         <div class="quarter">
-            <h2 class="circle_number float-left">1</h2>Create a team by clicking on the 'Teams' button in the upper navigation and then choosing 'Add Your Team' in the top right hand side of the page.
+            <h2 class="circle_number float-left">1</h2>Create a team by clicking on the 'Teams' button in the upper navigation and then choosing <?php echo anchor('/team/add_form','Add Your Team'); ?> in the top right hand side of the page.
         </div>
         <div class="three-quarters">
             <img src="<?php echo base_url(); ?>/assets/images/tutorial/click-on-teams.png" width="600" height="55">
@@ -54,7 +54,7 @@
     <br />
     <div class="grid">
         <div class="quarter">
-            <h2 class="circle_number float-left">1</h2>If you want to join a team, start by searching for a team. Click on the 'Teams' button in the upper navigation of the site.
+            <h2 class="circle_number float-left">1</h2>If you want to join a team, start by searching for a team. Click on the <?php echo anchor('team','Teams'); ?> button in the upper navigation of the site.
         </div>
         <div class="three-quarters">
             <img src="<?php echo base_url(); ?>/assets/images/tutorial/click-on-teams.png" width="600" height="55">

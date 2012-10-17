@@ -31,6 +31,20 @@
 
                 <div class="slide">
                     <div class="grid">
+
+                            <section style="padding-left:15px;">
+                                <h1 style="font-size:28px; line-height:30px;">Not sure what skills your project needs?</h1>
+
+                                <h2 style="padding-top:8px;">Are you looking for developers but aren't sure what programming languages or experience they need?</h2>
+                                <p style="padding-top:5px;">
+                                <?php echo anchor("/team/add_form", "Add your team"); ?> and send an e-mail to <a href="mailto:bccss.development@gmail.com">bccss.development@gmail.com</a> with your team information. Based on your team description, we will help you evaluate what experience developers or business partners should have to work on your idea!
+                                </p>
+                            </section>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="grid">
                         <div class="three-quarters">
                             <h1 style="font-size:28px; line-height:30px;">Get Involved With BC Skills</h1>
                             <section>
