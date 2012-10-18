@@ -15,11 +15,17 @@
 			<hr>
 
 			<p>
-                <b>Skills</b>: <?php echo $student->skills; ?>
+                <b>Skills</b>: <?php
+                if (strlen($student->skills) > 40)
+                    echo substr($student->skills,0,40) . '...' . anchor('student/view_student/'.$student->student_id, ' More');
+                else
+                    echo $student->skills;
+                ?>
+
                 <br />
 				<b>Bio</b>: <?php
                 if (strlen($student->bio) > 150)
-                    echo substr($student->bio,0,150) . '...' . anchor('student/view_student/'.$student->student_id, 'Read More');
+                    echo substr($student->bio,0,150) . '...' . anchor('student/view_student/'.$student->student_id, ' More');
                 else
                     echo $student->bio;
                     ?>
