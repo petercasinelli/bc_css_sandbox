@@ -85,6 +85,7 @@ class Team_Model extends CI_Model {
 
     public function get_teams($record_offset){
     	$this->load->helper('pagination_helper');
+        $this->db->order_by('created_at','DESC');
 		$query = $this->db->get('teams', PaginationSettings::per_page(), $record_offset);
         // $query = $this->db->from('teams')->get();
         $result = $query->result();
