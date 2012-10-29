@@ -51,15 +51,15 @@ $data["jquery"] = "
         <div class="half">
             <section>
                 <header>
-                    <h1>What's New</h1>
+                    <h1>New Teams</h1>
                 </header>
-                <p>
-                    BC Skills has a new look and new features. Now anyone can easily find co-founders, team members, and teams to join!
-                    <br /><br/>
-                    If you need help getting started, check out our <?php echo anchor('student/tutorial', 'tutorial'); ?> page for help on how to create your own team or join a team.
-                    <br /><br/>
-                    Also, since this is a new project, if you come across any errors or bugs, be sure to send them to <a href="mailto:bccss.development@gmail.com">bccss.development@gmail.com</a>.
-                </p>
+                <?php
+                foreach($new_teams as $new_team):
+                    $data["team"] = $new_team;
+                    $this->load->view('team/new_team_block.php', $data);
+                endforeach;
+                ?>
+                <?php echo anchor('/team', 'View All Teams'); ?>
             </section>
         </div>
         <div class="half">
@@ -76,19 +76,7 @@ $data["jquery"] = "
                 <?php echo anchor('student/view_all', 'View All Students'); ?>
 
             </section>
-            <br />
-            <section>
-                <header>
-                    <h1>New Teams</h1>
-                </header>
-                <?php
-                foreach($new_teams as $new_team):
-                    $data["team"] = $new_team;
-                    $this->load->view('team/new_team_block.php', $data);
-                endforeach;
-                ?>
-                <?php echo anchor('/team', 'View All Teams'); ?>
-            </section>
+
         </div>
     </div>
 </section>

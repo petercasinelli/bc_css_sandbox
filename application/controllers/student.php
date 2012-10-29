@@ -18,8 +18,8 @@ class Student extends MY_Controller {
         $data["student_logged_in"] = $this->current_student_info;
 
         //Retrieve 2 new students/teams and send to view
-        $data["new_students"] = $this->student_model->get_new_students(2);
-        $data["new_teams"] = $this->team_model->get_new_teams(2);
+        $data["new_students"] = $this->student_model->get_new_students(5);
+        $data["new_teams"] = $this->team_model->get_new_teams(5);
         foreach($data["new_teams"] as $new_team):
             $new_team->team_members = $this->team_model->get_team_members($new_team->team_id);
         endforeach;
