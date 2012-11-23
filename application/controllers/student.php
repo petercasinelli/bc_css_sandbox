@@ -26,6 +26,17 @@ class Student extends MY_Controller {
 
         $data['profile_completion'] = profile_completed($this->current_student_info);
 
+        //If this is the first time the user has logged in, check to see if they have not filled out skills or bio
+        if ($this->session->userdata('check_profile_completion')):
+            $profile_missing = array();
+            if (empty($this->current_student_info->bio))
+                array_push($profile_missing, 'bio');
+            if (empty($this->current_student_info->skills))
+                array_push($profile_missing, 'skills');
+            if (!empty($profile_missing))
+                $data["profile_missing"] = $profile_missing;
+        endif;
+
         //Get a count of all notifications for this user and pass count to student/includes/navigation view
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
