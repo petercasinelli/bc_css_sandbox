@@ -33,8 +33,9 @@ class Student extends CI_Controller {
             //Set last login to now
             $this->student_model->set_last_login($student->student_id);
 
-            $session_data = array('student_id' => $student->student_id
-            );
+            $session_data = array('student_id' => $student->student_id,
+                                  'check_profile_completion' => true
+                                 );
 
             $this->session->set_userdata($session_data);
             //echo 'Logged in as ' . $this->session->userdata('student_id');
@@ -81,7 +82,9 @@ class Student extends CI_Controller {
                     //Set last login to now
                     $this->student_model->set_last_login($student->student_id);
 
-                    $session_data = array('student_id' => $student->student_id);
+                    $session_data = array('student_id' => $student->student_id,
+                                          'check_profile_completion' => true
+                                        );
                     $this->session->set_userdata($session_data);
                     redirect('student/');
                 endif;
