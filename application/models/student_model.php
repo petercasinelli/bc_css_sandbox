@@ -342,7 +342,6 @@ class Student_model extends CI_Model {
         return $results;
     }
 
-
     public function add_skills($student_id, $skills){
 
         foreach($skills as $value):
@@ -475,5 +474,16 @@ class Student_model extends CI_Model {
 
         return $affected_rows;
     }
+	
+	public function get_student_skill_distribution(){
+		$this->db->select("skills.skill, count(*) as num_students");
+		$this->db->from("skills");
+		$this->db->join("student_skills", "skills.skill_id = student_skills.skill_id");
+		$this->db->group_by("skills.skill");
+		$this->db->order_by("num_students", "DESC");
+		$query = $this->db->get();
+		return $query->result();
+
+	}
 
 }
