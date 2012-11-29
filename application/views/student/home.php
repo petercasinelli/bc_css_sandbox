@@ -4,13 +4,14 @@ $this->load->library('message');
 $this->load->view('student/includes/header');
 ?>
 
+<section id="alert" style="display: none;">
+</section>
+
 <?php if (strlen($this->message->display()) > 0): ?>
 <section>
     <?php echo $this->message->display(); ?>
 </section>
 <?php endif;?>
-
-<?php $this->load->view('student/tutorial_slider'); ?>
 
 <?php
 $data["jquery"] = '
@@ -42,7 +43,7 @@ $data["jquery"] = '
            success: function(response, textStatus, jqXHR){
                // log a message to the console
                console.log("It worked!");
-               console.log("Response was: " + response);
+               $("#alert").html("<div style=\"padding:5px;\">Thanks for adding your skills and bio. Have any feedback? Send an e-mail to <a href=\"mailto:bccss.development@gmail.com\" target=\"_blank\">bccss.development@gmail.com</a>.</div>").show();
                $(".modal_close").click();
            },
            // callback handler that will be called on error
@@ -175,7 +176,10 @@ $data["jquery"] = $data["jquery"] . '
 
         </div>
     </div>
+
 </section>
+
+<?php $this->load->view('student/tutorial_slider'); ?>
 
 
 <?php $this->load->view('includes/footer', $data); ?>
