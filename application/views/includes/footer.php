@@ -9,6 +9,7 @@
 <script src="<?php echo base_url() ?>assets/js/tipsy.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.autoSuggest.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
 <?php if (!empty($jquery)): ?>
 <script type="text/javascript">
         <?php echo $jquery; ?>
