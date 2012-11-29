@@ -236,6 +236,32 @@ class Student extends MY_Controller {
 
     }
 
+    public function ajax_edit(){
+
+        $student_id = $this->current_student_id;
+
+        $bio 	= $this->input->post('bio', 	  TRUE);
+        $skills = $this->input->post('skills', TRUE);
+
+        if (!empty($skills))
+        {
+            $skills_affected = $this->student_model->update_student_skills($student_id, $skills);
+            if (!$skills_affected)
+                echo 'false';
+        }
+
+        if (!empty($bio))
+        {
+            $rows_affected = $this->student_model->edit_student($student_id, array("bio" => $bio));
+            if (!$rows_affected)
+                echo 'false';
+        }
+
+        echo 'true';
+
+
+    }
+
 
     public function upload_profile_pic(){
 
