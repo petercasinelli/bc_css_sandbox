@@ -15,6 +15,18 @@ class Student_model extends CI_Model {
         return $result;
     }
 
+    public function get_students()
+    {
+        $this->db->order_by('last_login', 'desc');
+        $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
+        $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
+
+        $query = $this->db->get('students');
+        $result = $query->result();
+
+        return $result;
+    }
+
     public function get_total_student_count()
     {
         $rows = $this->db->count_all('students');
