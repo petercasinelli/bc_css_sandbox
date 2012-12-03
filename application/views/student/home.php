@@ -90,21 +90,8 @@ $data["jquery"] = $data["jquery"] . '
 </div>
     <?php echo form_open('#', array("id" => "edit-profile")); ?>
     <?php
-
-    $skills = array(
-        'id'=>'skills',
-        'name' => 'skills',
-        'title' => 'ie- HTML, PHP, Marketing, PR, Accounting. Comma separated if multiple',
-        'value' => set_value('skills'),
-        'style' => 'width:340px;'
-    );
-    $bio = array(
-        'id'    => 'bio',
-        'name' 	=> 'bio',
-        'value' => set_value('bio', $student_logged_in->bio),
-        'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? Are you looking for co-founders? Or just looking to work on a project?',
-        'style' => 'height:100px;'
-    );
+    $user_has_no_skills = in_array('skills', $profile_missing);
+    $user_has_no_bio = in_array('bio', $profile_missing);
 
     $submit_button = array(
         'name'	=> 'submit',
@@ -114,9 +101,34 @@ $data["jquery"] = $data["jquery"] . '
         'style' => 'float:right;'
     );
 
+    if ($user_has_no_skills):
+
+            $skills = array(
+                'id'=>'skills',
+                'name' => 'skills',
+                'title' => 'ie- HTML, PHP, Marketing, PR, Accounting. Comma separated if multiple',
+                'value' => set_value('skills', $student_logged_in->skills),
+                'style' => 'width:340px;'
+            );
+
+            echo form_label('Skills:', 'skills'); echo form_input($skills);
+    endif;
+
+    if ($user_has_no_bio):
+
+        $bio = array(
+            'id'    => 'bio',
+            'name' 	=> 'bio',
+            'value' => set_value('bio', $student_logged_in->bio),
+            'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? Are you looking for co-founders? Or just looking to work on a project?',
+            'style' => 'height:100px;'
+        );
+
+        echo form_label('Personal Bio:', 'bio'); echo form_textarea($bio);
+
+    endif;
+
     ?>
-    <?php echo form_label('Skills:', 'skills'); echo form_input($skills);?>
-    <?php echo form_label('Personal Bio:', 'bio'); echo form_textarea($bio); ?>
     <div style="float:left; width:250px; height:40px; font-size:12px;" id="modal_notice"></div>
     <?php echo form_submit($submit_button); ?>
 
