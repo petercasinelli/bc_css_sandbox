@@ -35,6 +35,9 @@ class Student extends MY_Controller {
                 array_push($profile_missing, 'skills');
             if (!empty($profile_missing))
                 $data["profile_missing"] = $profile_missing;
+
+            $this->session->set_userdata('check_profile_completion', false);
+
         endif;
 
         //Get a count of all notifications for this user and pass count to student/includes/navigation view
