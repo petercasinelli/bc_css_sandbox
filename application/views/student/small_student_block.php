@@ -16,6 +16,8 @@
 
 			<p>
                 <b>Skills</b>: <?php
+                if (empty($student->skills))
+					echo "Unavailable";
                 if (strlen($student->skills) > 40)
                     echo substr($student->skills,0,40) . '...' . anchor('student/view_student/'.$student->student_id, ' More');
                 else
@@ -24,6 +26,8 @@
 
                 <br />
 				<b>Bio</b>: <?php
+				if (empty($student->bio))
+					echo "Unavailable";
                 if (strlen($student->bio) > 150)
                     echo substr($student->bio,0,150) . '...' . anchor('student/view_student/'.$student->student_id, ' More');
                 else
