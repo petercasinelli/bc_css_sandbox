@@ -298,6 +298,7 @@ class Student extends MY_Controller {
     }
     //View all students
     public function view_all($record_offset = 0){
+    	
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');
 
@@ -310,12 +311,15 @@ class Student extends MY_Controller {
 
         foreach($data["students"] as $student):
 
-            $student_skills = $this->student_model->get_student_skills($student->student_id);
-            $student->skills = '';
+            $student_skills = $this->student_model->get_student_skills($student->student_id);		
+            $student->skills  = '';
 
             foreach($student_skills as $skill):
                 $student->skills = $student->skills . $skill->skill . ', ';
             endforeach;
+			
+			if(!empty($student->skills))
+				$student->skills = substr($student->skills, 0, -2);
 
         endforeach;
 
