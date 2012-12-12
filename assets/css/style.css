@@ -110,6 +110,17 @@ a {
 	text-decoration:underline;
 }
 
+a.name {
+	color: #333;
+	font-size:1.3em;
+	line-height:5px;
+	text-decoration:none;
+}
+
+a.name:hover{
+	color: #575757;
+}
+
 a:hover {
 	text-decoration:none;
 }
@@ -201,7 +212,8 @@ hr {
 	border-radius:3px;
 	padding:5px;
 	margin:20px;
-	background:#ececec;
+	/*background:#ececec;*/
+	background: #fff;
 	border:1px solid #cdcdcd;
 	overflow:auto;
 }
@@ -224,6 +236,10 @@ hr {
 
 .listing p {
 	margin:0 10px;
+}
+
+p.team_listing{
+	margin-top:5px;
 }
 
 .social-links a {
@@ -450,4 +466,20 @@ a#facebookButton:hover {
     /*font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", sans-serif;*/
     font-family: "Tahoma";
     font-size:12px;
+}
+
+/*profile picture section css*/
+div.prof_pic_section{
+	float: left;
+	width: 200px;
+	margin:0px;
+}
+
+.prof_pic_section img{
+	border:1px solid #ccc;
+}
+
+.upload_form{
+	float:left;
+	margin: 0px;
 }
