@@ -139,12 +139,14 @@ endif; ?>
             </header>
             <!--Get the students profile picture source.. Will add helper for this -->
             <?php $pic_src = student_picture_src($student_logged_in->student_id, $student_logged_in->oauth_uid, $student_logged_in->picture); ?>
+            <div class="prof_pic_section">
             <img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
             <br />
             <?php echo anchor("student/remove_profile_pic", "Remove Picture"); ?>
+            </div>
             <!--begin upload form-->
 
-            <?php echo form_open_multipart('student/upload_profile_pic');?>
+            <?php echo form_open_multipart('student/upload_profile_pic', array("class"=>"upload_form"));?>
             <input type="file" name="userfile" size="20" />
             <input type="submit" value="Change My Picture" />
             </form>
