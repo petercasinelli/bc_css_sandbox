@@ -29,7 +29,7 @@ class Team extends MY_Controller {
 
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
-        $this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "/team/index"));
+        $this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "team/index"));
         $this->load->view('team/home', $data);
     }
 
