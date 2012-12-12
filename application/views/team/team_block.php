@@ -1,6 +1,6 @@
 <section class="listing">
 			<header>
-				<h2><?php echo anchor('team/view/'.$team->team_id,$team->team_name); //$team->team_name; ?></h2>
+				<h2><?php echo anchor('team/view/'.$team->team_id,$team->team_name, array("class"=>"name")); //$team->team_name; ?></h2>
 			</header>
 			<div class="float-right" style="padding:10px;">
 			<?php
@@ -13,8 +13,8 @@
 			?>
 			</div>
 			<br />
-			<p>
-			<b>Description</b>: <?php echo $team->team_description; ?>
+			<p class="team_listing">
+			<?php echo $team->team_description; ?>
 			</p>
 </section>
 		
