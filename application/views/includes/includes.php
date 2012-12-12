@@ -13,5 +13,6 @@
 	<link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/images/apple-icon-57.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(); ?>assets/images/apple-icon-72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url(); ?>assets/images/apple-icon-114.png">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body>

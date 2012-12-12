@@ -149,7 +149,7 @@ p, h1, h2, h3 {
 
 .grid div {
 	float:left;
-	margin:10px 0 10px 20px;
+	margin:10px 0 10px 10px;
 }
 
 .grid p, .grid h1, .grid h2, .grid h3 {
