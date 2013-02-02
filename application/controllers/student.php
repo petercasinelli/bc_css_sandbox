@@ -268,6 +268,8 @@ class Student extends MY_Controller {
 
     public function upload_profile_pic(){
 
+        $this->load->library('s3');
+
         //set the path to root
         $config['upload_path'] = './uploads/students/pictures';
         $config['allowed_types'] = 'gif|jpg|png';
@@ -291,8 +293,19 @@ class Student extends MY_Controller {
 
             $this->load->view('student/edit_student_form', $data);
         else:
+
             $uploaded_data = $this->upload->data();
-            $status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
+
+            $file = $this->s3->inputFile($uploaded_data['full_path']);
+
+            $bucket = 'bcskills-profile-pictures';
+            $uri = $uploaded_data['file_name'];
+            $s3_put_object = $this->s3->putObject($file, $bucket, $uri, 'private');
+
+            $status = FALSE;
+            if ($s3_put_object)
+                $status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
+
 
             $this->load->library('message');
             if ($status):
