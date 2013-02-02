@@ -300,7 +300,7 @@ class Student extends MY_Controller {
 
             $bucket = 'bcskills-profile-pictures';
             $uri = $uploaded_data['file_name'];
-            $s3_put_object = $this->s3->putObject($file, $bucket, $uri, 'private');
+            $s3_put_object = $this->s3->putObject($file, $bucket, $uri, 'public-read');
 
             $status = FALSE;
             if ($s3_put_object)
