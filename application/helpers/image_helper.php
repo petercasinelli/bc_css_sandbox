@@ -7,7 +7,7 @@ function student_picture_src($student_id, $oauth_uid, $picture){
 	$student_pic_url = student_picture_url();
 	
 	if($picture):
-		return $student_pic_url . $picture;
+		return 'https://s3.amazonaws.com/bcskills-profile-pictures/' . $picture;
 	else:
 		if($oauth_uid):
 			return "https://graph.facebook.com/". $oauth_uid . "/picture?type=large"; //high resolution
