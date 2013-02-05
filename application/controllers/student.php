@@ -268,8 +268,6 @@ class Student extends MY_Controller {
 
     public function upload_profile_pic(){
 
-        $this->load->library('s3');
-
         //set the path to root
         $config['upload_path'] = './uploads/students/pictures';
         $config['allowed_types'] = 'gif|jpg|png';
@@ -293,6 +291,8 @@ class Student extends MY_Controller {
 
             $this->load->view('student/edit_student_form', $data);
         else:
+
+            $this->load->library('s3');
 
             $uploaded_data = $this->upload->data();
 
@@ -319,9 +319,25 @@ class Student extends MY_Controller {
     }
 
 
-    public function remove_profile_pic(){
-        $status = $this->student_model->delete_profile_picture($this->current_student_id);
+    public function remove_profile_pic($uri){
+
         $this->load->library('message');
+        $this->load->library("s3");
+
+        $delete_object = FALSE;
+        $status = FALSE;
+        $bucket = 'bcskills-profile-pictures';
+
+        //Make sure student is removing their own profile picture
+        if (strcmp($uri, $this->current_student_info->picture) == 0):
+            $delete_object = $this->s3->deleteObject($bucket, $uri);
+        endif;
+
+        //If Amazon S3 object was delete, update database
+        if ($delete_object)
+            $status = $this->student_model->delete_profile_picture($this->current_student_id);
+
+        //If database is updated, redirect
         if ($status):
             $this->message->set("Picture deleted successfully", "success", TRUE);
             redirect("student/edit_form");
@@ -329,6 +345,7 @@ class Student extends MY_Controller {
             $this->message->set("Picture delete failed", "error", TRUE);
             redirect("student/edit_form");
         endif;
+
     }
     //view single student
     public function view_student($id=null){

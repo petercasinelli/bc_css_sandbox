@@ -142,7 +142,7 @@ endif; ?>
             <div class="prof_pic_section">
             <img src="<?php echo $pic_src; ?>" width="100px" height="100px"/>
             <br />
-            <?php echo anchor("student/remove_profile_pic", "Remove Picture"); ?>
+            <?php echo anchor("student/remove_profile_pic/".$student_logged_in->picture, "Remove Picture"); ?>
             </div>
             <!--begin upload form-->
 
