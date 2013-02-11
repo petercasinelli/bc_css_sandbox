@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/tipsy.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/global.css" type="text/css">
+
+    <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
 	<link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/ico">
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/ico">
 	<link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/images/apple-icon-57.png">
