@@ -44,5 +44,27 @@ endif;
     </div>
 </section>
 
+<section>
+    <div class="grid">
+        <div class="half">
+            <h1 style="font-size:20px; line-height:25px;">BCVC Team Registration</h1>
+            <p>Are you competing in the Boston College Venture Competition? Easily register on BC Skills, add your current team members, and start recruiting other team members. It only takes 30 seconds to set up a profile, team, and presence on BC Skills. Get started now!</p>
+            <a href="#"><button style="font-size:14px;">Register for BCVC &raquo;</button></a>
+        </div>
+        <div class="half">
+            <h1 style="font-size:20px; line-height:25px;">BC Skills Testimonial</h1>
+            <h2>Matthew Keemon (A&S 2013)</h2>
+            <img src="https://s3.amazonaws.com/bcskills-profile-pictures/keemon-testimonial.jpg" height="65" width="65" style="float:left; padding:5px;" />
+            <p><small>"BCSkills empowers startups and developers to connect seamlessly. Through my use of the service, I have been approached with numerous employment opportunities. A startup dress.me reached out to me through BCSkills, which led to valuable work experience..."</small></p>
+            <a href="#" class=""><button style="font-size:14px;">Read the Full Testimonial &raquo;</button></a>
+        </div>
+    </div>
+</section>
+
+
+<hr>
+
+
+</div>
 
 <?php $this->load->view('includes/footer'); ?>
