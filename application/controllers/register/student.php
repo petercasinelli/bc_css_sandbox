@@ -122,7 +122,8 @@ class Student extends CI_Controller {
             $this->message->set("Welcome to BC Skills! To network the best, we recommend you complete your profile below.", "success", TRUE);
 
             //Log student in automatically and redirect to student logged in page
-            $session_data = array('student_id' => $student_id
+            $session_data = array('student_id' => $student_id,
+                                  'check_profile_completion' => true
             );
 
             $this->session->set_userdata($session_data);

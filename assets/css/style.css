@@ -110,6 +110,17 @@ a {
 	text-decoration:underline;
 }
 
+a.name {
+	color: #333;
+	font-size:1.3em;
+	line-height:5px;
+	text-decoration:none;
+}
+
+a.name:hover{
+	color: #575757;
+}
+
 a:hover {
 	text-decoration:none;
 }
@@ -149,7 +160,7 @@ p, h1, h2, h3 {
 
 .grid div {
 	float:left;
-	margin:10px 0 10px 20px;
+	margin:10px 0 10px 10px;
 }
 
 .grid p, .grid h1, .grid h2, .grid h3 {
@@ -201,7 +212,8 @@ hr {
 	border-radius:3px;
 	padding:5px;
 	margin:20px;
-	background:#ececec;
+	/*background:#ececec;*/
+	background: #fff;
 	border:1px solid #cdcdcd;
 	overflow:auto;
 }
@@ -224,6 +236,10 @@ hr {
 
 .listing p {
 	margin:0 10px;
+}
+
+p.team_listing{
+	margin-top:5px;
 }
 
 .social-links a {
@@ -322,6 +338,20 @@ input[placeholder], [placeholder], *[placeholder] {
 	color:#989898 !important;
 }
 
+/* Green button */
+
+#green_button
+{
+    text-shadow:0 1px 0 #000000;
+    color:#ffffff;
+    background: #cdcdcd;
+    background:    -moz-linear-gradient(top, #2e6e2d 0%, #48ab46 100%); /* FF3.6+ */
+    background: -webkit-linear-gradient(top, #2e6e2d 0%, #48ab46 100%); /* Chrome10+,Safari5.1+ */
+    background:     -ms-linear-gradient(top, #2e6e2d 0%, #48ab46 100%); /* IE10+ */
+    background:         linear-gradient(top, #2e6e2d 0%, #48ab46 100%); /* W3C */
+    padding:10px;
+}
+
 /* Facebook Button */
 
 a#facebookButton {
@@ -374,4 +404,82 @@ a#facebookButton:hover {
     line-height:35px;
     text-align:center;
     background:#2d517a;
+}
+
+/*---------------------------------------
+	LEAN MODAL
+-----------------------------------------*/
+
+#lean_overlay {
+    position: fixed;
+    z-index: 10000;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#signup {
+
+    width: 404px;
+    padding-bottom: 2px;
+    display:none;
+    background: #FFF;
+
+}
+
+.modal_close
+{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: block;
+    z-index: 2;
+    width:17px;
+    height:18px;
+    background:url('../images/close-window.png');
+}
+
+.rounded_corners
+{
+    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+}
+
+.shadow
+{
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+
+}
+
+.grey_header {
+    height:70px;
+    margin-bottom:15px;
+    background: #EFEFEF;
+    background:    -moz-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* FF3.6+ */
+    background: -webkit-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+    background:     -ms-linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* IE10+ */
+    background:         linear-gradient(top, #f4f4f4 0%, #dddddd 49%, #d8d8d8 51%, #cdcdcd 100%); /* W3C */
+    border-bottom: 1px solid #CCC; border-top-left-radius: 5px; -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; border-top-right-radius: 5px; -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px;
+    color:#575757;
+    /*font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", sans-serif;*/
+    font-family: "Tahoma";
+    font-size:12px;
+}
+
+/*profile picture section css*/
+div.prof_pic_section{
+	float: left;
+	width: 200px;
+	margin:0px;
+}
+
+.prof_pic_section img{
+	border:1px solid #ccc;
+}
+
+.upload_form{
+	float:left;
+	margin: 0px;
 }

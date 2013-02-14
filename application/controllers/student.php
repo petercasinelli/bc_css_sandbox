@@ -26,6 +26,20 @@ class Student extends MY_Controller {
 
         $data['profile_completion'] = profile_completed($this->current_student_info);
 
+        //If this is the first time the user has logged in, check to see if they have not filled out skills or bio
+        if ($this->session->userdata('check_profile_completion')):
+            $profile_missing = array();
+            if (empty($this->current_student_info->bio))
+                array_push($profile_missing, 'bio');
+            if (empty($this->current_student_info->skills))
+                array_push($profile_missing, 'skills');
+            if (!empty($profile_missing))
+                $data["profile_missing"] = $profile_missing;
+
+            $this->session->set_userdata('check_profile_completion', false);
+
+        endif;
+
         //Get a count of all notifications for this user and pass count to student/includes/navigation view
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
@@ -225,6 +239,32 @@ class Student extends MY_Controller {
 
     }
 
+    public function ajax_edit(){
+
+        $student_id = $this->current_student_id;
+
+        $bio 	= $this->input->post('bio', 	  TRUE);
+        $skills = $this->input->post('skills', TRUE);
+
+        if (!empty($skills))
+        {
+            $skills_affected = $this->student_model->update_student_skills($student_id, $skills);
+            if (!$skills_affected)
+                echo 'false';
+        }
+
+        if (!empty($bio))
+        {
+            $rows_affected = $this->student_model->edit_student($student_id, array("bio" => $bio));
+            if (!$rows_affected)
+                echo 'false';
+        }
+
+        echo 'true';
+
+
+    }
+
 
     public function upload_profile_pic(){
 
@@ -251,8 +291,21 @@ class Student extends MY_Controller {
 
             $this->load->view('student/edit_student_form', $data);
         else:
+
+            $this->load->library('s3');
+
             $uploaded_data = $this->upload->data();
-            $status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
+
+            $file = $this->s3->inputFile($uploaded_data['full_path']);
+
+            $bucket = 'bcskills-profile-pictures';
+            $uri = $uploaded_data['file_name'];
+            $s3_put_object = $this->s3->putObject($file, $bucket, $uri, 'public-read');
+
+            $status = FALSE;
+            if ($s3_put_object)
+                $status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
+
 
             $this->load->library('message');
             if ($status):
@@ -266,9 +319,25 @@ class Student extends MY_Controller {
     }
 
 
-    public function remove_profile_pic(){
-        $status = $this->student_model->delete_profile_picture($this->current_student_id);
+    public function remove_profile_pic($uri){
+
         $this->load->library('message');
+        $this->load->library("s3");
+
+        $delete_object = FALSE;
+        $status = FALSE;
+        $bucket = 'bcskills-profile-pictures';
+
+        //Make sure student is removing their own profile picture
+        if (strcmp($uri, $this->current_student_info->picture) == 0):
+            $delete_object = $this->s3->deleteObject($bucket, $uri);
+        endif;
+
+        //If Amazon S3 object was delete, update database
+        if ($delete_object)
+            $status = $this->student_model->delete_profile_picture($this->current_student_id);
+
+        //If database is updated, redirect
         if ($status):
             $this->message->set("Picture deleted successfully", "success", TRUE);
             redirect("student/edit_form");
@@ -276,6 +345,7 @@ class Student extends MY_Controller {
             $this->message->set("Picture delete failed", "error", TRUE);
             redirect("student/edit_form");
         endif;
+
     }
     //view single student
     public function view_student($id=null){
@@ -298,6 +368,7 @@ class Student extends MY_Controller {
     }
     //View all students
     public function view_all($record_offset = 0){
+    	
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');
 
@@ -310,12 +381,15 @@ class Student extends MY_Controller {
 
         foreach($data["students"] as $student):
 
-            $student_skills = $this->student_model->get_student_skills($student->student_id);
-            $student->skills = '';
+            $student_skills = $this->student_model->get_student_skills($student->student_id);		
+            $student->skills  = '';
 
             foreach($student_skills as $skill):
                 $student->skills = $student->skills . $skill->skill . ', ';
             endforeach;
+			
+			if(!empty($student->skills))
+				$student->skills = substr($student->skills, 0, -2);
 
         endforeach;
 

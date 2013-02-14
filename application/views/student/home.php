@@ -4,28 +4,137 @@ $this->load->library('message');
 $this->load->view('student/includes/header');
 ?>
 
+<section id="alert" style="display: none;">
+</section>
+
 <?php if (strlen($this->message->display()) > 0): ?>
 <section>
     <?php echo $this->message->display(); ?>
 </section>
 <?php endif;?>
 
-<?php $this->load->view('student/tutorial_slider'); ?>
-
 <?php
-$data["jquery"] = "
+$data["jquery"] = '
 		$(function(){
-			$('#slides').slides({
+			$("#slides").slides({
 				preload: true,
-				preloadImage: 'img/loading.gif',
+				preloadImage: "img/loading.gif",
 				play: 5000,
 				pause: 5000,
 				hoverPause: true,
-				paginationClass: 'slide_pagination'
+				paginationClass: "slide_pagination"
 			});
-		});
-";
+
+';
+        if (!empty($profile_missing)):
+
+
+        $data["jquery"] = $data["jquery"] . '
+            $("#green_button").click(function(){
+        var skillsVar = $(".as-values").val();
+        var bioVar = $("#bio").val();
+        if (!skillsVar && !bioVar){
+            $("#modal_notice").html("<span style=\"color:#ff0000;\">You must enter skills and a bio.</span>");
+        } else {
+       $.ajax({
+           url: "'.base_url().'/student/ajax_edit/",
+            type: "POST",
+            data: {skills: skillsVar, bio: bioVar},
+           success: function(response, textStatus, jqXHR){
+               // log a message to the console
+               console.log("It worked!");
+               $("#alert").html("<div style=\"padding:5px;\">Thanks for adding your skills and bio. Have any feedback? Send an e-mail to <a href=\"mailto:bccss.development@gmail.com\" target=\"_blank\">bccss.development@gmail.com</a>.</div>").show();
+               $(".modal_close").click();
+           },
+           // callback handler that will be called on error
+           error: function(jqXHR, textStatus, errorThrown){
+               // log the error to the console
+               console.log(
+                   "The following error occured: "+
+                       textStatus, errorThrown
+               );
+               console.log("Response was: " + response);
+           },
+           // callback handler that will be called on completion
+           // which means, either on success or error
+           complete: function(){
+               // enable the inputs
+               console.log("Completed");
+
+           }
+        });
+        }
+    });
+
+        $("a[rel*=leanModal]").leanModal({closeButton: ".modal_close"});
+        $("#loadModal").click();
+
+		$("#skills").autoSuggest("'.base_url().'index.php/student/autosuggest_skills", {startText: "Enter skills here.", searchObjProps: "name", selectedItemProp: "name", selectedValuesProp: "name", minChars: 1, matchCase: false});
+
+		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});';
+
+        endif;
+
+$data["jquery"] = $data["jquery"] . '
+		});';
+
 ?>
+<?php if (!empty($profile_missing)): ?>
+
+<a id="loadModal" rel="leanModal" name="signup" href="#signup"></a>
+<div id="signup" class="rounded_corners">
+<div class="grey_header" style="padding:10px;">
+<span style="font-size:18px; font-weight:bold; text-shadow:0 1px 0 #ffffff;">Complete Your Profile</span>
+    <br /><div style="width:80%">Add your skills and a personal bio to help other students get in touch with you!</div>
+    <a class="modal_close" href="#"></a>
+</div>
+    <?php echo form_open('#', array("id" => "edit-profile")); ?>
+    <?php
+    $user_has_no_skills = in_array('skills', $profile_missing);
+    $user_has_no_bio = in_array('bio', $profile_missing);
+
+    $submit_button = array(
+        'name'	=> 'submit',
+        'value' => 'Save Profile',
+        'type'  => 'button',
+        'id'    => 'green_button',
+        'style' => 'float:right;'
+    );
+
+    if ($user_has_no_skills):
+
+            $skills = array(
+                'id'=>'skills',
+                'name' => 'skills',
+                'title' => 'ie- HTML, PHP, Marketing, PR, Accounting. Comma separated if multiple',
+                'value' => set_value('skills', $student_logged_in->skills),
+                'style' => 'width:340px;'
+            );
+
+            echo form_label('Skills:', 'skills'); echo form_input($skills);
+    endif;
+
+    if ($user_has_no_bio):
+
+        $bio = array(
+            'id'    => 'bio',
+            'name' 	=> 'bio',
+            'value' => set_value('bio', $student_logged_in->bio),
+            'title' => 'Tell us a little bit about yourself. Are you looking to get involved in a startup? Are you looking for co-founders? Or just looking to work on a project?',
+            'style' => 'height:100px;'
+        );
+
+        echo form_label('Personal Bio:', 'bio'); echo form_textarea($bio);
+
+    endif;
+
+    ?>
+    <div style="float:left; width:250px; height:40px; font-size:12px;" id="modal_notice"></div>
+    <?php echo form_submit($submit_button); ?>
+
+    <?php echo form_close(); ?>
+</div>
+<?php endif; ?>
 
 <?php if ($profile_completion != '100%'): ?>
 <section>
@@ -79,7 +188,10 @@ $data["jquery"] = "
 
         </div>
     </div>
+
 </section>
+
+<?php $this->load->view('student/tutorial_slider'); ?>
 
 
 <?php $this->load->view('includes/footer', $data); ?>
