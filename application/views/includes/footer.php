@@ -56,7 +56,7 @@
 		    var item = selection[i];
 			//var haha = g_map.data.getFormattedValue(item.row, item.column);
 			var skill = g_map.data.getFormattedValue(item.row, 0);
-			window.location = skill;
+			window.location = 'student/search/' + skill;
 		  }
 		}
     </script>
