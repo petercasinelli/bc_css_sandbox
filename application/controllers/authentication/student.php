@@ -191,6 +191,11 @@ class Student extends CI_Controller {
 
     }
 
+    //Redirect back from Facebook to add team form
+    public function fb_login_add_new_team(){
+
+    }
+
 }
 
 /* End of file authentication/student.php */
