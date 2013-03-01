@@ -30,6 +30,11 @@ class Home extends CI_Controller {
         $this->load->view('contact', $data);
     }
 
+    public function testimonials(){
+        $data['current_page'] = 'testimonials';
+        $this->load->view('testimonials', $data);
+    }
+
     public function forgot_password(){
 
         $data["current_page"] = 'student';
@@ -108,6 +113,11 @@ class Home extends CI_Controller {
 
 
 
+    }
+
+    public function register_and_add_team(){
+        $data["current_page"] = 'register_and_add_team';
+        $this->load->view('register_and_add_team', $data);
     }
 
 

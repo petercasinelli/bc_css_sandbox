@@ -104,6 +104,8 @@ class Team extends MY_Controller {
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
         $team_name = $this->input->post('team_name', TRUE);
+        $bcvc_team = $this->input->post('bcvc_team', TRUE);
+
         $team_description = $this->input->post('team_description', TRUE);
         $team_needs = $this->input->post('team_needs', TRUE);
 
@@ -124,9 +126,11 @@ class Team extends MY_Controller {
             $this->load->model('team_model');
 
             $team_data = array('team_name' => $team_name,
+                'bcvc_team' => $bcvc_team,
                 'team_description' => $team_description,
                 'team_needs' => $team_needs
             );
+
 
             //This automatically adds team with the current student being the administrator
             $team_id = $this->team_model->add_team($team_data, $this->current_student_id);
@@ -176,6 +180,7 @@ class Team extends MY_Controller {
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
         $team_name = $this->input->post('team_name', 			   TRUE);
+        $bcvc_team = $this->input->post('bcvc_team', 			   TRUE);
         $team_description = $this->input->post('team_description', TRUE);
         $team_needs = $this->input->post('team_needs', TRUE);
 
@@ -193,6 +198,7 @@ class Team extends MY_Controller {
         else:
 
             $team_data = array('team_name' => $team_name,
+                'bcvc_team' => $bcvc_team,
                 'team_description' => $team_description,
                 'team_needs' => $team_needs
             );

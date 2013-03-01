@@ -45,14 +45,16 @@ class Student extends CI_Controller {
 
     }
 
-    public function fb_login(){
+    public function fb_login($redirect_uri = NULL){
         $data["current_page"] = 'login';
+        if ($redirect_uri != NULL)
+            $redirect_uri = site_url($redirect_uri);
 
         $this->load->library('fb_connect');
         $user_id = $this->fb_connect->get_user_id();
 
         if(!$user_id):
-            $login = $this->fb_connect->get_login_url();
+            $login = $this->fb_connect->get_login_url($redirect_uri);
             redirect($login);
         endif;
 
@@ -73,11 +75,11 @@ class Student extends CI_Controller {
                 $this->load->view('student/student_login_form', $data);
                 return;
             endif;
-   
+
 			$fb_login_confirmation = $this->session->userdata('fb_login_confirmed');
+
 			if(!empty($fb_login_confirmation)):
 				$student = $this->student_model->oauth_authenticate($uid, $email, $first_name, $last_name);
-
                 if($student):
                     //Set last login to now
                     $this->student_model->set_last_login($student->student_id);
@@ -86,8 +88,13 @@ class Student extends CI_Controller {
                                           'check_profile_completion' => true
                                         );
                     $this->session->set_userdata($session_data);
-                    redirect('student/');
+                    //In case the user is already logged into Facebook, set redirect_uri
+                    if ($redirect_uri != NULL)
+                        redirect($redirect_uri);
+                    else
+                        redirect('student/');
                 endif;
+
 			else:
             	//If there is an existing student NORMAL Account AND the student FB login is UNCONFIRMED, ask if they would like to connect the accounts
             	$existing_student = $this->student_model->check_for_existing_student($first_name, $last_name, $email, 'facebook');
@@ -96,7 +103,7 @@ class Student extends CI_Controller {
                 	redirect('authentication/student/connect_fb_with_previous_account/');
             	else:
 					$this->session->set_userdata(array('fb_login_confirmed' => TRUE));
-            		redirect('authentication/student/fb_login');
+                    $this->fb_login(array('team','add_form'));
             	endif;
 			endif;
 		endif;
@@ -189,6 +196,22 @@ class Student extends CI_Controller {
 
 
 
+    }
+
+    /*Redirect back from Facebook to a given page
+    Ie- student wants to create an account to add a team; they login with Facebook
+    and are redirected to the add team page
+    */
+    public function fb_login_and_redirect($redirect_uri){
+
+        switch($redirect_uri):
+            case "add_team":
+                $this->fb_login(array('team','add_form'));
+                break;
+            default:
+                $this->fb_login();
+                break;
+        endswitch;
     }
 
 }

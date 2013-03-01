@@ -47,6 +47,7 @@ $route['authentication/student'] = "authentication/student/index";
 $route['register/student'] = "register/student/index";
 $route['about'] = 'home/about';
 $route['contact'] = 'home/contact';
+$route['testimonials'] = 'home/testimonials';
 $route['forgot_password'] = 'home/forgot_password';
 $route['reset_password'] = 'home/reset_password';
 

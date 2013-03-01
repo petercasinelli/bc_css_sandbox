@@ -34,10 +34,25 @@ endif;
 
 <?php if (strlen($team_data->team_needs) > 0): ?>
 <section>
-    <h1>What we need:</h1>
-    <section class="listing">
-        <?php echo $team_data->team_needs; ?>
-    </section>
+    <div class="grid">
+        <div class="half">
+            <h1>What we need:</h1>
+            <section class="listing">
+                <?php echo $team_data->team_needs; ?>
+            </section>
+        </div>
+        <div class="half">
+            <h1>Achievements/Competitions</h1>
+            <h2>Is this team competing in the Boston College Venture Competition?</h2>
+            <section class="listing">
+                <?php
+                ($team_data->bcvc_team == TRUE) ? $competing_for_bcvc = 'Yes, this team is competing.' : $competing_for_bcvc = 'No, this team is not competing.';
+                echo $competing_for_bcvc;
+                ?>
+            </section>
+        </div>
+    </div>
+
 </section>
 <?php endif; ?>
 <section>
