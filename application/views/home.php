@@ -49,7 +49,7 @@ endif;
         <div class="half">
             <h1 style="font-size:20px; line-height:25px;">BCVC Team Registration</h1>
             <p>Are you competing in the Boston College Venture Competition? Easily register on BC Skills, add your current team members, and start recruiting other team members. It only takes 30 seconds to set up a profile, team, and presence on BC Skills. Get started now!</p>
-            <a href="#"><button style="font-size:14px;">Register for BCVC &raquo;</button></a>
+            <?php echo anchor('/home/register_and_add_team','<button style="font-size:14px;">Register for BCVC &raquo;</button>'); ?>
         </div>
         <div class="half">
             <h1 style="font-size:20px; line-height:25px;">BC Skills Testimonial</h1>
