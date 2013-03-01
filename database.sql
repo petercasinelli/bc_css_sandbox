@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2012 at 09:48 PM
+-- Generation Time: Mar 01, 2013 at 05:46 PM
 -- Server version: 5.5.25
 -- PHP Version: 5.4.4
 
@@ -91,7 +91,7 @@ CREATE TABLE `students` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` datetime NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=86 ;
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `student_skills` (
   `student_id` int(11) unsigned NOT NULL,
   `skill_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`student_skills_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=239 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=241 ;
 
 -- --------------------------------------------------------
 
@@ -115,11 +115,12 @@ CREATE TABLE `student_skills` (
 CREATE TABLE `teams` (
   `team_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `team_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `bcvc_team` tinyint(1) NOT NULL,
   `team_description` blob NOT NULL,
   `team_needs` blob NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,7 @@ CREATE TABLE `team_members` (
   `student_id` int(11) unsigned NOT NULL,
   `account_type` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`team_members_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
