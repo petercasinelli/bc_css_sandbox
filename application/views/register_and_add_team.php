@@ -18,7 +18,7 @@ $this->load->view('includes/header');
     <p>If you already have an account or you need to create a new account, login with Facebook. After logging in,
         you will be able to create your team, invite team members, and recruit other students.</p>
     <div class="grid">
-            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_add_new_team" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_and_redirect/add_team" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
     </div>
 <br />
 </section>

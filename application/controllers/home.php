@@ -111,8 +111,8 @@ class Home extends CI_Controller {
     }
 
     public function register_and_add_team(){
-        $data["current_page"] = 'add_team';
-        $this->load->view('team/add_team', $data);
+        $data["current_page"] = 'register_and_add_team';
+        $this->load->view('register_and_add_team', $data);
     }
 
 
