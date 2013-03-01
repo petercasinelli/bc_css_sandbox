@@ -18,6 +18,7 @@ $search = array(
 				echo anchor(base_url(), 'Home', ($current_page == 'index') ? array('class' => 'active') : '');
 				echo anchor('about', 'About', ($current_page == 'about') ? array('class' => 'active') : '');
 				echo anchor('contact', 'Contact', ($current_page == 'contact') ? array('class' => 'active') : '');
+                echo anchor('testimonials', 'Testimonials', ($current_page == 'testimonials') ? array('class' => 'active') : '');
 			?>
 			</nav>
 			<div class="float-right">
