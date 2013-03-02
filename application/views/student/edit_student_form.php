@@ -213,8 +213,8 @@ endif; ?>
 
 <?php 
 $student_skills_length = strlen($this_students_skills);
-if ($student_skills_length > 0) 
+if ($student_skills_length > 0){
 	$preFill = substr($this_students_skills, 0, $student_skills_length - 1);
-$data['preFill'] = $preFill;
-//print_r($preFill);exit(1);
+	$data['preFill'] = $preFill;
+}
 $this->load->view('includes/footer', $data); ?>

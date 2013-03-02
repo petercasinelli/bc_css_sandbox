@@ -4,7 +4,7 @@
     </div>
 </section>
 <script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
-<script type="text/javascript"> var SkillsSettings = {startValues : '<?= $preFill; ?>'}</script>
+<script type="text/javascript"> var SkillsSettings = {startValues : '<?= (isset($preFill)) ? $preFill : ""; ?>'}</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/script.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/tipsy.js" type="text/javascript"></script>
@@ -12,7 +12,7 @@
 <script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
 <?php if (!empty($profile_missing)): ?>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
 <?php endif; ?>
 
 <script type="text/javascript">
@@ -35,12 +35,11 @@
 								minChars: 1, 
 								matchCase: false
 						};
-							
-		if(SkillsSettings.startValues)
+		if(SkillsSettings.startValues){
 			skills_config.preFill = SkillsSettings.startValues;
-		else
+		}else{
 			skills_config.startText = "Enter your skills here";
-			
+		}
 		$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
 		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
 	});

@@ -40,19 +40,5 @@ $(function(){
 	});
 	
 	$("#loadModal").click();
-	
-	$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', {
-		startText : "Enter skills here.",
-		searchObjProps : "name",
-		selectedItemProp : "name",
-		selectedValuesProp : "name",
-		minChars : 1,
-		matchCase : false
-	});
-	
-	$("#edit-profile [title]").tipsy({
-		trigger : "focus",
-		gravity : "w"
-	});
 
 });
