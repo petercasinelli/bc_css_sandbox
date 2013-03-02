@@ -211,19 +211,10 @@ endif; ?>
 
 
 
-<?php
+<?php 
 $student_skills_length = strlen($this_students_skills);
-if ($student_skills_length > 0){
-    $preFill = 'preFill: "'.substr($this_students_skills, 0, $student_skills_length - 1).'"';
-}
-else
-    $preFill = 'startText: "Enter your skills here"';
-
-
-$data["jquery"] = '$(function(){
-		$("#skills").autoSuggest("'.base_url().'index.php/student/autosuggest_skills", {'.$preFill.', searchObjProps: "name", selectedItemProp: "name", selectedValuesProp: "name", minChars: 1, matchCase: false});
-
-		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
-	});';
-
+if ($student_skills_length > 0) 
+	$preFill = substr($this_students_skills, 0, $student_skills_length - 1);
+$data['preFill'] = $preFill;
+//print_r($preFill);exit(1);
 $this->load->view('includes/footer', $data); ?>
