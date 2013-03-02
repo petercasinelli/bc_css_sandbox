@@ -115,12 +115,10 @@ class Student extends MY_Controller {
         $data["upload_errors"] = '';
 
         $student_skills = $this->student_model->get_student_skills($this->current_student_id);
-
-        $data["this_students_skills"] = '';
-        foreach($student_skills as $skill):
-            $data["this_students_skills"] = $data["this_students_skills"] . $skill->skill . ',';
-        endforeach;
-
+        $skills = "";
+        foreach($student_skills as $row) 
+        	$skills .= $row->skill . ',';
+		$data["this_students_skills"] = $skills;
         $this->load->view('student/edit_student_form', $data);
     }
 
