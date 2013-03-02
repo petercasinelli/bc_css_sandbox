@@ -44,6 +44,7 @@ $route['404_override'] = '';
 
 //Default page routes
 $route['authentication/student'] = "authentication/student/index";
+$route['authentication/student/login/(:any)'] = "authentication/student/login/$1";
 $route['register/student'] = "register/student/index";
 $route['about'] = 'home/about';
 $route['contact'] = 'home/contact';

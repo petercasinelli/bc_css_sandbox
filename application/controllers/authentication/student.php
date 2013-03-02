@@ -16,7 +16,7 @@ class Student extends CI_Controller {
 
     }
 
-    public function login(){
+    public function login($redirect_uri = NULL){
 
         $email = $this->input->post('email', TRUE);
         $password = $this->input->post('password', TRUE);
@@ -38,9 +38,10 @@ class Student extends CI_Controller {
                                  );
 
             $this->session->set_userdata($session_data);
-            //echo 'Logged in as ' . $this->session->userdata('student_id');
-            redirect('student/');
-
+            if($redirect_uri == "team_registration")
+            	redirect("/team/add_form");
+			else 
+				redirect('/student');
         endif;
 
     }
@@ -137,7 +138,6 @@ class Student extends CI_Controller {
 
     //A user has recognized they had a previous account and are attempting to login to merge with their Facebook account
     public function login_to_merge_with_facebook(){
-
         //Oauth_uid and student_id were set as flash session variables to hide from user for security reasons
         $oauth_uid = $this->session->userdata('oauth_uid');
         $student_id = $this->session->userdata('temp_student_id');
@@ -186,16 +186,8 @@ class Student extends CI_Controller {
                     redirect('student/');
 
                 endif;
-
-
             endif;
-
-
-
         endif;
-
-
-
     }
 
     /*Redirect back from Facebook to a given page
