@@ -78,45 +78,38 @@ $skills = array(
     'id'=>'skills',
     'name' => 'skills',
     'title' => 'Comma separated if multiple',
-    'value' => set_value('skills')
+    'value' => set_value('skills', $this_students_skills)
 );
-
 $twitter = array(
     'name' => 'twitter',
     'title' => '@username',
     'value' => set_value('twitter', $student_logged_in->twitter)
 );
-
 $facebook = array(
     'name' => 'facebook',
     'title' => 'Full Facebook Profile URL',
     'value' => set_value('facebook', $student_logged_in->facebook)
 );
-
 $linkedin = array(
     'name' => 'linkedin',
     'title' => 'Full LinkedIn Public Profile URL',
     'value' => set_value('linkedin', $student_logged_in->linkedin)
 );
-
 $dribbble = array(
     'name' => 'dribbble',
     'title' => 'Full Dribbble Profile URL',
     'value' => set_value('dribbble', $student_logged_in->dribbble)
 );
-
 $github = array(
     'name' => 'github',
     'title' => 'Full GitHub Profile URL',
     'value' => set_value('github', $student_logged_in->github)
 );
-
 $submit_button = array(
     'name'	=> 'submit',
     'value' => 'Save Profile',
     'type'  => 'submit'
 );
-
 ?>
 
 <?php
