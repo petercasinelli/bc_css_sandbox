@@ -493,9 +493,10 @@ class Student_model extends CI_Model {
 		$this->db->join("student_skills", "skills.skill_id = student_skills.skill_id");
 		$this->db->group_by("skills.skill");
 		$this->db->order_by("num_students", "DESC");
+		$this->db->limit("20");
 		$query = $this->db->get();
 		return $query->result();
-
 	}
+	
 
 }
