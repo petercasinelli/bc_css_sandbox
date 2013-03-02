@@ -3,19 +3,28 @@
         <h3>BC Skills is a <a href="https://github.com/pcas00/bc_css_sandbox" target="_blank">BC CSS project</a> with contributions from Alan Lin, Ron Radu, Matt Keemon, Kevin Lamb, and Peter Casinelli.</h3>
     </div>
 </section>
-
+<script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/script.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/tipsy.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.autoSuggest.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
-<?php if (!empty($jquery)): ?>
-<script type="text/javascript">
-        <?php echo $jquery; ?>
-</script>
+<?php if (!empty($profile_missing)): ?>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
 <?php endif; ?>
-<script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
+<script type="text/javascript">
+	$(function() {
+		$("#slides").slides({
+			preload : true,
+			preloadImage : "img/loading.gif",
+			play : 5000,
+			pause : 5000,
+			hoverPause : true,
+			paginationClass : "slide_pagination"
+		});
+	});
+</script>
 <script src="<?php echo base_url(); ?>assets/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">
