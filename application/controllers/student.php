@@ -131,30 +131,8 @@ class Student extends MY_Controller
         $github 	  	  = $this->input->post('github', 	  	   TRUE);
 
         $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('first', 'first name', 					'trim|required|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('last', 'last name', 						'trim|required|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('email', 'e-mail address', 			    'trim|required|htmlspecialchars|xss_clean');
-        if (!empty($password)){
-            $this->form_validation->set_rules('password', 'password', 					'trim|required|htmlspecialchars|xss_clean|matches[confirm_password]');
-            $this->form_validation->set_rules('confirm_password', 'confirmed password', 'trim|required|htmlspecialchars|xss_clean');
-        }
-
-        $this->form_validation->set_rules('year', 'year of graduation', 			'trim|htmlspecialchars|xss_clean|numeric|max_length[4]|valid_graduation_date');
-        $this->form_validation->set_rules('school', 'school', 						'trim|htmlspecialchars|xss_clean|numeric');
-        $this->form_validation->set_rules('major', 'major', 						'trim|htmlspecialchars|xss_clean|numeric');
-        $this->form_validation->set_rules('status', 'status', 						'trim|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('bio', 'bio', 							'trim|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('skills', 'skills',						'trim|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('software', 'software',					'trim|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('twitter', 'twitter',						'trim|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('facebook', 'facebook',					'trim|htmlspecialchars|xss_clean|valid_url');
-        $this->form_validation->set_rules('linkedin', 'linkedin',					'trim|htmlspecialchars|xss_clean|valid_url');
-        $this->form_validation->set_rules('dribbble', 'dribbble',					'trim|htmlspecialchars|xss_clean|valid_url');
-        $this->form_validation->set_rules('github', 'github',						'trim|htmlspecialchars|xss_clean|valid_url');
-
         //If form does not validate according to rules above, load form view with error messages
-        if ($this->form_validation->run() == FALSE) {
+        if (!$this->form_validation->valid_profile_edit($password)) {
             $data["student_logged_in"] = $this->current_student_info;
             //Create list of majors for view
             $data["majors"] = $this->student_model->get_majors();
