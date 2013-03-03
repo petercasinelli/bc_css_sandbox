@@ -305,10 +305,6 @@ label, input {
 	display:block;
 }
 
-#search {
-	font-size:1em;
-}
-
 input, select, textarea {
 	margin:0 0 15px;
 	font-size:1em;
@@ -488,4 +484,11 @@ div.prof_pic_section{
 
 .bio_rest{
 	display:none;
+}
+
+.typeahead_submit{
+	float:right;
+	margin-right:160px;
+	width:100px;
+	height:38px;
 }

@@ -11,6 +11,7 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.autoSuggest.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/typeahead/typeahead.min.js"></script>
 <?php if (!empty($profile_missing)): ?>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
 <?php endif; ?>
@@ -45,7 +46,6 @@
 	});
 </script>
 <script type="text/javascript">
-
 	$(document).ready(function() {
   		$(".bio_more").click(function() {
   			$(this).parent().children(".bio_rest").css("display", "inline");
@@ -53,7 +53,24 @@
 		});
 	});
 </script>
-         
+<script type="text/javascript">
+	$('.typeahead').typeahead({                                   
+	  name: 'languages',                                                             
+	  local: [                                                                    
+	    "PHP",
+	    "JavaScript",
+	    "Python",
+	    "HTML",
+	    "CSS",
+	    "Java",
+	    "Haskell",
+	    "OCaml",
+	    "Ruby",
+	    "Scala",
+	    ".NET"                                                            
+	  ]                                                                           
+	});
+</script>        
 <script src="<?php echo base_url(); ?>assets/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">
