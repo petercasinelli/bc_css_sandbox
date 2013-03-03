@@ -104,7 +104,7 @@ class Student extends CI_Controller {
                 	redirect('authentication/student/connect_fb_with_previous_account/');
             	else:
 					$this->session->set_userdata(array('fb_login_confirmed' => TRUE));
-                    $this->fb_login(array('team','add_form'));
+                    $this->fb_login(uri_string($redirect_uri));
             	endif;
 			endif;
 		endif;
