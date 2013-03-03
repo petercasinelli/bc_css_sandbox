@@ -3,7 +3,7 @@
 				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
 				<img src="<?php echo $pic_src; ?>" width="50px" height="50px" class="float-left"/>
 
-                <hgroup style="float:left; margin:0px; width:340px;">
+                <hgroup style="float:left; margin:0px;">
                     <h2><?php echo anchor('student/view_student/'.$student->student_id, $student->first . ' ' . $student->last); ?></h2>
                     <h3><?php if($student->school_id) echo $student->school;
                         if($student->year) echo ' ' . $student->year;
@@ -24,13 +24,15 @@
                     echo $student->skills;
                 ?>
 
-                <br />
+                <br>
+         
 				<b>Bio</b>: <?php
 				if (empty($student->bio))
 					echo "Unavailable";
-                if (strlen($student->bio) > 150)
-                    echo substr($student->bio,0,150) . '...' . anchor('student/view_student/'.$student->student_id, ' More');
-                else
+                if (strlen($student->bio) > 150){
+                	$rest = "<span class=\"bio_rest\">" . substr($student->bio, 150) . "</span>";
+                    echo substr($student->bio,0,150) . '<span class="bio_more">...' . '<a>More</a>' . "</span>".  $rest;
+                }else
                     echo $student->bio;
                     ?>
 
@@ -69,4 +71,5 @@
         <a href="mailto:<?php echo $student->email; ?>">Contact</a>
     </div>
 </div>
+
 		

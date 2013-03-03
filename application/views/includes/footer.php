@@ -12,9 +12,8 @@
 <script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
 <?php if (!empty($profile_missing)): ?>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
 <?php endif; ?>
-
 <script type="text/javascript">
 	$(function() {
 		$("#slides").slides({
@@ -26,7 +25,8 @@
 			paginationClass : "slide_pagination"
 		});
 	});
-
+</script>
+<script type="text/javascript">
 	$(function(){
 		var skills_config = {
 								searchObjProps: "name", 
@@ -43,8 +43,17 @@
 		$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
 		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
 	});
-	
 </script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+  		$(".bio_more").click(function() {
+  			$(this).parent().children(".bio_rest").css("display", "inline");
+  			$(this).remove();
+		});
+	});
+</script>
+         
 <script src="<?php echo base_url(); ?>assets/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">

@@ -21,15 +21,13 @@ $submit_button = array(
     <h2>Search for a student based on name, programming languages, school, or major: </h2>
     <?php
     $this->load->view('student/search_form');
-
-
     if (empty($students)):
         ?>
         <h2>There are currently no students.</h2>
         <?php
     endif;
     ?>
-    <div class="grid">
+    <div class="grid">  
 	<?php 
 	foreach($students as $student):
 		$data["student"] = $student;

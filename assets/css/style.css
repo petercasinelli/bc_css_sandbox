@@ -483,3 +483,9 @@ div.prof_pic_section{
 	float:left;
 	margin: 0px;
 }
+
+/*Students */
+
+.bio_rest{
+	display:none;
+}
