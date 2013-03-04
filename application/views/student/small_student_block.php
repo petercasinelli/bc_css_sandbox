@@ -30,9 +30,11 @@
 				if (empty($student->bio))
 					echo "Unavailable";
                 if (strlen($student->bio) > 150){
-                	$rest = "<span class=\"bio_rest\">" . substr($student->bio, 150) . "</span>";
-                    echo substr($student->bio,0,150) . '<span class="bio_more">...' . '<a>More</a>' . "</span>".  $rest;
-                }else
+                    echo substr($student->bio,0,150) . 
+                    '<span class="bio_more">...' . 
+                        '<a>More</a>' . 
+                     "</span>".  "<span class=\"bio_rest\">" . substr($student->bio, 150) . "</span>";
+                } else
                     echo $student->bio;
                     ?>
 
