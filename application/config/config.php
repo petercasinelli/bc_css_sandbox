@@ -16,6 +16,7 @@
 */
 $config['base_url']	= '';
 $config['student_pic_upload_path'] = 'uploads/students/pictures/';
+$config['asset_path'] = 'application/assets';
 /*
 |--------------------------------------------------------------------------
 | Index File

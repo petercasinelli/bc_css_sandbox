@@ -66,8 +66,8 @@
                 </div>
 
             </div>
-            <a href="#" class="prev"><img src="<?php echo base_url(); ?>/assets/images/slides/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
-            <a href="#" class="next"><img src="<?php echo base_url(); ?>/assets/images/slides/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+            <a href="#" class="prev"><img src="<?php echo asset_url(); ?>/images/slides/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+            <a href="#" class="next"><img src="<?php echo asset_url(); ?>/images/slides/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
         </div>
     </div>
 </div>

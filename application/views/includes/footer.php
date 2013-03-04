@@ -5,15 +5,15 @@
 </section>
 <script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
 <script type="text/javascript"> var SkillsSettings = {startValues : '<?= (isset($preFill)) ? $preFill : ""; ?>'}</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/js/script.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/js/tipsy.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.autoSuggest.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/js/slides.min.jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.leanModal.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/typeahead/typeahead.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="<?php echo asset_url() ?>/js/script.js" type="text/javascript"></script>
+<script src="<?php echo asset_url() ?>/js/tipsy.js" type="text/javascript"></script>
+<script src="<?php echo asset_url(); ?>/js/jquery.autoSuggest.js" type="text/javascript"></script>
+<script src="<?php echo asset_url(); ?>/js/slides.min.jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo asset_url(); ?>/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" src="<?php echo asset_url(); ?>/js/typeahead/typeahead.min.js"></script>
 <?php if (!empty($profile_missing)): ?>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/profileSuggest.js"></script>
+	<script type="text/javascript" src="<?php echo asset_url(); ?>/js/profileSuggest.js"></script>
 <?php endif; ?>
 <script type="text/javascript">
 	$(function() {
@@ -41,7 +41,7 @@
 		}else{
 			skills_config.startText = "Enter your skills here";
 		}
-		$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
+		$("#skills").autoSuggest(Settings.asset_url + 'index.php/student/autosuggest_skills', skills_config);
 		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
 	});
 </script>
@@ -71,7 +71,7 @@
 	  ]                                                                           
 	});
 </script>        
-<script src="<?php echo base_url(); ?>assets/js/gcharts/skills_barchart.js" type="text/javascript"></script>
+<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">
 
