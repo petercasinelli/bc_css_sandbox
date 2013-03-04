@@ -5,7 +5,7 @@
 </section>
 <script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
 <script type="text/javascript"> var SkillsSettings = {startValues : '<?= (isset($preFill)) ? $preFill : ""; ?>'}</script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="<?php echo asset_url() ?>/js/script.js" type="text/javascript"></script>
 <script src="<?php echo asset_url() ?>/js/tipsy.js" type="text/javascript"></script>
 <script src="<?php echo asset_url(); ?>/js/jquery.autoSuggest.js" type="text/javascript"></script>
@@ -71,7 +71,7 @@
 	  ]                                                                           
 	});
 </script>        
-<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>
+<!--<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>-->
 <!-- Google Analysitcs -->
 <script type="text/javascript">
 
