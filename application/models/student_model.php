@@ -340,6 +340,7 @@ class Student_model extends CI_Model {
     public function find_skill($skill){
 
         $this->db->from("skills")->like("skill", $skill);
+        $this->db->limit("10");
         $query = $this->db->get();
         $result = $query->result();
 
