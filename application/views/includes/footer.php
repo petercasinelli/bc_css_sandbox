@@ -41,7 +41,7 @@
 		}else{
 			skills_config.startText = "Enter your skills here";
 		}
-		$("#skills").autoSuggest(Settings.asset_url + 'index.php/student/autosuggest_skills', skills_config);
+		$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
 		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
 	});
 </script>
