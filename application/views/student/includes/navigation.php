@@ -9,7 +9,7 @@ $search = array(
 <header>
     <div>
         <div id="logo">
-            <a href="http://bcskills.com"><img src="<?php echo base_url(); ?>/assets/images/logo.png" alt="BC Skills"></a>
+            <a href="http://bcskills.com"><img src="<?php echo asset_url(); ?>/images/logo.png" alt="BC Skills"></a>
         </div>
 
         <nav>

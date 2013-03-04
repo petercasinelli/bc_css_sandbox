@@ -12,7 +12,7 @@ function student_picture_src($student_id, $oauth_uid, $picture){
 		if($oauth_uid):
 			return "https://graph.facebook.com/". $oauth_uid . "/picture?type=large"; //high resolution
 		else:
-			return base_url() . 'assets/images/blank_person.png'; //dummy image
+			return asset_url(). '/images/blank_person.png'; //dummy image
 		endif;
 	endif;
 	

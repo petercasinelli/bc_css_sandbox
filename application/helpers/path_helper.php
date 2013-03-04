@@ -11,6 +11,7 @@ if (!function_exists('asset_url'))
         return base_url() . $CI->config->item('asset_path');
     }
 	
+}
 	function student_picture_url()
 	{
 		$CI =& get_instance();
@@ -18,6 +19,5 @@ if (!function_exists('asset_url'))
        	return base_url() . $CI->config->item('student_pic_upload_path');
 	}
 	
-}
 
 /*End of path_helper located in application/helpers*/
