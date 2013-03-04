@@ -18,7 +18,7 @@ $submit_button = array(
 <section>
 	<h1>View all students</h1>
 
-    <h2>Search for a student based on name, programming languages, school, or major: </h2>
+    <h2>Search for a student based on name, <?php echo anchor("explore", "programming languages"); ?>, school, or major: </h2>
     <?php
     $this->load->view('student/search_form');
     if (empty($students)):

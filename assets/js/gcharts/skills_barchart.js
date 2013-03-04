@@ -23,7 +23,7 @@ function drawChart() {
 
 	//set char options
 	var options = {
-		title : 'Skills',
+		title : 'Programming Languages',
 		backgroundColor : '#f4f4f4'
 	};
 

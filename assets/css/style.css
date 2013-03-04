@@ -492,3 +492,8 @@ div.prof_pic_section{
 	width:100px;
 	height:38px;
 }
+
+/*explore*/
+section.explore {
+	overflow:hidden;
+}

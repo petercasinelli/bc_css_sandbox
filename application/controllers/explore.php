@@ -4,7 +4,7 @@
   * through visualizations.
   * @version 0.1
   */
-class Explore extends CI_Controller 
+class Explore extends MY_Controller 
 {
     
     public function __construct() 
@@ -15,7 +15,8 @@ class Explore extends CI_Controller
 
     public function index() 
     {
-        $data['current_page'] = 'index';
+        $data['current_page'] = 'student';
+        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $this -> load -> view('explore/index', $data);
     }
     
