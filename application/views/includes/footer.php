@@ -25,52 +25,47 @@
 			hoverPause : true,
 			paginationClass : "slide_pagination"
 		});
+
+        var skills_config = {
+            searchObjProps: "name",
+            selectedItemProp: "name",
+            selectedValuesProp: "name",
+            minChars: 2,
+            matchCase: false
+        };
+        if(SkillsSettings.startValues){
+            skills_config.preFill = SkillsSettings.startValues;
+        }else{
+            skills_config.startText = "Enter your skills here";
+        }
+        $("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
+        $("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
+
+        $(".bio_more").click(function() {
+            $(this).parent().children(".bio_rest").css("display", "inline");
+            $(this).remove();
+        });
+
+        $('.typeahead').typeahead({
+            name: 'languages',
+            local: [
+                "PHP",
+                "JavaScript",
+                "Python",
+                "HTML",
+                "CSS",
+                "Java",
+                "Haskell",
+                "OCaml",
+                "Ruby",
+                "Scala",
+                ".NET"
+            ]
+        });
+
 	});
 </script>
-<script type="text/javascript">
-	$(function(){
-		var skills_config = {
-								searchObjProps: "name", 
-								selectedItemProp: "name", 
-								selectedValuesProp: "name", 
-								minChars: 2, 
-								matchCase: false
-						};
-		if(SkillsSettings.startValues){
-			skills_config.preFill = SkillsSettings.startValues;
-		}else{
-			skills_config.startText = "Enter your skills here";
-		}
-		$("#skills").autoSuggest(Settings.base_url + 'index.php/student/autosuggest_skills', skills_config);
-		$("#edit-profile [title]").tipsy({trigger:"focus", gravity:"w"});
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-  		$(".bio_more").click(function() {
-  			$(this).parent().children(".bio_rest").css("display", "inline");
-  			$(this).remove();
-		});
-	});
-</script>
-<script type="text/javascript">
-	$('.typeahead').typeahead({                                   
-	  name: 'languages',                                                             
-	  local: [                                                                    
-	    "PHP",
-	    "JavaScript",
-	    "Python",
-	    "HTML",
-	    "CSS",
-	    "Java",
-	    "Haskell",
-	    "OCaml",
-	    "Ruby",
-	    "Scala",
-	    ".NET"                                                            
-	  ]                                                                           
-	});
-</script>        
+
 <!--<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>-->
 <!-- Google Analysitcs -->
 <script type="text/javascript">
