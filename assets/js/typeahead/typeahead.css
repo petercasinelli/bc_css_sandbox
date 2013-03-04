@@ -78,8 +78,12 @@
   white-space: nowrap;
   cursor: pointer;
 }
+.tt-is-under-cursor{
+	background-color:#3d913c;
+}
 .tt-suggestion * {
   white-space: normal;
+  color:#000;
 }
 /* rtl support */
 /* ----------- */
