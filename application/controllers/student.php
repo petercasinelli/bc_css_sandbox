@@ -10,36 +10,26 @@ class Student extends MY_Controller
     {
         parent::__construct();
         $this->load->helper("image_helper");
+        $this->load->helper('studentprofile_helper');
     }
 
     public function index()
     {
         $this->load->model("student_model");
         $this->load->model("team_model");
-
-        $this->load->helper('studentprofile_helper');
+        
         $data["current_page"] = 'index';
         $data["student_logged_in"] = $this->current_student_info;
 
         //Retrieve 2 new students/teams and send to view
         $data["new_students"] = $this->student_model->get_new_students(5);
         $data["new_teams"] = $this->team_model->get_new_teams(5);
-        foreach($data["new_teams"] as $new_team)
+        foreach($data["new_teams"] as $new_team) {
             $new_team->team_members = $this->team_model->get_team_members($new_team->team_id);
-        
+        }
         $data['profile_completion'] = profile_completed($this->current_student_info);
         //If this is the first time the user has logged in, check to see if they have not filled out skills or bio
-        if ($this->session->userdata('check_profile_completion')) {
-            $profile_missing = array();
-            if (empty($this->current_student_info->bio))
-                array_push($profile_missing, 'bio');
-            if (empty($this->current_student_info->skills))
-                array_push($profile_missing, 'skills');
-            if (!empty($profile_missing))
-                $data["profile_missing"] = $profile_missing;
-            $this->session->set_userdata('check_profile_completion', false);
-        }
-
+        $data = profile_fill_notification($data, $this->current_student_info);
         //Get a count of all notifications for this user and pass count to student/includes/navigation view
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $this->load->view('student/home', $data);
@@ -66,11 +56,8 @@ class Student extends MY_Controller
 		$search_results = $this->student_model->search_students($decoded_query, $record_offset);
         $data["students"] = $search_results["result"];
         
-        foreach($data["students"] as $student){
-            $student_skills = $this->student_model->get_student_skills($student->student_id);
-            $student->skills = '';
-            foreach($student_skills as $skill)
-                $student->skills = $student->skills . $skill->skill . ', ';
+        foreach($data["students"] as $student) {
+            $student->skills = get_user_skill_list($this->student_model->get_student_skills($student->student_id));
         }
 
         $data["student_logged_in"] = $this->current_student_info;
@@ -97,11 +84,7 @@ class Student extends MY_Controller
         $data["schools"] = $this->student_model->get_schools();
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $data["upload_errors"] = '';
-        $student_skills = $this->student_model->get_student_skills($this->current_student_id);
-        $skills = "";
-        foreach($student_skills as $row) 
-        	$skills .= $row->skill . ',';
-		$data["this_students_skills"] = $skills;
+		$data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($this->current_student_id), true);
         $this->load->view('student/edit_student_form', $data);
     }
 
@@ -139,13 +122,7 @@ class Student extends MY_Controller
             //Create list of schools view
             $data["schools"] = $this->student_model->get_schools();
             //Load skills again
-            $student_skills = $this->student_model->get_student_skills($this->current_student_id);
-
-            $data["this_students_skills"] = '';
-            
-            foreach($student_skills as $skill) {
-                $data["this_students_skills"] = $data["this_students_skills"] . $skill->skill . ',';
-            }
+            $data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($student_id), true);
 
             $data["upload_errors"] = '';
             $this->load->view('student/edit_student_form', $data);
@@ -299,12 +276,7 @@ class Student extends MY_Controller
         if($data['student'] && !is_null($id)) {
             $data["current_page"] = 'student';
             $data["notifications"] = $this->student_model->get_notifications($id);
-            $data['student']->skills = '';
-            $student_skills = $this->student_model->get_student_skills($id);
-            
-            foreach($student_skills as $skill) {
-                $data['student']->skills = $data['student']->skills . $skill->skill . ', ';
-            }
+            $data['student']->skills = $student->skills  = get_user_skill_list($this->student_model->get_student_skills($id));;
             
             $this->load->view('student/view_student', $data);
         } else {
@@ -319,23 +291,13 @@ class Student extends MY_Controller
     {
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');
-
+        
         $data["current_page"] = 'student';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $data["students"] = $this->student_model->get_all_students($record_offset);
 
         foreach($data["students"] as $student) {
-            $student_skills = $this->student_model->get_student_skills($student->student_id);		
-            $student->skills  = '';
-
-            foreach($student_skills as $skill) {
-                $student->skills = $student->skills . $skill->skill . ', ';
-            }
-			
-			if(!empty($student->skills)) {
-				$student->skills = substr($student->skills, 0, -2);
-            }
-            
+            $student->skills  = get_user_skill_list($this->student_model->get_student_skills($student->student_id));
         }
 
         $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "student/view_all"));
