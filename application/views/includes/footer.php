@@ -66,7 +66,7 @@
 	});
 </script>
 
-<!--<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>-->
+<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">
 
