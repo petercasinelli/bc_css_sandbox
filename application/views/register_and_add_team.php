@@ -19,7 +19,7 @@ $this->load->helper('form');
     <p>If you already have an account or you need to create a new account, login with Facebook. After logging in,
         you will be able to create your team, invite team members, and recruit other students.</p>
    
-            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_and_redirect/add_team" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_and_redirect/add_team" id="facebookButton"><img src="<?php echo asset_url(); ?>/images/facebook_button.png"></a>
             <div style="width:290px; margin:auto;">
 	<a href="javascript:;" onclick="toggleExpand(0)" id="sign-in-without-fb">Sign in without Facebook</a>
         | <?php echo anchor('/forgot_password', 'Forget password?'); ?>

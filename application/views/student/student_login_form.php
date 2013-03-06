@@ -10,7 +10,7 @@ $this->load->view('includes/header');
         <?php echo $this->message->display(); ?>
     </section>
     <?php endif;?>
-	<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button.png"></a>
+	<a href="<?php echo base_url(); ?>index.php/authentication/student/fb_login" id="facebookButton"><img src="<?php echo asset_url(); ?>/images/facebook_button.png"></a>
 	<hr style="width:400px;">
 	<div style="width:290px; margin:auto;">
 	<a href="javascript:;" onclick="toggleExpand(0)" id="sign-in-without-fb">Sign in without Facebook</a>
