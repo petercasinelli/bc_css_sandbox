@@ -276,7 +276,7 @@ class Student extends MY_Controller
         if($data['student'] && !is_null($id)) {
             $data["current_page"] = 'student';
             $data["notifications"] = $this->student_model->get_notifications($id);
-            $data['student']->skills = $student->skills  = get_user_skill_list($this->student_model->get_student_skills($id));;
+            $data['student']->skills = get_user_skill_list($this->student_model->get_student_skills($id));
             
             $this->load->view('student/view_student', $data);
         } else {

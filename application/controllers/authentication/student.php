@@ -48,7 +48,7 @@ class Student extends CI_Controller {
 
     public function fb_login($redirect_uri = NULL){
         $data["current_page"] = 'login';
-        if ($redirect_uri != NULL)
+        if (!is_null($redirect_uri))
             $redirect_uri = site_url($redirect_uri);
 
         $this->load->library('fb_connect');
@@ -90,7 +90,7 @@ class Student extends CI_Controller {
                                         );
                     $this->session->set_userdata($session_data);
                     //In case the user is already logged into Facebook, set redirect_uri
-                    if ($redirect_uri != NULL)
+                    if (!is_null($redirect_uri))
                         redirect($redirect_uri);
                     else
                         redirect('student/');
@@ -104,7 +104,10 @@ class Student extends CI_Controller {
                 	redirect('authentication/student/connect_fb_with_previous_account/');
             	else:
 					$this->session->set_userdata(array('fb_login_confirmed' => TRUE));
-                    $this->fb_login(uri_string($redirect_uri));
+                    if (!is_null($redirect_uri))
+                        $this->fb_login(uri_string($redirect_uri));
+                    else
+                        $this->fb_login('authentication/student/fb_login');
             	endif;
 			endif;
 		endif;
