@@ -213,4 +213,15 @@ class Team_Model extends CI_Model {
         return $results;
     }
 
+    public function get_team_founders($team_id){
+
+        $this->db->select('students.first, students.last, students.email, students.student_id');
+        $this->db->join('students', 'students.student_id = team_members.student_id');
+        $query = $this->db->get_where('team_members', array('team_id' => $team_id, 'account_type' => 1));
+
+        $founders = $query->result();
+
+        return $founders;
+    }
+
 }
