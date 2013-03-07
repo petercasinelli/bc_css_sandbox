@@ -24,6 +24,7 @@ class Team extends MY_Controller {
 
         foreach($data['teams'] as $key => $team):
             $team->team_members = $this->team_model->get_team_members($team->team_id);
+            $team->team_founders = $this->team_model->get_team_founders($team->team_id);
             //$data['teams'][$key]->teams = $this->team_model->get_team_members($team->team_id);
         endforeach;
 

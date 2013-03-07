@@ -515,8 +515,9 @@ section.explore {
     float:left;
 }
 
-.team_block h1, h2, h3, p, img
+.team_block p, h1, h2, h3, img
 {
-    margin:5px 0 0 10px;
+    margin-left:5px;
 }
+
 
