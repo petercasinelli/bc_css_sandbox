@@ -19,9 +19,10 @@ $this->load->view('student/includes/header');
         <h2>There are currently no teams.</h2>
         <?php
     endif;
-    
+    $data['number'] = 0;
     foreach($teams as $team):
     	$data['team'] = $team;
+        $data['number']++;
     	$this->load->view('team/team_block', $data);
     endforeach; 
     echo $this->pagination->create_links();

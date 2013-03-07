@@ -29,7 +29,7 @@ endif;
 
 <section>
     <h1>About Us</h1>
-    <?php $this->load->view("team/team_block", array("team"=>$team_data)); ?>
+    <?php $this->load->view("team/new_team_block", array("team"=>$team_data)); ?>
 </section>
 
 <?php if (strlen($team_data->team_needs) > 0): ?>
@@ -43,6 +43,7 @@ endif;
         </div>
         <div class="half">
             <h1>Achievements/Competitions</h1>
+            <img src="<?php echo asset_url(); ?>/images/bcvc-logo.jpg" width="100" height="75" style="float:left; padding-right:10px;" />
             <h2>Is this team competing in the Boston College Venture Competition?</h2>
             <section class="listing">
                 <?php

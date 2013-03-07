@@ -1,20 +1,46 @@
-<section class="listing">
-			<header>
-				<h2><?php echo anchor('team/view/'.$team->team_id,$team->team_name, array("class"=>"name")); //$team->team_name; ?></h2>
-			</header>
-			<div class="float-right" style="padding:10px;">
-			<?php
+<div class="team_block">
+    <?php if ($team->bcvc_team){ ?>
+    <img src="<?php echo asset_url(); ?>/images/bcvc-bw.png" width="60" height="41" style="float:right;"/>
+    <?php }
+    if (!empty($team->team_founders))
+        echo mailto($team->team_founders[0]->email,'<button style="float:right;">Get In Touch</button>');
+    ?>
+    <header>
+        <h1><?php echo anchor('team/view/'.$team->team_id,$team->team_name); ?></h1>
+        <?php if (!empty($team->team_founders)){ ?>
+        <h2>Founder: <?php echo anchor('student/view/'.$team->team_founders[0]->student_id, $team->team_founders[0]->first . ' ' . $team->team_founders[0]->last); ?></h2>
+        <?php } ?>
+    </header>
 
-			foreach ($team->team_members as $team_member):
+    <p><?php
+        if (strlen($team->team_description) > 120)
+            $team->team_description = substr($team->team_description, 0, 120) . '...';
 
-				$img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
-				echo '<img src="'.$img_src.'" style="width:25px; height:25px; border:1px solid #ccc; float:left; padding:1px;">';
-			endforeach;
-			?>
-			</div>
-			<br />
-			<p class="team_listing">
-			<?php echo $team->team_description; ?>
-			</p>
-</section>
-		
+        echo $team->team_description;
+        echo ' ' .anchor('team/view/'.$team->team_id,'Read More');
+        ?></p>
+    <p>
+
+
+    </p>
+    <p>
+    <h3>Team Members:</h3>
+    <?php
+    if (empty($team->team_members))
+        echo '<p>There are currently no team members.</p>';
+    foreach ($team->team_members as $team_member):
+
+        $img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
+        echo '<img src="'.$img_src.'" style="width:25px; height:25px; float:left; padding:1px; display: block;">';
+    endforeach;
+    ?>
+    </p>
+</div>
+<?php if ($number % 2 == 0){ ?>
+<br style="clear:both;" />
+<?php //echo $number;
+} ?>
+
+
+
+
