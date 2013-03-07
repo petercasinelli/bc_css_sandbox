@@ -24,7 +24,8 @@ $this->load->view('student/includes/header');
     	$data['team'] = $team;
         $data['number']++;
     	$this->load->view('team/team_block', $data);
-    endforeach; 
+    endforeach;
+    echo '<br style="clear:both">';
     echo $this->pagination->create_links();
     ?>
 </section>
