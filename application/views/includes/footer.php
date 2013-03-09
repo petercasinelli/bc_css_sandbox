@@ -6,12 +6,15 @@
 <script type="text/javascript"> var Settings = {base_url: '<?= base_url(); ?>'}</script>
 <script type="text/javascript"> var SkillsSettings = {startValues : '<?= (isset($preFill)) ? $preFill : ""; ?>'}</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo asset_url(); ?>/js/jQuery-slimScroll-1.0.6/jquery.slimscroll.min.js"></script>
 <script src="<?php echo asset_url() ?>/js/script.js" type="text/javascript"></script>
 <script src="<?php echo asset_url() ?>/js/tipsy.js" type="text/javascript"></script>
 <script src="<?php echo asset_url(); ?>/js/jquery.autoSuggest.js" type="text/javascript"></script>
 <script src="<?php echo asset_url(); ?>/js/slides.min.jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/typeahead/typeahead.min.js"></script>
+<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>
 <?php if (!empty($profile_missing)): ?>
 	<script type="text/javascript" src="<?php echo asset_url(); ?>/js/profileSuggest.js"></script>
 <?php endif; ?>
@@ -65,8 +68,12 @@
 
 	});
 </script>
-
-<script src="<?php echo asset_url(); ?>/js/gcharts/skills_barchart.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $('.slimScrollBox').slimScroll({
+        position: 'right',
+        height: '220px'
+    });
+</script>
 <!-- Google Analysitcs -->
 <script type="text/javascript">
 
