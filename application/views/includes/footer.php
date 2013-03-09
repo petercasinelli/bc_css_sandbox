@@ -63,6 +63,14 @@
             ]
         });
 
+        <?php if ($join_a_team){ ?>
+        $("#join-a-team").tipsy({gravity:"n"});
+        <?php } ?>
+
+        <?php if ($get_in_touch){ ?>
+        $(".get-in-touch").tipsy({gravity:"n"});
+        <?php } ?>
+
 	});
 </script>
 
