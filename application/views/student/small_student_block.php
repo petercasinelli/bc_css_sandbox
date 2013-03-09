@@ -1,5 +1,5 @@
 <div class="slimScrollBox">
-<div class="listing half" style="width:400px; min-height:220px">
+<div class="half" style="width:400px; min-height:220px">
 			<header>
 				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
 				<img src="<?php echo $pic_src; ?>" width="50px" height="50px" class="float-left"/>

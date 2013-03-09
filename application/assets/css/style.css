@@ -218,15 +218,19 @@ hr {
     border:1px solid #cdcdcd;
 }
 
-/*
+.slimScrollBox p {
+    margin:0 10px;
+}
+
 .listing {
     border-radius:3px;
     padding:5px;
     margin:20px;
-    background:#ececec;
+    /*background:#ececec;*/
     background: #fff;
     border:1px solid #cdcdcd;
-}*/
+    overflow:auto;
+}
 
 .listing h2, .listing h3 {
     margin:0 10px;
