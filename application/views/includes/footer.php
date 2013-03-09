@@ -66,11 +66,11 @@
             ]
         });
 
-        <?php if ($join_a_team){ ?>
+        <?php if (!empty($join_a_team) && $join_a_team){ ?>
         $("#join-a-team").tipsy({gravity:"n"});
         <?php } ?>
 
-        <?php if ($get_in_touch){ ?>
+        <?php if (!empty($get_in_touch) && $get_in_touch){ ?>
         $(".get-in-touch").tipsy({gravity:"n"});
         <?php } ?>
 
