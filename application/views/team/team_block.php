@@ -8,7 +8,7 @@
     <header>
         <h1><?php echo anchor('team/view/'.$team->team_id,$team->team_name); ?></h1>
         <?php if (!empty($team->team_founders)){ ?>
-        <h2>Founder: <?php echo anchor('student/view/'.$team->team_founders[0]->student_id, $team->team_founders[0]->first . ' ' . $team->team_founders[0]->last); ?></h2>
+        <h2>Founder: <?php echo anchor('student/view_student/'.$team->team_founders[0]->student_id, $team->team_founders[0]->first . ' ' . $team->team_founders[0]->last); ?></h2>
         <?php } ?>
     </header>
 
@@ -31,7 +31,7 @@
     foreach ($team->team_members as $team_member):
 
         $img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
-        echo '<img src="'.$img_src.'" style="width:25px; height:25px; float:left; padding:1px; display: block;">';
+        echo '<img src="'.$img_src.'" style="width:25px; height:25px; float:left; padding:1px; display: block;" class="get-in-touch" title="'.$team_member->first. ' ' .$team_member->last.': '.$team_member->email.'">';
     endforeach;
     ?>
     </p>
