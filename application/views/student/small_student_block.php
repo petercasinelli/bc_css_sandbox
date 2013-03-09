@@ -2,7 +2,7 @@
 <div class="half" style="width:400px; min-height:220px">
 			<header>
 				<?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
-				<img src="<?php echo $pic_src; ?>" width="50px" height="50px" class="float-left"/>
+				<img src="<?php echo $pic_src; ?>" width="50px" height="50px" class="float-left" style="padding:0 5px 5px 0;"/>
 
                 <hgroup style="float:left; margin:0px;">
                     <h2><?php echo anchor('student/view_student/'.$student->student_id, $student->first . ' ' . $student->last); ?></h2>
@@ -42,7 +42,6 @@
 
 			</p>
     <div>
-        <br />
 				<span class="social-links">
 					<?php
                     if (!empty($student->twitter)):
