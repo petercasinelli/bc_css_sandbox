@@ -31,7 +31,7 @@
     foreach ($team->team_members as $team_member):
 
         $img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
-        echo '<img src="'.$img_src.'" style="width:25px; height:25px; float:left; padding:1px; display: block;" class="get-in-touch" title="'.$team_member->first. ' ' .$team_member->last.': '.$team_member->email.'">';
+        echo '<a href="'.base_url().'student/view_student/'.$team_member->student_id.'"><img src="'.$img_src.'" style="width:25px; height:25px; float:left; padding:1px; display: block;" class="get-in-touch" title="'.$team_member->first. ' ' .$team_member->last.': '.$team_member->email.'"></a>';
     endforeach;
     ?>
     </p>
