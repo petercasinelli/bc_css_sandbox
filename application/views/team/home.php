@@ -32,8 +32,6 @@ $this->load->view('student/includes/header');
 
 
 <?php
-$data["jquery"] = '
-$(function(){
-    $("#join-a-team").tipsy({gravity:"n"});
-});';
+$data["join_a_team"] = TRUE;
+$data["get_in_touch"] = TRUE;
 $this->load->view('includes/footer', $data); ?>
