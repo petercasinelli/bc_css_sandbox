@@ -166,22 +166,19 @@ class Student_model extends CI_Model {
         $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
 		
 		foreach($search_terms as $key=>$value){
-			//for the first value, we'll take it through all. Afterwords, do ORS.
+			//first search must start with LIKE
 			if($key == 0){
-				$this->db->like('first', $value);
-        		$this->db->or_like('last', $value);
-        		$this->db->or_like('school', $value);
-        		$this->db->or_like('major', $value);
-        		$this->db->or_like('skill', $value);
-			}else{
-				$this->db->or_like('first', $value);
-				$this->db->or_like('last', $value);
-        		$this->db->or_like('school', $value);
-        		$this->db->or_like('major', $value);
-        		$this->db->or_like('skill', $value);
-			}
+			    $this->db->like('first', $value);
+			} else {
+			    $this->db->or_like('first', $value);
+            }
+            
+			$this->db->or_like('last', $value);
+        	$this->db->or_like('school', $value);
+        	$this->db->or_like('major', $value);
+        	$this->db->or_like('skill', $value);
 		}
-
+        
         $this->db->distinct('students.student_id');
         $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
         //$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
