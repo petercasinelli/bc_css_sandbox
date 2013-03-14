@@ -21,7 +21,7 @@ $this->load->view('student/includes/header');
 	        ?>
 	        <p class="green-alert">Your search returned <b><?php echo $search_results; ?> student<?php if ($search_results > 1) echo 's'; ?></b></p>
 	        <?php
-	        $this->load->view('student/search_form');
+	        $this->load->view('student/search_form', array("search_query"=>$search_query));
 	    endif;
 	endif;
     //Counter kept for expand/hide student profile

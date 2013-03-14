@@ -6,7 +6,13 @@ $search = array(
     'class' => 'typeahead',
     'id' => 'search',
     'placeholder' => 'ie- Python',
-    'style' => 'float:left; margin-right:10px;');
+    'style' => 'float:left; margin-right:10px;'
+);
+
+//sticky field
+if(isset($search_query)) {
+    $search['value'] = $search_query;
+}
 
 $submit_button = array(
     'name'	=> 'submit',
