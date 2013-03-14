@@ -6,9 +6,8 @@
         <?php
 
         foreach ($team->team_members as $team_member):
-
             $img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
-            echo '<img src="'.$img_src.'" style="width:25px; height:25px; border:1px solid #ccc; float:left; padding:1px;">';
+            echo '<a class="small_member_pic" href="'.base_url().'student/view_student/'.$team_member->student_id.'"><img src="'.$img_src.'"></a>';
         endforeach;
         ?>
     </div>

@@ -568,6 +568,16 @@ section.explore {
     float:left;
 }
 
+.small_member_pic img{
+	width:25px; 
+	height:25px; 
+	float:left; 
+	padding:1px;
+	display: block;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+}
+
 .team_block p, h1, h2, h3, img
 {
     margin-left:5px;

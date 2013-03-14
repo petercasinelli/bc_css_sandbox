@@ -1,7 +1,7 @@
 <section class="listing">
     <header>
         <?php $pic_src = student_picture_src($student->student_id, $student->oauth_uid, $student->picture); ?>
-        <img src="<?php echo $pic_src; ?>" width="25px" height="25px" class="float-left"/>
+        <a class="small_member_pic" href="<?php echo base_url();?>student/view_student/<?php echo $student->student_id; ?>"><img src="<?php echo $pic_src; ?>" width="25px" height="25px" class="float-left"/></a>
         <hgroup class="float-left">
             <h2><?php echo anchor('student/view_student/'.$student->student_id, $student->first .' '.$student->last); ?></h2>
 
