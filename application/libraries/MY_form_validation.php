@@ -36,6 +36,21 @@ class MY_Form_validation extends CI_Form_validation
         
         return $this->run();
     }
+
+    public function valid_team()
+    {
+        $this->set_rules('team_name', 'team name', 'trim|required|htmlspecialchars|xss_clean');
+        $this->set_rules('team_description', 'team description', 'trim|required|htmlspecialchars|xss_clean');
+        
+        return $this->run();
+    }
+    
+    public function valid_team_update()
+    {
+        $this->set_rules('team_update', 'team update', 'trim|required|htmlspecialchars|xss_clean');
+        
+        return $this->run();
+    }
 	
 	public function bc_email($email)
 	{

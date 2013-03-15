@@ -77,6 +77,7 @@ class Team extends MY_Controller
 
     public function add()
     {
+        $this->load->library('form_validation');
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
@@ -85,12 +86,8 @@ class Team extends MY_Controller
 
         $team_description = $this->input->post('team_description', TRUE);
         $team_needs = $this->input->post('team_needs', TRUE);
-
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('team_name', 'team name', 'trim|required|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('team_description', 'team description', 'trim|required|htmlspecialchars|xss_clean');
         //If form does not validate according to rules above, load form view with error messages
-        if ($this->form_validation->run() == FALSE){
+        if (!$this->form_validation->valid_team()){
             $data["student_logged_in"] = $this->current_student_info;
             $this->load->view('team/add_team_form', $data);
         } else{ //display students according to search term
@@ -132,33 +129,31 @@ class Team extends MY_Controller
     public function edit($team_id)
     {
         $this->load->helper('team_helper');
+        $this->load->library('form_validation');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
-
+        
         $team_name = $this->input->post('team_name', 			   TRUE);
         $bcvc_team = $this->input->post('bcvc_team', 			   TRUE);
         $team_description = $this->input->post('team_description', TRUE);
         $team_needs = $this->input->post('team_needs', TRUE);
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('team_name', 'team name', 'trim|required|htmlspecialchars|xss_clean');
-        $this->form_validation->set_rules('team_description', 'team description', 'trim|required|htmlspecialchars|xss_clean');
-
         //If form does not validate according to rules above, load form view with error messages
-        if ($this->form_validation->run() == FALSE){
+        if (!$this->form_validation->valid_team()){
             $data["student_logged_in"] = $this->current_student_info;
+            $data["team_data"] = $this->team_model->get_team($team_id);
+            array_push($data, array("team_id" => $team_id));
             $this->load->view('team/edit_team_form', $data);
         } else{
-            $team_data = array('team_name' => $team_name,
-                'bcvc_team' => $bcvc_team,
-                'team_description' => $team_description,
-                'team_needs' => $team_needs
-            );
-
+            $team_data = array(       'team_name' => $team_name,
+                                      'bcvc_team' => $bcvc_team,
+                               'team_description' => $team_description,
+                                     'team_needs' => $team_needs
+                         );
             $update_team = $this->team_model->update_team($team_id, $team_data, $this->current_student_id);
-
+            
             if ($team_id > 0){
                 $this->message->set("You have successfully edited your team", "success", TRUE);
                 $path = 'team/view/'.$team_id;
@@ -189,15 +184,15 @@ class Team extends MY_Controller
     public function add_update($team_id)
     {
         $this->load->helper('team_helper');
+        $this->load->library('form_validation');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $team_update = $this->input->post('team_update', TRUE);
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('team_update', 'team update', 'trim|required|htmlspecialchars|xss_clean');
+
         //If form does not validate according to rules above, load form view with error messages
-        if ($this->form_validation->run() == FALSE){
+        if (!$this->form_validation->valid_team_update()){
             $data["student_logged_in"] = $this->current_student_info;
             $data["team_data"] = $this->team_model->get_team($team_id);
             $this->load->view('team/add_team_update_form', $data);
