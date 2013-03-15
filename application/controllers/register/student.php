@@ -57,4 +57,4 @@ class Student extends CI_Controller
 }
 
 /* End of file authentication/student.php */
-/* Location: ./application/controllers/authentication/student.php */
+/* Location: ./application/controllers/registration/student.php */
