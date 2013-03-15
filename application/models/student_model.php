@@ -39,33 +39,13 @@ class Student_model extends CI_Model {
         $this->db->join('schools','schools.school_id = students.school_id', 'left');
 
         $query = $this->db->get_where('students', array('students.student_id'=>$student_id));
-
         $result = $query->row();
 
         return $result;
     }
 
-    public function add_student_skill($student_id, $skill_id){
-
-        $students_skills_query = $this->db->select('student_skills.skill_id')->from('student_skills')->where(array('student_id'=>$student_id, 'skill_id' => $skill_id))->get();
-        $student_skills = $students_skills_query->result();
-
-        if (empty($student_skills)):
-
-            $query = $this->db->insert('student_skills', array('student_id' => $student_id, 'skill_id' => $skill_id));
-            $affected_rows = $this->db->affected_rows();
-            return $affected_rows;
-
-        else:
-
-            return 0;
-        endif;
-
-    }
-
     public function get_student_skills($student_id)
     {
-
         $this->db->select('skills.skill_id, skill');
         $query = $this->db->join("skills", "skills.skill_id = student_skills.skill_id")->get_where('student_skills', array('student_id'=>$student_id));
         $result = $query->result();
@@ -73,19 +53,21 @@ class Student_model extends CI_Model {
         return $result;
     }
 
-    function parse_skills($skills){
+    function parse_skills($skills)
+    {
         $new_array = explode(",", $skills);
 
-        foreach($new_array as $key=>$item):
+        foreach($new_array as $key=>$item){
             $new_array[$key] = trim($item);
-        endforeach;
-
+        }
+        
         $skills = array_filter($new_array);
 
         return $skills;
     }
 
-    public function update_student_skills($student_id, $skills){
+    public function update_student_skills($student_id, $skills)
+    {
         $original_skills = $this->student_model->get_student_skills($student_id);
         $skills_value = "";
         $rows_affected = 0;
@@ -134,7 +116,6 @@ class Student_model extends CI_Model {
 
     public function get_search_student_count($query)
     {
-
         $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
         $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
