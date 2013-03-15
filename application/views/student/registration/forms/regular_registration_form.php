@@ -1,8 +1,13 @@
 <?php
-	$name = array(
-				'name' 	=> 'name',
-				'value' => set_value('name')
-				 );	
+	$first = array(
+        'name'  => 'first',
+        'value' => set_value('first')
+    );
+
+    $last = array(
+        'name'  => 'last',
+        'value' => set_value('last')
+    );
 
 	$email = array(
 				'name' 	=> 'email',
@@ -21,7 +26,8 @@
 ?>
 			<?php echo form_open('register/student/register', array("id" => "edit-profile")); ?>
 			
-			<?php echo form_label('Full Name:', 'name'); echo form_input($name); ?>
+			<?php echo form_label('First Name:', 'first'); echo form_input($first);?>
+            <?php echo form_label('Last Name:', 'last'); echo form_input($last); ?>
 			<!--<h2>Personal Information</h2>-->
 			<?php //echo form_label('First Name:', 'first'); echo form_input($first);?>
 			<?php //echo form_label('Last Name:', 'last'); echo form_input($last); ?>

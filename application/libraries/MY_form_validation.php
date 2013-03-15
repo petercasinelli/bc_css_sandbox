@@ -51,6 +51,17 @@ class MY_Form_validation extends CI_Form_validation
         
         return $this->run();
     }
+    
+    public function valid_new_user()
+    {
+        $this->set_message('is_unique', 'You already have an account with BC Skills. Click on the Login button above to log in.');
+        $this->set_rules('first', 'first name', 'trim|required|htmlspecialchars|xss_clean');
+        $this->set_rules('last', 'last name', 'trim|required|htmlspecialchars|xss_clean');
+        $this->set_rules('email', 'BC e-mail address', 'trim|required|htmlspecialchars|xss_clean|valid_email|bc_email|is_unique[students.email]');
+        $this->set_rules('password', 'password', 'trim|required|htmlspecialchars|xss_clean|');
+        
+        return $this->run();
+    }
 	
 	public function bc_email($email)
 	{
