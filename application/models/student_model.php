@@ -47,7 +47,8 @@ class Student_model extends CI_Model {
     public function get_student_skills($student_id)
     {
         $this->db->select('skills.skill_id, skill');
-        $query = $this->db->join("skills", "skills.skill_id = student_skills.skill_id")->get_where('student_skills', array('student_id'=>$student_id));
+        $this->db->join("skills", "skills.skill_id = student_skills.skill_id");
+        $query = $this->db->get_where('student_skills', array('student_id'=>$student_id));
         $result = $query->result();
 
         return $result;
@@ -76,30 +77,34 @@ class Student_model extends CI_Model {
             $skills_value .= $row->skill . ",";
         }
         //parse the string and filter null and empty values
-        $skill_array= $this->parse_skills($skills_value);
-        $new_skill_array = $this->parse_skills($skills);
+        $skill_array = $this->parse_skills($skills_value); //original skills
+        $new_skill_array = $this->parse_skills($skills); //input skill
 
         //find difference between new and original tag list
-        $added = array_diff($new_skill_array, $skill_array);
+        $added = array_diff($new_skill_array, $skill_array); //values in array1 not in array2
         $deleted = array_diff($skill_array, $new_skill_array);
 
-        if(!empty($added) || empty($skill_array)):
+        if(!empty($added)){
             $this->student_model->add_skills($student_id, $added);
             $rows_affected += $this->db->affected_rows();
-        endif;
+        }
 
-        if(!empty($deleted) || empty($new_skill_array)):
+        if(!empty($deleted)){
             $this->student_model->delete_skills($student_id, $deleted);
             $rows_affected += $this->db->affected_rows();
-        endif;
+        }
 
-        return $rows_affected;
+        if($rows_affected > 0){
+            return TRUE;
+        } else{
+            return FALSE;
+        }
+        
     }
 
     public function add_student($student_data)
     {
         $this->db->insert('students', $student_data);
-
         //Return student_id
         return $this->db->insert_id();
     }
@@ -110,8 +115,12 @@ class Student_model extends CI_Model {
         $this->db->update('students', $student_data);
 
         $affected_rows = $this->db->affected_rows();
-        //Return # of affected rows
-        return $affected_rows;
+        
+        if($affected_rows > 0){
+            return TRUE;
+        } else{
+            return FALSE;
+        }
     }
 
     public function get_search_student_count($query)
@@ -303,19 +312,17 @@ class Student_model extends CI_Model {
         endif;
     }
 
-    public function add_skill($skill){
-
+    public function add_skill($skill)
+    {
         $skill_data = array('skill' => $skill);
         $add_skill = $this->db->insert('skills', $skill_data);
         $skill_id = $this->db->insert_id();
 
         return $skill_id;
-
-
-
     }
 
-    public function find_skill($skill){
+    public function find_skill($skill)
+    {
 
         $this->db->from("skills")->like("skill", $skill);
         $this->db->limit("10");
@@ -325,18 +332,17 @@ class Student_model extends CI_Model {
         return $result;
     }
 
-    public function get_all_skills(){
-
+    public function get_all_skills()
+    {
         $query = $this->db->get('skills');
         $results = $query->result();
 
         return $results;
     }
 
-    public function add_skills($student_id, $skills){
-
+    public function add_skills($student_id, $skills)
+    {
         foreach($skills as $value):
-
             $this->db->select('skill_id');
             $this->db->from('skills');
             $this->db->where('skill', $value);
@@ -353,7 +359,6 @@ class Student_model extends CI_Model {
                 $this->db->where('skill_id', $skill_id);
                 $duplicate_check_result = $this->db->get();
                 $duplicate_rows = $duplicate_check_result->num_rows();
-
                 //If question not yet associated with tag
                 if($duplicate_rows == 0):
                     $this->db->set('student_id', $student_id);
@@ -375,8 +380,8 @@ class Student_model extends CI_Model {
         endforeach;
     }
 
-    public function delete_skills($student_id, $skills){
-
+    public function delete_skills($student_id, $skills)
+    {
         foreach($skills as $value):
             //unsupported by active record
             $delete_query = "DELETE
@@ -403,8 +408,8 @@ class Student_model extends CI_Model {
         endforeach;
     }
 
-    public function get_new_students($limit){
-
+    public function get_new_students($limit)
+    {
         $this->db->limit($limit);
         $this->db->join('majors','majors.major_id = students.major_id', 'left');
         $this->db->join('schools','schools.school_id = students.school_id', 'left');
@@ -416,8 +421,8 @@ class Student_model extends CI_Model {
 
     }
 
-    public function reset_password($email, $password){
-
+    public function reset_password($email, $password)
+    {
         $this->db->where('email', $email);
         $query = $this->db->update('students', array('password' => $password));
         $affected_rows = $this->db->affected_rows();
@@ -427,8 +432,8 @@ class Student_model extends CI_Model {
     }
 
     //ci AR does not support clause grouping
-    public function check_for_existing_student($first, $last, $email, $type){
-        
+    public function check_for_existing_student($first, $last, $email, $type)
+    {
         $where = "(first = '$first' 
                    AND last = '$last' 
                    OR email = '$email') 
@@ -441,8 +446,8 @@ class Student_model extends CI_Model {
     }
 
     //Right now strictly being used for checking previous student data needed for account merging
-    public function get_previous_student($student_id){
-
+    public function get_previous_student($student_id)
+    {
         $this->db->select('first, last, email');
         $this->db->where('student_id', $student_id);
         $query = $this->db->get('students');
@@ -452,8 +457,8 @@ class Student_model extends CI_Model {
         return $result;
     }
 
-    public function merge_with_fb_account($student_id, $oauth_uid){
-
+    public function merge_with_fb_account($student_id, $oauth_uid)
+    {
         $this->db->where('student_id', $student_id);
         $this->db->limit(1);
         $query = $this->db->update('students', array('oauth_uid' => $oauth_uid));
@@ -462,7 +467,8 @@ class Student_model extends CI_Model {
         return $affected_rows;
     }
 	
-	public function get_student_skill_distribution(){
+	public function get_student_skill_distribution()
+	{
 		$this->db->select("skills.skill, count(*) as num_students");
 		$this->db->from("skills");
 		$this->db->join("student_skills", "skills.skill_id = student_skills.skill_id");
@@ -472,6 +478,5 @@ class Student_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
 
 }
