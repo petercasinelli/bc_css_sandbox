@@ -2,51 +2,48 @@
 
 class Student extends CI_Controller {
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('student_model');
         $this->load->library('message');
     }
 
-
-    public function index(){
-
+    public function index()
+    {
         $data['current_page'] = 'login';
         $this->load->view('student/student_login_form', $data);
-
     }
 
-    public function login($redirect_uri = NULL){
-
+    public function login($redirect_uri = NULL)
+    {
         $email = $this->input->post('email', TRUE);
         $password = $this->input->post('password', TRUE);
-
         $student = $this->student_model->authenticate($email, $password);
 
-        if (empty($student)):
+        if (empty($student)){
             $data['current_page'] = "index";
             $this->message->set("You have entered incorrect login information. Please try again:", "error");
             $this->load->view('student/student_login_form', $data);
-        else:
-            //We only want one result (and should only be passed one result)
-            //$student = $student[0];
+        } else{
             //Set last login to now
             $this->student_model->set_last_login($student->student_id);
 
-            $session_data = array('student_id' => $student->student_id,
+            $session_data = array('student_id'               => $student->student_id,
                                   'check_profile_completion' => true
-                                 );
+                                  );
 
             $this->session->set_userdata($session_data);
             if($redirect_uri == "team_registration")
             	redirect("/team/add_form");
 			else 
 				redirect('/student');
-        endif;
-
+        }
+        
     }
 
-    public function fb_login($redirect_uri = NULL){
+    public function fb_login($redirect_uri = NULL)
+    {
         $data["current_page"] = 'login';
         if (!is_null($redirect_uri))
             $redirect_uri = site_url($redirect_uri);
@@ -116,31 +113,35 @@ class Student extends CI_Controller {
         $this->load->view('student/student_login_form', $data);
     }
 	
-    public function logout(){
+    public function logout()
+    {
         $this->session->sess_destroy();
         redirect('/');
     }
 
-    public function connect_fb_with_previous_account(){
+    public function connect_fb_with_previous_account()
+    {
         $data["current_page"] = 'student';
         $student_id = $this->session->userdata('temp_student_id');
-
         $data["student"] = $this->student_model->get_previous_student($student_id);
 
-        if (empty($data["student"]))
+        if (empty($data["student"])){
             redirect('home');
+        }
 
         $this->load->view('student/registration/connect_fb_with_previous_account', $data);
     }
 
     //Student has not tried to merge previous account with Facebook and wants to create a new Facebook account
-    public function fb_login_confirmed(){
+    public function fb_login_confirmed()
+    {
         $this->session->set_userdata(array('fb_login_confirmed' => TRUE));
         redirect('authentication/student/fb_login');
     }
 
     //A user has recognized they had a previous account and are attempting to login to merge with their Facebook account
-    public function login_to_merge_with_facebook(){
+    public function login_to_merge_with_facebook()
+    {
         //Oauth_uid and student_id were set as flash session variables to hide from user for security reasons
         $oauth_uid = $this->session->userdata('oauth_uid');
         $student_id = $this->session->userdata('temp_student_id');
@@ -197,16 +198,17 @@ class Student extends CI_Controller {
     Ie- student wants to create an account to add a team; they login with Facebook
     and are redirected to the add team page
     */
-    public function fb_login_and_redirect($redirect_uri){
-
-        switch($redirect_uri):
+    public function fb_login_and_redirect($redirect_uri)
+    {
+        switch($redirect_uri){
             case "add_team":
                 $this->fb_login(array('team','add_form'));
                 break;
             default:
                 $this->fb_login();
                 break;
-        endswitch;
+        }
+        
     }
 
 }
