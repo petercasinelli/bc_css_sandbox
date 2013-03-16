@@ -344,7 +344,7 @@ class Student_model extends CI_Model {
 
     public function delete_skills($student_id, $skills)
     {
-        foreach($skills as $value):
+        foreach($skills as $value){
             //unsupported by active record
             $delete_query = "DELETE
 							 FROM student_skills
@@ -352,22 +352,8 @@ class Student_model extends CI_Model {
 							 JOIN skills ON student_skills.skill_id = skills.skill_id 
 							 WHERE student_id = $student_id 
 							 AND skill = '$value'";
-
             $this->db->query($delete_query);
-
-            $this->db->select('student_id');
-            $this->db->from("student_skills");
-            $this->db->join("skills", "student_skills.skill_id = skills.skill_id");
-            $this->db->where("skill",$value);
-            $num_exists = $this->db->count_all_results();
-
-            if($num_exists == 0):
-                $this->db->from("skills");
-                $this->db->where("skill", $value);
-                $this->db->delete("skills");
-            endif;
-
-        endforeach;
+        }
     }
 
     public function get_new_students($limit)
