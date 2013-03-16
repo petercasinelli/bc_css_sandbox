@@ -33,7 +33,7 @@
             searchObjProps: "name",
             selectedItemProp: "name",
             selectedValuesProp: "name",
-            minChars: 2,
+            minChars: 1,
             matchCase: false
         };
         if(SkillsSettings.startValues){
