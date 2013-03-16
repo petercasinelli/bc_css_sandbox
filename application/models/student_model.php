@@ -125,37 +125,37 @@ class Student_model extends CI_Model {
 
     public function search_students($query, $record_offset)
     {
-		//we'll explode the query to split it into keywords
-		$search_terms = array_filter(explode(" ", $query));
-		//for each FIELD, we'll do multiple ORs 
+        //we'll explode the query to split it into keywords
+        $search_terms = array_filter(explode(" ", $query));
+        //for each FIELD, we'll do multiple ORs 
         $this->db->join('student_skills', 'student_skills.student_id = students.student_id', 'left');
         $this->db->join('skills', 'skills.skill_id = student_skills.skill_id', 'left');
         $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
         $this->db->join('majors', 'majors.major_id = students.major_id', 'left');
-		
-		foreach($search_terms as $key=>$value){
-			//first search must start with LIKE
-			if($key == 0){
-			    $this->db->like('first', $value);
-			} else {
-			    $this->db->or_like('first', $value);
+        
+        foreach($search_terms as $key=>$value){
+            //first search must start with LIKE
+            if($key == 0){
+                $this->db->like('first', $value);
+            } else {
+                $this->db->or_like('first', $value);
             }
             
-			$this->db->or_like('last', $value);
-        	$this->db->or_like('school', $value);
-        	$this->db->or_like('major', $value);
-        	$this->db->or_like('skill', $value);
-		}
+            $this->db->or_like('last', $value);
+            $this->db->or_like('school', $value);
+            $this->db->or_like('major', $value);
+            $this->db->or_like('skill', $value);
+        }
         
         $this->db->distinct('students.student_id');
         $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
         //$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
-		$query = $this->db->get('students');
+        $query = $this->db->get('students');
         $result = $query->result();
-		$result_count = sizeof($result);
-		//splice the array rather than relying on separate query for count
-		$results = array_splice($result, $record_offset, PaginationSettings::per_page());	
-		$result_map = array("result_count"=>$result_count, "result"=>$results);
+        $result_count = sizeof($result);
+        //splice the array rather than relying on separate query for count
+        $results = array_splice($result, $record_offset, PaginationSettings::per_page());   
+        $result_map = array("result_count"=>$result_count, "result"=>$results);
         return $result_map;
 
     }
@@ -347,11 +347,11 @@ class Student_model extends CI_Model {
         foreach($skills as $value){
             //unsupported by active record
             $delete_query = "DELETE
-							 FROM student_skills
-							 USING student_skills
-							 JOIN skills ON student_skills.skill_id = skills.skill_id 
-							 WHERE student_id = $student_id 
-							 AND skill = '$value'";
+                             FROM student_skills
+                             USING student_skills
+                             JOIN skills ON student_skills.skill_id = skills.skill_id 
+                             WHERE student_id = $student_id 
+                             AND skill = '$value'";
             $this->db->query($delete_query);
         }
     }
@@ -414,17 +414,17 @@ class Student_model extends CI_Model {
 
         return $affected_rows;
     }
-	
-	public function get_student_skill_distribution()
-	{
-		$this->db->select("skills.skill, count(*) as num_students");
-		$this->db->from("skills");
-		$this->db->join("student_skills", "skills.skill_id = student_skills.skill_id");
-		$this->db->group_by("skills.skill");
-		$this->db->order_by("num_students", "DESC");
-		$this->db->limit("20");
-		$query = $this->db->get();
-		return $query->result();
-	}
+    
+    public function get_student_skill_distribution()
+    {
+        $this->db->select("skills.skill, count(*) as num_students");
+        $this->db->from("skills");
+        $this->db->join("student_skills", "skills.skill_id = student_skills.skill_id");
+        $this->db->group_by("skills.skill");
+        $this->db->order_by("num_students", "DESC");
+        $this->db->limit("20");
+        $query = $this->db->get();
+        return $query->result();
+    }
 
 }
