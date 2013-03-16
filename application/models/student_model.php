@@ -320,42 +320,26 @@ class Student_model extends CI_Model {
 
     public function add_skills($student_id, $skills)
     {
-        foreach($skills as $value):
+        foreach($skills as $value){
             $this->db->select('skill_id');
             $this->db->from('skills');
             $this->db->where('skill', $value);
             $search_result = $this->db->get();
             $rows = $search_result->num_rows();
-
             //If tag already exists
-            if($rows > 0):
+            if($rows > 0){
                 $skill_id = $search_result->row()->skill_id;
-                //Now check for primary key violation
-                $this->db->select('*');
-                $this->db->from('student_skills');
-                $this->db->where('student_id', $student_id);
-                $this->db->where('skill_id', $skill_id);
-                $duplicate_check_result = $this->db->get();
-                $duplicate_rows = $duplicate_check_result->num_rows();
-                //If question not yet associated with tag
-                if($duplicate_rows == 0):
-                    $this->db->set('student_id', $student_id);
-                    $this->db->set('skill_id', $skill_id);
-                    $this->db->insert('student_skills');
-                endif;
-            //If tag does not exist
-            else:
+            } else{
                 $this->db->set('skill', $value);
                 $this->db->insert('skills');
-
                 $skill_id = $this->db->insert_id();
-
-                $this->db->set('student_id', $student_id);
-                $this->db->set('skill_id', $skill_id);
-                $this->db->insert('student_skills');
-            endif;
-
-        endforeach;
+            }
+            
+            $this->db->set('student_id', $student_id);
+            $this->db->set('skill_id', $skill_id);
+            $this->db->insert('student_skills');
+        }
+        
     }
 
     public function delete_skills($student_id, $skills)
