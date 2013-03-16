@@ -64,7 +64,7 @@ class Student_model extends CI_Model {
         
         $skills = array_filter($new_array);
 
-        return $skills;
+        return array_unique($skills);
     }
 
     public function update_student_skills($student_id, $skills)
