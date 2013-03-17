@@ -26,6 +26,12 @@ class MY_Controller extends CI_Controller {
         	$this->current_student_info->skills = $this->current_student_info->skills . $skill->skill . ', ';
         endforeach;
     }
+    
+    function set_notification($data, $current_student_id)
+    {
+        $data["notifications"] = $this->student_model->get_notifications($current_student_id);
+        return $data;
+    }
 	
 }
 
