@@ -149,7 +149,10 @@ class Student_model extends CI_Model
         }
         
         $this->db->distinct('students.student_id');
-        $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
+        $this->db->select('first, last, email, oauth_uid, 
+        students.school_id, students.major_id, students.student_id, 
+        picture, schools.school, year, majors.major, bio, status, 
+        twitter, facebook, linkedin, dribbble, github');
       
         $query = $this->db->get('students');
         $result = $query->result();
@@ -282,7 +285,12 @@ class Student_model extends CI_Model
             $notifications = array();
 
             foreach($results as $result){
-                $join_request_query = $this->db->select("first, last, team_id, students.student_id, join_team_requests.timestamp")->from("students")->join("join_team_requests", "students.student_id = join_team_requests.student_id")->where("team_id", $result->team_id)->get();
+                $this->db->select("first, last, team_id, students.student_id, join_team_requests.timestamp");
+                $this->db->from("students");
+                $this->db->join("join_team_requests", "students.student_id = join_team_requests.student_id");
+                $this->db->where("team_id", $result->team_id);
+                
+                $join_request_query = $this->db->get();
                 $team_request = $join_request_query->row();
                 
                 if (!empty($team_request)){
@@ -367,6 +375,7 @@ class Student_model extends CI_Model
         $this->db->join('majors','majors.major_id = students.major_id', 'left');
         $this->db->join('schools','schools.school_id = students.school_id', 'left');
         $this->db->order_by('student_id', 'DESC');
+        
         $query = $this->db->get('students');
         $results = $query->result();
 
@@ -377,6 +386,7 @@ class Student_model extends CI_Model
     public function reset_password($email, $password)
     {
         $this->db->where('email', $email);
+        
         $query = $this->db->update('students', array('password' => $password));
         $affected_rows = $this->db->affected_rows();
 
@@ -392,6 +402,7 @@ class Student_model extends CI_Model
                    OR email = '$email') 
                    AND (oauth_uid IS NULL)";
         $this->db->where($where);
+        
         $query = $this->db->get('students');
         $result = $query->row();
 
@@ -403,8 +414,8 @@ class Student_model extends CI_Model
     {
         $this->db->select('first, last, email');
         $this->db->where('student_id', $student_id);
+        
         $query = $this->db->get('students');
-
         $result = $query->row();
 
         return $result;
@@ -431,8 +442,9 @@ class Student_model extends CI_Model
         $this->db->limit("20");
         
         $query = $this->db->get();
+        $result = $query->result();
         
-        return $query->result();
+        return $result;
     }
     
 }
