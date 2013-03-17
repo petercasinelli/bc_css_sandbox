@@ -22,7 +22,7 @@ class Team_Model extends CI_Model
             return $team_id;
         }
     }
-	
+    
     public function update_team($team_id, $team_data)
     {
         $this->db->where('team_id', $team_id);
@@ -61,9 +61,9 @@ class Team_Model extends CI_Model
     public function add_member_permission($student_id, $permission_id = 1, $team_id)
     {
         $member_data = array(
-            "student_id" 	=> $student_id,
+            "student_id"    => $student_id,
             "permission_id" => $permission_id,
-            "team_id"		=> $team_id
+            "team_id"       => $team_id
         );
         $query = $this->db->insert('team_permissions', $member_data);
         $affected_rows = $this->db->affected_rows();
@@ -81,17 +81,17 @@ class Team_Model extends CI_Model
 
     public function get_teams($record_offset)
     {
-    	$this->load->helper('pagination_helper');
+        $this->load->helper('pagination_helper');
         $this->db->order_by('team_id','DESC');
         
-		$query = $this->db->get('teams', PaginationSettings::per_page(), $record_offset);
+        $query = $this->db->get('teams', PaginationSettings::per_page(), $record_offset);
         $result = $query->result();
         
         return $result;
     }
-	
-	public function get_total_team_count()
-	{
+    
+    public function get_total_team_count()
+    {
         $rows = $this->db->count_all('teams');
         
         return $rows;
