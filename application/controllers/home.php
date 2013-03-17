@@ -51,54 +51,38 @@ class Home extends CI_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email', 'e-mail address', 'trim|required|htmlspecialchars|xss_clean');
         //If form does not validate according to rules above, load form view with error messages
-        if ($this->form_validation->run() == FALSE):
+        if ($this->form_validation->run() == FALSE){
             $this->load->view('student/forgot_password', $data);
-        else:
+        } else{
             $this->load->helper('string');
             $new_password = random_string('alnum', 10);
             //Attempt to reset password
             $reset_password = $this->student_model->reset_password($email, sha1($new_password));
             switch($reset_password){
-                //0 means no e-mail was found
                 case 0:
-                    $this->message->set('You have entered an e-mail address that does not belong to any of our users. Please try again:', 'error', TRUE);
+                    $this->message->set('You have entered an e-mail address that does not belong to any of our users. 
+                    Please try again:', 'error', TRUE);
                     $this->load->view('student/forgot_password', $data);
                     break;
-                //1 means pass was changed
                 case 1:
-                    //Send an e-mail
-                    $this->load->library('email');
-                    $this->email->set_newline("\r\n").
-                    $this->email->from('bccss.development@gmail.com', 'BC Skills');
-                    $this->email->to($email);
-                    $this->email->subject('BC Skills Password Reset');
-                    $this->email->message('Hello,
-
-                    You recently requested to reset your password on BCSkills.com.
-
-                    Here is your new password: ' . $new_password . '
-
-                    Please let us know if you have any issues,
-
-                    BC CSS Team');
-                    if ($this->email->send()) {
+                    if (Authen::send_password($email, $reset_password)) {
                         $this->message->set('We just sent '. $email .' a new password', 'success', TRUE);
                         redirect('home');
                     } else {
-                        echo $this->email->print_debugger();
-                        exit;
-                        $this->message->set('Your password could not be reset. Please try again. If this problem persists, please contact BC Skills.', 'error', TRUE);
+                        $this->message->set('Your password could not be reset. 
+                        Please try again. If this problem persists, 
+                        please contact BC Skills.', 'error', TRUE);
                         redirect('/forgot_password');
                     }
                     break;
-                //Some error
                 default:
-                    $this->message->set('There was an error when you tried to reset your password. Please try again:', 'error', TRUE);
+                    $this->message->set('There was an error when you tried to reset your password. 
+                    Please try again:', 'error', TRUE);
                     $this->load->view('student/forgot_password', $data);
                     break;
-              }
+           }
 
-        endif;
+        }
     }
 
     public function register_and_add_team()
