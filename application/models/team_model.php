@@ -217,42 +217,56 @@ class Team_Model extends CI_Model
         
     }
 
-    public function deny_request($team_id, $student_id){
-        $query = $this->db->select('join_team_request_id')->from('join_team_requests')->where(array('team_id' => $team_id, 'student_id' => $student_id))->get();
+    public function deny_request($team_id, $student_id)
+    {
+        $deny_data = array(
+            'team_id'    => $team_id, 
+            'student_id' => $student_id
+        );
+        $this->db->select('join_team_request_id');
+        $this->db->from('join_team_requests');
+        $this->db->where($deny_data);
+        
+        $query =$this->db->get();
         $result = $query->row();
 
-        if (empty($result)):
+        if (empty($result)){
             return $result;
-        else:
-
-            $delete_request = $this->db->delete('join_team_requests', array('join_team_request_id' => $result->join_team_request_id));
+        } else{
+            $delete_data = array(
+                'join_team_request_id' => $result->join_team_request_id
+            );
+            $delete_request = $this->db->delete('join_team_requests', $delete_data);
             $affected_rows = $this->db->affected_rows();
+            
             return $affected_rows;
-
-
-        endif;
+        }
+        
     }
 
-    public function get_new_teams($limit){
-
+    public function get_new_teams($limit)
+    {
         $this->db->limit($limit);
         $this->db->order_by('team_id', 'DESC');
+        
         $query = $this->db->get('teams');
-
         $results = $query->result();
 
         return $results;
     }
 
-    public function get_team_founders($team_id){
-
+    public function get_team_founders($team_id)
+    {
+        $team_data = array(
+            'team_id'      => $team_id, 
+            'account_type' => 1
+        );
         $this->db->select('students.first, students.last, students.email, students.student_id');
         $this->db->join('students', 'students.student_id = team_members.student_id');
-        $query = $this->db->get_where('team_members', array('team_id' => $team_id, 'account_type' => 1));
+        $query = $this->db->get_where('team_members', $team_data);
+        $results = $query->result();
 
-        $founders = $query->result();
-
-        return $founders;
+        return $results;
     }
 
 }
