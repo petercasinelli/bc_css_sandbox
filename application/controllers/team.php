@@ -81,22 +81,17 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
-        $team_name = $this->input->post('team_name', TRUE);
-        $bcvc_team = $this->input->post('bcvc_team', TRUE);
-
-        $team_description = $this->input->post('team_description', TRUE);
-        $team_needs = $this->input->post('team_needs', TRUE);
+        $team_data['team_name'] = $this->input->post('team_name', TRUE);
+        $team_data['bcvc_team'] = $this->input->post('bcvc_team', TRUE);
+        $team_data['team_description'] = $this->input->post('team_description', TRUE);
+        $team_data['team_needs'] = $this->input->post('team_needs', TRUE);
+        
         //If form does not validate according to rules above, load form view with error messages
         if (!$this->form_validation->valid_team()){
             $data["student_logged_in"] = $this->current_student_info;
             $this->load->view('team/add_team_form', $data);
         } else{ //display students according to search term
             $this->load->model('team_model');
-            $team_data = array('team_name' => $team_name,
-                'bcvc_team' => $bcvc_team,
-                'team_description' => $team_description,
-                'team_needs' => $team_needs
-            );
             //This automatically adds team with the current student being the administrator
             $team_id = $this->team_model->add_team($team_data, $this->current_student_id);
             if ($team_id > 0){
@@ -135,10 +130,10 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         
-        $team_name = $this->input->post('team_name', 			   TRUE);
-        $bcvc_team = $this->input->post('bcvc_team', 			   TRUE);
-        $team_description = $this->input->post('team_description', TRUE);
-        $team_needs = $this->input->post('team_needs', TRUE);
+        $team_data['team_name'] = $this->input->post('team_name', 			   TRUE);
+        $team_data['bcvc_team'] = $this->input->post('bcvc_team', 			   TRUE);
+        $team_data['team_description'] = $this->input->post('team_description', TRUE);
+        $team_data['team_needs'] = $this->input->post('team_needs', TRUE);
 
         //If form does not validate according to rules above, load form view with error messages
         if (!$this->form_validation->valid_team()){
@@ -147,11 +142,6 @@ class Team extends MY_Controller
             array_push($data, array("team_id" => $team_id));
             $this->load->view('team/edit_team_form', $data);
         } else{
-            $team_data = array(       'team_name' => $team_name,
-                                      'bcvc_team' => $bcvc_team,
-                               'team_description' => $team_description,
-                                     'team_needs' => $team_needs
-                         );
             $update_team = $this->team_model->update_team($team_id, $team_data, $this->current_student_id);
             
             if ($team_id > 0){
