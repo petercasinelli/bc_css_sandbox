@@ -130,8 +130,8 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         
-        $team_data['team_name'] = $this->input->post('team_name', 			   TRUE);
-        $team_data['bcvc_team'] = $this->input->post('bcvc_team', 			   TRUE);
+        $team_data['team_name'] = $this->input->post('team_name', TRUE);
+        $team_data['bcvc_team'] = $this->input->post('bcvc_team', TRUE);
         $team_data['team_description'] = $this->input->post('team_description', TRUE);
         $team_data['team_needs'] = $this->input->post('team_needs', TRUE);
 
