@@ -32,7 +32,7 @@ class Student extends MY_Controller
         $data['profile_completion'] = profile_completed($this->current_student_info);
         //If this is the first time the user has logged in, check if bio or skills filled
         $data = profile_fill_notification($data, $this->current_student_info);
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $this->load->view('student/home', $data);
     }
 	
@@ -45,7 +45,7 @@ class Student extends MY_Controller
 			$data["empty_search"] = "Please enter a search term";
 			$data["current_page"] = 'student';
 			$data["search_query"] = "";
-            $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+            $data = $this->set_notification($data, $this->current_student_id);
 
 			$data["students"] = array();
             $this->load->view('student/search_students', $data);
@@ -63,7 +63,7 @@ class Student extends MY_Controller
 
         $data["student_logged_in"] = $this->current_student_info;
         $data["search_query"] = $decoded_query;
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 	    $data["search_results"] = $search_results["result_count"];
 		$this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
         $this->load->view('student/search_students', $data);
@@ -83,7 +83,7 @@ class Student extends MY_Controller
         $data["majors"] = $this->student_model->get_majors();
         //Create list of schools view
         $data["schools"] = $this->student_model->get_schools();
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $data["upload_errors"] = '';
 		$data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($this->current_student_id), true);
         $this->load->view('student/edit_student_form', $data);
@@ -95,7 +95,7 @@ class Student extends MY_Controller
         $this->load->library('form_validation');
         
         $data["current_page"] = 'edit_profile';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 
         $student_id = $this->current_student_id;
         //Currently, email address cannot be changed
@@ -246,7 +246,7 @@ class Student extends MY_Controller
         $data['student'] = $this->student_model->get_student($id);
         if($data['student'] && !is_null($id)) {
             $data["current_page"] = 'student';
-            $data["notifications"] = $this->student_model->get_notifications($id);
+            $data = $this->set_notification($data, $this->current_student_id);
             $data['student']->skills = get_user_skill_list($this->student_model->get_student_skills($id));
             
             $this->load->view('student/view_student', $data);
@@ -264,7 +264,7 @@ class Student extends MY_Controller
         $this->load->helper('pagination_helper');
         
         $data["current_page"] = 'student';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $data["students"] = $this->student_model->get_all_students($record_offset);
 
         foreach($data["students"] as $student) {
@@ -292,7 +292,7 @@ class Student extends MY_Controller
     public function tutorial()
     {
         $data["current_page"] = 'tutorial';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $this->load->view('student/tutorial', $data);
     }
 
