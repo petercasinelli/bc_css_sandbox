@@ -1,7 +1,22 @@
 <?php
 class Student_model extends CI_Model 
 {
-
+    public function update_student_profile($student_id, $password, $skills, $student_data)
+    {
+        if (!empty($password)) {
+            $student_data["password"] = sha1($password);
+        }
+        
+        $skills_affected = $this->update_student_skills($student_id, $skills);
+        $rows_affected = $this->edit_student($student_id, $student_data);
+        
+        if($skills_affected || $rows_affected){
+            return TRUE;
+        } else{
+            return FALSE;
+        }
+    }
+    
     public function get_all_students($record_offset)
     {
         $this->load->helper('pagination_helper');
