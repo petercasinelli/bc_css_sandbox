@@ -61,7 +61,7 @@ class Team extends MY_Controller
         $data['team_data'] = $this->team_model->get_team($team_id);
         $data['team_data']->team_members = $this->team_model->get_team_members($team_id);
         $data['team_updates'] = $this->team_model->get_updates($team_id);
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 
         $this->load->view('team/view_team', $data);
     }
@@ -70,7 +70,7 @@ class Team extends MY_Controller
     {
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 
         $this->load->view('team/add_team_form', $data);
     }
@@ -79,7 +79,7 @@ class Team extends MY_Controller
     {
         $this->load->library('form_validation');
         $data["current_page"] = 'team';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 
         $team_data['team_name'] = $this->input->post('team_name', TRUE);
         $team_data['bcvc_team'] = $this->input->post('bcvc_team', TRUE);
@@ -116,7 +116,7 @@ class Team extends MY_Controller
         $data["student_logged_in"] = $this->current_student_info;
         $data["team_data"] = $this->team_model->get_team($team_id);
         array_push($data, array("team_id" => $team_id));
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $this->load->view('team/edit_team_form', $data);
     }
 
@@ -128,7 +128,7 @@ class Team extends MY_Controller
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
         $data["current_page"] = 'team';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         
         $team_data['team_name'] = $this->input->post('team_name', TRUE);
         $team_data['bcvc_team'] = $this->input->post('bcvc_team', TRUE);
@@ -165,7 +165,7 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
         $data["team_data"] = $this->team_model->get_team($team_id);
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
 
         $this->load->view('team/add_team_update_form', $data);
     }
@@ -178,7 +178,7 @@ class Team extends MY_Controller
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
         $data["current_page"] = 'team';
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $team_update = $this->input->post('team_update', TRUE);
 
         //If form does not validate according to rules above, load form view with error messages
@@ -267,7 +267,7 @@ class Team extends MY_Controller
     public function confirm_leave($team_id)
     {
         $data["team_id"] = $team_id;
-        $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $data["current_page"] = "team";
         $this->load->view("team/confirm_leave", $data);
     }
