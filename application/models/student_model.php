@@ -1,6 +1,6 @@
 <?php
-class Student_model extends CI_Model {
-
+class Student_model extends CI_Model 
+{
 
     public function get_all_students($record_offset)
     {
@@ -37,7 +37,7 @@ class Student_model extends CI_Model {
     {
         $this->db->join('majors','majors.major_id = students.major_id', 'left');
         $this->db->join('schools','schools.school_id = students.school_id', 'left');
-
+        
         $query = $this->db->get_where('students', array('students.student_id'=>$student_id));
         $result = $query->row();
 
@@ -48,6 +48,7 @@ class Student_model extends CI_Model {
     {
         $this->db->select('skills.skill_id, skill');
         $this->db->join("skills", "skills.skill_id = student_skills.skill_id");
+        
         $query = $this->db->get_where('student_skills', array('student_id'=>$student_id));
         $result = $query->result();
 
@@ -149,13 +150,15 @@ class Student_model extends CI_Model {
         
         $this->db->distinct('students.student_id');
         $this->db->select('first, last, email, oauth_uid, students.school_id, students.major_id, students.student_id, picture, schools.school, year, majors.major, bio, status, twitter, facebook, linkedin, dribbble, github');
-        //$query = $this->db->get('students', PaginationSettings::per_page(), $record_offset);
+      
         $query = $this->db->get('students');
         $result = $query->result();
         $result_count = sizeof($result);
+        
         //splice the array rather than relying on separate query for count
         $results = array_splice($result, $record_offset, PaginationSettings::per_page());   
         $result_map = array("result_count"=>$result_count, "result"=>$results);
+        
         return $result_map;
 
     }
@@ -165,6 +168,7 @@ class Student_model extends CI_Model {
         $this->db->order_by('major', 'asc');
         $query = $this->db->get('majors');
         $result = $query->result();
+        
         return $result;
     }
 
@@ -173,6 +177,7 @@ class Student_model extends CI_Model {
         $this->db->order_by('school', 'asc');
         $query = $this->db->get('schools');
         $result = $query->result();
+        
         return $result;
     }
 
@@ -185,7 +190,6 @@ class Student_model extends CI_Model {
         $query = $this->db->get_where('students', $login_information);
 
         $result = $query->row();
-
         //Return student with student information
         return $result;
 
@@ -200,15 +204,16 @@ class Student_model extends CI_Model {
 
     }
 
-    public function oauth_authenticate($oauth_id, $email="None", $first_name, $last_name){
+    public function oauth_authenticate($oauth_id, $email="None", $first_name, $last_name)
+    {
         //check if the uid exists in database, if so, return TRUE
         $query = $this->db->get_where('students', array('oauth_uid'=>$oauth_id));
         $rows = $query->num_rows();
         $result = $query->row();
 
-        if($rows > 0):
+        if($rows > 0){
             return $result;
-        else:
+        } else{
             $data = array(
                 'oauth_uid' => $oauth_id,
                 'first' => $first_name ,
@@ -221,17 +226,18 @@ class Student_model extends CI_Model {
             $rows_affected = $this->db->affected_rows();
 
             //fetch the user
-            if($rows_affected > 0):
+            if($rows_affected > 0){
                 $query = $this->db->get_where('students', array('student_id'=>$user_id));
                 $rows = $query->num_rows();
                 $result = $query->row();
+                
                 return $result;
-            endif;
-        endif;
+            }
+        }
     }
 
-    public function update_profile_picture($student_id, $file_name){
-        //update student set picture = blah where id = blah
+    public function update_profile_picture($student_id, $file_name)
+    {
         $data = array(
             'picture' => $file_name,
         );
@@ -241,12 +247,12 @@ class Student_model extends CI_Model {
             $this->db->update('students', $data);
             return TRUE;
         } catch (Exception $e) {
-            //echo 'Update failed: ',  $e->getMessage(), "\n";
             return FALSE;
         }
     }
 
-    public function delete_profile_picture($student_id){
+    public function delete_profile_picture($student_id)
+    {
         $data = array(
             'picture' => NULL,
         );
@@ -262,32 +268,32 @@ class Student_model extends CI_Model {
             return FALSE;
     }
 
-    public function get_notifications($student_id){
-
+    public function get_notifications($student_id)
+    {
         //Check to see if this student is an administrator for any team
         $this->db->select("team_id");
+        
         $query = $this->db->get_where("team_members", array("student_id" => $student_id, "account_type" => 1));
         $results = $query->result();
 
-        if (empty($results)):
+        if (empty($results)){
             return $results;
-        else:
+        } else{
             $notifications = array();
 
-            foreach($results as $result):
-
+            foreach($results as $result){
                 $join_request_query = $this->db->select("first, last, team_id, students.student_id, join_team_requests.timestamp")->from("students")->join("join_team_requests", "students.student_id = join_team_requests.student_id")->where("team_id", $result->team_id)->get();
                 $team_request = $join_request_query->row();
-                if (!empty($team_request)):
+                
+                if (!empty($team_request)){
                     $team_request->type = 'join_team';
                     array_push($notifications, $team_request);
-                endif;
+                }
 
-            endforeach;
+            }
 
             return $notifications;
-
-        endif;
+        }
     }
 
     public function add_skill($skill)
@@ -301,7 +307,6 @@ class Student_model extends CI_Model {
 
     public function find_skill($skill)
     {
-
         $this->db->from("skills")->like("skill", $skill);
         $this->db->limit("10");
         $query = $this->db->get();
@@ -426,5 +431,5 @@ class Student_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-
+    
 }
