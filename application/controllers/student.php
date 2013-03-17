@@ -92,6 +92,8 @@ class Student extends MY_Controller
     public function edit()
     {
         $this->load->library('message');
+        $this->load->library('form_validation');
+        
         $data["current_page"] = 'edit_profile';
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
 
@@ -114,19 +116,13 @@ class Student extends MY_Controller
         $student_data['dribbble'] = $this->input->post('dribbble', TRUE);
         $student_data['github'] = $this->input->post('github', TRUE);
 
-        $this->load->library('form_validation');
-        //If form does not validate according to rules above, load form view with error messages
         if (!$this->form_validation->valid_profile_edit($password)) {
             $data["student_logged_in"] = $this->current_student_info;
-            //Create list of majors for view
             $data["majors"] = $this->student_model->get_majors();
-            //Create list of schools view
             $data["schools"] = $this->student_model->get_schools();
-            //Load skills again
             $data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($student_id), true);
             $data["upload_errors"] = '';
             $this->load->view('student/edit_student_form', $data);
-        //if passed validation, add student to database
         } else {
             $update = $this->student_model->update_student_profile($student_id, $password, $skills, $student_data);        
             if ($update) {
