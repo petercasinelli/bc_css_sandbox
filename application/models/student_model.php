@@ -414,6 +414,7 @@ class Student_model extends CI_Model
     {
         $this->db->where('student_id', $student_id);
         $this->db->limit(1);
+        
         $query = $this->db->update('students', array('oauth_uid' => $oauth_uid));
         $affected_rows = $this->db->affected_rows();
 
@@ -428,7 +429,9 @@ class Student_model extends CI_Model
         $this->db->group_by("skills.skill");
         $this->db->order_by("num_students", "DESC");
         $this->db->limit("20");
+        
         $query = $this->db->get();
+        
         return $query->result();
     }
     
