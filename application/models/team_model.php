@@ -1,57 +1,55 @@
 <?php
-class Team_Model extends CI_Model {
-
-
-    /*function add_team($team_data, $student_id)
-      *@param $team_data
-      *@param $student_id
-      */
-    //Add a team, add the $student_id as a member and administrator
-    public function add_team($team_data, $student_id){
-
+class Team_Model extends CI_Model
+{
+    /**
+    * Adds the student as a member and admin
+    *@param $team_data
+    *@param $student_id
+    */
+    public function add_team($team_data, $student_id)
+    {
         $query = $this->db->insert('teams', $team_data);
         $affected_rows = $this->db->affected_rows();
-
         //If the team was successfully added, add a team member and permissions
-        if ($affected_rows):
+        if ($affected_rows){
             $team_id = $this->db->insert_id();
             $add_team_member = $this->add_team_member($student_id, $team_id, 1);
+        }
 
-        endif;
-
-        if (empty($team_id))
-            return 0;
-        else
+        if (empty($team_id)){
+            return -1;
+        } else{
             return $team_id;
-
-
+        }
     }
 	
-    public function update_team($team_id, $team_data){
-
+    public function update_team($team_id, $team_data)
+    {
         $this->db->where('team_id', $team_id);
         $query = $this->db->update('teams', $team_data);
-
         $affected_rows = $this->db->affected_rows();
+        
         return $affected_rows;
     }
 
-    public function add_team_member($student_id, $team_id, $account_type = 0){
-
-        $member_data = array("student_id" => $student_id,
-            "team_id" => $team_id,
+    public function add_team_member($student_id, $team_id, $account_type = 0)
+    {
+        $member_data = array(
+            "student_id"   => $student_id,
+            "team_id"      => $team_id,
             "account_type" => $account_type
         );
         $this->db->insert('team_members', $member_data);
-
         $affected_rows = $this->db->affected_rows();
+        
         return $affected_rows;
     }
 
-    public function remove_team_member($student_id, $team_id){
-
-        $member_data = array("student_id" => $student_id,
-            "team_id" => $team_id
+    public function remove_team_member($student_id, $team_id)
+    {
+        $member_data = array(
+            "student_id" => $student_id,
+            "team_id"    => $team_id
         );
         $query = $this->db->delete('team_members', $member_data);
         $affected_rows = $this->db->affected_rows();
@@ -60,46 +58,56 @@ class Team_Model extends CI_Model {
 
     }
 
-    public function add_member_permission($student_id, $permission_id = 1, $team_id){
-
-        $member_data = array("student_id" 	=> $student_id,
+    public function add_member_permission($student_id, $permission_id = 1, $team_id)
+    {
+        $member_data = array(
+            "student_id" 	=> $student_id,
             "permission_id" => $permission_id,
             "team_id"		=> $team_id
         );
-
         $query = $this->db->insert('team_permissions', $member_data);
-
         $affected_rows = $this->db->affected_rows();
+        
         return $affected_rows;
     }
 
-    public function get_team($team_id){
-
+    public function get_team($team_id)
+    {
         $query = $this->db->get_where('teams', array('team_id' => $team_id));
-
         $result = $query->row();
 
         return $result;
-
     }
 
-    public function get_teams($record_offset){
+    public function get_teams($record_offset)
+    {
     	$this->load->helper('pagination_helper');
         $this->db->order_by('team_id','DESC');
+        
 		$query = $this->db->get('teams', PaginationSettings::per_page(), $record_offset);
-        // $query = $this->db->from('teams')->get();
         $result = $query->result();
+        
         return $result;
     }
 	
-		public function get_total_team_count() {
+	public function get_total_team_count()
+	{
         $rows = $this->db->count_all('teams');
+        
         return $rows;
     }
 
-    public function get_team_members($team_id){
-        $query = $this->db->from('students')->join('team_members', 'students.student_id = team_members.student_id')->join('schools', 'schools.school_id = students.school_id', 'left')->join('majors', 'majors.major_id = students.major_id','left')->where('team_id', $team_id)->get();
+    public function get_team_members($team_id)
+    {
+        $this->db->from('students');
+        $this->db->join('team_members', 'students.student_id = team_members.student_id');
+        $this->db->join('schools', 'schools.school_id = students.school_id', 'left');
+        $this->db->join('majors', 'majors.major_id = students.major_id','left');
+        $this->db->where('team_id', $team_id);
+        
+        $query = $this->db->get();
         $result = $query->result();
+        
         return $result;
     }
 
@@ -111,13 +119,14 @@ class Team_Model extends CI_Model {
         return $result;
     }
 
-    public function add_update($team_id, $team_update, $student_id){
-
+    public function add_update($team_id, $team_update, $student_id)
+    {
         $update_data = array(
             'team_id' => $team_id,
             'team_update' => $team_update,
             'student_id' => $student_id
         );
+        
         $query = $this->db->insert('team_updates', $update_data);
         $affected_rows = $this->db->affected_rows();
 
