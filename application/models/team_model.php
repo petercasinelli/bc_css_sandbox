@@ -113,30 +113,39 @@ class Team_Model extends CI_Model
 
     public function get_student_permission($team_id, $student_id)
     {
+        $student_data = array(
+            'student_id' => $student_id, 
+            'team_id'    => $team_id
+        );
         $this->db->select('account_type');
-        $query = $this->db->get_where('team_members',array('student_id' => $student_id, 'team_id' => $team_id));
+        
+        $query = $this->db->get_where('team_members', $student_data);
         $result = $query->row();
+        
         return $result;
     }
 
     public function add_update($team_id, $team_update, $student_id)
     {
         $update_data = array(
-            'team_id' => $team_id,
+            'team_id'     => $team_id,
             'team_update' => $team_update,
-            'student_id' => $student_id
-        );
-        
+            'student_id'  => $student_id
+        ); 
         $query = $this->db->insert('team_updates', $update_data);
         $affected_rows = $this->db->affected_rows();
 
         return $affected_rows;
     }
 
-    public function delete_update($team_update_id){
-
-        $query = $this->db->delete('team_updates', array('team_update_id' => $team_update_id));
+    public function delete_update($team_update_id)
+    {
+        $update_data = array(
+            'team_update_id' => $team_update_id
+        );
+        $query = $this->db->delete('team_updates', $update_data);
         $affected_rows = $this->db->affected_rows();
+        
         return $affected_rows;
     }
 
@@ -147,21 +156,22 @@ class Team_Model extends CI_Model
         return $result;
     }
 
-    public function get_join_request($team_id, $student_id){
-
-        $query = $this->db->get_where('join_team_requests', array('team_id' => $team_id,
-                'student_id' => $student_id)
+    public function get_join_request($team_id, $student_id)
+    {
+        $request_data = array(
+            'team_id'    => $team_id,
+            'student_id' => $student_id
         );
+        $query = $this->db->get_where('join_team_requests', $request_data);
         $result = $query->result();
 
         return $result;
     }
-
     //Make sure there is not a member request already
-    public function join_request($team_id, $student_id){
-
+    public function join_request($team_id, $student_id)
+    {
         $join_request_data = array(
-            'team_id' => $team_id,
+            'team_id'    => $team_id,
             'student_id' => $student_id
         );
 
@@ -171,28 +181,40 @@ class Team_Model extends CI_Model
         return $affected_rows;
     }
 
-    public function accept_request($team_id, $student_id){
-
-        $query = $this->db->select('join_team_request_id')->from('join_team_requests')->where(array('team_id' => $team_id, 'student_id' => $student_id))->get();
+    public function accept_request($team_id, $student_id)
+    {
+        $request_data = array(
+            'team_id'    => $team_id, 
+            'student_id' => $student_id
+        );
+        $this->db->select('join_team_request_id');
+        $this->db->from('join_team_requests');
+        $this->db->where($request_data);
+        
+        $query = $this->db->get();
         $result = $query->row();
 
-        if (empty($result)):
+        if (empty($result)){
             return $result;
-        else:
+        } else{
             //Request existed so delete join request and add team member to team
-
             $add_team_member = $this->add_team_member($student_id, $team_id);
             $affected_rows = $this->db->affected_rows();
-            if ($affected_rows == 0):
+            
+            if ($affected_rows == 0){
                 return $affected_rows;
-            else:
-                $delete_request = $this->db->delete('join_team_requests', array('join_team_request_id' => $result->join_team_request_id));
+            } else{
+                $delete_data = array(
+                    'join_team_request_id' => $result->join_team_request_id
+                );
+                $delete_request = $this->db->delete('join_team_requests', $delete_data);
                 $delete_affected_rows = $this->db->affected_rows();
+                
                 return $delete_affected_rows;
-            endif;
+            }
 
-
-        endif;
+        }
+        
     }
 
     public function deny_request($team_id, $student_id){
