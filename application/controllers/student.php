@@ -261,17 +261,11 @@ class Student extends MY_Controller
     public function view_all($record_offset = 0)
     {
         $this->load->library('pagination');
-        $this->load->helper('pagination_helper');
-        
+        $this->load->helper('pagination_helper');   
         $data["current_page"] = 'student';
         $data = $this->set_notification($data, $this->current_student_id);
         $data["students"] = $this->student_model->get_all_students($record_offset);
-
-        foreach($data["students"] as $student) {
-            $student->skills  = get_user_skill_list($this->student_model->get_student_skills($student->student_id));
-        }
-
-        $this->pagination->initialize(PaginationSettings::set( $this->student_model->get_total_student_count(), "student/view_all"));
+        $this->pagination->initialize(PaginationSettings::set($this->student_model->get_total_student_count(), "student/view_all"));
         $this->load->view('student/view_all_students', $data);
     }
 
