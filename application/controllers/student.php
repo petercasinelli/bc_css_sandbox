@@ -56,11 +56,6 @@ class Student extends MY_Controller
 		$decoded_query = urldecode($query);
 		$search_results = $this->student_model->search_students($decoded_query, $record_offset);
         $data["students"] = $search_results["result"];
-        
-        foreach($data["students"] as $student) {
-            $student->skills = get_user_skill_list($this->student_model->get_student_skills($student->student_id));
-        }
-
         $data["student_logged_in"] = $this->current_student_info;
         $data["search_query"] = $decoded_query;
         $data = $this->set_notification($data, $this->current_student_id);
