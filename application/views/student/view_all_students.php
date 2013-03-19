@@ -30,6 +30,7 @@ $submit_button = array(
     <div class="grid">  
 	<?php 
 	foreach($students as $student):
+        $student->skills  = get_student_skills($student->student_id);
 		$data["student"] = $student;
 		$this->load->view('student/small_student_block', $data);
 	endforeach;
