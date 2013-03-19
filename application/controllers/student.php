@@ -248,7 +248,6 @@ class Student extends MY_Controller
             $data["current_page"] = 'student';
             $data = $this->set_notification($data, $this->current_student_id);
             $data['student']->skills = get_user_skill_list($this->student_model->get_student_skills($id));
-            
             $this->load->view('student/view_student', $data);
         } else {
             $data["current_page"] = 'student';
@@ -276,7 +275,11 @@ class Student extends MY_Controller
         $skills = $this->student_model->find_skill($input);
         
         foreach ($skills as $skill) {
-            array_push($data, array('value' => $skill->skill_id, 'name' => $skill->skill));
+            $skill_data = array(
+                'value' => $skill->skill_id, 
+                'name'  => $skill->skill
+            );
+            array_push($data, $skill_data);
         }
         
         header("Content-type: application/json");
