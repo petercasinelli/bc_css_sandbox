@@ -1,6 +1,7 @@
 <?php
 
-function profile_completed($student_info) {
+function profile_completed($student_info) 
+{
 	$total = 0;
 	$score = 0;
 	//set up point system with relevant fields
@@ -41,7 +42,8 @@ function profile_completed($student_info) {
 	return $percent . '%';
 }
 
-function profile_fill_notification($data, $current_student){
+function profile_fill_notification($data, $current_student)
+{
     $CI = &get_instance();
     
     if ($CI->session->userdata('check_profile_completion')) {
@@ -65,7 +67,11 @@ function profile_fill_notification($data, $current_student){
     return $data;
 }
 
-function get_user_skill_list($student_skills, $keep_trailing_comma = false){
+function get_student_skills($student_id, $keep_trailing_comma = false)
+{
+    $CI = &get_instance();
+    $student_skills = $CI->student_model->get_student_skills($student_id);
+    
     $skills = "";
     
     foreach($student_skills as $skill) {
@@ -82,4 +88,5 @@ function get_user_skill_list($student_skills, $keep_trailing_comma = false){
 
     return $skills;
 }
+
 /*End of helpers/studentprofile_helper.php*/ 
