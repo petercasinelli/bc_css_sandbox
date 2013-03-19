@@ -85,7 +85,7 @@ class Student extends MY_Controller
         $data["schools"] = $this->student_model->get_schools();
         $data = $this->set_notification($data, $this->current_student_id);
         $data["upload_errors"] = '';
-		$data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($this->current_student_id), true);
+		$data["this_students_skills"] = get_student_skills($this->current_student_id, true);
         $this->load->view('student/edit_student_form', $data);
     }
 
@@ -120,7 +120,7 @@ class Student extends MY_Controller
             $data["student_logged_in"] = $this->current_student_info;
             $data["majors"] = $this->student_model->get_majors();
             $data["schools"] = $this->student_model->get_schools();
-            $data["this_students_skills"] = get_user_skill_list($this->student_model->get_student_skills($student_id), true);
+            $data["this_students_skills"] = get_student_skills($student_id, true);
             $data["upload_errors"] = '';
             $this->load->view('student/edit_student_form', $data);
         } else {
