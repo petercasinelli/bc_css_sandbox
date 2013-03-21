@@ -9,6 +9,7 @@ class Team extends MY_Controller
         $this->load->model("team_model");
         $this->load->library('message');
         $this->load->helper("image_helper");
+        $this->load->helper("team_helper");
     }
 
     public function index($record_offset = 0)
