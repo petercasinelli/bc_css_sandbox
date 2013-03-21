@@ -21,6 +21,8 @@ $this->load->view('student/includes/header');
     endif;
     $data['number'] = 0;
     foreach($teams as $team):
+        $team->team_members = get_team_members($team->team_id);
+        $team->team_founders = get_team_founders($team->team_id);
     	$data['team'] = $team;
         $data['number']++;
     	$this->load->view('team/team_block', $data);
