@@ -21,7 +21,7 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
         $data['teams'] = $this->team_model->get_teams($record_offset);
-        $data["notifications"] = $this->set_notification($data, $this->current_student_id);
+        $data = $this->set_notification($data, $this->current_student_id);
         $this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "team/index"));
         $this->load->view('team/home', $data);
     }
