@@ -18,3 +18,15 @@ function student_is_team_admin($team_id, $student_id){
 
     echo 'HELPER LOADED';
 }
+
+function get_team_members($team_id)
+{
+    $CI = &get_instance();
+    return $CI->team_model->get_team_members($team_id);
+}
+
+function get_team_founders($team_id)
+{
+    $CI = &get_instance();
+    return $CI->team_model->get_team_founders($team_id);
+}
