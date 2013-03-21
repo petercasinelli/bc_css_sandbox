@@ -21,12 +21,6 @@ class Team extends MY_Controller
         $data["current_page"] = 'team';
         $data["student_logged_in"] = $this->current_student_info;
         $data['teams'] = $this->team_model->get_teams($record_offset);
-
-        foreach($data['teams'] as $key => $team){
-            $team->team_members = $this->team_model->get_team_members($team->team_id);
-            $team->team_founders = $this->team_model->get_team_founders($team->team_id);
-        }
-
         $data["notifications"] = $this->student_model->get_notifications($this->current_student_id);
         $this->pagination->initialize(PaginationSettings::set( $this->team_model->get_total_team_count(), "team/index"));
         $this->load->view('team/home', $data);
