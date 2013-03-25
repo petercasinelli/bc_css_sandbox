@@ -34,39 +34,39 @@ class Student extends MY_Controller
         
         $this->load->view('student/home', $data);
     }
-	
-	public function search($query=null, $record_offset=0)
-	{
-		$this->load->library('pagination');
+    
+    public function search($query=null, $record_offset=0)
+    {
+        $this->load->library('pagination');
         $this->load->helper('pagination_helper');
         
-		$data = $this->set_current_page("student");
+        $data = $this->set_current_page("student");
         
-		if(empty($query)) {
-			$data["empty_search"] = "Please enter a search term";
-			$data["search_query"] = "";
+        if(empty($query)) {
+            $data["empty_search"] = "Please enter a search term";
+            $data["search_query"] = "";
             $data = $this->set_notification($data, $this->current_student_id);
 
-			$data["students"] = array();
+            $data["students"] = array();
             $this->load->view('student/search_students', $data);
-			return;
-		}
-		
-		$decoded_query = urldecode($query);
-		$search_results = $this->student_model->search_students($decoded_query, $record_offset);
+            return;
+        }
+        
+        $decoded_query = urldecode($query);
+        $search_results = $this->student_model->search_students($decoded_query, $record_offset);
         $data["students"] = $search_results["result"];
         $data["student_logged_in"] = $this->current_student_info;
         $data["search_query"] = $decoded_query;
         $data = $this->set_notification($data, $this->current_student_id);
-	    $data["search_results"] = $search_results["result_count"];
-		$this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
+        $data["search_results"] = $search_results["result_count"];
+        $this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
         $this->load->view('student/search_students', $data);
-	}
+    }
 
     public function submit_query($record_offset = 0)
     {
         $query = $this->input->post('query', TRUE);
-		redirect("student/search/$query");
+        redirect("student/search/$query");
     }
 
     public function edit_form()
@@ -79,7 +79,7 @@ class Student extends MY_Controller
         $data["schools"] = $this->student_model->get_schools();
         $data = $this->set_notification($data, $this->current_student_id);
         $data["upload_errors"] = '';
-		$data["this_students_skills"] = get_student_skills($this->current_student_id, true);
+        $data["this_students_skills"] = get_student_skills($this->current_student_id, true);
         $this->load->view('student/edit_student_form', $data);
     }
 
@@ -135,7 +135,7 @@ class Student extends MY_Controller
     public function ajax_edit()
     {
         $student_id = $this->current_student_id;
-        $bio 	= $this->input->post('bio', TRUE);
+        $bio    = $this->input->post('bio', TRUE);
         $skills = $this->input->post('skills', TRUE);
         if (!empty($skills)) {
             $skills_affected = $this->student_model->update_student_skills($student_id, $skills);
@@ -163,7 +163,7 @@ class Student extends MY_Controller
         $config['file_name'] = "studentpic_" . sha1($this->current_student_id);
 
         //2000kb and max image width and height
-        $config['max_size']	= '2000';
+        $config['max_size'] = '2000';
         $config['max_width']  = '1024';
         $config['max_height']  = '768';
 
