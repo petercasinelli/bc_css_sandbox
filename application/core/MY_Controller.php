@@ -33,6 +33,12 @@ class MY_Controller extends CI_Controller
         $data["notifications"] = $this->student_model->get_notifications($current_student_id);
         return $data;
     }
+    
+    function set_current_page($page, $data = array())
+    {
+        $data["current_page"] = $page;
+        return $data;
+    }
 	
 }
 ?>
