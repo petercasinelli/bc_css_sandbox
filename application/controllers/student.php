@@ -18,10 +18,9 @@ class Student extends MY_Controller
         $this->load->model("student_model");
         $this->load->model("team_model");
         
-        $data["current_page"] = 'index';
+        $data = $this->set_current_page("index");
+        $data = $this->set_notification($data, $this->current_student_id);
         $data["student_logged_in"] = $this->current_student_info;
-
-        //Retrieve 2 new students/teams and send to view
         $data["new_students"] = $this->student_model->get_new_students(5);
         $data["new_teams"] = $this->team_model->get_new_teams(5);
         
@@ -32,7 +31,7 @@ class Student extends MY_Controller
         $data['profile_completion'] = profile_completed($this->current_student_info);
         //If this is the first time the user has logged in, check if bio or skills filled
         $data = profile_fill_notification($data, $this->current_student_info);
-        $data = $this->set_notification($data, $this->current_student_id);
+        
         $this->load->view('student/home', $data);
     }
 	
@@ -40,10 +39,11 @@ class Student extends MY_Controller
 	{
 		$this->load->library('pagination');
         $this->load->helper('pagination_helper');
-		
-		if(empty($query)){
+        
+		$data = $this->set_current_page("student");
+        
+		if(empty($query)) {
 			$data["empty_search"] = "Please enter a search term";
-			$data["current_page"] = 'student';
 			$data["search_query"] = "";
             $data = $this->set_notification($data, $this->current_student_id);
 
@@ -52,7 +52,6 @@ class Student extends MY_Controller
 			return;
 		}
 		
-        $data["current_page"] = 'student';
 		$decoded_query = urldecode($query);
 		$search_results = $this->student_model->search_students($decoded_query, $record_offset);
         $data["students"] = $search_results["result"];
@@ -72,7 +71,7 @@ class Student extends MY_Controller
 
     public function edit_form()
     {
-        $data["current_page"] = 'edit_profile';
+        $data = $this->set_current_page("edit_profile");
         $data["student_logged_in"] = $this->current_student_info;
         //Create list of majors for view
         $data["majors"] = $this->student_model->get_majors();
@@ -89,7 +88,7 @@ class Student extends MY_Controller
         $this->load->library('message');
         $this->load->library('form_validation');
         
-        $data["current_page"] = 'edit_profile';
+        $data = $this->set_current_page("edit_profile");
         $data = $this->set_notification($data, $this->current_student_id);
 
         $student_id = $this->current_student_id;
@@ -238,14 +237,13 @@ class Student extends MY_Controller
 
     public function view_student($id=null)
     {
+        $data = $this->set_current_page("student");
         $data['student'] = $this->student_model->get_student($id);
         if($data['student'] && !is_null($id)) {
-            $data["current_page"] = 'student';
             $data = $this->set_notification($data, $this->current_student_id);
             $data['student']->skills = get_student_skills($this->current_student_id);
             $this->load->view('student/view_student', $data);
         } else {
-            $data["current_page"] = 'student';
             $data["student"] = null;
             $data['notifications'] = null;
             $this->load->view('student/view_student', $data);
@@ -256,7 +254,7 @@ class Student extends MY_Controller
     {
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');   
-        $data["current_page"] = 'student';
+        $data = $this->set_current_page("student");
         $data = $this->set_notification($data, $this->current_student_id);
         $data["students"] = $this->student_model->get_all_students($record_offset);
         $this->pagination->initialize(PaginationSettings::set($this->student_model->get_total_student_count(), "student/view_all"));
