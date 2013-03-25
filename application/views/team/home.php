@@ -32,8 +32,6 @@ $this->load->view('student/includes/header');
     ?>
 </section>
 
-
 <?php
-$data["join_a_team"] = TRUE;
-$data["get_in_touch"] = TRUE;
+
 $this->load->view('includes/footer', $data); ?>

@@ -9,8 +9,8 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/jQuery-slimScroll-1.0.6/jquery.slimscroll.min.js"></script>
-<script type="text/javascript" src="<?php echo asset_url() ?>/js/script.js"></script>
-<script type="text/javascript" src="<?php echo asset_url() ?>/js/tipsy.js"></script>
+<script type="text/javascript" src="<?php echo asset_url(); ?>/js/script.js"></script>
+<script type="text/javascript" src="<?php echo asset_url(); ?>/js/tipsy.js"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/jquery.autoSuggest.js"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo asset_url(); ?>/js/jquery.leanModal.min.js"></script>
@@ -67,14 +67,8 @@
             ]
         });
 
-        <?php if (!empty($join_a_team) && $join_a_team){ ?>
         $("#join-a-team").tipsy({gravity:"n"});
-        <?php } ?>
-
-        <?php if (!empty($get_in_touch) && $get_in_touch){ ?>
         $(".get-in-touch").tipsy({gravity:"n"});
-        <?php } ?>
-
 	});
 </script>
 <script type="text/javascript">
