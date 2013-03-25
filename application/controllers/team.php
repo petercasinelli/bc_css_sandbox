@@ -18,7 +18,7 @@ class Team extends MY_Controller
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');
 
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data["student_logged_in"] = $this->current_student_info;
         $data['teams'] = $this->team_model->get_teams($record_offset);
         $data = $this->set_notification($data, $this->current_student_id);
@@ -37,7 +37,7 @@ class Team extends MY_Controller
             redirect('team/');
         }
         
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data["student_logged_in"] = $this->current_student_info;
         $permission = $this->team_model->get_student_permission($team_id, $this->current_student_id);
 
@@ -63,7 +63,7 @@ class Team extends MY_Controller
 
     public function add_form()
     {
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data["student_logged_in"] = $this->current_student_info;
         $data = $this->set_notification($data, $this->current_student_id);
 
@@ -73,7 +73,7 @@ class Team extends MY_Controller
     public function add()
     {
         $this->load->library('form_validation');
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data = $this->set_notification($data, $this->current_student_id);
 
         $team_data['team_name'] = $this->input->post('team_name', TRUE);
@@ -107,7 +107,7 @@ class Team extends MY_Controller
         $this->load->helper('team_helper');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data["student_logged_in"] = $this->current_student_info;
         $data["team_data"] = $this->team_model->get_team($team_id);
         array_push($data, array("team_id" => $team_id));
@@ -122,7 +122,7 @@ class Team extends MY_Controller
         $this->load->library('form_validation');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data = $this->set_notification($data, $this->current_student_id);
         
         $team_data['team_name'] = $this->input->post('team_name', TRUE);
@@ -157,7 +157,7 @@ class Team extends MY_Controller
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
 
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data["student_logged_in"] = $this->current_student_info;
         $data["team_data"] = $this->team_model->get_team($team_id);
         $data = $this->set_notification($data, $this->current_student_id);
@@ -172,7 +172,7 @@ class Team extends MY_Controller
         $this->load->library('form_validation');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
-        $data["current_page"] = 'team';
+        $data = $this->set_current_page("team");
         $data = $this->set_notification($data, $this->current_student_id);
         $team_update = $this->input->post('team_update', TRUE);
 
