@@ -3,8 +3,9 @@
   * Extend MY_Controller for authentication/current student logged in built in
   * @version 0.1
   */
-class Notification extends MY_Controller {
-
+class Notification extends MY_Controller
+{
+    
     public function __construct()
     {
         parent::__construct();

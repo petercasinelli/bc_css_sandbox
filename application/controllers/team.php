@@ -196,7 +196,8 @@ class Team extends MY_Controller
         }
     }
 
-    public function delete_update($team_id, $team_update_id){
+    public function delete_update($team_id, $team_update_id)
+    {
         $this->load->helper('team_helper');
         //Check to see if this student is administrator and can access this page
         $permission = student_is_team_admin($team_id, $this->current_student_id);
