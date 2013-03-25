@@ -1,5 +1,5 @@
 <section>
-    <div style="width:100%; text-align: center;">
+    <div id="footer">
         <h3>BC Skills is a <a href="https://github.com/pcas00/bc_css_sandbox" target="_blank">BC CSS project</a> with contributions from Alan Lin, Ron Radu, Matt Keemon, Kevin Lamb, and Peter Casinelli.</h3>
     </div>
 </section>

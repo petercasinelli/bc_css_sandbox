@@ -553,8 +553,7 @@ section.explore {
 }
 
 /* team block */
-.team_block
-{
+.team_block {
     width:400px;
     height:210px;
     padding:5px;
@@ -568,7 +567,7 @@ section.explore {
     float:left;
 }
 
-.small_member_pic img{
+.small_member_pic img {
 	width:25px; 
 	height:25px; 
 	float:left; 
@@ -578,9 +577,14 @@ section.explore {
 	border-radius: 3px;
 }
 
-.team_block p, h1, h2, h3, img
-{
+.team_block p, h1, h2, h3, img {
     margin-left:5px;
+}
+
+/*Footer*/
+#footer{
+    width:100%; 
+    text-align: center;
 }
 
 
