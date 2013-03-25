@@ -217,4 +217,4 @@ if ($student_skills_length > 0){
 	$preFill = substr($this_students_skills, 0, $student_skills_length - 1);
 	$data['preFill'] = $preFill;
 }
-$this->load->view('includes/footer', $data); ?>
+$this->load->view('includes/footer', (isset($data)) ? $data : array()); ?>
