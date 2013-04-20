@@ -22,42 +22,32 @@ class Student extends MY_Controller
         $data = $this->set_notification($data, $this->current_student_id);
         $data["student_logged_in"] = $this->current_student_info;
         $data["new_students"] = $this->student_model->get_new_students(5);
-        $data["new_teams"] = $this->team_model->get_new_teams(5);
-        
-        foreach($data["new_teams"] as $new_team) {
-            $new_team->team_members = $this->team_model->get_team_members($new_team->team_id);
-        }
-        
+        $data["new_teams"] = $this->team_model->get_new_teams(5);  
         $data['profile_completion'] = profile_completed($this->current_student_info);
-        //If this is the first time the user has logged in, check if bio or skills filled
+        //If first time the user has logged in, check if bio or skills filled
         $data = profile_fill_notification($data, $this->current_student_info);
-        
         $this->load->view('student/home', $data);
     }
     
-    public function search($query=null, $record_offset=0)
+    public function search($query = null, $record_offset = 0)
     {
         $this->load->library('pagination');
         $this->load->helper('pagination_helper');
         
         $data = $this->set_current_page("student");
-        
-        if(empty($query)) {
+        $data = $this->set_notification($data, $this->current_student_id);
+        if (empty($query)) {
             $data["empty_search"] = "Please enter a search term";
             $data["search_query"] = "";
-            $data = $this->set_notification($data, $this->current_student_id);
-
             $data["students"] = array();
             $this->load->view('student/search_students', $data);
             return;
         }
-        
         $decoded_query = urldecode($query);
         $search_results = $this->student_model->search_students($decoded_query, $record_offset);
         $data["students"] = $search_results["result"];
         $data["student_logged_in"] = $this->current_student_info;
         $data["search_query"] = $decoded_query;
-        $data = $this->set_notification($data, $this->current_student_id);
         $data["search_results"] = $search_results["result_count"];
         $this->pagination->initialize(PaginationSettings::set($data["search_results"], "student/search/$query"));
         $this->load->view('student/search_students', $data);
@@ -109,7 +99,6 @@ class Student extends MY_Controller
         $student_data['linkedin'] = $this->input->post('linkedin', TRUE);
         $student_data['dribbble'] = $this->input->post('dribbble', TRUE);
         $student_data['github'] = $this->input->post('github', TRUE);
-
         if (!$this->form_validation->valid_profile_edit($password)) {
             $data["student_logged_in"] = $this->current_student_info;
             $data["majors"] = $this->student_model->get_majors();
@@ -126,33 +115,28 @@ class Student extends MY_Controller
                 //this also gets called when user doesn't make any changes.
                 $this->message->set("Your profile could not be edited. Please try again.", "error", TRUE);
                 redirect("student/edit_form");
-            }
-
+            }    
         }
-
     }
 
     public function ajax_edit()
     {
         $student_id = $this->current_student_id;
-        $bio    = $this->input->post('bio', TRUE);
+        $bio = $this->input->post('bio', TRUE);
         $skills = $this->input->post('skills', TRUE);
         if (!empty($skills)) {
             $skills_affected = $this->student_model->update_student_skills($student_id, $skills);
             if (!$skills_affected) {
                 echo 'false';
-            }
-        }
-        
+            }   
+        }   
         if (!empty($bio)) {
             $rows_affected = $this->student_model->edit_student($student_id, array("bio" => $bio));
             if (!$rows_affected){
                 echo 'false';
             }
         }
-
-        echo 'true';
-        
+        echo 'true';   
     }
 
     public function upload_profile_pic()
@@ -161,15 +145,12 @@ class Student extends MY_Controller
         $config['upload_path'] = './uploads/students/pictures';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['file_name'] = "studentpic_" . sha1($this->current_student_id);
-
         //2000kb and max image width and height
         $config['max_size'] = '2000';
         $config['max_width']  = '1024';
         $config['max_height']  = '768';
-
         //prevent users from uploading multiple images.
         $config['overwrite']  = TRUE;
-
         //load the upload lib with settings
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload()) {
@@ -187,13 +168,10 @@ class Student extends MY_Controller
             $uri = $uploaded_data['file_name'];
             $s3_put_object = $this->s3->putObject($file, $bucket, $uri, 'public-read');
             $status = FALSE;
-            
             if ($s3_put_object) {
                 $status = $this->student_model->update_profile_picture($this->current_student_id, $uploaded_data['file_name']);
             }
-            
             $this->load->library('message');
-            
             if ($status) {
                 $this->message->set("Picture updated successfully", "success", TRUE);
                 redirect("student/edit_form");
@@ -201,7 +179,6 @@ class Student extends MY_Controller
                 $this->message->set("Picture update failed", "error", TRUE);
                 redirect("student/edit_form");
             }
-            
         }
     }
 
@@ -213,17 +190,14 @@ class Student extends MY_Controller
         $delete_object = FALSE;
         $status = FALSE;
         $bucket = 'bcskills-profile-pictures';
-
         //Make sure student is removing their own profile picture
         if (strcmp($uri, $this->current_student_info->picture) == 0) {
             $delete_object = $this->s3->deleteObject($bucket, $uri);
         }
-
         //If Amazon S3 object was delete, update database
         if ($delete_object) {
             $status = $this->student_model->delete_profile_picture($this->current_student_id);
-        }
-        
+        } 
         //If database is updated, redirect
         if ($status) {
             $this->message->set("Picture deleted successfully", "success", TRUE);
@@ -232,22 +206,19 @@ class Student extends MY_Controller
             $this->message->set("Picture delete failed", "error", TRUE);
             redirect("student/edit_form");
         }
-
     }
 
-    public function view_student($id=null)
+    public function view_student($id = null)
     {
         $data = $this->set_current_page("student");
         $data['student'] = $this->student_model->get_student($id);
         if($data['student'] && !is_null($id)) {
             $data = $this->set_notification($data, $this->current_student_id);
-            $data['student']->skills = get_student_skills($id);
-            $this->load->view('student/view_student', $data);
         } else {
             $data["student"] = null;
             $data['notifications'] = null;
-            $this->load->view('student/view_student', $data);
         }
+        $this->load->view('student/view_student', $data);
     }
 
     public function view_all($record_offset = 0)
@@ -266,7 +237,6 @@ class Student extends MY_Controller
         $input = $this->input->get("q");
         $data = array();
         $skills = $this->student_model->find_skill($input);
-        
         foreach ($skills as $skill) {
             $skill_data = array(
                 'value' => $skill->skill_id, 
@@ -274,7 +244,6 @@ class Student extends MY_Controller
             );
             array_push($data, $skill_data);
         }
-        
         header("Content-type: application/json");
         echo json_encode($data);
     }
