@@ -90,14 +90,14 @@
             position: 'relative',
             overflow: 'hidden',
             width: o.width,
-            height: o.height
+            height: 250
           });
 
         // update style for the div
         me.css({
           overflow: 'hidden',
           width: o.width,
-          height: o.height
+          height: 220
         });
 
         // create scrollbar rail
