@@ -29,7 +29,11 @@ endif;
 
 <section>
     <h1>About Us</h1>
-    <?php $this->load->view("team/new_team_block", array("team"=>$team_data)); ?>
+    <?php 
+        $data["team_members"] = $this->team_model->get_team_members($team_data->team_id);
+        $data["team"] = $team_data;
+        $this->load->view("team/new_team_block", $data); 
+    ?>
 </section>
 
 <?php if (strlen($team_data->team_needs) > 0): ?>
@@ -81,7 +85,7 @@ endif;
                 echo '<h3>There are currently no team members.</h3>';
             endif;
 
-            foreach($team_data->team_members as $student):?>
+            foreach($data["team_members"] as $student):?>
                 <?php $this->load->view("team/member_block", array("student"=>$student, "id" => $student->student_id))?>
                 <?php endforeach;?>
         </div>

@@ -54,7 +54,6 @@ class Team extends MY_Controller
 
         $data["permission"] = $permission;
         $data['team_data'] = $this->team_model->get_team($team_id);
-        $data['team_data']->team_members = $this->team_model->get_team_members($team_id);
         $data['team_updates'] = $this->team_model->get_updates($team_id);
         $data = $this->set_notification($data, $this->current_student_id);
 
