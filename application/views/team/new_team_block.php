@@ -5,7 +5,7 @@
     <div class="float-right">
         <?php
 
-        foreach ($team->team_members as $team_member):
+        foreach ($team_members as $team_member):
             $img_src = student_picture_src($team_member->student_id, $team_member->oauth_uid, $team_member->picture);
             echo '<a class="small_member_pic" href="'.base_url().'student/view_student/'.$team_member->student_id.'"><img src="'.$img_src.'"></a>';
         endforeach;

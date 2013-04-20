@@ -15,7 +15,7 @@
 			<hr>
 
 			<p>
-                <b>Skills</b>: <?php echo $student->skills; ?>
+                <b>Skills</b>: <?php echo $skills; ?>
                 <br />
 				<b>Bio</b>: <?php
 

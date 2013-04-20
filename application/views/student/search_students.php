@@ -27,7 +27,7 @@ $this->load->view('student/includes/header');
     //Counter kept for expand/hide student profile
     $i = 0;
     foreach($students as $student):
-        $student->skills  = get_student_skills($student->student_id);
+        $data["skills"]  = get_student_skills($student->student_id);
         $data["student"] = $student;
         $data["id"] = $i;
         //we want to put this in assoc

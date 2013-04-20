@@ -97,6 +97,7 @@ $this->load->view('student/includes/header');
                 <?php
                 foreach($new_teams as $new_team):
                     $data["team"] = $new_team;
+                    $data["team_members"] = $this->team_model->get_team_members($new_team->team_id);
                     $this->load->view('team/new_team_block.php', $data);
                 endforeach;
                 ?>
