@@ -6,7 +6,7 @@ $(function(){
 			$("#modal_notice").html("<span style=\"color:#ff0000;\">You must enter skills and a bio.</span>");
 		} else {
 			$.ajax({
-				url : Settings.base_url + '/student/ajax_edit/',
+				url : Settings.base_url + 'student/ajax_edit/',
 				type : "POST",
 				data : {
 					skills : skillsVar,
@@ -23,6 +23,7 @@ $(function(){
 					// log the error to the console
 					console.log("The following error occured: " + textStatus, errorThrown);
 					console.log("Response was: " + response);
+                    $("#loadModal").hide();
 				},
 				// callback handler that will be called on completion
 				// which means, either on success or error
