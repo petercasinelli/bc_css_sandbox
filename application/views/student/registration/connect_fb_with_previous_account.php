@@ -56,7 +56,7 @@ $this->load->view('includes/header');
             <h1 style="font-size:24px;">Create A New Account</h1>
             <br />If the the name and e-mail address don't look like yours, create a new account with Facebook
             <br />
-            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_confirmed" id="facebookButton"><img src="<?php echo base_url(); ?>assets/images/facebook_button_4.png"></a>
+            <a href="<?php echo base_url(); ?>/authentication/student/fb_login_confirmed" id="facebookButton"><img src="<?php echo asset_url(); ?>/images/facebook_button_4.png"></a>
         </div>
     </div>
 
