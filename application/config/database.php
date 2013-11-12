@@ -48,16 +48,16 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-//Get Amazon configuration variables 
-$hostname = get_cfg_var('aws.param1');
-$database = get_cfg_var('aws.param2');
-$username = get_cfg_var('aws.param3');
-$password = get_cfg_var('aws.param4');
+//Get Amazon configuration variables
+$configuration = get_cfg_var('aws.param1');
+$configuration = json_decode($configuration, TRUE);
+$database_configuration = $configuration['database'][0];
 
-$db['default']['hostname'] = $hostname;
-$db['default']['username'] = $username;
-$db['default']['password'] = $password;
-$db['default']['database'] = $database;
+$db['default']['hostname'] = $database_configuration['host'];
+$db['default']['username'] = $database_configuration['username'];
+$db['default']['password'] = $database_configuration['password'];
+$db['default']['database'] = $database_configuration['name'];
+
 
 
 $db['default']['dbdriver'] = 'mysql';
