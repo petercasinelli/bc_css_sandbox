@@ -14,3 +14,4 @@ application/config/database.php
 Icon?
 ehthumbs.db
 Thumbs.db
+.elasticbeanstalk/
