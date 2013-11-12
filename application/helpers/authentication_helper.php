@@ -9,10 +9,10 @@ class Authen
 {
     public static function send_password($email, $new_password)
     {
-        $CI = & get_instance();
-        
+        $CI = &get_instance();
+
         $CI->load->library('email');
-        $CI->email->set_newline("\r\n").
+        $CI->email->set_newline("\r\n");
         $CI->email->from('bccss.development@gmail.com', 'BC Skills');
         $CI->email->to($email);
         $CI->email->subject('BC Skills Password Reset');
@@ -25,7 +25,7 @@ class Authen
         Please let us know if you have any issues,
 
         BC CSS Team');
-        
+
         return $CI->email->send();
     }
 }

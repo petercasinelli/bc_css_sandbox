@@ -65,7 +65,7 @@ class Home extends CI_Controller
                     $this->load->view('student/forgot_password', $data);
                     break;
                 case 1:
-                    if (Authen::send_password($email, $reset_password)) {
+                    if (Authen::send_password($email, $new_password)) {
                         $this->message->set('We just sent '. $email .' a new password', 'success', TRUE);
                         redirect('home');
                     } else {
