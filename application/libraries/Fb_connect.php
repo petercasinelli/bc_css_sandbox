@@ -7,15 +7,14 @@ class Fb_connect{
     public function __construct(){
         $this->CI = &get_instance();
 
-        $vars = get_cfg_var('aws.param5');
-        $explode = explode(',', $vars);
-
-        $app_id = '173070729494386';
-        $secret = $explode[0];
+        //Get Amazon configuration variables
+        $config = get_cfg_var('aws.param3');
+        $config = json_decode($config, TRUE);
+        $fb_config = $config['facebook'][0];
 
         $this->config = array(
-            'appId'  => $app_id,
-            'secret' => $secret,
+            'appId'  => $fb_config['app_id'],
+            'secret' => $fb_config['secret'],
         );
         $this->CI->load->library('facebook-php-sdk/src/facebook', $this->config, 'facebook');
     }
