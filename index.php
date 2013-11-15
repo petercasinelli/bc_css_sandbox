@@ -1,4 +1,7 @@
 <?php
+//Fix for AWS PHP Sessions bug
+$dir = sys_get_temp_dir();
+session_save_path($dir);
 
 date_default_timezone_set("America/New_York");
 /*
